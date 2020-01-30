@@ -33,11 +33,6 @@ define( require => {
       this.modelViewTransform = modelViewTransform;
       this.model = model;
 
-      // @public {Property.<boolean>} determines the visibility of the WallNode
-      // this.visibilityProperty = new DerivedProperty ( [ this.mass.visibilityProperty ], function( massVisible ) {
-      //   return massVisible;
-      // } );
-
       // @public {Rectangle}
       this.rect = new Rectangle( {
         fill: '#333',
@@ -54,7 +49,6 @@ define( require => {
         self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( self.rect.rectWidth / 2, self.rect.rectHeight / 2 ) );
       } );
 
-      // this.visibilityProperty.linkAttribute( this, 'visible' );
     }
 
     /**
@@ -62,7 +56,7 @@ define( require => {
      * @public
      */
     reset() {
-      // TODO
+      // NO-OP
     }
 
   }
