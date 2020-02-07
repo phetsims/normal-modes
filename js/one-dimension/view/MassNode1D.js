@@ -50,7 +50,7 @@ define( require => {
 
       this.dragCallback = function( event, listener ) {
         self.model.arrowsVisibilityProperty.set( false );
-        let point = listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() );
+        const point = listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() );
         if ( self.model.directionOfMotionProperty.get() === self.model.directionOfMotion.HORIZONTAL ) {
           const oldY = self.mass.displacementProperty.get().y;
           self.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
@@ -67,7 +67,7 @@ define( require => {
 
       this.overUpCallback = function( isOver ) {
         const axis = self.model.directionOfMotionProperty.get();
-        if( axis == self.model.directionOfMotion.VERTICAL ) {
+        if( axis === self.model.directionOfMotion.VERTICAL ) {
           self.arrows.top.visible = isOver;
           self.arrows.bottom.visible = isOver;
         }
@@ -87,7 +87,7 @@ define( require => {
 
       this.addInputListener( this.dragListener );
       this.model.arrowsVisibilityProperty.link( function( arrowsVisible ) {
-        let callback = self.overUpCallback.bind( self );
+        const callback = self.overUpCallback.bind( self );
         if ( arrowsVisible ) {
           self.dragListener.isOverProperty.link( callback );
         }

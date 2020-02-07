@@ -31,11 +31,11 @@ define( require => {
     const VStrut = require( 'SCENERY/nodes/VStrut' );
 
     // strings
-    const amplitudeString = require( 'string!NORMAL_MODES/amp-selector-1d.amplitude' );
-    const normalModeSpectrumString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode-spectrum' );
-    const frequencyString = require( 'string!NORMAL_MODES/amp-selector-1d.frequency' );
-    const normalModeString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode' );
-    const phaseString = require( 'string!NORMAL_MODES/amp-selector-1d.phase' );
+    const ampSelector1DAmplitudeString = require( 'string!NORMAL_MODES/amp-selector-1d.amplitude' );
+    const ampSelector1DNormalModeSpectrumString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode-spectrum' );
+    const ampSelector1DFrequencyString = require( 'string!NORMAL_MODES/amp-selector-1d.frequency' );
+    const ampSelector1DNormalModeString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode' );
+    const ampSelector1DPhaseString = require( 'string!NORMAL_MODES/amp-selector-1d.phase' );
 
     class AmpPhaseAccordionBox extends AccordionBox {
       // TODO - comment code
@@ -80,7 +80,7 @@ define( require => {
             touchAreaYDilation: 6
           },
 
-          titleNode: new Text( normalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
+          titleNode: new Text( ampSelector1DNormalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
           showTitleWhenExpanded: false
 
         } );
@@ -104,13 +104,13 @@ define( require => {
           layoutFunction: NumberControl.createLayoutFunction4(),
           titleNodeOptions: {
             font: NormalModesConstants.CONTROL_FONT,
-            scale: 0,
+            scale: 0
           },
           numberDisplayOptions: {
             font: NormalModesConstants.CONTROL_FONT,
             scale: 0
           }
-        }
+        };
 
         const phaseSliderOptions = {
           delta: 0.01,
@@ -119,26 +119,26 @@ define( require => {
             trackSize: new Dimension2( 80, 3 ),
             thumbSize: new Dimension2( 15, 26 ),
             thumbTouchAreaXDilation: 15,
-            thumbTouchAreaYDilation: 15,
+            thumbTouchAreaYDilation: 15
           },
           includeArrowButtons: false,
           layoutFunction: NumberControl.createLayoutFunction4(),
           titleNodeOptions: {
             font: NormalModesConstants.CONTROL_FONT,
-            scale: 0,
+            scale: 0
           },
           numberDisplayOptions: {
             font: NormalModesConstants.CONTROL_FONT,
             scale: 0
           }
-        }
+        };
 
         for ( let i = 0; i < ampSliders.length; i++ ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
 
           ampSliders[ i ] = new NumberControl(
-            "",
+            '',
             model.modeAmplitudeProperty[ i ],
             new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
                                 OneDimensionConstants.MAX_MODE_AMPLITUDE,
@@ -147,7 +147,7 @@ define( require => {
           );
 
           phaseSliders[ i ] = new NumberControl(
-            "",
+            '',
             model.modePhaseProperty[ i ],
             new RangeWithValue( OneDimensionConstants.MIN_MODE_PHASE,
                                 OneDimensionConstants.MAX_MODE_PHASE,
@@ -170,23 +170,23 @@ define( require => {
           modeGraphs[ i ] = new StaticModeGraphCanvasNode( model, {
               normalModeNum: i,
               graphSize: { width: 40, height: 25 },
-              graphStartX: 0,
+              graphStartX: 0
           } );
         }
 
         const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1);
 
         const normalModeLabel = new Text(
-          normalModeString,
+          ampSelector1DNormalModeString,
           { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
         );
 
         const amplitudeLabel = new Text(
-          amplitudeString,
+          ampSelector1DAmplitudeString,
           { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
         );
 
-        const phaseLabel = new Text( phaseString, { font: NormalModesConstants.CONTROL_FONT, maxWidth: 80 } );
+        const phaseLabel = new Text( ampSelector1DPhaseString, { font: NormalModesConstants.CONTROL_FONT, maxWidth: 80 } );
 
         const piLabel = new Text( MathSymbols.UNARY_PLUS + MathSymbols.PI, { font: NormalModesConstants.CONTROL_FONT, maxWidth: 30 } );
         const zeroLabel = new Text( '0', { font: NormalModesConstants.CONTROL_FONT, maxWidth: 30 } );
@@ -208,7 +208,7 @@ define( require => {
         } );
 
         const frequencyLabel = new Text(
-          frequencyString,
+          ampSelector1DFrequencyString,
           { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
         );
 

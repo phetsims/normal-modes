@@ -41,16 +41,16 @@ define( require => {
       this.addChild( this.circle );
 
       const rotationPoint = new Vector2( 0, 0 );
-      for(let arrow in this.arrows) {
+      for(const arrow in this.arrows) {
         this.arrows[ arrow ].rotateAround( rotationPoint, Math.PI / 4 );
       }
 
       this.startCallback = function( event, listener ) {
         let foundIndex = -1;
         let foundArray = null;
-        for ( let array of self.model.masses ) {
+        for ( const array of self.model.masses ) {
           foundIndex = array.indexOf( self.mass );
-          if ( foundIndex != -1 ) {
+          if ( foundIndex !== -1 ) {
             foundArray = array;
             break;
           }
@@ -88,7 +88,7 @@ define( require => {
 
       this.addInputListener( this.dragListener );
       this.model.arrowsVisibilityProperty.link( function( arrowsVisible ) {
-        let callback = self.overUpCallback.bind( self );
+        const callback = self.overUpCallback.bind( self );
         if ( arrowsVisible ) {
           self.dragListener.isOverProperty.link( callback );
         }

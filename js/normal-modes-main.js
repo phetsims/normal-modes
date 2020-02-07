@@ -38,7 +38,7 @@ define( require => {
     const sim = new Sim( normalModesTitleString, [
       // new IntroScreen ..., TODO
       new OneDimensionScreen( Tandem.ROOT.createTandem( 'oneDimensionScreen' ) ),
-      new TwoDimensionsScreen( Tandem.ROOT.createTandem( 'twoDimensionsScreen' ) ),
+      new TwoDimensionsScreen( Tandem.ROOT.createTandem( 'twoDimensionsScreen' ) )
     ], simOptions );
     sim.start();
   } );

@@ -10,7 +10,6 @@ define( require => {
 
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NumberProperty = require( 'AXON/NumberProperty' );
   const Vector2Property = require( 'DOT/Vector2Property' );
   const Vector2 = require( 'DOT/Vector2' );
 

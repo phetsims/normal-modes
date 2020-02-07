@@ -16,6 +16,7 @@ define( require => {
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const Property = require( 'AXON/Property' );
+  const Range = require( 'DOT/Range' );
   const Spring = require( 'NORMAL_MODES/common/model/Spring' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -102,8 +103,8 @@ define( require => {
               return 0;
             }
             else {
-              let omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
-              let omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numMasses + 1 ) );
+              const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
+              const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numMasses + 1 ) );
               return Math.sqrt( omegaI ** 2 + omegaJ ** 2);
             }
           } );
@@ -182,17 +183,17 @@ define( require => {
     changedNumberOfMasses( numMasses ) {
 
       let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-      let xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (numMasses + 1);
-      let xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
+      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (numMasses + 1);
+      const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
       let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-      let yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (numMasses + 1);
-      let yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS - TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
+      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (numMasses + 1);
+      const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS - TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
         x = TwoDimensionsConstants.LEFT_WALL_X_POS;
         for ( let j = 0; j < MAX_MASSES; ++j ) {
-          let visible = ( i <= numMasses && j <= numMasses );
+          const visible = ( i <= numMasses && j <= numMasses );
 
           this.masses[ i ][ j ].equilibriumPositionProperty.set( new Vector2( x, y ) );
           this.masses[ i ][ j ].visibilityProperty.set( visible );
@@ -218,19 +219,19 @@ define( require => {
      * @private
      */
     createDefaultMasses( tandem ) {
-      let defaultMassesNum = this.numVisibleMassesProperty.get();
+      const defaultMassesNum = this.numVisibleMassesProperty.get();
 
       let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-      let xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (defaultMassesNum + 1);
-      let xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
+      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (defaultMassesNum + 1);
+      const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
       let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-      let yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (defaultMassesNum + 1);
-      let yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
+      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (defaultMassesNum + 1);
+      const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
         for ( let j = 0; j < MAX_MASSES; ++j ) {
-          let visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
+          const visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
 
           this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( 'mass' + i + '_' + j ) );
 
@@ -253,8 +254,14 @@ define( require => {
     createDefaultSprings() {
       for ( let i = 0; i < MAX_SPRINGS; i++ ) {
         for ( let j = 0; j < MAX_SPRINGS; ++j ) {
-          if ( i !== MAX_SPRINGS - 1 ) this.springsX[ i ][ j ] = new Spring( this.masses[ i + 1 ][ j ], this.masses[ i + 1 ][ j + 1 ] );
-          if ( j !== MAX_SPRINGS - 1 ) this.springsY[ i ][ j ] = new Spring( this.masses[ i ][ j + 1 ], this.masses[ i + 1 ][ j + 1 ] );
+
+          if ( i !== MAX_SPRINGS - 1 ) {
+            this.springsX[ i ][ j ] = new Spring( this.masses[ i + 1 ][ j ], this.masses[ i + 1 ][ j + 1 ] );
+          }
+
+          if ( j !== MAX_SPRINGS - 1 ) {
+            this.springsY[ i ][ j ] = new Spring( this.masses[ i ][ j + 1 ], this.masses[ i + 1 ][ j + 1 ] );
+          }
         }
       }
     }
@@ -334,7 +341,7 @@ define( require => {
           this.singleStep( TwoDimensionsConstants.FIXED_DT );
         }
       }
-      else if ( this.draggingMassIndexesProperty.get() == null ) {
+      else if ( this.draggingMassIndexesProperty.get() === null ) {
         this.setExactPositions();
       }
 
@@ -346,9 +353,9 @@ define( require => {
      * @public
      */
     singleStep( dt ) {
-      dt *= this.simSpeedProperty.get()
+      dt *= this.simSpeedProperty.get();
       this.timeProperty.set( this.timeProperty.get() + dt );
-      if ( this.draggingMassIndexesProperty.get() != null ) {
+      if ( this.draggingMassIndexesProperty.get() !== null ) {
         this.setVerletPositions( dt );
       }
       else {
@@ -368,13 +375,13 @@ define( require => {
       for ( let i = 1; i <= N; ++i ) {
         for ( let j = 1; j <= N; ++j ) {
           const dragging = this.draggingMassIndexesProperty.get();
-          if ( !dragging || dragging.i != i || dragging.j != j ) {
+          if ( !dragging || dragging.i !== i || dragging.j !== j ) {
 
             const x = this.masses[ i ][ j ].displacementProperty.get();
             const v = this.masses[ i ][ j ].velocityProperty.get();
             const a = this.masses[ i ][ j ].accelerationProperty.get();
 
-            let displacement = x.plus( v.timesScalar( dt ) ).add( a.timesScalar( dt * dt / 2 ) );
+            const displacement = x.plus( v.timesScalar( dt ) ).add( a.timesScalar( dt * dt / 2 ) );
             this.masses[ i ][ j ].displacementProperty.set( displacement );
             this.masses[ i ][ j ].previousAccelerationProperty.set( a );
 
@@ -396,7 +403,7 @@ define( require => {
       for ( let i = 1; i <= N; ++i ) {
         for ( let j = 1; j <= N; ++j ) {
           const dragging = this.draggingMassIndexesProperty.get();
-          if ( !dragging || dragging.i != i || dragging.j != j ) {
+          if ( !dragging || dragging.i !== i || dragging.j !== j ) {
 
             const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
             const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
@@ -460,8 +467,8 @@ define( require => {
       }
       for ( let i = 1; i <= N; ++i ) {
         for ( let j = 1; j <= N; ++j ) {
-          let displacement = new Vector2( 0, 0 );
-          let velocity = new Vector2( 0, 0 );
+          const displacement = new Vector2( 0, 0 );
+          const velocity = new Vector2( 0, 0 );
 
           const sineProductMatrix = this.sineProduct[ i ][ j ];
           for ( let r = 1; r <= N; ++r ) {

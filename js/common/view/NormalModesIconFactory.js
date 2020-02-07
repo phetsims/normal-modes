@@ -16,7 +16,6 @@ define( require => {
   const Path = require( 'SCENERY/nodes/Path' );
   const Shape = require( 'KITE/Shape' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Circle = require( 'SCENERY/nodes/Circle' );
 
   // TODO - Fix
   const NormalModesIconFactory = {
@@ -35,7 +34,7 @@ define( require => {
         boundsMethod: 'unstroked',
         lineWidth: 16,
         rectWidth: 80,
-        rectHeight: 80,
+        rectHeight: 80
       } );
 
       const springShape = new Shape().moveTo( 0, 0 ).lineTo( 0, 1 );
@@ -57,9 +56,9 @@ define( require => {
       spring.translation = new Vector2( iconNode.centerX, iconNode.centerY - 15 );
 
       return new ScreenIcon( iconNode, {
-        fill: Color.toColor( "#ffffff" ),
+        fill: Color.toColor( '#ffffff' ),
         maxIconWidthProportion: 1, /* isso n é o default, pode tirar se quiser */
-        maxIconHeightProportion: 1,
+        maxIconHeightProportion: 1
       } );
 
     },
@@ -71,13 +70,12 @@ define( require => {
       } );
 
       return new ScreenIcon( iconNode, {
-        fill: Color.toColor( "#ffffff" ),
+        fill: Color.toColor( '#ffffff' ),
         maxIconWidthProportion: 1,
-        maxIconHeightProportion: 1,
+        maxIconHeightProportion: 1
       } );
     }
-
-  }
+  };
 
   return normalModes.register( 'NormalModesIconFactory', NormalModesIconFactory );
 } );

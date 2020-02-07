@@ -26,7 +26,7 @@ define( require => {
     const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
 
     // strings
-    const normalModeAmplitudesString = require( 'string!NORMAL_MODES/amp-selector-2d.normal-mode-amplitudes' );
+    const ampSelector2DNormalModeAmplitudesString = require( 'string!NORMAL_MODES/amp-selector-2d.normal-mode-amplitudes' );
 
     const PANEL_SIZE = 270;
     const RECT_GRID_UNITS = 5;
@@ -72,7 +72,7 @@ define( require => {
             touchAreaYDilation: 6
           },
 
-          titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
+          titleNode: new Text( ampSelector2DNormalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
           showTitleWhenExpanded: false
 
         } );
@@ -108,15 +108,15 @@ define( require => {
           orientation: 'vertical'
         } );
 
-        const ampAxisProperty = new DerivedProperty( [ model.ampSelectorAxisProperty ], ( selectorAxis ) => {
+        const ampAxisProperty = new DerivedProperty( [ model.ampSelectorAxisProperty ], selectorAxis => {
           return ( selectorAxis === model.ampSelectorAxis.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
         } );
 
-        const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], ( numMasses ) => {
+        const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
           return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numMasses - 1 ];
         } );
 
-        const gridSizeProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], ( numMasses ) => {
+        const gridSizeProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
           return PANEL_SIZE / ( 1 + ( RECT_GRID_UNITS + PADDING_GRID_UNITS ) * numMasses );
         } );
 

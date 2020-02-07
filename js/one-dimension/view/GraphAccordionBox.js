@@ -22,7 +22,7 @@ define( require => {
 
     // strings
 
-    const normalModeString = require( 'string!NORMAL_MODES/normal-modes.title' );
+    const normalModesTitleString = require( 'string!NORMAL_MODES/normal-modes.title' );
 
     class GraphAccordionBox extends AccordionBox {
 
@@ -45,7 +45,7 @@ define( require => {
         const PANEL_X_MARGIN = 7;
         const PANEL_Y_MARGIN = 8;
 
-        const titleNode = new Text( normalModeString, { font: NormalModesConstants.CONTROL_FONT } );
+        const titleNode = new Text( normalModesTitleString, { font: NormalModesConstants.CONTROL_FONT } );
 
         options = merge( options, {
           resize: true,
@@ -100,7 +100,7 @@ define( require => {
 
         Property.multilink( [ model.numVisibleMassesProperty, this.expandedProperty ], function ( numMasses, isExpanded ) {
           graphContainer.children = normalModeGraphs.slice( 0, numMasses );
-          graphContainer.children.forEach( ( graph ) => graph.update() );
+          graphContainer.children.forEach( graph => graph.update() );
           self.layout();
         } );
 

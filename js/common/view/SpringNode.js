@@ -63,9 +63,11 @@ define( require => {
       Property.multilink( [ this.spring.leftMass.equilibriumPositionProperty, this.spring.leftMass.displacementProperty, this.spring.rightMass.equilibriumPositionProperty, this.spring.rightMass.displacementProperty ], function( leftPos, leftDispl, rightPos, rightDispl ) {
         if ( self.visible ) {
 
-          let p1 = self.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
-          let p2 = self.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
-          if ( p1.distance( p2 ) === 0 ) return;
+          const p1 = self.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
+          const p2 = self.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
+          if ( p1.distance( p2 ) === 0 ) {
+            return;
+          }
 
           self.scale( 1 / currentXScaling, 1 );
 

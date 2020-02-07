@@ -46,10 +46,10 @@ define( require => {
             fill: Color.toColor( 'rgb( 0, 0, 0)' ).colorUtilsBrighter( .6 ),
             rectWidth: 1, /* just a default value */
             rectHeight: 0,
-            cornerRadius: 2,
+            cornerRadius: 2
           },
           rectGridSize: 5,
-          paddingGridSize: 1,
+          paddingGridSize: 1
         } );
 
         super( options );
@@ -63,12 +63,12 @@ define( require => {
         const self = this;
 
         self.amplitudeChanged = function( amplitude, axis ) {
-          if( model.ampSelectorAxisProperty.get() == axis ) {
+          if( model.ampSelectorAxisProperty.get() === axis ) {
             const maxAmp = maxAmpProperty.get();
             const heightFactor = Math.min( 1, amplitude / maxAmp );
             self.backgroundRect.rectHeight = self.rectHeight * ( 1 - heightFactor );
           }
-        }
+        };
 
         self.numMassesChanged = function( numMasses ) {
           if( self.row < numMasses && self.col < numMasses ) {
@@ -87,17 +87,17 @@ define( require => {
           else {
             self.visible = false;
           }
-        }
+        };
 
         self.ampAxisChanged = function( ampSelectorAxis ) {
-          self.fill = ( ampSelectorAxis == model.ampSelectorAxis.VERTICAL )? options.fillY : options.fillX;
+          self.fill = ( ampSelectorAxis === model.ampSelectorAxis.VERTICAL )? options.fillY : options.fillX;
           self.amplitudeChanged( ampAxisProperty.get()[ row ][ col ].get(), ampSelectorAxis );
-        }
+        };
 
-        model.modeXAmplitudeProperty[ row ][ col ].link( ( amplitude ) => {
+        model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
           self.amplitudeChanged( amplitude, model.ampSelectorAxis.HORIZONTAL );
         } );
-        model.modeYAmplitudeProperty[ row ][ col ].link( ( amplitude ) => {
+        model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
           self.amplitudeChanged( amplitude, model.ampSelectorAxis.VERTICAL );
         } );
 
@@ -108,7 +108,7 @@ define( require => {
         const isNear = function( n1, n2 ) {
           const EPS = 10e-5;
           return n1 >= ( n2 - EPS ) && n1 <= ( n2 + EPS );
-        }
+        };
 
         this.addInputListener( new FireListener( {
           fire: () => {

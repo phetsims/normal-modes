@@ -13,7 +13,7 @@ define( require => {
     const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
     const inherit = require( 'PHET_CORE/inherit' );
     const normalModes = require( 'NORMAL_MODES/normalModes' );
-    const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' )
+    const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
 
     // constants
     const X_LEN = 100;

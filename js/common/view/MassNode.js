@@ -70,7 +70,7 @@ define( require => {
 
         top:    new ArrowNode( 0, - this.size / 2, 0, - this.size / 2 - arrowSize, arrowOptions ),
         bottom: new ArrowNode( 0,   this.size / 2, 0,   this.size / 2 + arrowSize, arrowOptions )
-      }
+      };
 
       this.addChild( this.arrows.left );
       this.addChild( this.arrows.top );

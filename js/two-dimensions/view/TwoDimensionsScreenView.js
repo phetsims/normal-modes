@@ -99,7 +99,7 @@ define( require => {
 
       const borderWalls = new Rectangle( new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
         stroke: Color.toColor( '#333' ),
-        lineWidth: 2,
+        lineWidth: 2
       } );
 
       this.addChild( borderWalls );

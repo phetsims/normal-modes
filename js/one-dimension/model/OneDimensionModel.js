@@ -16,6 +16,7 @@ define( require => {
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
   const NumberProperty = require( 'AXON/NumberProperty' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
+  const Range = require( 'DOT/Range' );
   const Spring = require( 'NORMAL_MODES/common/model/Spring' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -133,11 +134,11 @@ define( require => {
     changedNumberOfMasses( numMasses ) {
 
       let x = OneDimensionConstants.LEFT_WALL_X_POS;
-      let xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (numMasses + 1);
-      let xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
+      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (numMasses + 1);
+      const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
-        let visible = ( i <= numMasses );
+        const visible = ( i <= numMasses );
 
         this.masses[ i ].equilibriumPositionProperty.set( new Vector2( x, 0 ) );
         this.masses[ i ].visibilityProperty.set( visible );
@@ -173,14 +174,14 @@ define( require => {
      * @private
      */
     createDefaultMasses( tandem ) {
-      let defaultMassesNum = this.numVisibleMassesProperty.get();
+      const defaultMassesNum = this.numVisibleMassesProperty.get();
 
       let x = OneDimensionConstants.LEFT_WALL_X_POS;
-      let xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (defaultMassesNum + 1);
-      let xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
+      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (defaultMassesNum + 1);
+      const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
-        let visible = ( i <= defaultMassesNum );
+        const visible = ( i <= defaultMassesNum );
 
         this.masses[ i ] = new Mass( new Vector2( x, 0 ), visible, tandem.createTandem( 'mass' + i ) );
 
@@ -283,7 +284,7 @@ define( require => {
      * @public
      */
     singleStep( dt ) {
-      dt *= this.simSpeedProperty.get()
+      dt *= this.simSpeedProperty.get();
       this.timeProperty.set( this.timeProperty.get() + dt );
       if ( this.draggingMassIndexProperty.get() > 0 ) {
         this.setVerletPositions( dt );
@@ -303,13 +304,13 @@ define( require => {
     setVerletPositions( dt ) {
       const N = this.numVisibleMassesProperty.get();
       for ( let i = 1; i <= N; ++i ) {
-        if ( i != this.draggingMassIndexProperty.get() ) {
+        if ( i !== this.draggingMassIndexProperty.get() ) {
 
           const x = this.masses[ i ].displacementProperty.get();
           const v = this.masses[ i ].velocityProperty.get();
           const a = this.masses[ i ].accelerationProperty.get();
 
-          let displacement = x.plus( v.timesScalar( dt ) ).add( a.timesScalar( dt * dt / 2 ) );
+          const displacement = x.plus( v.timesScalar( dt ) ).add( a.timesScalar( dt * dt / 2 ) );
           this.masses[ i ].displacementProperty.set( displacement );
           this.masses[ i ].previousAccelerationProperty.set( a );
 
@@ -328,7 +329,7 @@ define( require => {
     recalculateVelocityAndAcceleration( dt ) {
       const N = this.numVisibleMassesProperty.get();
       for ( let i = 1; i <= N; ++i ) {
-        if ( i != this.draggingMassIndexProperty.get() ) {
+        if ( i !== this.draggingMassIndexProperty.get() ) {
 
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
