@@ -18,7 +18,7 @@
     "value": "Zero Positions"
   },
   "numberOfMasses": {
-    "value": "Number of Masses: "
+    "value": "Number of Masses:"
   },
   "showSprings": {
     "value": "Show Springs"
@@ -36,19 +36,19 @@
     "value": "fast"
   },
   "normalMode": {
-    "value": "Normal Mode: "
+    "value": "Normal Mode:"
   },
   "amplitude": {
-    "value": "Amplitude: "
+    "value": "Amplitude:"
   },
   "normalModeSpectrum": {
     "value": "Normal Mode Spectrum"
   },
   "phase": {
-    "value": "Phase: "
+    "value": "Phase:"
   },
   "frequency": {
-    "value": "Frequency: "
+    "value": "Frequency:"
   },
   "normalModeAmplitudes": {
     "value": "Normal Mode Amplitudes"
