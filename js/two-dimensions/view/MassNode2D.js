@@ -48,7 +48,8 @@ define( require => {
       this.startCallback = function( event, listener ) {
         let foundIndex = -1;
         let foundArray = null;
-        for ( const array of self.model.masses ) {
+        for ( let i = 0; i < self.model.masses.length; i++ ) {
+          const array = self.model.masses[ i ];
           foundIndex = array.indexOf( self.mass );
           if ( foundIndex !== -1 ) {
             foundArray = array;
