@@ -141,7 +141,7 @@ define( require => {
           model.modeAmplitudeProperty[ i ],
           new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
             OneDimensionConstants.MAX_MODE_AMPLITUDE,
-            OneDimensionConstants.INIT_MODE_AMPLUITUDE ),
+            OneDimensionConstants.INIT_MODE_AMPLITUDE ),
           ampSliderOptions
         );
 
