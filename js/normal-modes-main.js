@@ -21,7 +21,7 @@ define( require => {
 
   const simOptions = {
     credits: {
-      //TODO fill in credits, all of these fields are optional, see joist.CreditsNode
+      //TODO https://github.com/phetsims/normal-modes/issues/19, fill in credits
       leadDesign: '',
       softwareDevelopment: '',
       team: '',
