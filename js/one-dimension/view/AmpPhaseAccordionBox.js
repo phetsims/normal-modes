@@ -31,11 +31,10 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  const ampSelector1DAmplitudeString = require( 'string!NORMAL_MODES/amp-selector-1d.amplitude' );
-  const ampSelector1DNormalModeSpectrumString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode-spectrum' );
-  const ampSelector1DFrequencyString = require( 'string!NORMAL_MODES/amp-selector-1d.frequency' );
-  const ampSelector1DNormalModeString = require( 'string!NORMAL_MODES/amp-selector-1d.normal-mode' );
-  const ampSelector1DPhaseString = require( 'string!NORMAL_MODES/amp-selector-1d.phase' );
+  const amplitudeString = require( 'string!NORMAL_MODES/amplitude' );
+  const frequencyString = require( 'string!NORMAL_MODES/frequency' );
+  const normalModeSpectrumString = require( 'string!NORMAL_MODES/normalModeSpectrum' );
+  const normalModeString = require( 'string!NORMAL_MODES/normalMode' );
 
   class AmpPhaseAccordionBox extends AccordionBox {
     // TODO - comment code
@@ -80,7 +79,7 @@ define( require => {
           touchAreaYDilation: 6
         },
 
-        titleNode: new Text( ampSelector1DNormalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
+        titleNode: new Text( normalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
         showTitleWhenExpanded: false
 
       } );
@@ -177,16 +176,16 @@ define( require => {
       const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1 );
 
       const normalModeLabel = new Text(
-        ampSelector1DNormalModeString,
+        normalModeString,
         { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
       );
 
       const amplitudeLabel = new Text(
-        ampSelector1DAmplitudeString,
+        amplitudeString,
         { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
       );
 
-      const phaseLabel = new Text( ampSelector1DPhaseString, {
+      const phaseLabel = new Text( phaseString, {
         font: NormalModesConstants.CONTROL_FONT,
         maxWidth: 80
       } );
@@ -217,7 +216,7 @@ define( require => {
       } );
 
       const frequencyLabel = new Text(
-        ampSelector1DFrequencyString,
+        frequencyString,
         { font: NormalModesConstants.CONTROL_FONT, maxWidth: 120 }
       );
 
@@ -336,6 +335,8 @@ define( require => {
     }
 
   }
+
+  const phaseString = require( 'string!NORMAL_MODES/phase' );
 
   return normalModes.register( 'AmpPhaseAccordionBox', AmpPhaseAccordionBox );
 } );

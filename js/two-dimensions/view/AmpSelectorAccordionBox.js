@@ -26,7 +26,7 @@ define( require => {
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
 
   // strings
-  const ampSelector2DNormalModeAmplitudesString = require( 'string!NORMAL_MODES/amp-selector-2d.normal-mode-amplitudes' );
+  const normalModeAmplitudesString = require( 'string!NORMAL_MODES/normalModeAmplitudes' );
 
   const PANEL_SIZE = 270;
   const RECT_GRID_UNITS = 5;
@@ -72,7 +72,7 @@ define( require => {
           touchAreaYDilation: 6
         },
 
-        titleNode: new Text( ampSelector2DNormalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
+        titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
         showTitleWhenExpanded: false
 
       } );

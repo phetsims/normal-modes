@@ -34,15 +34,15 @@ define( require => {
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
-  const optionsPanelSpeedString = require( 'string!NORMAL_MODES/options-panel.speed' );
-  const optionsPanelSlowString = require( 'string!NORMAL_MODES/options-panel.slow' );
-  const optionsPanelNormalString = require( 'string!NORMAL_MODES/options-panel.normal' );
-  const optionsPanelFastString = require( 'string!NORMAL_MODES/options-panel.fast' );
-  const optionsPanelShowSpringsString = require( 'string!NORMAL_MODES/options-panel.show-springs' );
-  const optionsPanelShowPhasesString = require( 'string!NORMAL_MODES/options-panel.show-phases' );
-  const optionsPanelInitialPositionsString = require( 'string!NORMAL_MODES/options-panel.initial-positions' );
-  const optionsPanelZeroPositionsString = require( 'string!NORMAL_MODES/options-panel.zero-positions' );
-  const optionsPanelNumMassesString = require( 'string!NORMAL_MODES/options-panel.num-masses' );
+  const fastString = require( 'string!NORMAL_MODES/fast' );
+  const initialPositionsString = require( 'string!NORMAL_MODES/initialPositions' );
+  const normalString = require( 'string!NORMAL_MODES/normal' );
+  const numberOfMassesString = require( 'string!NORMAL_MODES/numberOfMasses' );
+  const showPhasesString = require( 'string!NORMAL_MODES/showPhases' );
+  const showSpringsString = require( 'string!NORMAL_MODES/showSprings' );
+  const slowString = require( 'string!NORMAL_MODES/slow' );
+  const speedString = require( 'string!NORMAL_MODES/speed' );
+  const zeroPositionsString = require( 'string!NORMAL_MODES/zeroPositions' );
 
   class OptionsPanel extends Panel {
 
@@ -63,7 +63,7 @@ define( require => {
       */
 
       // TODO - create text on a separate line
-      const showSpringsCheckbox = new Checkbox( new Text( optionsPanelShowSpringsString, { font: NormalModesConstants.GENERAL_FONT } ), model.springsVisibilityProperty, {
+      const showSpringsCheckbox = new Checkbox( new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } ), model.springsVisibilityProperty, {
         boxWidth: 16
       } );
       showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
@@ -73,7 +73,7 @@ define( require => {
 
       // TODO - refactor
       if ( doShowPhases ) {
-        showPhasesCheckbox = new Checkbox( new Text( optionsPanelShowPhasesString, { font: NormalModesConstants.GENERAL_FONT } ), model.phasesVisibilityProperty, {
+        showPhasesCheckbox = new Checkbox( new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } ), model.phasesVisibilityProperty, {
           boxWidth: 16
         } );
         showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
@@ -152,12 +152,12 @@ define( require => {
       };
 
       // Initial positions button
-      const initialPositionsButton = new TextPushButton( optionsPanelInitialPositionsString, merge( {
+      const initialPositionsButton = new TextPushButton( initialPositionsString, merge( {
         listener: model.initialPositions.bind( model )
       }, textButtonsOptions ) );
 
       // Zero positions button
-      const zeroPositionsButton = new TextPushButton( optionsPanelZeroPositionsString, merge( {
+      const zeroPositionsButton = new TextPushButton( zeroPositionsString, merge( {
         listener: model.zeroPositions.bind( model )
       }, textButtonsOptions ) );
 
@@ -208,15 +208,15 @@ define( require => {
           majorTicks: [
             {
               value: OneDimensionConstants.MIN_SPEED,
-              label: new Text( optionsPanelSlowString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+              label: new Text( slowString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
             },
             {
               value: OneDimensionConstants.INIT_SPEED,
-              label: new Text( optionsPanelNormalString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+              label: new Text( normalString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
             },
             {
               value: OneDimensionConstants.MAX_SPEED,
-              label: new Text( optionsPanelFastString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+              label: new Text( fastString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
             }
           ],
           minorTickSpacing: OneDimensionConstants.DELTA_SPEED
@@ -230,7 +230,7 @@ define( require => {
       };
 
       const speedControl = new NumberControl(
-        optionsPanelSpeedString,
+        speedString,
         model.simSpeedProperty,
         new RangeWithValue( OneDimensionConstants.MIN_SPEED,
           OneDimensionConstants.MAX_SPEED,
@@ -268,7 +268,7 @@ define( require => {
       };
 
       const numVisibleMassesControl = new NumberControl(
-        optionsPanelNumMassesString,
+        numberOfMassesString,
         model.numVisibleMassesProperty,
         new RangeWithValue( NormalModesConstants.MIN_MASSES_ROW_LEN,
           NormalModesConstants.MAX_MASSES_ROW_LEN,

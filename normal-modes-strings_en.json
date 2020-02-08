@@ -8,49 +8,49 @@
   "screen.two-dimensions": {
     "value": "Two Dimensions"
   },
-  "options-panel.speed": {
+  "speed": {
     "value": "Speed"
   },
-  "options-panel.initial-positions": {
+  "initialPositions": {
     "value": "Initial Positions"
   },
-  "options-panel.zero-positions": {
+  "zeroPositions": {
     "value": "Zero Positions"
   },
-  "options-panel.num-masses": {
+  "numberOfMasses": {
     "value": "Number of Masses: "
   },
-  "options-panel.show-springs": {
+  "showSprings": {
     "value": "Show Springs"
   },
-  "options-panel.show-phases": {
+  "showPhases": {
     "value": "Show Phases"
   },
-  "options-panel.slow": {
+  "slow": {
     "value": "slow"
   },
-  "options-panel.normal": {
+  "normal": {
     "value": "normal"
   },
-  "options-panel.fast": {
+  "fast": {
     "value": "fast"
   },
-  "amp-selector-1d.normal-mode": {
+  "normalMode": {
     "value": "Normal Mode: "
   },
-  "amp-selector-1d.amplitude": {
+  "amplitude": {
     "value": "Amplitude: "
   },
-  "amp-selector-1d.normal-mode-spectrum": {
+  "normalModeSpectrum": {
     "value": "Normal Mode Spectrum"
   },
-  "amp-selector-1d.phase": {
+  "phase": {
     "value": "Phase: "
   },
-  "amp-selector-1d.frequency": {
+  "frequency": {
     "value": "Frequency: "
   },
-  "amp-selector-2d.normal-mode-amplitudes": {
+  "normalModeAmplitudes": {
     "value": "Normal Mode Amplitudes"
   }
 }
