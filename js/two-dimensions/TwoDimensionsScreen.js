@@ -5,39 +5,39 @@
  * @author Franco Barpp Gomes (UTFPR)
  */
 define( require => {
-    'use strict';
+  'use strict';
 
-    // modules
-    const Property = require( 'AXON/Property' );
-    const Screen = require( 'JOIST/Screen' );
-    const normalModes = require( 'NORMAL_MODES/normalModes' );
-    const NormalModesIconFactory = require( 'NORMAL_MODES/common/view/NormalModesIconFactory' );
-    const TwoDimensionsModel = require( 'NORMAL_MODES/two-dimensions/model/TwoDimensionsModel' );
-    const TwoDimensionsScreenView = require( 'NORMAL_MODES/two-dimensions/view/TwoDimensionsScreenView' );
+  // modules
+  const Property = require( 'AXON/Property' );
+  const Screen = require( 'JOIST/Screen' );
+  const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesIconFactory = require( 'NORMAL_MODES/common/view/NormalModesIconFactory' );
+  const TwoDimensionsModel = require( 'NORMAL_MODES/two-dimensions/model/TwoDimensionsModel' );
+  const TwoDimensionsScreenView = require( 'NORMAL_MODES/two-dimensions/view/TwoDimensionsScreenView' );
 
-    const screenTwoDimensionsString = require( 'string!NORMAL_MODES/screen.two-dimensions' );
+  const screenTwoDimensionsString = require( 'string!NORMAL_MODES/screen.two-dimensions' );
 
-    class TwoDimensionsScreen extends Screen {
+  class TwoDimensionsScreen extends Screen {
 
-      /**
-       * @param {Tandem} tandem
-       */
-      constructor( tandem ) {
+    /**
+     * @param {Tandem} tandem
+     */
+    constructor( tandem ) {
 
-        const options = {
-          name: screenTwoDimensionsString,
-          backgroundColorProperty: new Property( 'white' ),
-          homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
-          tandem: tandem
-        };
+      const options = {
+        name: screenTwoDimensionsString,
+        backgroundColorProperty: new Property( 'white' ),
+        homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
+        tandem: tandem
+      };
 
-        super(
-          () => new TwoDimensionsModel( tandem.createTandem( 'model' ) ),
-          model => new TwoDimensionsScreenView( model, tandem.createTandem( 'view' ) ),
-          options
-        );
-      }
+      super(
+        () => new TwoDimensionsModel( tandem.createTandem( 'model' ) ),
+        model => new TwoDimensionsScreenView( model, tandem.createTandem( 'view' ) ),
+        options
+      );
     }
+  }
 
-    return normalModes.register( 'TwoDimensionsScreen', TwoDimensionsScreen );
-  } );
+  return normalModes.register( 'TwoDimensionsScreen', TwoDimensionsScreen );
+} );

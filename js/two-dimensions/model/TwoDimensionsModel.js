@@ -68,7 +68,7 @@ define( require => {
       this.modeXPhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
       this.modeYPhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
       this.modeFrequencyProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      for( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
+      for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
         this.modeXAmplitudeProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
         this.modeYAmplitudeProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
         this.modeXPhaseProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
@@ -105,7 +105,7 @@ define( require => {
             else {
               const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
               const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numMasses + 1 ) );
-              return Math.sqrt( omegaI ** 2 + omegaJ ** 2);
+              return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
             }
           } );
 
@@ -183,11 +183,11 @@ define( require => {
     changedNumberOfMasses( numMasses ) {
 
       let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (numMasses + 1);
+      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( numMasses + 1 );
       const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
       let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (numMasses + 1);
+      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( numMasses + 1 );
       const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS - TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
@@ -222,11 +222,11 @@ define( require => {
       const defaultMassesNum = this.numVisibleMassesProperty.get();
 
       let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / (defaultMassesNum + 1);
+      const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNum + 1 );
       const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
       let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / (defaultMassesNum + 1);
+      const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( defaultMassesNum + 1 );
       const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
@@ -461,8 +461,8 @@ define( require => {
           this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * Math.cos( freqTimesTimeMinusPhsX );
           this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * Math.cos( freqTimesTimeMinusPhsY );
 
-          this.freqTimesAmplitudeXTimesSin[ r ][ s ] = - modeFrequency * modeAmplitudeX * Math.sin( freqTimesTimeMinusPhsX );
-          this.freqTimesAmplitudeYTimesSin[ r ][ s ] = - modeFrequency * modeAmplitudeY * Math.sin( freqTimesTimeMinusPhsY );
+          this.freqTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( freqTimesTimeMinusPhsX );
+          this.freqTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( freqTimesTimeMinusPhsY );
         }
       }
       for ( let i = 1; i <= N; ++i ) {

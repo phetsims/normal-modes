@@ -40,7 +40,7 @@ define( require => {
       this.size = 20;
 
       // @public {Property.<boolean>} determines the visibility of the MassNode
-      this.visibilityProperty = new DerivedProperty ( [ this.mass.visibilityProperty ], function( massVisible ) {
+      this.visibilityProperty = new DerivedProperty( [ this.mass.visibilityProperty ], function( massVisible ) {
         return massVisible;
       } );
 
@@ -65,11 +65,11 @@ define( require => {
       const arrowSize = 23;
       // @public {Object}
       this.arrows = {
-        left:   new ArrowNode( - this.size / 2, 0, - this.size / 2 - arrowSize, 0, arrowOptions ),
-        right:  new ArrowNode(   this.size / 2, 0,   this.size / 2 + arrowSize, 0, arrowOptions ),
+        left: new ArrowNode( -this.size / 2, 0, -this.size / 2 - arrowSize, 0, arrowOptions ),
+        right: new ArrowNode( this.size / 2, 0, this.size / 2 + arrowSize, 0, arrowOptions ),
 
-        top:    new ArrowNode( 0, - this.size / 2, 0, - this.size / 2 - arrowSize, arrowOptions ),
-        bottom: new ArrowNode( 0,   this.size / 2, 0,   this.size / 2 + arrowSize, arrowOptions )
+        top: new ArrowNode( 0, -this.size / 2, 0, -this.size / 2 - arrowSize, arrowOptions ),
+        bottom: new ArrowNode( 0, this.size / 2, 0, this.size / 2 + arrowSize, arrowOptions )
       };
 
       this.addChild( this.arrows.left );

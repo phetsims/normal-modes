@@ -41,7 +41,7 @@ define( require => {
       this.addChild( this.circle );
 
       const rotationPoint = new Vector2( 0, 0 );
-      for(const arrow in this.arrows) {
+      for ( const arrow in this.arrows ) {
         this.arrows[ arrow ].rotateAround( rotationPoint, Math.PI / 4 );
       }
 
@@ -67,7 +67,7 @@ define( require => {
         self.mass.displacementProperty.set( listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() ) );
       };
 
-      this.endCallback =  function( event, listener ) {
+      this.endCallback = function( event, listener ) {
         self.model.draggingMassIndexesProperty.set( null );
         self.model.computeModeAmplitudesAndPhases();
       };

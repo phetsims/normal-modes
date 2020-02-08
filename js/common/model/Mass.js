@@ -28,7 +28,7 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines the visibility of the mass
-      this.visibilityProperty = new BooleanProperty ( visible, {
+      this.visibilityProperty = new BooleanProperty( visible, {
         tandem: tandem.createTandem( 'visibilityProperty' )
       } );
 

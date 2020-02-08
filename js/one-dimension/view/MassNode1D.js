@@ -54,20 +54,21 @@ define( require => {
         if ( self.model.directionOfMotionProperty.get() === self.model.directionOfMotion.HORIZONTAL ) {
           const oldY = self.mass.displacementProperty.get().y;
           self.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
-        } else {
+        }
+        else {
           const oldX = self.mass.displacementProperty.get().x;
           self.mass.displacementProperty.set( new Vector2( oldX, point.y ) );
         }
       };
 
-      this.endCallback =  function( event, listener ) {
+      this.endCallback = function( event, listener ) {
         self.model.draggingMassIndexProperty.set( -1 );
         self.model.computeModeAmplitudesAndPhases();
       };
 
       this.overUpCallback = function( isOver ) {
         const axis = self.model.directionOfMotionProperty.get();
-        if( axis === self.model.directionOfMotion.VERTICAL ) {
+        if ( axis === self.model.directionOfMotion.VERTICAL ) {
           self.arrows.top.visible = isOver;
           self.arrows.bottom.visible = isOver;
         }

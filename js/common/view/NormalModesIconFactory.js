@@ -25,7 +25,7 @@ define( require => {
 
       const rectSize = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE;
       const iconNode = new Rectangle( 0, 0, rectSize.width, rectSize.height, {
-        children: [ ]
+        children: []
       } );
 
       const mass = new Rectangle( {
@@ -66,7 +66,7 @@ define( require => {
     createTwoDimensionsScreenIcon() {
       const rectSize = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE;
       const iconNode = new Rectangle( 0, 0, rectSize.width, rectSize.height, {
-        children: [ ]
+        children: []
       } );
 
       return new ScreenIcon( iconNode, {

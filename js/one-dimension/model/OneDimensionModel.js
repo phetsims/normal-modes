@@ -134,7 +134,7 @@ define( require => {
     changedNumberOfMasses( numMasses ) {
 
       let x = OneDimensionConstants.LEFT_WALL_X_POS;
-      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (numMasses + 1);
+      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( numMasses + 1 );
       const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
@@ -177,7 +177,7 @@ define( require => {
       const defaultMassesNum = this.numVisibleMassesProperty.get();
 
       let x = OneDimensionConstants.LEFT_WALL_X_POS;
-      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / (defaultMassesNum + 1);
+      const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( defaultMassesNum + 1 );
       const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
       for ( let i = 0; i < MAX_MASSES; i++ ) {
@@ -206,7 +206,7 @@ define( require => {
      * @public
      */
     resetNormalModes() {
-      for(let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++) {
+      for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
         this.modeAmplitudeProperty[ i ].reset();
         this.modePhaseProperty[ i ].reset();
       }
@@ -381,7 +381,7 @@ define( require => {
           const modeFrequency = this.modeFrequencyProperty[ j ].get();
           const modePhase = this.modePhaseProperty[ j ].get();
           displacement += modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
-          velocity += ( - modeFrequency ) * modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
+          velocity += ( -modeFrequency ) * modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
         }
 
         if ( this.directionOfMotionProperty.get() === this.directionOfMotion.HORIZONTAL ) {
@@ -389,7 +389,8 @@ define( require => {
           const oldVelocityY = this.masses[ i ].velocityProperty.get().y;
           this.masses[ i ].displacementProperty.set( new Vector2( displacement, oldY ) );
           this.masses[ i ].velocityProperty.set( new Vector2( velocity, oldVelocityY ) );
-        } else {
+        }
+        else {
           const oldX = this.masses[ i ].displacementProperty.get().x;
           const oldVelocityX = this.masses[ i ].velocityProperty.get().x;
           this.masses[ i ].displacementProperty.set( new Vector2( oldX, displacement ) );
@@ -418,7 +419,8 @@ define( require => {
           if ( this.directionOfMotionProperty.get() === this.directionOfMotion.HORIZONTAL ) {
             massDisplacement = this.masses[ j ].initialDisplacementProperty.get().x;
             massVelocity = this.masses[ j ].initialVelocityProperty.get().x;
-          } else {
+          }
+          else {
             massDisplacement = this.masses[ j ].initialDisplacementProperty.get().y;
             massVelocity = this.masses[ j ].initialVelocityProperty.get().y;
           }

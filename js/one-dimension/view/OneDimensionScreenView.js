@@ -42,7 +42,7 @@ define( require => {
       const VIEWBOX_WIDTH = 755 - 8;
 
       const viewOrigin = new Vector2( VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
-                                      ( this.layoutBounds.maxY - 2 * OneDimensionConstants.SCREEN_VIEW_Y_MARGIN - 300 ) / 2 + OneDimensionConstants.SCREEN_VIEW_Y_MARGIN );
+        ( this.layoutBounds.maxY - 2 * OneDimensionConstants.SCREEN_VIEW_Y_MARGIN - 300 ) / 2 + OneDimensionConstants.SCREEN_VIEW_Y_MARGIN );
 
       // @public {ModelViewTransform2}
       this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2 );
@@ -121,6 +121,7 @@ define( require => {
 
       this.addChild( this.graphBox );
     }
+
     /**
      * Resets the view.
      * @public

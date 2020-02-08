@@ -40,7 +40,7 @@ define( require => {
       this.model = model;
 
       // @public {Property.<boolean>} determines the visibility of the SpringNode
-      this.visibilityProperty = new DerivedProperty ( [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ], function( mySpringVisible, springsVisible ) {
+      this.visibilityProperty = new DerivedProperty( [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ], function( mySpringVisible, springsVisible ) {
         return mySpringVisible && springsVisible;
       } );
 

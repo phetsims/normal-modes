@@ -48,7 +48,7 @@ define( require => {
   };
 
   const baseMaxAmplitude = .3;
-  for( let i = 0; i < maxAmplitudes.length; i++ ) {
+  for ( let i = 0; i < maxAmplitudes.length; i++ ) {
     // this is the way the original sim does
     const springLength = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( i + 2 );
     maxAmplitudes[ i ] = baseMaxAmplitude * springLength;

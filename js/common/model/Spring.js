@@ -24,7 +24,7 @@ define( require => {
       this.rightMass = rightMass;
 
       // @public {Property.<boolean>} determines the visibility of the spring
-      this.visibilityProperty = new DerivedProperty ( [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ], function( leftVisible, rightVisible ) {
+      this.visibilityProperty = new DerivedProperty( [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ], function( leftVisible, rightVisible ) {
         return leftVisible;
       } );
 
