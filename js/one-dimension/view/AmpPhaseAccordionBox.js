@@ -35,6 +35,7 @@ define( require => {
   const frequencyString = require( 'string!NORMAL_MODES/frequency' );
   const normalModeSpectrumString = require( 'string!NORMAL_MODES/normalModeSpectrum' );
   const normalModeString = require( 'string!NORMAL_MODES/normalMode' );
+  const phaseString = require( 'string!NORMAL_MODES/phase' );
 
   class AmpPhaseAccordionBox extends AccordionBox {
     // TODO - comment code
@@ -324,7 +325,6 @@ define( require => {
         self.centerX = options.centerX;
 
       } );
-
     }
 
     /**
@@ -334,8 +334,6 @@ define( require => {
       // NO-OP
     }
   }
-
-  const phaseString = require( 'string!NORMAL_MODES/phase' );
 
   return normalModes.register( 'AmpPhaseAccordionBox', AmpPhaseAccordionBox );
 } );
