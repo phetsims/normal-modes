@@ -76,6 +76,7 @@ define( require => {
       // @public {number} Accumulated delta-time
       this.dt = 0;
 
+      // @public {NumberProperty[]}
       this.modeAmplitudeProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
       this.modePhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
       this.modeFrequencyProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
