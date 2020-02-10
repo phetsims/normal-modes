@@ -97,7 +97,9 @@ define( require => {
           self.arrows.bottom.visible = false;
           self.arrows.left.visible = false;
           self.arrows.right.visible = false;
-          self.dragListener.isOverProperty.unlink( callback );
+          if ( self.dragListener.isOverProperty.hasListener( callback ) ) {
+            self.dragListener.isOverProperty.unlink( callback );
+          }
         }
       } );
     }
