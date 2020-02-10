@@ -78,22 +78,26 @@ define( require => {
 
         for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; ++j ) {
           this.modeXAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-            tandem: tandem.createTandem( 'modeXAmplitudeProperty' + i + '_' + j ),
+            //TODO see https://github.com/phetsims/normal-modes/issues/17
+            // tandem: tandem.createTandem( 'modeXAmplitudeProperty' + i + '_' + j ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
           } );
 
           this.modeYAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-            tandem: tandem.createTandem( 'modeYAmplitudeProperty' + i + '_' + j ),
+            //TODO see https://github.com/phetsims/normal-modes/issues/17
+            // tandem: tandem.createTandem( 'modeYAmplitudeProperty' + i + '_' + j ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
           } );
 
           this.modeXPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-            tandem: tandem.createTandem( 'modeXPhaseProperty' + i + '_' + j ),
+            //TODO see https://github.com/phetsims/normal-modes/issues/17
+            // tandem: tandem.createTandem( 'modeXPhaseProperty' + i + '_' + j ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
           } );
 
           this.modeYPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-            tandem: tandem.createTandem( 'modeYPhaseProperty' + i + '_' + j ),
+            //TODO see https://github.com/phetsims/normal-modes/issues/17
+            // tandem: tandem.createTandem( 'modeYPhaseProperty' + i + '_' + j ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
           } );
 
