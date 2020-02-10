@@ -108,9 +108,7 @@ define( require => {
               return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
             }
           } );
-
         }
-
       }
 
       // @public {Mass[][]} Array with the arrays that will contain all of the masses.
@@ -148,7 +146,6 @@ define( require => {
       this.ampSelectorAxisProperty = new EnumerationProperty( this.ampSelectorAxis, this.ampSelectorAxis.VERTICAL, {
         tandem: tandem.createTandem( 'ampSelectorAxisProperty' )
       } );
-
     }
 
     /**
@@ -344,7 +341,6 @@ define( require => {
       else if ( this.draggingMassIndexesProperty.get() === null ) {
         this.setExactPositions();
       }
-
     }
 
     /**
@@ -427,7 +423,6 @@ define( require => {
           }
         }
       }
-
     }
 
     /**
@@ -531,7 +526,6 @@ define( require => {
         }
       }
     }
-
   }
 
   return normalModes.register( 'TwoDimensionsModel', TwoDimensionsModel );

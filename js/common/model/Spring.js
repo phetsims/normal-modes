@@ -7,7 +7,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
 
@@ -24,10 +23,11 @@ define( require => {
       this.rightMass = rightMass;
 
       // @public {Property.<boolean>} determines the visibility of the spring
-      this.visibilityProperty = new DerivedProperty( [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ], function( leftVisible, rightVisible ) {
-        return leftVisible;
-      } );
-
+      this.visibilityProperty = new DerivedProperty(
+        [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ],
+        function( leftVisible, rightVisible ) {
+          return leftVisible;
+        } );
     }
 
     /**
@@ -37,7 +37,6 @@ define( require => {
     reset() {
       // Nothing to reset
     }
-
   }
 
   return normalModes.register( 'Spring', Spring );

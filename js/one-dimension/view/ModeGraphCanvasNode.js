@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const Bounds2 = require( 'DOT/Bounds2' );
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const inherit = require( 'PHET_CORE/inherit' );
@@ -17,7 +16,6 @@ define( require => {
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
 
   // constants
-
   const RIGHT_WALL_PADDING = 25;
   const X_LEN = 50;
 

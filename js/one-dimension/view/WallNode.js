@@ -7,7 +7,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const Color = require( 'SCENERY/util/Color' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -58,7 +57,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'WallNode', WallNode );

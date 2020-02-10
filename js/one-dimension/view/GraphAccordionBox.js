@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const AccordionBox = require( 'SUN/AccordionBox' );
   const merge = require( 'PHET_CORE/merge' );
   const ModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/ModeGraphCanvasNode' );
@@ -21,7 +20,6 @@ define( require => {
   const VBox = require( 'SCENERY/nodes/VBox' );
 
   // strings
-
   const normalModesTitleString = require( 'string!NORMAL_MODES/normal-modes.title' );
 
   class GraphAccordionBox extends AccordionBox {
@@ -103,7 +101,6 @@ define( require => {
         graphContainer.children.forEach( graph => graph.update() );
         self.layout();
       } );
-
     }
 
     /**
@@ -112,7 +109,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'GraphAccordionBox', GraphAccordionBox );

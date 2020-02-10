@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
@@ -44,10 +43,11 @@ define( require => {
         return massVisible;
       } );
 
-      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ], function( massPosition, massDisplacement ) {
-        self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
-        // self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( self.rect.rectWidth / 2, self.rect.rectHeight / 2 ) );
-      } );
+      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ],
+        function( massPosition, massDisplacement ) {
+          self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
+          // self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( self.rect.rectWidth / 2, self.rect.rectHeight / 2 ) );
+        } );
 
       // TODO - magic numbers
       const arrowOptions = {
@@ -63,6 +63,7 @@ define( require => {
       };
 
       const arrowSize = 23;
+
       // @public {Object}
       this.arrows = {
         left: new ArrowNode( -this.size / 2, 0, -this.size / 2 - arrowSize, 0, arrowOptions ),
@@ -87,7 +88,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'MassNode', MassNode );

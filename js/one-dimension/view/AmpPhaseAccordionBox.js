@@ -333,7 +333,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   const phaseString = require( 'string!NORMAL_MODES/phase' );

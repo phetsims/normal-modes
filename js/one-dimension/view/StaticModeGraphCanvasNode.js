@@ -90,7 +90,6 @@ define( require => {
         // put a negative sign in front of it because of y coordinate stuff
         this.curveYPositions[ i ] = -( 2 * this.graphSize.height / 3 ) * ( amp * Math.sin( x * ( n + 1 ) * Math.PI ) * Math.cos( freq * time - phase ) ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
       }
-
     }
   } );
 } );

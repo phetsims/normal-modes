@@ -28,6 +28,7 @@ define( require => {
   // strings
   const normalModeAmplitudesString = require( 'string!NORMAL_MODES/normalModeAmplitudes' );
 
+  // constants
   const PANEL_SIZE = 270;
   const RECT_GRID_UNITS = 5;
   const PADDING_GRID_UNITS = 1;
@@ -152,16 +153,14 @@ define( require => {
       } );
 
       super( contentNode, options );
-
     }
 
     /**
      * @public
      */
     reset() {
-
+      // NO-OP
     }
-
   }
 
   return normalModes.register( 'AmpSelectorAccordionBox', AmpSelectorAccordionBox );

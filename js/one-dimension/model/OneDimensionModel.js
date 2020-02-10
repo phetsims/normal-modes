@@ -432,7 +432,6 @@ define( require => {
         this.modePhaseProperty[ i - 1 ].set( Math.atan2( AmplitudeTimesSinPhase, AmplitudeTimesCosPhase ) );
       }
     }
-
   }
 
   return normalModes.register( 'OneDimensionModel', OneDimensionModel );

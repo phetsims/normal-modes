@@ -44,7 +44,6 @@ define( require => {
 
     FPS: 60,
     FIXED_DT: 1 / 60
-
   };
 
   const baseMaxAmplitude = .3;

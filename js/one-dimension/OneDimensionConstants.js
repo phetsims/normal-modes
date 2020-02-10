@@ -38,7 +38,6 @@ define( require => {
 
     FPS: 60,
     FIXED_DT: 1 / 60
-
   };
 
   return normalModes.register( 'OneDimensionConstants', OneDimensionConstants );

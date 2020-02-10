@@ -7,7 +7,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -40,9 +39,11 @@ define( require => {
       this.model = model;
 
       // @public {Property.<boolean>} determines the visibility of the SpringNode
-      this.visibilityProperty = new DerivedProperty( [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ], function( mySpringVisible, springsVisible ) {
-        return mySpringVisible && springsVisible;
-      } );
+      this.visibilityProperty = new DerivedProperty(
+        [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ],
+        function( mySpringVisible, springsVisible ) {
+          return mySpringVisible && springsVisible;
+        } );
 
       // @private {Shape} shape of the spring path
       this.springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
@@ -89,7 +90,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'SpringNode', SpringNode );

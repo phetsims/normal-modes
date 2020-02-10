@@ -8,7 +8,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const Color = require( 'SCENERY/util/Color' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const MassNode = require( 'NORMAL_MODES/common/view/MassNode' );
@@ -109,7 +108,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'MassNode1D', MassNode1D );

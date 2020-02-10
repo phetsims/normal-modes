@@ -60,7 +60,6 @@ define( require => {
         maxIconWidthProportion: 1, /* isso n é o default, pode tirar se quiser */
         maxIconHeightProportion: 1
       } );
-
     },
 
     createTwoDimensionsScreenIcon() {

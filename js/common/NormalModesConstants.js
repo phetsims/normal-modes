@@ -10,7 +10,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const Color = require( 'SCENERY/util/Color' );
   const PhetFont = require( 'SCENERY_PHET/PhetFont' );
 
@@ -53,7 +52,6 @@ define( require => {
       stroke: 'rgb( 190, 190, 190 )',
       fill: 'rgb( 240, 240, 240 )'
     }
-
   };
 
   return normalModes.register( 'NormalModesConstants', NormalModesConstants );

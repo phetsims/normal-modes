@@ -123,9 +123,8 @@ define( require => {
      * @public
      */
     reset() {
-
+      // NO-OP
     }
-
   }
 
   return normalModes.register( 'AmpSelectorRectNode', AmpSelectorRectNode );

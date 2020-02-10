@@ -297,7 +297,6 @@ define( require => {
     reset() {
       // NO-OP
     }
-
   }
 
   return normalModes.register( 'OptionsPanel', OptionsPanel );
