@@ -275,7 +275,6 @@ define( require => {
       else if ( this.draggingMassIndexProperty.get() <= 0 ) {
         this.setExactPositions();
       }
-
     }
 
     /**
@@ -318,7 +317,6 @@ define( require => {
       }
 
       this.recalculateVelocityAndAcceleration( dt );
-
     }
 
     /**
@@ -361,7 +359,6 @@ define( require => {
           this.masses[ i ].velocityProperty.set( new Vector2( 0, 0 ) );
         }
       }
-
     }
 
     /**

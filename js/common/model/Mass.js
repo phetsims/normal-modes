@@ -7,7 +7,6 @@ define( require => {
   'use strict';
 
   // modules
-
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const Vector2Property = require( 'DOT/Vector2Property' );

@@ -116,7 +116,6 @@ define( require => {
           amp.set( isNear( amp.get(), maxAmpProperty.get() ) ? TwoDimensionsConstants.MIN_MODE_AMPLITUDE : maxAmpProperty.get() );
         }
       } ) );
-
     }
 
     /**
