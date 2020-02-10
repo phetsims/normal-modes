@@ -11,6 +11,7 @@ define( require => {
 
   // modules
   const Color = require( 'SCENERY/util/Color' );
+  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
   const FireListener = require( 'SCENERY/listeners/FireListener' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -90,15 +91,15 @@ define( require => {
       };
 
       self.ampAxisChanged = function( ampSelectorAxis ) {
-        self.fill = ( ampSelectorAxis === model.ampSelectorAxis.VERTICAL ) ? options.fillY : options.fillX;
+        self.fill = ( ampSelectorAxis === DirectionOfMotion.VERTICAL ) ? options.fillY : options.fillX;
         self.amplitudeChanged( ampAxisProperty.get()[ row ][ col ].get(), ampSelectorAxis );
       };
 
       model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, model.ampSelectorAxis.HORIZONTAL );
+        self.amplitudeChanged( amplitude, DirectionOfMotion.HORIZONTAL );
       } );
       model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, model.ampSelectorAxis.VERTICAL );
+        self.amplitudeChanged( amplitude, DirectionOfMotion.VERTICAL );
       } );
 
       model.numVisibleMassesProperty.link( this.numMassesChanged );

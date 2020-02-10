@@ -9,7 +9,7 @@ define( require => {
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
+  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Mass = require( 'NORMAL_MODES/common/model/Mass' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -31,9 +31,6 @@ define( require => {
      * @param {Tandem} tandem
      */
     constructor( tandem ) {
-
-      // @public {Enumeration}
-      this.directionOfMotion = Enumeration.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
 
       // @public {Property.<boolean>} determines whether the sim is in a play/pause state
       this.playingProperty = new BooleanProperty( true, {
@@ -64,7 +61,7 @@ define( require => {
       } );
 
       // @public {Property.<string>} the current direction of motion of the visible masses
-      this.directionOfMotionProperty = new EnumerationProperty( this.directionOfMotion, this.directionOfMotion.VERTICAL, {
+      this.directionOfMotionProperty = new EnumerationProperty( DirectionOfMotion, DirectionOfMotion.VERTICAL, {
         tandem: tandem.createTandem( 'directionOfMotionProperty' )
       } );
 
@@ -155,7 +152,7 @@ define( require => {
 
     /**
      * Swaps x and y in the displacements and velocities when the direction changes.
-     * @param {number} directionOfMotion - the current direction of motion
+     * @param {DirectionOfMotion} directionOfMotion - the current direction of motion
      * @private
      */
     changedDirectionOfMotion( directionOfMotion ) {
@@ -345,7 +342,7 @@ define( require => {
           this.masses[ i ].velocityProperty.set( v.plus( a.plus( aLast ).multiplyScalar( dt / 2 ) ) );
 
           // provavelmente é possível fazer isso
-          if ( this.directionOfMotionProperty.get() === this.directionOfMotion.HORIZONTAL ) {
+          if ( this.directionOfMotionProperty.get() === DirectionOfMotion.HORIZONTAL ) {
             this.masses[ i ].velocityProperty.get().y = 0;
             this.masses[ i ].accelerationProperty.get().y = 0;
           }
@@ -382,7 +379,7 @@ define( require => {
           velocity += ( -modeFrequency ) * modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
         }
 
-        if ( this.directionOfMotionProperty.get() === this.directionOfMotion.HORIZONTAL ) {
+        if ( this.directionOfMotionProperty.get() === DirectionOfMotion.HORIZONTAL ) {
           const oldY = this.masses[ i ].displacementProperty.get().y;
           const oldVelocityY = this.masses[ i ].velocityProperty.get().y;
           this.masses[ i ].displacementProperty.set( new Vector2( displacement, oldY ) );
@@ -414,7 +411,7 @@ define( require => {
         for ( let j = 1; j <= N; ++j ) { // for each mass
           let massDisplacement = 0;
           let massVelocity = 0;
-          if ( this.directionOfMotionProperty.get() === this.directionOfMotion.HORIZONTAL ) {
+          if ( this.directionOfMotionProperty.get() === DirectionOfMotion.HORIZONTAL ) {
             massDisplacement = this.masses[ j ].initialDisplacementProperty.get().x;
             massVelocity = this.masses[ j ].initialVelocityProperty.get().x;
           }

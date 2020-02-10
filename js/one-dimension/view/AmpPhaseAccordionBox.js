@@ -13,6 +13,7 @@ define( require => {
   const AccordionBox = require( 'SUN/AccordionBox' );
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
+  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Line = require( 'SCENERY/nodes/Line' );
@@ -258,10 +259,10 @@ define( require => {
       const horizontalButton = new ArrowNode( 0, 0, iconSize, 0, AXES_ARROW_OPTIONS );
       const verticalButton = new ArrowNode( 0, 0, 0, iconSize, AXES_ARROW_OPTIONS );
       const directionOfMotionRadioButtonGroup = new RadioButtonGroup( model.directionOfMotionProperty, [ {
-        value: model.directionOfMotion.HORIZONTAL,
+        value: DirectionOfMotion.HORIZONTAL,
         node: horizontalButton
       }, {
-        value: model.directionOfMotion.VERTICAL,
+        value: DirectionOfMotion.VERTICAL,
         node: verticalButton
       } ], {
         deselectedLineWidth: 1,

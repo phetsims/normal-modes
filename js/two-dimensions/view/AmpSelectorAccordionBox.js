@@ -15,6 +15,7 @@ define( require => {
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const merge = require( 'PHET_CORE/merge' );
@@ -94,10 +95,10 @@ define( require => {
       const horizontalButton = new ArrowNode( 0, 0, iconSize, 0, AXES_ARROW_OPTIONS );
       const verticalButton = new ArrowNode( 0, 0, 0, iconSize, AXES_ARROW_OPTIONS );
       const ampSelectorAxisRadioButtonGroup = new RadioButtonGroup( model.ampSelectorAxisProperty, [ {
-        value: model.ampSelectorAxis.HORIZONTAL,
+        value: DirectionOfMotion.HORIZONTAL,
         node: horizontalButton
       }, {
-        value: model.ampSelectorAxis.VERTICAL,
+        value: DirectionOfMotion.VERTICAL,
         node: verticalButton
       } ], {
         deselectedLineWidth: 1,
@@ -110,7 +111,7 @@ define( require => {
       } );
 
       const ampAxisProperty = new DerivedProperty( [ model.ampSelectorAxisProperty ], selectorAxis => {
-        return ( selectorAxis === model.ampSelectorAxis.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
+        return ( selectorAxis === DirectionOfMotion.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
       } );
 
       const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
