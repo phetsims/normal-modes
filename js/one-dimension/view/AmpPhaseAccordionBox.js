@@ -20,7 +20,6 @@ define( require => {
   const MathSymbols = require( 'SCENERY_PHET/MathSymbols' );
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
-  const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
@@ -29,6 +28,7 @@ define( require => {
   const StaticModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/StaticModeGraphCanvasNode' );
   const Text = require( 'SCENERY/nodes/Text' );
   const VBox = require( 'SCENERY/nodes/VBox' );
+  const VSlider = require( 'SUN/VSlider' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
 
   // strings
@@ -93,53 +93,24 @@ define( require => {
       const modeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 
       const ampSliderOptions = {
-        delta: 0.01,
-        sliderOptions: {
-          orientation: 'vertical',
-          trackSize: new Dimension2( 100, 3 ),
-          thumbSize: new Dimension2( 15, 26 ),
-          thumbTouchAreaXDilation: 15,
-          thumbTouchAreaYDilation: 15
-        },
-        includeArrowButtons: false,
-        layoutFunction: NumberControl.createLayoutFunction4(),
-        titleNodeOptions: {
-          font: NormalModesConstants.CONTROL_FONT,
-          scale: 0
-        },
-        numberDisplayOptions: {
-          font: NormalModesConstants.CONTROL_FONT,
-          scale: 0
-        }
+        trackSize: new Dimension2( 3, 100 ),
+        thumbSize: new Dimension2( 26, 15 ),
+        thumbTouchAreaXDilation: 15,
+        thumbTouchAreaYDilation: 15
       };
 
       const phaseSliderOptions = {
-        delta: 0.01,
-        sliderOptions: {
-          orientation: 'vertical',
-          trackSize: new Dimension2( 80, 3 ),
-          thumbSize: new Dimension2( 15, 26 ),
-          thumbTouchAreaXDilation: 15,
-          thumbTouchAreaYDilation: 15
-        },
-        includeArrowButtons: false,
-        layoutFunction: NumberControl.createLayoutFunction4(),
-        titleNodeOptions: {
-          font: NormalModesConstants.CONTROL_FONT,
-          scale: 0
-        },
-        numberDisplayOptions: {
-          font: NormalModesConstants.CONTROL_FONT,
-          scale: 0
-        }
+        trackSize: new Dimension2( 3, 80 ),
+        thumbSize: new Dimension2( 26, 15 ),
+        thumbTouchAreaXDilation: 15,
+        thumbTouchAreaYDilation: 15
       };
 
       for ( let i = 0; i < ampSliders.length; i++ ) {
         const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
         const m = OneDimensionConstants.MASSES_MASS_VALUE;
 
-        ampSliders[ i ] = new NumberControl(
-          '',
+        ampSliders[ i ] = new VSlider(
           model.modeAmplitudeProperty[ i ],
           new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
             OneDimensionConstants.MAX_MODE_AMPLITUDE,
@@ -147,8 +118,7 @@ define( require => {
           ampSliderOptions
         );
 
-        phaseSliders[ i ] = new NumberControl(
-          '',
+        phaseSliders[ i ] = new VSlider(
           model.modePhaseProperty[ i ],
           new RangeWithValue( OneDimensionConstants.MIN_MODE_PHASE,
             OneDimensionConstants.MAX_MODE_PHASE,
