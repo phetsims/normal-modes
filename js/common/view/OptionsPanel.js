@@ -225,7 +225,7 @@ define( require => {
           font: NormalModesConstants.GENERAL_FONT
         },
         numberDisplayOptions: {
-          scale: 0
+          visible: false
         }
       };
 
