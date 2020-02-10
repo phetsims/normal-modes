@@ -33,7 +33,7 @@ define( require => {
 
       const self = this;
 
-      // @private (read-only) Non-property attributes
+      // @private (read-only) Non-Property attributes
       this.spring = spring;
       this.modelViewTransform = modelViewTransform;
       this.model = model;

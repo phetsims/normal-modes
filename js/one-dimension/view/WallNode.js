@@ -27,7 +27,7 @@ define( require => {
 
       const self = this;
 
-      // @private (read-only) Non-property attributes
+      // @private (read-only) Non-Property attributes
       this.mass = mass;
       this.modelViewTransform = modelViewTransform;
       this.model = model;
