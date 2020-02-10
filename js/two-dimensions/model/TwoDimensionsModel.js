@@ -18,6 +18,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Spring = require( 'NORMAL_MODES/common/model/Spring' );
+  const Tandem = require( 'TANDEM/Tandem' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
   const Vector2 = require( 'DOT/Vector2' );
 
@@ -235,7 +236,10 @@ define( require => {
         for ( let j = 0; j < MAX_MASSES; ++j ) {
           const visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
 
-          this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( 'mass' + i + '_' + j ) );
+          //TODO see https://github.com/phetsims/normal-modes/issues/17
+          // const massTandem = tandem.createTandem( 'mass' + i + '_' + j );
+          const massTandem = Tandem.OPTIONAL;
+          this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, massTandem );
 
           if ( x < xFinal - xStep / 2 ) {
             x += xStep;
