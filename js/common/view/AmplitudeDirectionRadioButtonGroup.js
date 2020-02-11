@@ -10,20 +10,20 @@ define( require => {
   'use strict';
 
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
   const ICON_SIZE = 45;
 
-  class DirectionOfMotionRadioButtonGroup extends RadioButtonGroup {
+  class AmplitudeDirectionRadioButtonGroup extends RadioButtonGroup {
 
     /**
-     * @param {Property.<DirectionOfMotion>} directionOfMotionProperty
+     * @param {Property.<AmplitudeDirection>} amplitudeDirectionProperty
      * @param {Object} [options]
      */
-    constructor( directionOfMotionProperty, options ) {
+    constructor( amplitudeDirectionProperty, options ) {
 
       options = merge( {
         deselectedLineWidth: 1,
@@ -33,7 +33,7 @@ define( require => {
         buttonContentXMargin: 8,
         buttonContentYMargin: 8,
         orientation: 'vertical',
-        axesArrow: {
+        axesArrowOptions: {
           doubleHead: true,
           tailWidth: 1.5,
           headWidth: 10,
@@ -45,20 +45,20 @@ define( require => {
         }, options
       } );
 
-      const horizontalButton = {
-        value: DirectionOfMotion.HORIZONTAL,
-        node: new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrow )
+      const horizontalButtonDescription = {
+        value: AmplitudeDirection.HORIZONTAL,
+        node: new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrowOptions )
       };
 
-      const verticalButton = {
-        value: DirectionOfMotion.VERTICAL,
-        node: new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrow )
+      const verticalButtonDescription = {
+        value: AmplitudeDirection.VERTICAL,
+        node: new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrowOptions )
       };
 
-      super( directionOfMotionProperty, [ horizontalButton, verticalButton ], options );
+      super( amplitudeDirectionProperty, [ horizontalButtonDescription, verticalButtonDescription ], options );
     }
 
   }
 
-  return normalModes.register( 'DirectionOfMotionRadioButtonGroup', DirectionOfMotionRadioButtonGroup );
+  return normalModes.register( 'AmplitudeDirectionRadioButtonGroup', AmplitudeDirectionRadioButtonGroup );
 } );

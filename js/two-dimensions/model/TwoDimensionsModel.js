@@ -8,7 +8,7 @@ define( require => {
 
   // modules
   const BooleanProperty = require( 'AXON/BooleanProperty' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const EnumerationProperty = require( 'AXON/EnumerationProperty' );
   const Mass = require( 'NORMAL_MODES/common/model/Mass' );
@@ -146,8 +146,8 @@ define( require => {
       } );
 
       // @public {Property.<string>} the current direction of motion of the visible masses
-      this.ampSelectorAxisProperty = new EnumerationProperty( DirectionOfMotion, DirectionOfMotion.VERTICAL, {
-        tandem: tandem.createTandem( 'ampSelectorAxisProperty' )
+      this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
+        tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
       } );
     }
 

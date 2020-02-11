@@ -11,7 +11,7 @@ define( require => {
 
   // modules
   const Color = require( 'SCENERY/util/Color' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const FireListener = require( 'SCENERY/listeners/FireListener' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -25,11 +25,11 @@ define( require => {
      * @param {TwoDimensionsModel} model
      * @param {number} row
      * @param {number} col
-     * @param {DerivedProperty.<DirectionOfMotion>} ampAxisProperty
+     * @param {DerivedProperty.<Property.<number>[][]>} axisAmplitudesProperty
      * @param {DerivedProperty.<number>} maxAmpProperty
      * @param {DerivedProperty.<number>} gridSizeProperty
      */
-    constructor( options, model, row, col, ampAxisProperty, maxAmpProperty, gridSizeProperty ) {
+    constructor( options, model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty ) {
 
       options = merge( {
         boundsMethod: 'none',
@@ -69,7 +69,7 @@ define( require => {
       const self = this;
 
       self.amplitudeChanged = function( amplitude, axis ) {
-        if ( model.ampSelectorAxisProperty.get() === axis ) {
+        if ( model.amplitudeDirectionProperty.get() === axis ) {
           const maxAmp = maxAmpProperty.get();
           const heightFactor = Math.min( 1, amplitude / maxAmp );
           self.backgroundRect.rectHeight = self.rectHeight * ( 1 - heightFactor );
@@ -82,7 +82,7 @@ define( require => {
           self.rectWidth = self.rectHeight = options.rectGridSize * gridSizeProperty.get();
 
           self.backgroundRect.rectWidth = self.rectWidth;
-          self.amplitudeChanged( ampAxisProperty.get()[ row ][ col ].get(), model.ampSelectorAxisProperty.get() );
+          self.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
 
           const gridLeft = options.paddingGridSize + self.col * ( options.paddingGridSize + options.rectGridSize );
           const gridTop = options.paddingGridSize + self.row * ( options.paddingGridSize + options.rectGridSize );
@@ -95,21 +95,21 @@ define( require => {
         }
       };
 
-      self.ampAxisChanged = function( ampSelectorAxis ) {
-        self.fill = ( ampSelectorAxis === DirectionOfMotion.VERTICAL ) ? options.fillY : options.fillX;
-        self.amplitudeChanged( ampAxisProperty.get()[ row ][ col ].get(), ampSelectorAxis );
+      self.amplitudeDirectionChanged = function( amplitudeDirection ) {
+        self.fill = ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? options.fillY : options.fillX;
+        self.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
       };
 
       model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, DirectionOfMotion.HORIZONTAL );
+        self.amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
       } );
       model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, DirectionOfMotion.VERTICAL );
+        self.amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
       } );
 
       model.numVisibleMassesProperty.link( this.numMassesChanged );
 
-      model.ampSelectorAxisProperty.link( this.ampAxisChanged );
+      model.amplitudeDirectionProperty.link( this.amplitudeDirectionChanged );
 
       const isNear = function( n1, n2 ) {
         const EPS = 10e-5;
@@ -118,7 +118,7 @@ define( require => {
 
       this.addInputListener( new FireListener( {
         fire: () => {
-          const amp = ampAxisProperty.get()[ row ][ col ];
+          const amp = axisAmplitudesProperty.get()[ row ][ col ];
           amp.set( isNear( amp.get(), maxAmpProperty.get() ) ? TwoDimensionsConstants.MIN_MODE_AMPLITUDE : maxAmpProperty.get() );
         }
       } ) );

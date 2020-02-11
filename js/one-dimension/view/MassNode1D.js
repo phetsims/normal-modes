@@ -9,7 +9,7 @@ define( require => {
 
   // modules
   const Color = require( 'SCENERY/util/Color' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const MassNode = require( 'NORMAL_MODES/common/view/MassNode' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -51,7 +51,7 @@ define( require => {
       this.dragCallback = function( event, listener ) {
         self.model.arrowsVisibilityProperty.set( false );
         const point = listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() );
-        if ( self.model.directionOfMotionProperty.get() === DirectionOfMotion.HORIZONTAL ) {
+        if ( self.model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
           const oldY = self.mass.displacementProperty.get().y;
           self.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
         }
@@ -67,8 +67,8 @@ define( require => {
       };
 
       this.overUpCallback = function( isOver ) {
-        const directionOfMotion = self.model.directionOfMotionProperty.get();
-        if ( directionOfMotion === DirectionOfMotion.VERTICAL ) {
+        const amplitudeDirection = self.model.amplitudeDirectionProperty.get();
+        if ( amplitudeDirection === AmplitudeDirection.VERTICAL ) {
           self.arrows.top.visible = isOver;
           self.arrows.bottom.visible = isOver;
         }

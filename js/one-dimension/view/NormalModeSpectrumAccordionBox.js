@@ -12,7 +12,7 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const DirectionOfMotionRadioButtonGroup = require( 'NORMAL_MODES/common/view/DirectionOfMotionRadioButtonGroup' );
+  const AmplitudeDirectionRadioButtonGroup = require( 'NORMAL_MODES/common/view/AmplitudeDirectionRadioButtonGroup' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Line = require( 'SCENERY/nodes/Line' );
@@ -49,7 +49,7 @@ define( require => {
       Model properties used:
         - modeAmplitudeProperty[0..9]
         - modePhaseProperty[0..9]
-        - directionOfMotionProperty
+        - amplitudeDirectionProperty
         - numVisibleMassesProperty
         - phasesVisibilityProperty
       */
@@ -211,7 +211,7 @@ define( require => {
         children: panelColumns.slice( 0, model.numVisibleMassesProperty.get() + 1 )
       } );
 
-      const directionOfMotionRadioButtonGroup = new DirectionOfMotionRadioButtonGroup( model.directionOfMotionProperty );
+      const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
 
       super( contentNode, options );
 
@@ -259,7 +259,7 @@ define( require => {
 
         contentNode.children = panelColumns.slice( 0, numMasses + 1 );
         contentNode.addChild( lineSeparator );
-        contentNode.addChild( directionOfMotionRadioButtonGroup );
+        contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 
         self.layout(); // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
         self.centerX = options.centerX;

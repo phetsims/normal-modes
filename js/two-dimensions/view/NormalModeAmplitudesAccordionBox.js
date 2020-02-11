@@ -14,8 +14,8 @@ define( require => {
   const AmplitudeSelectorRectangle = require( 'NORMAL_MODES/two-dimensions/view/AmplitudeSelectorRectangle' );
   const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
-  const DirectionOfMotionRadioButtonGroup = require( 'NORMAL_MODES/common/view/DirectionOfMotionRadioButtonGroup' );
+  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
+  const AmplitudeDirectionRadioButtonGroup = require( 'NORMAL_MODES/common/view/AmplitudeDirectionRadioButtonGroup' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const merge = require( 'PHET_CORE/merge' );
@@ -43,7 +43,7 @@ define( require => {
 
       /*
       Model properties used:
-        - ampSelectorAxisProperty
+        - amplitudeDirectionProperty
         - modeXAmplitudeProperty
         - modeYAmplitudeProperty
       */
@@ -77,10 +77,10 @@ define( require => {
         showTitleWhenExpanded: false
       }, options );
 
-      const directionOfMotionRadioButtonGroup = new DirectionOfMotionRadioButtonGroup( model.ampSelectorAxisProperty );
+      const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
 
-      const ampAxisProperty = new DerivedProperty( [ model.ampSelectorAxisProperty ], selectorAxis => {
-        return ( selectorAxis === DirectionOfMotion.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
+      const axisAmplitudesProperty = new DerivedProperty( [ model.amplitudeDirectionProperty ], amplitudeDirection => {
+        return ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
       } );
 
       const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
@@ -104,7 +104,7 @@ define( require => {
           backgroundRect: {
             fill: Color.toColor( options.fill ).colorUtilsBrighter( 0.6 )
           }
-        }, model, row, col, ampAxisProperty, maxAmpProperty, gridSizeProperty );
+        }, model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty );
       }
 
       const selectorBox = new Rectangle( {
@@ -119,7 +119,7 @@ define( require => {
       const contentNode = new HBox( {
         spacing: 0,
         align: 'center',
-        children: [ directionOfMotionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
+        children: [ amplitudeDirectionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
       } );
 
       super( contentNode, options );

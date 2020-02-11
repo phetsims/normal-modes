@@ -12,7 +12,7 @@ define( require => {
   const Enumeration = require( 'PHET_CORE/Enumeration' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
 
-  const DirectionOfMotion = Enumeration.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
+  const AmplitudeDirection = Enumeration.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
 
-  return normalModes.register( 'DirectionOfMotion', DirectionOfMotion );
+  return normalModes.register( 'AmplitudeDirection', AmplitudeDirection );
 } );
