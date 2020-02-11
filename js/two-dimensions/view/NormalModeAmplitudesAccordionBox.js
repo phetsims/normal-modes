@@ -11,7 +11,7 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
-  const AmpSelectorRectNode = require( 'NORMAL_MODES/two-dimensions/view/AmpSelectorRectNode' );
+  const AmplitudeSelectorRectangle = require( 'NORMAL_MODES/two-dimensions/view/AmplitudeSelectorRectangle' );
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
@@ -34,7 +34,7 @@ define( require => {
   const RECT_GRID_UNITS = 5;
   const PADDING_GRID_UNITS = 1;
 
-  class AmpSelectorAccordionBox extends AccordionBox {
+  class NormalModeAmplitudesAccordionBox extends AccordionBox {
 
     /**
      * @param {Object} [options]
@@ -122,14 +122,14 @@ define( require => {
         return PANEL_SIZE / ( 1 + ( RECT_GRID_UNITS + PADDING_GRID_UNITS ) * numMasses );
       } );
 
-      const selectorRectsLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
-      const selectorRects = new Array( selectorRectsLength );
+      const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
+      const selectorRectangles = new Array( selectorRectanglesLength );
 
-      for ( let i = 0; i < selectorRectsLength; i++ ) {
+      for ( let i = 0; i < selectorRectanglesLength; i++ ) {
         const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_ROW_LEN );
         const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
 
-        selectorRects[ i ] = new AmpSelectorRectNode( {
+        selectorRectangles[ i ] = new AmplitudeSelectorRectangle( {
           rectGridSize: RECT_GRID_UNITS,
           paddingGridSize: PADDING_GRID_UNITS,
           backgroundRect: {
@@ -139,7 +139,7 @@ define( require => {
       }
 
       const selectorBox = new Rectangle( {
-        children: selectorRects,
+        children: selectorRectangles,
         rectHeight: PANEL_SIZE,
         rectWidth: PANEL_SIZE
       } );
@@ -164,5 +164,5 @@ define( require => {
     }
   }
 
-  return normalModes.register( 'AmpSelectorAccordionBox', AmpSelectorAccordionBox );
+  return normalModes.register( 'NormalModeAmplitudesAccordionBox', NormalModeAmplitudesAccordionBox );
 } );

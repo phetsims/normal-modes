@@ -8,7 +8,7 @@ define( require => {
   'use strict';
 
   // modules
-  const AmpSelectorAccordionBox = require( 'NORMAL_MODES/two-dimensions/view/AmpSelectorAccordionBox' );
+  const NormalModeAmplitudesAccordionBox = require( 'NORMAL_MODES/two-dimensions/view/NormalModeAmplitudesAccordionBox' );
   const Bounds2 = require( 'DOT/Bounds2' );
   const Color = require( 'SCENERY/util/Color' );
   const MassNode2D = require( 'NORMAL_MODES/two-dimensions/view/MassNode2D' );
@@ -104,7 +104,7 @@ define( require => {
 
       this.addChild( borderWalls );
 
-      const ampSelectorAccordionBoxOptions = {
+      const normalModeAmplitudesAccordionBoxOptions = {
         left: borderWalls.right + 10,
         bottom: this.layoutBounds.maxY - TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
         cornerRadius: 5,
@@ -112,9 +112,9 @@ define( require => {
         stroke: NormalModesConstants.PANEL_COLORS.stroke
       };
 
-      const ampSelectorAccordionBox = new AmpSelectorAccordionBox( ampSelectorAccordionBoxOptions, model );
+      const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( normalModeAmplitudesAccordionBoxOptions, model );
 
-      this.addChild( ampSelectorAccordionBox );
+      this.addChild( normalModeAmplitudesAccordionBox );
 
       this.massNodes = [];
       for ( let i = 1; i < this.model.masses.length - 1; ++i ) {

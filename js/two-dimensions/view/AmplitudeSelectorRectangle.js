@@ -18,7 +18,7 @@ define( require => {
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
 
-  class AmpSelectorRectNode extends Rectangle {
+  class AmplitudeSelectorRectangle extends Rectangle {
 
     /**
      * @param {Object} [options]
@@ -127,5 +127,5 @@ define( require => {
     }
   }
 
-  return normalModes.register( 'AmpSelectorRectNode', AmpSelectorRectNode );
+  return normalModes.register( 'AmplitudeSelectorRectangle', AmplitudeSelectorRectangle );
 } );

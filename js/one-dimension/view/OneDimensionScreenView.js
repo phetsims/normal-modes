@@ -8,8 +8,8 @@ define( require => {
   'use strict';
 
   // modules
-  const AmpPhaseAccordionBox = require( 'NORMAL_MODES/one-dimension/view/AmpPhaseAccordionBox' );
-  const GraphAccordionBox = require( 'NORMAL_MODES/one-dimension/view/GraphAccordionBox' );
+  const NormalModeSpectrumAccordionBox = require( 'NORMAL_MODES/one-dimension/view/NormalModeSpectrumAccordionBox' );
+  const NormalModesAccordionBox = require( 'NORMAL_MODES/one-dimension/view/NormalModesAccordionBox' );
   const MassNode1D = require( 'NORMAL_MODES/one-dimension/view/MassNode1D' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -74,7 +74,7 @@ define( require => {
         true /* showPhases checkbox */
       );
 
-      const ampPhaseAccordionBoxOptions = {
+      const normalModeSpectrumAccordionBoxOptions = {
         bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
         cornerRadius: 5,
         fill: NormalModesConstants.PANEL_COLORS.fill,
@@ -84,9 +84,9 @@ define( require => {
       // maxWidth: VIEWBOX_WIDTH
       // maxWidth: this.layoutBounds.maxX - 2 * OneDimensionConstants.SCREEN_VIEW_X_MARGIN - 240,
 
-      const ampPhaseAccordionBox = new AmpPhaseAccordionBox( ampPhaseAccordionBoxOptions, model );
+      const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( normalModeSpectrumAccordionBoxOptions, model );
 
-      this.addChild( ampPhaseAccordionBox );
+      this.addChild( normalModeSpectrumAccordionBox );
       this.addChild( optionsPanel );
       this.addChild( resetAllButton );
 
@@ -112,14 +112,14 @@ define( require => {
         this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
       }
 
-      this.graphBox = new GraphAccordionBox( {
+      this.normalModesAccordionBox = new NormalModesAccordionBox( {
         top: optionsPanel.bottom + 8,
         right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
         fill: NormalModesConstants.PANEL_COLORS.fill,
         stroke: NormalModesConstants.PANEL_COLORS.stroke
       }, model );
 
-      this.addChild( this.graphBox );
+      this.addChild( this.normalModesAccordionBox );
     }
 
     /**

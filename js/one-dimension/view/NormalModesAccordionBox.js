@@ -22,7 +22,7 @@ define( require => {
   // strings
   const normalModesTitleString = require( 'string!NORMAL_MODES/normal-modes.title' );
 
-  class GraphAccordionBox extends AccordionBox {
+  class NormalModesAccordionBox extends AccordionBox {
 
     /**
      * @param {Object} [options]
@@ -111,5 +111,5 @@ define( require => {
     }
   }
 
-  return normalModes.register( 'GraphAccordionBox', GraphAccordionBox );
+  return normalModes.register( 'NormalModesAccordionBox', NormalModesAccordionBox );
 } );
