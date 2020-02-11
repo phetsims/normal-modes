@@ -45,7 +45,7 @@ define( require => {
 
       const titleNode = new Text( normalModesTitleString, { font: NormalModesConstants.CONTROL_FONT } );
 
-      options = merge( options, {
+      options = merge( {
         resize: true,
 
         cornerRadius: PANEL_CORNER_RADIUS,
@@ -68,7 +68,7 @@ define( require => {
         titleNode: titleNode,
         showTitleWhenExpanded: true
 
-      } );
+      }, options );
 
       const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 

@@ -11,9 +11,8 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
-  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const DirectionOfMotionRadioButtonGroup = require( 'NORMAL_MODES/common/view/DirectionOfMotionRadioButtonGroup' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const Line = require( 'SCENERY/nodes/Line' );
@@ -23,7 +22,6 @@ define( require => {
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
-  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StaticModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/StaticModeGraphCanvasNode' );
   const Text = require( 'SCENERY/nodes/Text' );
@@ -61,7 +59,7 @@ define( require => {
       const PANEL_X_MARGIN = 10;
       const PANEL_Y_MARGIN = 10;
 
-      options = merge( options, {
+      options = merge( {
         resize: true,
 
         cornerRadius: PANEL_CORNER_RADIUS,
@@ -84,7 +82,7 @@ define( require => {
         titleNode: new Text( normalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
         showTitleWhenExpanded: false
 
-      } );
+      }, options );
 
       const ampSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
       const phaseSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
@@ -213,36 +211,7 @@ define( require => {
         children: panelColumns.slice( 0, model.numVisibleMassesProperty.get() + 1 )
       } );
 
-      const RADIO_BUTTON_ICON_SIZE = 45;
-      const iconSize = RADIO_BUTTON_ICON_SIZE;
-      const AXES_ARROW_OPTIONS = {
-        doubleHead: true,
-        tailWidth: 1.5,
-        headWidth: 10,
-        headHeight: 10,
-        fill: 'black',
-        stroke: null,
-        maxWidth: iconSize,
-        maxHeight: iconSize
-      };
-
-      const horizontalButton = new ArrowNode( 0, 0, iconSize, 0, AXES_ARROW_OPTIONS );
-      const verticalButton = new ArrowNode( 0, 0, 0, iconSize, AXES_ARROW_OPTIONS );
-      const directionOfMotionRadioButtonGroup = new RadioButtonGroup( model.directionOfMotionProperty, [ {
-        value: DirectionOfMotion.HORIZONTAL,
-        node: horizontalButton
-      }, {
-        value: DirectionOfMotion.VERTICAL,
-        node: verticalButton
-      } ], {
-        deselectedLineWidth: 1,
-        selectedLineWidth: 1.5,
-        cornerRadius: 8,
-        deselectedButtonOpacity: 0.35,
-        buttonContentXMargin: 8,
-        buttonContentYMargin: 8,
-        orientation: 'vertical'
-      } );
+      const directionOfMotionRadioButtonGroup = new DirectionOfMotionRadioButtonGroup( model.directionOfMotionProperty );
 
       super( contentNode, options );
 

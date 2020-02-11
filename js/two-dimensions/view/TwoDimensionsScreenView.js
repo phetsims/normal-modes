@@ -41,7 +41,7 @@ define( require => {
       this.model = model;
 
       const viewOrigin = new Vector2( ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
-        ( this.layoutBounds.maxY - 2 * TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN - 0 ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN );
+        ( this.layoutBounds.maxY - 2 * TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN );
 
       // @public {ModelViewTransform2}
       this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 );

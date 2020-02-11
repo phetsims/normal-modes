@@ -12,16 +12,15 @@ define( require => {
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
   const AmplitudeSelectorRectangle = require( 'NORMAL_MODES/two-dimensions/view/AmplitudeSelectorRectangle' );
-  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
   const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const DirectionOfMotion = require( 'NORMAL_MODES/common/model/DirectionOfMotion' );
+  const DirectionOfMotionRadioButtonGroup = require( 'NORMAL_MODES/common/view/DirectionOfMotionRadioButtonGroup' );
   const HBox = require( 'SCENERY/nodes/HBox' );
   const HStrut = require( 'SCENERY/nodes/HStrut' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
-  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Text = require( 'SCENERY/nodes/Text' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
@@ -54,7 +53,7 @@ define( require => {
       const PANEL_X_MARGIN = 9;
       const PANEL_Y_MARGIN = 10;
 
-      options = merge( options, {
+      options = merge( {
         resize: true,
 
         cornerRadius: PANEL_CORNER_RADIUS,
@@ -76,39 +75,9 @@ define( require => {
 
         titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
         showTitleWhenExpanded: false
+      }, options );
 
-      } );
-
-      const RADIO_BUTTON_ICON_SIZE = 45;
-      const iconSize = RADIO_BUTTON_ICON_SIZE;
-      const AXES_ARROW_OPTIONS = {
-        doubleHead: true,
-        tailWidth: 1.5,
-        headWidth: 10,
-        headHeight: 10,
-        fill: 'black',
-        stroke: null,
-        maxWidth: iconSize,
-        maxHeight: iconSize
-      };
-
-      const horizontalButton = new ArrowNode( 0, 0, iconSize, 0, AXES_ARROW_OPTIONS );
-      const verticalButton = new ArrowNode( 0, 0, 0, iconSize, AXES_ARROW_OPTIONS );
-      const ampSelectorAxisRadioButtonGroup = new RadioButtonGroup( model.ampSelectorAxisProperty, [ {
-        value: DirectionOfMotion.HORIZONTAL,
-        node: horizontalButton
-      }, {
-        value: DirectionOfMotion.VERTICAL,
-        node: verticalButton
-      } ], {
-        deselectedLineWidth: 1,
-        selectedLineWidth: 1.5,
-        cornerRadius: 8,
-        deselectedButtonOpacity: 0.35,
-        buttonContentXMargin: 8,
-        buttonContentYMargin: 8,
-        orientation: 'vertical'
-      } );
+      const directionOfMotionRadioButtonGroup = new DirectionOfMotionRadioButtonGroup( model.ampSelectorAxisProperty );
 
       const ampAxisProperty = new DerivedProperty( [ model.ampSelectorAxisProperty ], selectorAxis => {
         return ( selectorAxis === DirectionOfMotion.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
@@ -150,7 +119,7 @@ define( require => {
       const contentNode = new HBox( {
         spacing: 0,
         align: 'center',
-        children: [ ampSelectorAxisRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
+        children: [ directionOfMotionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
       } );
 
       super( contentNode, options );
