@@ -215,9 +215,7 @@ define( require => {
 
       super( contentNode, options );
 
-      const self = this;
-
-      model.phasesVisibilityProperty.link( function( phasesVisibility ) {
+      model.phasesVisibilityProperty.link( ( phasesVisibility ) => {
         for ( let i = 1; i < panelColumns.length; ++i ) {
           const j = i - 1;
           panelColumns[ i ].children = ( phasesVisibility ) ?
@@ -244,10 +242,10 @@ define( require => {
         frequencyLabel.right = panelColumns[ 0 ].right;
         phaseBox.right = panelColumns[ 0 ].right;
 
-        self.bottom = options.bottom;
+        this.bottom = options.bottom;
       } );
 
-      model.numVisibleMassesProperty.link( function( numMasses ) {
+      model.numVisibleMassesProperty.link( ( numMasses ) => {
         for ( let i = 0; i < numMasses; i++ ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
@@ -261,8 +259,8 @@ define( require => {
         contentNode.addChild( lineSeparator );
         contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 
-        self.layout(); // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
-        self.centerX = options.centerX;
+        this.layout(); // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
+        this.centerX = options.centerX;
 
       } );
     }

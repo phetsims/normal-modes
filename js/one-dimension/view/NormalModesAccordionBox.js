@@ -94,12 +94,10 @@ define( require => {
 
       super( graphContainer, options );
 
-      const self = this;
-
-      Property.multilink( [ model.numVisibleMassesProperty, this.expandedProperty ], function( numMasses, isExpanded ) {
+      Property.multilink( [ model.numVisibleMassesProperty, this.expandedProperty ], ( numMasses, isExpanded ) => {
         graphContainer.children = normalModeGraphs.slice( 0, numMasses );
         graphContainer.children.forEach( graph => graph.update() );
-        self.layout();
+        this.layout();
       } );
     }
 

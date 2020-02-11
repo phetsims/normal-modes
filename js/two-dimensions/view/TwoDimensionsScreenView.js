@@ -35,8 +35,6 @@ define( require => {
         tandem: tandem
       } );
 
-      const self = this;
-
       // @public {TwoDimensionsModel}
       this.model = model;
 
@@ -76,19 +74,20 @@ define( require => {
       this.addChild( optionsPanel );
       this.addChild( resetAllButton );
 
-      // @private {SpringNode[]} Array that will contain all of the springNodes.
-      this.springXNodes = model.springsX.map( function( springArray ) {
-        return springArray.map( function( spring ) {
-          const springNode = new SpringNode( spring, self.modelViewTransform, self.model, tandem.createTandem( 'springNodes' ) );
-          self.addChild( springNode );
+      // @private {SpringNode[]} Array that will contain all of the X axis springNodes.
+      this.springXNodes = model.springsX.map( ( springArray ) => {
+        return springArray.map( ( spring ) => {
+          const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
+          this.addChild( springNode );
           return springNode;
         } );
       } );
 
-      this.springYNodes = model.springsY.map( function( springArray ) {
-        return springArray.map( function( spring ) {
-          const springNode = new SpringNode( spring, self.modelViewTransform, self.model, tandem.createTandem( 'springNodes' ) );
-          self.addChild( springNode );
+      // @private {SpringNode[]} Array that will contain all of the Y axis springNodes.
+      this.springYNodes = model.springsY.map( ( springArray ) => {
+        return springArray.map( ( spring ) => {
+          const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
+          this.addChild( springNode );
           return springNode;
         } );
       } );

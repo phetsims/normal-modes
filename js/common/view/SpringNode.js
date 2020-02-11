@@ -31,8 +31,6 @@ define( require => {
         excludeInvisible: true
       } );
 
-      const self = this;
-
       // @private (read-only) Non-Property attributes
       this.spring = spring;
       this.modelViewTransform = modelViewTransform;
@@ -61,22 +59,27 @@ define( require => {
 
       let currentXScaling = 1;
 
-      Property.multilink( [ this.spring.leftMass.equilibriumPositionProperty, this.spring.leftMass.displacementProperty, this.spring.rightMass.equilibriumPositionProperty, this.spring.rightMass.displacementProperty ], function( leftPos, leftDispl, rightPos, rightDispl ) {
-        if ( self.visible ) {
+      Property.multilink( 
+        [ this.spring.leftMass.equilibriumPositionProperty,
+          this.spring.leftMass.displacementProperty,
+          this.spring.rightMass.equilibriumPositionProperty,
+          this.spring.rightMass.displacementProperty 
+        ], ( leftPos, leftDispl, rightPos, rightDispl ) => {
+        if ( this.visible ) {
 
-          const p1 = self.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
-          const p2 = self.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
+          const p1 = this.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
+          const p2 = this.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
           if ( p1.distance( p2 ) === 0 ) {
             return;
           }
 
-          self.scale( 1 / currentXScaling, 1 );
+          this.scale( 1 / currentXScaling, 1 );
 
           currentXScaling = p1.distance( p2 );
 
-          self.translation = p1;
-          self.rotation = p2.minus( p1 ).angle;
-          self.scale( currentXScaling, 1 );
+          this.translation = p1;
+          this.rotation = p2.minus( p1 ).angle;
+          this.scale( currentXScaling, 1 );
         }
       } );
 

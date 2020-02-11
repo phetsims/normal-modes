@@ -34,8 +34,6 @@ define( require => {
         tandem: tandem
       } );
 
-      const self = this;
-
       // @public {OneDimensionModel}
       this.model = model;
 
@@ -93,9 +91,9 @@ define( require => {
       // The springs are added first
 
       // @private {SpringNode[]} Array that will contain all of the springNodes.
-      this.springNodes = model.springs.map( function( spring ) {
-        const springNode = new SpringNode( spring, self.modelViewTransform, self.model, tandem.createTandem( 'springNodes' ) );
-        self.addChild( springNode );
+      this.springNodes = model.springs.map( ( spring ) => {
+        const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
+        this.addChild( springNode );
         return springNode;
       } );
 

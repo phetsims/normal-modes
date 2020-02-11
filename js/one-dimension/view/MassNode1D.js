@@ -28,7 +28,6 @@ define( require => {
     constructor( mass, modelViewTransform, model, tandem ) {
 
       super( mass, modelViewTransform, model, tandem );
-      const self = this;
 
       // @public {Rectangle}
       this.rect = new Rectangle( {
@@ -44,37 +43,37 @@ define( require => {
 
       this.addChild( this.rect );
 
-      this.startCallback = function( event, listener ) {
-        self.model.draggingMassIndexProperty.set( self.model.masses.indexOf( self.mass ) );
+      this.startCallback = ( event, listener ) => {
+        this.model.draggingMassIndexProperty.set( this.model.masses.indexOf( this.mass ) );
       };
 
-      this.dragCallback = function( event, listener ) {
-        self.model.arrowsVisibilityProperty.set( false );
-        const point = listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() );
-        if ( self.model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-          const oldY = self.mass.displacementProperty.get().y;
-          self.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
+      this.dragCallback = ( event, listener ) => {
+        this.model.arrowsVisibilityProperty.set( false );
+        const point = listener.modelPoint.minus( this.mass.equilibriumPositionProperty.get() );
+        if ( this.model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
+          const oldY = this.mass.displacementProperty.get().y;
+          this.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
         }
         else {
-          const oldX = self.mass.displacementProperty.get().x;
-          self.mass.displacementProperty.set( new Vector2( oldX, point.y ) );
+          const oldX = this.mass.displacementProperty.get().x;
+          this.mass.displacementProperty.set( new Vector2( oldX, point.y ) );
         }
       };
 
-      this.endCallback = function( event, listener ) {
-        self.model.draggingMassIndexProperty.set( -1 );
-        self.model.computeModeAmplitudesAndPhases();
+      this.endCallback = ( event, listener ) => {
+        this.model.draggingMassIndexProperty.set( -1 );
+        this.model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = function( isOver ) {
-        const amplitudeDirection = self.model.amplitudeDirectionProperty.get();
+      this.overUpCallback = ( isOver ) => {
+        const amplitudeDirection = this.model.amplitudeDirectionProperty.get();
         if ( amplitudeDirection === AmplitudeDirection.VERTICAL ) {
-          self.arrows.top.visible = isOver;
-          self.arrows.bottom.visible = isOver;
+          this.arrows.top.visible = isOver;
+          this.arrows.bottom.visible = isOver;
         }
         else {
-          self.arrows.left.visible = isOver;
-          self.arrows.right.visible = isOver;
+          this.arrows.left.visible = isOver;
+          this.arrows.right.visible = isOver;
         }
       };
 
@@ -83,22 +82,22 @@ define( require => {
         start: this.startCallback,
         drag: this.dragCallback,
         end: this.endCallback,
-        transform: self.modelViewTransform
+        transform: this.modelViewTransform
       } );
 
       this.addInputListener( this.dragListener );
-      this.model.arrowsVisibilityProperty.link( function( arrowsVisible ) {
-        const callback = self.overUpCallback.bind( self );
+      this.model.arrowsVisibilityProperty.link( ( arrowsVisible ) => {
+        const callback = this.overUpCallback.bind( this );
         if ( arrowsVisible ) {
-          self.dragListener.isOverProperty.link( callback );
+          this.dragListener.isOverProperty.link( callback );
         }
         else {
-          self.arrows.top.visible = false;
-          self.arrows.bottom.visible = false;
-          self.arrows.left.visible = false;
-          self.arrows.right.visible = false;
-          if ( self.dragListener.isOverProperty.hasListener( callback ) ) {
-            self.dragListener.isOverProperty.unlink( callback );
+          this.arrows.top.visible = false;
+          this.arrows.bottom.visible = false;
+          this.arrows.left.visible = false;
+          this.arrows.right.visible = false;
+          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
+            this.dragListener.isOverProperty.unlink( callback );
           }
         }
       } );

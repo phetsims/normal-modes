@@ -24,9 +24,7 @@ define( require => {
      */
     constructor( mass, modelViewTransform, model, tandem ) {
       super( { cursor: 'pointer' } );
-
-      const self = this;
-
+      
       // @private (read-only) Non-Property attributes
       this.mass = mass;
       this.modelViewTransform = modelViewTransform;
@@ -44,8 +42,8 @@ define( require => {
       } );
       this.addChild( this.rect );
 
-      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ], function( massPosition, massDisplacement ) {
-        self.translation = self.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( self.rect.rectWidth / 2, self.rect.rectHeight / 2 ) );
+      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ], ( massPosition, massDisplacement ) => {
+        this.translation = this.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( this.rect.rectWidth / 2, this.rect.rectHeight / 2 ) );
       } );
     }
 

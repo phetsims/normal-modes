@@ -26,7 +26,6 @@ define( require => {
     constructor( mass, modelViewTransform, model, tandem ) {
 
       super( mass, modelViewTransform, model, tandem );
-      const self = this;
 
       // @public {Circle}
       this.circle = new Circle( {
@@ -44,38 +43,38 @@ define( require => {
         this.arrows[ arrow ].rotateAround( rotationPoint, Math.PI / 4 );
       }
 
-      this.startCallback = function( event, listener ) {
+      this.startCallback = ( event, listener ) => {
         let foundIndex = -1;
         let foundArray = null;
-        for ( let i = 0; i < self.model.masses.length; i++ ) {
-          const array = self.model.masses[ i ];
-          foundIndex = array.indexOf( self.mass );
+        for ( let i = 0; i < this.model.masses.length; i++ ) {
+          const array = this.model.masses[ i ];
+          foundIndex = array.indexOf( this.mass );
           if ( foundIndex !== -1 ) {
             foundArray = array;
             break;
           }
         }
-        self.model.draggingMassIndexesProperty.set( {
-          i: self.model.masses.indexOf( foundArray ),
+        this.model.draggingMassIndexesProperty.set( {
+          i: this.model.masses.indexOf( foundArray ),
           j: foundIndex
         } );
       };
 
-      this.dragCallback = function( event, listener ) {
-        self.model.arrowsVisibilityProperty.set( false );
-        self.mass.displacementProperty.set( listener.modelPoint.minus( self.mass.equilibriumPositionProperty.get() ) );
+      this.dragCallback = ( event, listener ) => {
+        this.model.arrowsVisibilityProperty.set( false );
+        this.mass.displacementProperty.set( listener.modelPoint.minus( this.mass.equilibriumPositionProperty.get() ) );
       };
 
-      this.endCallback = function( event, listener ) {
-        self.model.draggingMassIndexesProperty.set( null );
-        self.model.computeModeAmplitudesAndPhases();
+      this.endCallback = ( event, listener ) => {
+        this.model.draggingMassIndexesProperty.set( null );
+        this.model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = function( isOver ) {
-        self.arrows.top.visible = isOver;
-        self.arrows.bottom.visible = isOver;
-        self.arrows.left.visible = isOver;
-        self.arrows.right.visible = isOver;
+      this.overUpCallback = ( isOver ) => {
+        this.arrows.top.visible = isOver;
+        this.arrows.bottom.visible = isOver;
+        this.arrows.left.visible = isOver;
+        this.arrows.right.visible = isOver;
       };
 
       this.dragListener = new DragListener( {
@@ -83,22 +82,22 @@ define( require => {
         start: this.startCallback,
         drag: this.dragCallback,
         end: this.endCallback,
-        transform: self.modelViewTransform
+        transform: this.modelViewTransform
       } );
 
       this.addInputListener( this.dragListener );
-      this.model.arrowsVisibilityProperty.link( function( arrowsVisible ) {
-        const callback = self.overUpCallback.bind( self );
+      this.model.arrowsVisibilityProperty.link( ( arrowsVisible ) => {
+        const callback = this.overUpCallback.bind( this );
         if ( arrowsVisible ) {
-          self.dragListener.isOverProperty.link( callback );
+          this.dragListener.isOverProperty.link( callback );
         }
         else {
-          self.arrows.top.visible = false;
-          self.arrows.bottom.visible = false;
-          self.arrows.left.visible = false;
-          self.arrows.right.visible = false;
-          if ( self.dragListener.isOverProperty.hasListener( callback ) ) {
-            self.dragListener.isOverProperty.unlink( callback );
+          this.arrows.top.visible = false;
+          this.arrows.bottom.visible = false;
+          this.arrows.left.visible = false;
+          this.arrows.right.visible = false;
+          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
+            this.dragListener.isOverProperty.unlink( callback );
           }
         }
       } );

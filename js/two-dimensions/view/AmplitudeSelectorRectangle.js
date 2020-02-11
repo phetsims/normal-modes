@@ -66,45 +66,43 @@ define( require => {
       this.backgroundRect = new Rectangle( options.backgroundRect );
       this.addChild( this.backgroundRect );
 
-      const self = this;
-
-      self.amplitudeChanged = function( amplitude, axis ) {
+      this.amplitudeChanged = ( amplitude, axis ) => {
         if ( model.amplitudeDirectionProperty.get() === axis ) {
           const maxAmp = maxAmpProperty.get();
           const heightFactor = Math.min( 1, amplitude / maxAmp );
-          self.backgroundRect.rectHeight = self.rectHeight * ( 1 - heightFactor );
+          this.backgroundRect.rectHeight = this.rectHeight * ( 1 - heightFactor );
         }
       };
 
-      self.numMassesChanged = function( numMasses ) {
-        if ( self.row < numMasses && self.col < numMasses ) {
-          self.visible = true;
-          self.rectWidth = self.rectHeight = options.rectGridSize * gridSizeProperty.get();
+      this.numMassesChanged = ( numMasses ) => {
+        if ( this.row < numMasses && this.col < numMasses ) {
+          this.visible = true;
+          this.rectWidth = this.rectHeight = options.rectGridSize * gridSizeProperty.get();
 
-          self.backgroundRect.rectWidth = self.rectWidth;
-          self.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
+          this.backgroundRect.rectWidth = this.rectWidth;
+          this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
 
-          const gridLeft = options.paddingGridSize + self.col * ( options.paddingGridSize + options.rectGridSize );
-          const gridTop = options.paddingGridSize + self.row * ( options.paddingGridSize + options.rectGridSize );
+          const gridLeft = options.paddingGridSize + this.col * ( options.paddingGridSize + options.rectGridSize );
+          const gridTop = options.paddingGridSize + this.row * ( options.paddingGridSize + options.rectGridSize );
 
-          self.left = gridSizeProperty.get() * gridLeft;
-          self.top = gridSizeProperty.get() * gridTop;
+          this.left = gridSizeProperty.get() * gridLeft;
+          this.top = gridSizeProperty.get() * gridTop;
         }
         else {
-          self.visible = false;
+          this.visible = false;
         }
       };
 
-      self.amplitudeDirectionChanged = function( amplitudeDirection ) {
-        self.fill = ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? options.fillY : options.fillX;
-        self.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
+      this.amplitudeDirectionChanged = ( amplitudeDirection ) => {
+        this.fill = ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? options.fillY : options.fillX;
+        this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
       };
 
       model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
+        this.amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
       } );
       model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
-        self.amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
+        this.amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
       } );
 
       model.numVisibleMassesProperty.link( this.numMassesChanged );
