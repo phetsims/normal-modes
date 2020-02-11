@@ -22,7 +22,12 @@ define( require => {
 
     /**
      * @param {Object} [options]
-     * @param {Model} model
+     * @param {TwoDimensionsModel} model
+     * @param {number} row
+     * @param {number} col
+     * @param {DerivedProperty.<string>} ampAxisProperty
+     * @param {DerivedProperty.<number>} maxAmpProperty
+     * @param {DerivedProperty.<number>} gridSizeProperty
      */
     constructor( options, model, row, col, ampAxisProperty, maxAmpProperty, gridSizeProperty ) {
 

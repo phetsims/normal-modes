@@ -26,7 +26,7 @@ define( require => {
 
     /**
      * @param {Object} [options]
-     * @param {Model} model
+     * @param {OneDimensionModel} model
      */
     constructor( options, model ) {
 

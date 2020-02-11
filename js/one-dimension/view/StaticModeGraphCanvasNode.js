@@ -20,8 +20,8 @@ define( require => {
 
   // TODO - this should be a class
   /**
-   * @param {Model} [model] used to get model properties
-   * @param {Object} [options] that can be passed on to the underlying node
+   * @param {OneDimensionModel} model
+   * @param {Object} [options]
    * @constructor
    */
   function StaticModeGraphCanvasNode( model, options ) {

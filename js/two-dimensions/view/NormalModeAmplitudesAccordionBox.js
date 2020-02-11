@@ -38,7 +38,7 @@ define( require => {
 
     /**
      * @param {Object} [options]
-     * @param {Model} model
+     * @param {TwoDimensionsModel} model
      */
     constructor( options, model ) {
 

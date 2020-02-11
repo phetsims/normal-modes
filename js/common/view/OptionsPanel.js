@@ -48,8 +48,8 @@ define( require => {
 
     /**
      * @param {Object} [panelOptions]
-     * @param {Model} model
-     * @param {bool} doShowPhases
+     * @param {OneDimensionModel|TwoDimensionsModel} model
+     * @param {boolean} doShowPhases
      */
     constructor( panelOptions, model, doShowPhases = false ) {
 

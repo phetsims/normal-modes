@@ -22,7 +22,7 @@ define( require => {
     /**
      * @param {Mass} mass
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {OneDimensionModel} model
+     * @param {OneDimensionModel|TwoDimensionsModel} model
      * @param {Tandem} tandem
      */
     constructor( mass, modelViewTransform, model, tandem ) {
