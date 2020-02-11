@@ -215,7 +215,7 @@ define( require => {
 
       super( contentNode, options );
 
-      model.phasesVisibilityProperty.link( ( phasesVisibility ) => {
+      model.phasesVisibilityProperty.link( phasesVisibility => {
         for ( let i = 1; i < panelColumns.length; ++i ) {
           const j = i - 1;
           panelColumns[ i ].children = ( phasesVisibility ) ?
@@ -245,7 +245,7 @@ define( require => {
         this.bottom = options.bottom;
       } );
 
-      model.numVisibleMassesProperty.link( ( numMasses ) => {
+      model.numVisibleMassesProperty.link( numMasses => {
         for ( let i = 0; i < numMasses; i++ ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;

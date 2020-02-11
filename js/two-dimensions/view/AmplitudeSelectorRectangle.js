@@ -74,7 +74,7 @@ define( require => {
         }
       };
 
-      this.numMassesChanged = ( numMasses ) => {
+      this.numMassesChanged = numMasses => {
         if ( this.row < numMasses && this.col < numMasses ) {
           this.visible = true;
           this.rectWidth = this.rectHeight = options.rectGridSize * gridSizeProperty.get();
@@ -93,7 +93,7 @@ define( require => {
         }
       };
 
-      this.amplitudeDirectionChanged = ( amplitudeDirection ) => {
+      this.amplitudeDirectionChanged = amplitudeDirection => {
         this.fill = ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? options.fillY : options.fillX;
         this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
       };

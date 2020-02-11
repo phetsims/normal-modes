@@ -65,7 +65,7 @@ define( require => {
         this.model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = ( isOver ) => {
+      this.overUpCallback = isOver => {
         const amplitudeDirection = this.model.amplitudeDirectionProperty.get();
         if ( amplitudeDirection === AmplitudeDirection.VERTICAL ) {
           this.arrows.top.visible = isOver;
@@ -86,7 +86,7 @@ define( require => {
       } );
 
       this.addInputListener( this.dragListener );
-      this.model.arrowsVisibilityProperty.link( ( arrowsVisible ) => {
+      this.model.arrowsVisibilityProperty.link( arrowsVisible => {
         const callback = this.overUpCallback.bind( this );
         if ( arrowsVisible ) {
           this.dragListener.isOverProperty.link( callback );

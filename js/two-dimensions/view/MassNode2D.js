@@ -70,7 +70,7 @@ define( require => {
         this.model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = ( isOver ) => {
+      this.overUpCallback = isOver => {
         this.arrows.top.visible = isOver;
         this.arrows.bottom.visible = isOver;
         this.arrows.left.visible = isOver;
@@ -86,7 +86,7 @@ define( require => {
       } );
 
       this.addInputListener( this.dragListener );
-      this.model.arrowsVisibilityProperty.link( ( arrowsVisible ) => {
+      this.model.arrowsVisibilityProperty.link( arrowsVisible => {
         const callback = this.overUpCallback.bind( this );
         if ( arrowsVisible ) {
           this.dragListener.isOverProperty.link( callback );

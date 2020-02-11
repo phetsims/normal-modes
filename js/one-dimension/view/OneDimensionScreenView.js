@@ -91,7 +91,7 @@ define( require => {
       // The springs are added first
 
       // @private {SpringNode[]} Array that will contain all of the springNodes.
-      this.springNodes = model.springs.map( ( spring ) => {
+      this.springNodes = model.springs.map( spring => {
         const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
         this.addChild( springNode );
         return springNode;
