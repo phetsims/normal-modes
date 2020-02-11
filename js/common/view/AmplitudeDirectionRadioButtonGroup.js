@@ -42,8 +42,8 @@ define( require => {
           stroke: null,
           maxWidth: ICON_SIZE,
           maxHeight: ICON_SIZE
-        }, options
-      } );
+        }
+      }, options );
 
       const horizontalButtonDescription = {
         value: AmplitudeDirection.HORIZONTAL,
