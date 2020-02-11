@@ -59,29 +59,29 @@ define( require => {
 
       let currentXScaling = 1;
 
-      Property.multilink( 
+      Property.multilink(
         [ this.spring.leftMass.equilibriumPositionProperty,
           this.spring.leftMass.displacementProperty,
           this.spring.rightMass.equilibriumPositionProperty,
-          this.spring.rightMass.displacementProperty 
+          this.spring.rightMass.displacementProperty
         ], ( leftPos, leftDispl, rightPos, rightDispl ) => {
-        if ( this.visible ) {
+          if ( this.visible ) {
 
-          const p1 = this.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
-          const p2 = this.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
-          if ( p1.distance( p2 ) === 0 ) {
-            return;
+            const p1 = this.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
+            const p2 = this.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
+            if ( p1.distance( p2 ) === 0 ) {
+              return;
+            }
+
+            this.scale( 1 / currentXScaling, 1 );
+
+            currentXScaling = p1.distance( p2 );
+
+            this.translation = p1;
+            this.rotation = p2.minus( p1 ).angle;
+            this.scale( currentXScaling, 1 );
           }
-
-          this.scale( 1 / currentXScaling, 1 );
-
-          currentXScaling = p1.distance( p2 );
-
-          this.translation = p1;
-          this.rotation = p2.minus( p1 ).angle;
-          this.scale( currentXScaling, 1 );
-        }
-      } );
+        } );
 
       this.visibilityProperty.linkAttribute( this, 'visible' );
     }

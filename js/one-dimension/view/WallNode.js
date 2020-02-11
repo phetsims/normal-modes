@@ -24,7 +24,7 @@ define( require => {
      */
     constructor( mass, modelViewTransform, model, tandem ) {
       super( { cursor: 'pointer' } );
-      
+
       // @private (read-only) Non-Property attributes
       this.mass = mass;
       this.modelViewTransform = modelViewTransform;
