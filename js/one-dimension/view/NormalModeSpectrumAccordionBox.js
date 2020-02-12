@@ -25,6 +25,7 @@ define( require => {
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StaticModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/StaticModeGraphCanvasNode' );
   const Text = require( 'SCENERY/nodes/Text' );
+  const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
   const VSlider = require( 'SUN/VSlider' );
   const VStrut = require( 'SCENERY/nodes/VStrut' );
@@ -130,7 +131,7 @@ define( require => {
         const freq = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
         frequencyText[ i ] = new Text(
           // freq-omega-subscript0
-          `${freq.toFixed( 2 )}\u03C9\u2080`,
+          `${Utils.toFixed( freq, 2 )}\u03C9\u2080`,
           { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
         );
 
@@ -246,7 +247,7 @@ define( require => {
           const freq = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
 
           modeGraphs[ i ].update();
-          frequencyText[ i ].text = `${freq.toFixed( 2 )}\u03C9\u2080`;
+          frequencyText[ i ].text = `${Utils.toFixed( freq, 2 )}\u03C9\u2080`;
         }
 
         contentNode.children = panelColumns.slice( 0, numMasses + 1 );
