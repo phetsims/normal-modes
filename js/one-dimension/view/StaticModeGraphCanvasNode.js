@@ -13,56 +13,65 @@ define( require => {
   const Bounds2 = require( 'DOT/Bounds2' );
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
-  const inherit = require( 'PHET_CORE/inherit' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
 
-  // TODO - this should be a class
-  /**
-   * @param {OneDimensionModel} model
-   * @param {number} normalModeNumber
-   * @param {Object} [options]
-   * @constructor
-   */
-  function StaticModeGraphCanvasNode( model, normalModeNumber, options ) {
+  class StaticModeGraphCanvasNode extends CanvasNode {
 
-    options = merge( {
-      graphSize: new Dimension2( 40, 25 ),
-      graphStartX: 0,
-      strokeColor: 'blue',
-      referenceLineStrokeColor: 'black',
-      xResolution: 100
-    }, options );
+    /**
+     * @param {OneDimensionModel} model
+     * @param {number} normalModeNumber
+     * @param {Object} [options]
+     * @constructor
+     */
+    constructor( model, normalModeNumber, options ) {
 
-    options.canvasBounds = new Bounds2( 0, 0, options.graphSize.width, options.graphSize.height );
-    CanvasNode.call( this, options );
+      options = merge( {
+        graphSize: new Dimension2( 40, 25 ),
+        graphStartX: 0,
+        strokeColor: 'blue',
+        referenceLineStrokeColor: 'black',
+        curveResolution: 100
+      }, options );
 
-    this.normalModeNumber = normalModeNumber; // @private {Number} - 0 to 9 (representing 1 to 10)
-    this.xResolution = options.xResolution;
+      options.canvasBounds = new Bounds2( 0, 0, options.graphSize.width, options.graphSize.height );
+      super( options );
 
-    this.graphSize = options.graphSize; // @private
-    this.graphStart = { x: options.graphStartX, y: this.graphSize.height / 2 }; // @private
+      // @private {number} - 0 to 9, determines the normal mode represented
+      this.normalModeNumber = normalModeNumber;
 
-    this.xStep = this.graphSize.width / this.xResolution; // @private
-    this.curveYPositions = new Array( this.xResolution );  // @private
+      // @private {number} - how many points the curve has
+      this.curveResolution = options.curveResolution;
 
-    this.strokeColor = options.strokeColor; // @private
-    this.referenceLineStrokeColor = options.referenceLineStrokeColor; // @private
+      // @private {Dimension2}
+      this.graphSize = options.graphSize;
 
-    this.model = model; // @private
-  }
+      // @private {Object} - start point of the graph
+      this.graphStart = { x: options.graphStartX, y: this.graphSize.height / 2 }; // @private
 
-  normalModes.register( 'StaticModeGraphCanvasNode', StaticModeGraphCanvasNode );
+      // @private {number} - x distance between consecutive graph points
+      this.xStep = this.graphSize.width / this.curveResolution;
 
-  return inherit( CanvasNode, StaticModeGraphCanvasNode, {
+      // @private {Array.<number>}
+      this.curveYPositions = new Array( this.curveResolution );
+
+      // @private {String} - curve stroke canvas color
+      this.strokeColor = options.strokeColor; // @private
+
+      // @private {String} - reference line (y = 0) stroke canvas color
+      this.referenceLineStrokeColor = options.referenceLineStrokeColor;
+
+      // @private {OneDimensionModel}
+      this.model = model;
+    }
 
     /**
      * Paints the static normal mode graph.
      * @param {CanvasRenderingContext2D} context
      * @public
      */
-    paintCanvas: function( context ) {
+    paintCanvas( context ) {
 
       // draw reference line
       context.beginPath();
@@ -83,9 +92,14 @@ define( require => {
       context.strokeStyle = this.strokeColor;
       context.lineWidth = 2;
       context.stroke();
-    },
+    }
 
-    update: function() {
+    /**
+     * Updates the curve.
+     * Note that this happens only once. Because it is static, there's no need to keep updating it.
+     * @public
+     */
+    update() {
 
       const n = this.normalModeNumber;
       const amp = 0.15;
@@ -94,11 +108,13 @@ define( require => {
       const time = 0;
 
       for ( let i = 0; i < this.curveYPositions.length; i++ ) {
-        const x = i / this.xResolution;
+        const x = i / this.curveResolution;
 
         // put a negative sign in front of it because of y coordinate stuff
         this.curveYPositions[ i ] = -( 2 * this.graphSize.height / 3 ) * ( amp * Math.sin( x * ( n + 1 ) * Math.PI ) * Math.cos( freq * time - phase ) ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
       }
     }
-  } );
+  }
+
+  return normalModes.register( 'StaticModeGraphCanvasNode', StaticModeGraphCanvasNode );
 } );
