@@ -25,10 +25,10 @@ define( require => {
   class NormalModesAccordionBox extends AccordionBox {
 
     /**
-     * @param {Object} [options]
      * @param {OneDimensionModel} model
+     * @param {Object} [options]
      */
-    constructor( options, model ) {
+    constructor( model, options ) {
 
       /*
       Model properties used:
@@ -74,12 +74,7 @@ define( require => {
 
       // TODO - separate the mode number and right align it
       for ( let i = 0; i < normalModeGraphs.length; i++ ) {
-        normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, {
-          normalModeNum: i,
-          graphSize: { width: 133, height: 22 },
-          graphStartX: 25,
-          wallHeight: 8
-        } );
+        normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
 
         Property.multilink( [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ], function( time, amp, phase ) {
           normalModeGraphs[ i ].update();

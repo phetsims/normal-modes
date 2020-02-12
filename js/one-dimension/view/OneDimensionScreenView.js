@@ -67,9 +67,9 @@ define( require => {
       };
 
       const optionsPanel = new OptionsPanel(
-        optionsPanelOptions,
         model,
-        true /* showPhases checkbox */
+        true, /* show showPhases checkbox */
+        optionsPanelOptions
       );
 
       const normalModeSpectrumAccordionBoxOptions = {
@@ -79,10 +79,8 @@ define( require => {
         stroke: NormalModesConstants.PANEL_COLORS.stroke,
         centerX: viewOrigin.x
       };
-      // maxWidth: VIEWBOX_WIDTH
-      // maxWidth: this.layoutBounds.maxX - 2 * OneDimensionConstants.SCREEN_VIEW_X_MARGIN - 240,
 
-      const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( normalModeSpectrumAccordionBoxOptions, model );
+      const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, normalModeSpectrumAccordionBoxOptions );
 
       this.addChild( normalModeSpectrumAccordionBox );
       this.addChild( optionsPanel );
@@ -110,12 +108,12 @@ define( require => {
         this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
       }
 
-      this.normalModesAccordionBox = new NormalModesAccordionBox( {
+      this.normalModesAccordionBox = new NormalModesAccordionBox( model, {
         top: optionsPanel.bottom + 8,
         right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
         fill: NormalModesConstants.PANEL_COLORS.fill,
         stroke: NormalModesConstants.PANEL_COLORS.stroke
-      }, model );
+      } );
 
       this.addChild( this.normalModesAccordionBox );
     }

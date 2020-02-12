@@ -21,15 +21,15 @@ define( require => {
   class AmplitudeSelectorRectangle extends Rectangle {
 
     /**
-     * @param {Object} [options]
      * @param {TwoDimensionsModel} model
      * @param {number} row
      * @param {number} col
      * @param {DerivedProperty.<Property.<number>[][]>} axisAmplitudesProperty
      * @param {DerivedProperty.<number>} maxAmpProperty
      * @param {DerivedProperty.<number>} gridSizeProperty
+     * @param {Object} [options]
      */
-    constructor( options, model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty ) {
+    constructor( model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty, options ) {
 
       options = merge( {
         boundsMethod: 'none',

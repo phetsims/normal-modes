@@ -40,10 +40,10 @@ define( require => {
     // TODO - comment code
 
     /**
-     * @param {Object} [options]
      * @param {OneDimensionModel} model
+     * @param {Object} [options]
      */
-    constructor( options, model ) {
+    constructor( model, options ) {
 
       /*
       Model properties used:
@@ -78,10 +78,8 @@ define( require => {
           touchAreaXDilation: 6,
           touchAreaYDilation: 6
         },
-
         titleNode: new Text( normalModeSpectrumString, { font: NormalModesConstants.CONTROL_FONT } ),
         showTitleWhenExpanded: false
-
       }, options );
 
       const ampSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
@@ -136,11 +134,7 @@ define( require => {
           { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
         );
 
-        modeGraphs[ i ] = new StaticModeGraphCanvasNode( model, {
-          normalModeNum: i,
-          graphSize: { width: 40, height: 25 },
-          graphStartX: 0
-        } );
+        modeGraphs[ i ] = new StaticModeGraphCanvasNode( model, i );
       }
 
       const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1 );

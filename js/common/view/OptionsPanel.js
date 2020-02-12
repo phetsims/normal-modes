@@ -47,11 +47,11 @@ define( require => {
   class OptionsPanel extends Panel {
 
     /**
-     * @param {Object} [panelOptions]
      * @param {OneDimensionModel|TwoDimensionsModel} model
      * @param {boolean} doShowPhases
+     * @param {Object} [options]
      */
-    constructor( panelOptions, model, doShowPhases = false ) {
+    constructor( model, doShowPhases, options ) {
 
       /*
       Model properties used:
@@ -288,7 +288,7 @@ define( require => {
         ]
       } );
 
-      super( contentNode, panelOptions );
+      super( contentNode, options );
     }
 
     /**

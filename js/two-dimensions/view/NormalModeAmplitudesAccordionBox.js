@@ -94,17 +94,20 @@ define( require => {
       const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
       const selectorRectangles = new Array( selectorRectanglesLength );
 
+      const selectorRectangleOptions = {
+        rectGridSize: RECT_GRID_UNITS,
+        paddingGridSize: PADDING_GRID_UNITS,
+        backgroundRect: {
+          fill: Color.toColor( options.fill ).colorUtilsBrighter( 0.6 )
+        }
+      };
+
       for ( let i = 0; i < selectorRectanglesLength; i++ ) {
         const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_ROW_LEN );
         const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
 
-        selectorRectangles[ i ] = new AmplitudeSelectorRectangle( {
-          rectGridSize: RECT_GRID_UNITS,
-          paddingGridSize: PADDING_GRID_UNITS,
-          backgroundRect: {
-            fill: Color.toColor( options.fill ).colorUtilsBrighter( 0.6 )
-          }
-        }, model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty );
+        selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
+          maxAmpProperty, gridSizeProperty, selectorRectangleOptions );
       }
 
       const selectorBox = new Rectangle( {
