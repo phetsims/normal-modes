@@ -70,7 +70,7 @@ define( require => {
       const optionsPanel = new OptionsPanel(
         model,
         false, /* no showPhases checkbox */
-        optionsPanelOptions,
+        optionsPanelOptions
       );
 
       this.addChild( optionsPanel );
