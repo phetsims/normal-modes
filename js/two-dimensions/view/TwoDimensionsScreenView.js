@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * The view for the 'Two Dimensions' Screen.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)
  */
@@ -68,7 +70,7 @@ define( require => {
       const optionsPanel = new OptionsPanel(
         model,
         false, /* no showPhases checkbox */
-        optionsPanelOptions,
+        optionsPanelOptions
       );
 
       this.addChild( optionsPanel );

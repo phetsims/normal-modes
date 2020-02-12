@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * The 'One Dimension' screen.
+ *
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */

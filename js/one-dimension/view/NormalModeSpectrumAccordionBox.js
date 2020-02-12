@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * AccordionBox containing amplitude and phase selection for the normal modes.
+ * AccordionBox containing amplitude and phase selection for the 1D normal modes.
  *
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)

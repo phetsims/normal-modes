@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * This Spring class models a spring that connects two masses and is visible when the left one is visible.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 define( require => {

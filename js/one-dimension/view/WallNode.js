@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * WallNode is the view for the stationary masses at each end in the 'One Dimension' Screen.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 define( require => {
