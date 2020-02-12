@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * SpringNode draws a line between the two masses that its Spring connects.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 define( require => {

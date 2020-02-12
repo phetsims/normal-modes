@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * The view for the 'Two Dimensions' Screen.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)
  */

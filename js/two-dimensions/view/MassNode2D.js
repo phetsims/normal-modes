@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * Subclass of MassNode. It adds its drag listener and a circle. It also rotates the arrows created in MassNode.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)
  */

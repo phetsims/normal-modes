@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Radio button group used to select movement axis (1D) or normal mode amplitude selector axes (2D)
+ * Radio button group used to select movement axis (1D) or normal mode amplitude selector axes (2D).
  *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)

@@ -1,6 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * Mass is the model for a mass that has a position, velocity and acceleration.
+ * In this simulation, the properties of the masses are set and updated by the main model.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 define( require => {

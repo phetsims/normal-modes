@@ -1,6 +1,9 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * Factory that creates the icons for the One and Two Dimensions Screens.
+ * Currently unfinished.
+ *
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */

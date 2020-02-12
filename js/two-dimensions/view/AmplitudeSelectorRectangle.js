@@ -1,12 +1,17 @@
 // Copyright 2020, University of Colorado Boulder
 
-/**
- * AccordionBox containing amplitude and phase selection for the normal modes.
- *
- * @author Franco Barpp Gomes (UTFPR)
- * @author Thiago de Mendonça Mildemberger (UTFPR)
- */
 define( require => {
+  /**
+   * Subclass of Rectangle that represents the amplitude of a normal mode in Two Dimensions.
+   * It can be clicked to change the amplitude according to the following (the original sim behaviour):
+   *  - If the current amplitude is not 'near' the maximum amplitude value, set it to the maximum value;
+   *  - If it is 'near', set it to 0.
+   * In our case, 'near' is arbitrarily defined.
+   * The maximum amplitude values are calculated in TwoDimensionConstants in the same way the original sim does.
+   *
+   * @author Franco Barpp Gomes (UTFPR)
+   * @author Thiago de Mendonça Mildemberger (UTFPR)
+   */
   'use strict';
 
   // modules

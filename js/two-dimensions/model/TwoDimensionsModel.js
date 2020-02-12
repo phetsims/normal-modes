@@ -1,6 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
+ * The model for the 'Two Dimensions' Screen.
+ *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 define( require => {
