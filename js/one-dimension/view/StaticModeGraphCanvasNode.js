@@ -23,7 +23,6 @@ define( require => {
      * @param {OneDimensionModel} model
      * @param {number} normalModeNumber
      * @param {Object} [options]
-     * @constructor
      */
     constructor( model, normalModeNumber, options ) {
 
