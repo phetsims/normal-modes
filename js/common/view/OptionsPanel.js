@@ -290,13 +290,6 @@ define( require => {
 
       super( contentNode, options );
     }
-
-    /**
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'OptionsPanel', OptionsPanel );

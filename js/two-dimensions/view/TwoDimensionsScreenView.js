@@ -50,7 +50,6 @@ define( require => {
         listener: () => {
           this.interruptSubtreeInput(); // cancel interactions that may be in progress
           model.reset();
-          this.reset();
         },
         right: this.layoutBounds.maxX - TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
@@ -124,14 +123,6 @@ define( require => {
           this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
         }
       }
-    }
-
-    /**
-     * Resets the view.
-     * @public
-     */
-    reset() {
-      // NO-OP
     }
 
     /**

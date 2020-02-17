@@ -32,14 +32,6 @@ define( require => {
           return leftVisible;
         } );
     }
-
-    /**
-     * Resets the model.
-     * @public
-     */
-    reset() {
-      // Nothing to reset
-    }
   }
 
   return normalModes.register( 'Spring', Spring );

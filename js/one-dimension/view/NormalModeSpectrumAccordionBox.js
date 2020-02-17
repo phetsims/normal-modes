@@ -271,13 +271,6 @@ define( require => {
 
       } );
     }
-
-    /**
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'NormalModeSpectrumAccordionBox', NormalModeSpectrumAccordionBox );

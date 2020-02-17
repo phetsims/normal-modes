@@ -51,7 +51,6 @@ define( require => {
         listener: () => {
           this.interruptSubtreeInput(); // cancel interactions that may be in progress
           model.reset();
-          this.reset();
         },
         right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN,
         bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
@@ -118,14 +117,6 @@ define( require => {
       } );
 
       this.addChild( this.normalModesAccordionBox );
-    }
-
-    /**
-     * Resets the view.
-     * @public
-     */
-    reset() {
-      // NO-OP
     }
 
     /**

@@ -130,13 +130,6 @@ define( require => {
 
       super( contentNode, options );
     }
-
-    /**
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'NormalModeAmplitudesAccordionBox', NormalModeAmplitudesAccordionBox );

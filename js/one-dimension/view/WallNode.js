@@ -49,14 +49,6 @@ define( require => {
         this.translation = this.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( this.rect.rectWidth / 2, this.rect.rectHeight / 2 ) );
       } );
     }
-
-    /**
-     * Resets the node.
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'WallNode', WallNode );

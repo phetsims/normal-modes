@@ -97,13 +97,6 @@ define( require => {
         this.layout();
       } );
     }
-
-    /**
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'NormalModesAccordionBox', NormalModesAccordionBox );

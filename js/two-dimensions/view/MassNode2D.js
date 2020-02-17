@@ -106,14 +106,6 @@ define( require => {
         }
       } );
     }
-
-    /**
-     * Resets the node.
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'MassNode2D', MassNode2D );

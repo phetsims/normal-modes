@@ -90,14 +90,6 @@ define( require => {
 
       this.visibilityProperty.linkAttribute( this, 'visible' );
     }
-
-    /**
-     * Resets the node.
-     * @public
-     */
-    reset() {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'SpringNode', SpringNode );
