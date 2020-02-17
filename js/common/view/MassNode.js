@@ -37,10 +37,12 @@ define( require => {
       this.size = 20;
 
       // @public {Property.<boolean>} determines the visibility of the MassNode
+      // TODO - this property is unnecessary (see https://github.com/phetsims/normal-modes/issues/45)
       this.visibilityProperty = new DerivedProperty( [ this.mass.visibilityProperty ], function( massVisible ) {
         return massVisible;
       } );
 
+      // dispose is unnecessary, the MassNode and the dependencies exist for the lifetime of the sim
       Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ],
         ( massPosition, massDisplacement ) => {
           this.translation = this.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );

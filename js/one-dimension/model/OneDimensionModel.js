@@ -91,6 +91,7 @@ define( require => {
           range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
         } );
 
+        // dispose is unnecessary, since this class owns the dependency
         this.modeFrequencyProperty[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], function( numMasses ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
@@ -112,9 +113,6 @@ define( require => {
       this.springs = new Array( MAX_SPRINGS );
       this.createDefaultSprings();
 
-      this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
-      this.amplitudeDirectionProperty.link( this.changedAmplitudeDirection.bind( this ) );
-
       // @public {Property.<number>} the index of the mass being dragged
       this.draggingMassIndexProperty = new NumberProperty( 0, {
         tandem: tandem.createTandem( 'draggingMassIndexProperty' )
@@ -124,6 +122,12 @@ define( require => {
       this.arrowsVisibilityProperty = new BooleanProperty( true, {
         tandem: tandem.createTandem( 'arrowsVisibilityProperty' )
       } );
+
+      // unlink is unnecessary, exists for the lifetime of the sim
+      this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+
+      // unlink is unnecessary, exists for the lifetime of the sim
+      this.amplitudeDirectionProperty.link( this.changedAmplitudeDirection.bind( this ) );
     }
 
     /**
@@ -183,6 +187,7 @@ define( require => {
       for ( let i = 0; i < MAX_MASSES; i++ ) {
         const visible = ( i <= defaultMassesNum );
 
+        // All the masses needed are created at once, and exist for the lifetime of the sim
         this.masses[ i ] = new Mass( new Vector2( x, 0 ), visible, tandem.createTandem( 'mass' + i ) );
 
         if ( x < xFinal ) {
@@ -197,6 +202,7 @@ define( require => {
      */
     createDefaultSprings() {
       for ( let i = 0; i < MAX_SPRINGS; i++ ) {
+        // All the springs needed are created at once, and exist for the lifetime of the sim
         this.springs[ i ] = new Spring( this.masses[ i ], this.masses[ i + 1 ] );
       }
     }

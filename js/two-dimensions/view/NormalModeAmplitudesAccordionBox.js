@@ -79,14 +79,17 @@ define( require => {
 
       const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
 
+      // dispose is unnecessary, exists for the lifetime of the sim
       const axisAmplitudesProperty = new DerivedProperty( [ model.amplitudeDirectionProperty ], amplitudeDirection => {
         return ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
       } );
 
+      // dispose is unnecessary, exists for the lifetime of the sim
       const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
         return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numMasses - 1 ];
       } );
 
+      // dispose is unnecessary, exists for the lifetime of the sim
       const gridSizeProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
         return PANEL_SIZE / ( 1 + ( RECT_GRID_UNITS + PADDING_GRID_UNITS ) * numMasses );
       } );

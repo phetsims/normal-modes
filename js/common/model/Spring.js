@@ -25,6 +25,7 @@ define( require => {
       this.rightMass = rightMass;
 
       // @public {Property.<boolean>} determines the visibility of the spring
+      // dispose is unnecessary because all masses and springs exist for the lifetime of the sim
       this.visibilityProperty = new DerivedProperty(
         [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ],
         function( leftVisible, rightVisible ) {

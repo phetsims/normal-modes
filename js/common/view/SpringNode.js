@@ -39,6 +39,7 @@ define( require => {
       this.model = model;
 
       // @public {Property.<boolean>} determines the visibility of the SpringNode
+      // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       this.visibilityProperty = new DerivedProperty(
         [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ],
         function( mySpringVisible, springsVisible ) {
@@ -61,6 +62,7 @@ define( require => {
 
       let currentXScaling = 1;
 
+      // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       Property.multilink(
         [ this.spring.leftMass.equilibriumPositionProperty,
           this.spring.leftMass.displacementProperty,

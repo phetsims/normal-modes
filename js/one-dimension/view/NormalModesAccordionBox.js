@@ -76,6 +76,7 @@ define( require => {
       for ( let i = 0; i < normalModeGraphs.length; i++ ) {
         normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
 
+        // dispose is unnecessary, exists for the lifetime of the sim
         Property.multilink( [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ], function( time, amp, phase ) {
           normalModeGraphs[ i ].update();
         } );
@@ -89,6 +90,7 @@ define( require => {
 
       super( graphContainer, options );
 
+      // dispose is unnecessary, exists for the lifetime of the sim
       Property.multilink( [ model.numVisibleMassesProperty, this.expandedProperty ], ( numMasses, isExpanded ) => {
         graphContainer.children = normalModeGraphs.slice( 0, numMasses );
         graphContainer.children.forEach( graph => graph.update() );

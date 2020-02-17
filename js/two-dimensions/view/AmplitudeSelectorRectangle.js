@@ -103,15 +103,19 @@ define( require => {
         this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
       };
 
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
         this.amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
       } );
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
         this.amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
       } );
 
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.numVisibleMassesProperty.link( this.numMassesChanged );
 
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.amplitudeDirectionProperty.link( this.amplitudeDirectionChanged );
 
       const isNear = function( n1, n2 ) {

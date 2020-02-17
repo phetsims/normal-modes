@@ -104,6 +104,7 @@ define( require => {
             range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
           } );
 
+          // dispose is unnecessary, since this class owns the dependency
           this.modeFrequencyProperty[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], function( numMasses ) {
             const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
             const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
@@ -135,8 +136,6 @@ define( require => {
       }
       this.createDefaultSprings();
 
-      this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
-
       // @public {Property.<number[]|null>} the indexes of the mass being dragged (an object with and 'i' and a 'j')
       this.draggingMassIndexesProperty = new Property( null, {
         tandem: tandem.createTandem( 'draggingMassIndexesProperty' )
@@ -151,6 +150,9 @@ define( require => {
       this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
         tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
       } );
+
+      // unlink is unnecessary, exists for the lifetime of the sim
+      this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
     }
 
     /**
@@ -238,6 +240,7 @@ define( require => {
           //TODO see https://github.com/phetsims/normal-modes/issues/17
           // const massTandem = tandem.createTandem( 'mass' + i + '_' + j );
           const massTandem = Tandem.OPTIONAL;
+          // All the masses needed are created at once, and exist for the lifetime of the sim
           this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, massTandem );
 
           if ( x < xFinal - xStep / 2 ) {
@@ -260,6 +263,7 @@ define( require => {
       for ( let i = 0; i < MAX_SPRINGS; i++ ) {
         for ( let j = 0; j < MAX_SPRINGS; ++j ) {
 
+          // All the springs needed are created at once, and exist for the lifetime of the sim
           if ( i !== MAX_SPRINGS - 1 ) {
             this.springsX[ i ][ j ] = new Spring( this.masses[ i + 1 ][ j ], this.masses[ i + 1 ][ j + 1 ] );
           }

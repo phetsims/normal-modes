@@ -210,6 +210,7 @@ define( require => {
 
       super( contentNode, options );
 
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.phasesVisibilityProperty.link( phasesVisibility => {
         for ( let i = 1; i < panelColumns.length; ++i ) {
           const j = i - 1;
@@ -240,6 +241,7 @@ define( require => {
         this.bottom = options.bottom;
       } );
 
+      // unlink is unnecessary, exists for the lifetime of the sim
       model.numVisibleMassesProperty.link( numMasses => {
         for ( let i = 0; i < numMasses; i++ ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
