@@ -89,7 +89,7 @@ define( require => {
 
       this.addInputListener( this.dragListener );
       const callback = this.overUpCallback.bind( this );
-      // unlink is unnecessary, the MassNode1D and the depencency exist for the lifetime of the sim
+      // unlink is unnecessary, the MassNode1D and the dependency exists for the lifetime of the sim
       this.model.arrowsVisibilityProperty.link( arrowsVisible => {
         if ( arrowsVisible ) {
           // unlink is needed when the arrows become invisible
@@ -100,9 +100,7 @@ define( require => {
           this.arrows.bottom.visible = false;
           this.arrows.left.visible = false;
           this.arrows.right.visible = false;
-          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
-            this.dragListener.isOverProperty.unlink( callback );
-          }
+          this.dragListener.isOverProperty.unlink( callback );
         }
       } );
     }
