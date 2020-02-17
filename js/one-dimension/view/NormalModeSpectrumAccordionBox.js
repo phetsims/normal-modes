@@ -34,7 +34,7 @@ define( require => {
   // strings
   const amplitudeString = require( 'string!NORMAL_MODES/amplitude' );
   const frequencyString = require( 'string!NORMAL_MODES/frequency' );
-  const frequencyOmegaPatternString = require( 'string!NORMAL_MODES/frequencyOmegaPattern' );
+  const frequencyRatioOmegaPatternString = require( 'string!NORMAL_MODES/frequencyRatioOmegaPattern' );
   const normalModeSpectrumString = require( 'string!NORMAL_MODES/normalModeSpectrum' );
   const normalModeString = require( 'string!NORMAL_MODES/normalMode' );
   const phaseString = require( 'string!NORMAL_MODES/phase' );
@@ -132,7 +132,7 @@ define( require => {
 
         const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
         frequencyText[ i ] = new Text(
-          StringUtils.fillIn( frequencyOmegaPatternString, {
+          StringUtils.fillIn( frequencyRatioOmegaPatternString, {
             frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
           } ),
           { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
@@ -257,7 +257,7 @@ define( require => {
           const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
 
           modeGraphs[ i ].update();
-          frequencyText[ i ].text = StringUtils.fillIn( frequencyOmegaPatternString, {
+          frequencyText[ i ].text = StringUtils.fillIn( frequencyRatioOmegaPatternString, {
             frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
           } );
         }
