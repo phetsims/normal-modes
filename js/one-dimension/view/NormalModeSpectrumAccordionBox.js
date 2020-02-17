@@ -210,6 +210,8 @@ define( require => {
 
       super( contentNode, options );
 
+      let strut;
+
       // unlink is unnecessary, exists for the lifetime of the sim
       model.phasesVisibilityProperty.link( phasesVisibility => {
         for ( let i = 1; i < panelColumns.length; ++i ) {
@@ -221,8 +223,11 @@ define( require => {
 
         lineSeparator.setY2( panelColumns[ 1 ].bounds.height * 0.8 );
 
-        // needed to make the Node have the same height as the VBoxes
-        const strut = new VStrut( panelColumns[ 1 ].bounds.height );
+        // the previous VStrut needs to be disposed
+        if ( strut && typeof strut.dispose === 'function' ) {
+          strut.dispose();
+        }
+        strut = new VStrut( panelColumns[ 1 ].bounds.height );
 
         panelColumns[ 0 ].children = ( phasesVisibility ) ?
           [ strut, normalModeLabel, amplitudeLabel, frequencyLabel, phaseBox ] :
