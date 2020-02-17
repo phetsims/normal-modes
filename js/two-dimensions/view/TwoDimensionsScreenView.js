@@ -124,15 +124,6 @@ define( require => {
         }
       }
     }
-
-    /**
-     * Steps the view.
-     * @param {number} dt - time step, in seconds
-     * @public
-     */
-    step( dt ) {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'TwoDimensionsScreenView', TwoDimensionsScreenView );

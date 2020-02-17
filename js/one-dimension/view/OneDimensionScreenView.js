@@ -118,15 +118,6 @@ define( require => {
 
       this.addChild( this.normalModesAccordionBox );
     }
-
-    /**
-     * Steps the view.
-     * @param {number} dt - time step, in seconds
-     * @public
-     */
-    step( dt ) {
-      // NO-OP
-    }
   }
 
   return normalModes.register( 'OneDimensionScreenView', OneDimensionScreenView );
