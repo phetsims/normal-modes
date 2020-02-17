@@ -100,7 +100,9 @@ define( require => {
           this.arrows.bottom.visible = false;
           this.arrows.left.visible = false;
           this.arrows.right.visible = false;
-          this.dragListener.isOverProperty.unlink( callback );
+          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
+            this.dragListener.isOverProperty.unlink( callback );
+          }
         }
       } );
     }
