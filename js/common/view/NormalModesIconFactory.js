@@ -17,6 +17,7 @@ define( require => {
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
   const Vector2 = require( 'DOT/Vector2' );
   const Path = require( 'SCENERY/nodes/Path' );
+  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const Shape = require( 'KITE/Shape' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
 
@@ -47,7 +48,7 @@ define( require => {
         boundsMethod: 'none',
         pickable: false,
         inputEnabled: false,
-        stroke: 'red',
+        stroke: PhetColorScheme.RED_COLORBLIND,
         lineWidth: 50
       } );
 
