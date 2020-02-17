@@ -50,6 +50,9 @@
   "frequency": {
     "value": "Frequency:"
   },
+  "frequencyOmegaPattern": {
+    "value": "{{frequencyRatio}}\u03C9\u2080"
+  },
   "normalModeAmplitudes": {
     "value": "Normal Mode Amplitudes"
   }

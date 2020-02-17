@@ -24,6 +24,7 @@ define( require => {
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StaticModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/StaticModeGraphCanvasNode' );
+  const StringUtils = require( 'PHETCOMMON/util/StringUtils' );
   const Text = require( 'SCENERY/nodes/Text' );
   const Utils = require( 'DOT/Utils' );
   const VBox = require( 'SCENERY/nodes/VBox' );
@@ -33,6 +34,7 @@ define( require => {
   // strings
   const amplitudeString = require( 'string!NORMAL_MODES/amplitude' );
   const frequencyString = require( 'string!NORMAL_MODES/frequency' );
+  const frequencyOmegaPatternString = require( 'string!NORMAL_MODES/frequencyOmegaPattern' );
   const normalModeSpectrumString = require( 'string!NORMAL_MODES/normalModeSpectrum' );
   const normalModeString = require( 'string!NORMAL_MODES/normalMode' );
   const phaseString = require( 'string!NORMAL_MODES/phase' );
@@ -128,10 +130,11 @@ define( require => {
           { font: NormalModesConstants.CONTROL_FONT }
         );
 
-        const freq = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
+        const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
         frequencyText[ i ] = new Text(
-          // freq-omega-subscript0
-          `${Utils.toFixed( freq, 2 )}\u03C9\u2080`,
+          StringUtils.fillIn( frequencyOmegaPatternString, {
+            frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
+          } ),
           { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
         );
 
@@ -251,10 +254,12 @@ define( require => {
         for ( let i = 0; i < numMasses; i++ ) {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
-          const freq = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
+          const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
 
           modeGraphs[ i ].update();
-          frequencyText[ i ].text = `${Utils.toFixed( freq, 2 )}\u03C9\u2080`;
+          frequencyText[ i ].text = StringUtils.fillIn( frequencyOmegaPatternString, {
+            frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
+          } );
         }
 
         contentNode.children = panelColumns.slice( 0, numMasses + 1 );
