@@ -112,7 +112,7 @@ define( require => {
         stroke: NormalModesConstants.PANEL_COLORS.stroke
       };
 
-      const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( normalModeAmplitudesAccordionBoxOptions, model );
+      const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, normalModeAmplitudesAccordionBoxOptions );
 
       this.addChild( normalModeAmplitudesAccordionBox );
 

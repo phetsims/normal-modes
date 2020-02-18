@@ -36,10 +36,10 @@ define( require => {
   class NormalModeAmplitudesAccordionBox extends AccordionBox {
 
     /**
-     * @param {Object} [options]
      * @param {TwoDimensionsModel} model
+     * @param {Object} [options]
      */
-    constructor( options, model ) {
+    constructor( model, options ) {
 
       /*
       Model properties used:
