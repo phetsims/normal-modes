@@ -505,12 +505,6 @@ define( require => {
     computeModeAmplitudesAndPhases() {
       this.timeProperty.reset();
       const N = this.numVisibleMassesProperty.get();
-      for ( let i = 1; i <= N; ++i ) {
-        for ( let j = 1; j <= N; ++j ) {
-          this.masses[ i ][ j ].initialDisplacementProperty.set( this.masses[ i ][ j ].displacementProperty.get() );
-          this.masses[ i ][ j ].initialVelocityProperty.set( this.masses[ i ][ j ].velocityProperty.get() );
-        }
-      }
       for ( let r = 1; r <= N; ++r ) {
         for ( let s = 1; s <= N; ++s ) { // for each mode
           let AmplitudeTimesCosPhaseX = 0;
@@ -519,8 +513,8 @@ define( require => {
           let AmplitudeTimesSinPhaseY = 0;
           for ( let i = 1; i <= N; ++i ) {
             for ( let j = 1; j <= N; ++j ) { // for each mass
-              const massDisplacement = this.masses[ i ][ j ].initialDisplacementProperty.get();
-              const massVelocity = this.masses[ i ][ j ].initialVelocityProperty.get();
+              const massDisplacement = this.masses[ i ][ j ].displacementProperty.get();
+              const massVelocity = this.masses[ i ][ j ].velocityProperty.get();
               const modeFrequency = this.modeFrequencyProperty[ r - 1 ][ s - 1 ].get();
               const constantTimesSineProduct = ( 4 / ( ( N + 1 ) * ( N + 1 ) ) ) * this.sineProduct[ i ][ j ][ r ][ s ];
 

@@ -408,10 +408,6 @@ define( require => {
      */
     computeModeAmplitudesAndPhases() {
       this.timeProperty.reset();
-      for ( let i = 1; i <= NormalModesConstants.MAX_MASSES_ROW_LEN; ++i ) {
-        this.masses[ i ].initialDisplacementProperty.set( this.masses[ i ].displacementProperty.get() );
-        this.masses[ i ].initialVelocityProperty.set( this.masses[ i ].velocityProperty.get() );
-      }
       const N = this.numVisibleMassesProperty.get();
       for ( let i = 1; i <= N; ++i ) { // for each mode
         let AmplitudeTimesCosPhase = 0;
@@ -420,12 +416,12 @@ define( require => {
           let massDisplacement = 0;
           let massVelocity = 0;
           if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-            massDisplacement = this.masses[ j ].initialDisplacementProperty.get().x;
-            massVelocity = this.masses[ j ].initialVelocityProperty.get().x;
+            massDisplacement = this.masses[ j ].displacementProperty.get().x;
+            massVelocity = this.masses[ j ].velocityProperty.get().x;
           }
           else {
-            massDisplacement = this.masses[ j ].initialDisplacementProperty.get().y;
-            massVelocity = this.masses[ j ].initialVelocityProperty.get().y;
+            massDisplacement = this.masses[ j ].displacementProperty.get().y;
+            massVelocity = this.masses[ j ].velocityProperty.get().y;
           }
 
           AmplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * Math.sin( i * j * Math.PI / ( N + 1 ) );

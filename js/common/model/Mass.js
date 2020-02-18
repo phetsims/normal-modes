@@ -39,19 +39,9 @@ define( require => {
         tandem: tandem.createTandem( 'displacementProperty' )
       } );
 
-      // @public {Property.<Vector2>} mass initial displacement
-      this.initialDisplacementProperty = new Vector2Property( new Vector2( 0, 0 ), {
-        tandem: tandem.createTandem( 'initialDisplacementProperty' )
-      } );
-
       // @public {Property.<Vector2>} mass current velocity
       this.velocityProperty = new Vector2Property( new Vector2( 0, 0 ), {
         tandem: tandem.createTandem( 'velocityProperty' )
-      } );
-
-      // @public {Property.<Vector2>} mass initial velocity
-      this.initialVelocityProperty = new Vector2Property( new Vector2( 0, 0 ), {
-        tandem: tandem.createTandem( 'initialVelocityProperty' )
       } );
 
       // @public {Property.<Vector2>} mass current acceleration
@@ -72,9 +62,7 @@ define( require => {
      */
     zeroPosition() {
       this.displacementProperty.reset();
-      this.initialDisplacementProperty.reset();
       this.velocityProperty.reset();
-      this.initialVelocityProperty.reset();
       this.accelerationProperty.reset();
       this.previousAccelerationProperty.reset();
     }
@@ -88,17 +76,7 @@ define( require => {
       this.visibilityProperty.reset();
       this.zeroPosition();
     }
-
-    /**
-     * Restores displacement and velocity to stored initial values.
-     * @public
-     */
-    restoreInitialState() {
-      this.displacementProperty.set( this.initialDisplacementProperty.get() );
-      this.velocityProperty.set( this.initialVelocityProperty.get() );
-      this.accelerationProperty.reset();
-      this.previousAccelerationProperty.reset();
-    }
+    
   }
 
   return normalModes.register( 'Mass', Mass );
