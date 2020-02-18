@@ -52,6 +52,7 @@ define( require => {
       Model properties used:
         - modeAmplitudeProperty[0..9]
         - modePhaseProperty[0..9]
+        - modeFrequencyProperty[0..9]
         - amplitudeDirectionProperty
         - numVisibleMassesProperty
         - phasesVisibilityProperty
@@ -138,7 +139,7 @@ define( require => {
           { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
         );
 
-        modeGraphs[ i ] = new StaticModeGraphCanvasNode( model, i );
+        modeGraphs[ i ] = new StaticModeGraphCanvasNode( i, model.modeFrequencyProperty[ i ] );
       }
 
       const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1 );

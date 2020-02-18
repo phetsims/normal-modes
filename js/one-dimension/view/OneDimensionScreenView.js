@@ -96,8 +96,8 @@ define( require => {
         return springNode;
       } );
 
-      this.leftWallNode = new WallNode( this.model.masses[ 0 ], this.modelViewTransform, this.model, tandem.createTandem( 'leftWallNode' ) );
-      this.rightWallNode = new WallNode( this.model.masses[ this.model.masses.length - 1 ], this.modelViewTransform, this.model, tandem.createTandem( 'rightWallNode' ) );
+      this.leftWallNode = new WallNode( this.model.masses[ 0 ], this.modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
+      this.rightWallNode = new WallNode( this.model.masses[ this.model.masses.length - 1 ], this.modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
 
       this.addChild( this.leftWallNode );
       this.addChild( this.rightWallNode );

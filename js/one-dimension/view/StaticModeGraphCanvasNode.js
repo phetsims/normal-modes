@@ -20,11 +20,11 @@ define( require => {
   class StaticModeGraphCanvasNode extends CanvasNode {
 
     /**
-     * @param {OneDimensionModel} model
      * @param {number} normalModeNumber
+     * @param {Property.<number>} modeFrequencyProperty
      * @param {Object} [options]
      */
-    constructor( model, normalModeNumber, options ) {
+    constructor( normalModeNumber, modeFrequencyProperty, options ) {
 
       options = merge( {
         graphSize: new Dimension2( 40, 25 ),
@@ -61,8 +61,8 @@ define( require => {
       // @private {String} - reference line (y = 0) stroke canvas color
       this.referenceLineStrokeColor = options.referenceLineStrokeColor;
 
-      // @private {OneDimensionModel}
-      this.model = model;
+      // @private {Property.<number>}
+      this.modeFrequencyProperty = modeFrequencyProperty;
     }
 
     /**
@@ -103,7 +103,7 @@ define( require => {
       const n = this.normalModeNumber;
       const amp = 0.15;
       const phase = 0;
-      const freq = this.model.modeFrequencyProperty[ n ].get();
+      const freq = this.modeFrequencyProperty.get();
       const time = 0;
 
       for ( let i = 0; i < this.curveYPositions.length; i++ ) {

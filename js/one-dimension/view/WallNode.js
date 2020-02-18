@@ -21,16 +21,14 @@ define( require => {
     /**
      * @param {Mass} mass
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {OneDimensionModel} model
      * @param {Tandem} tandem
      */
-    constructor( mass, modelViewTransform, model, tandem ) {
+    constructor( mass, modelViewTransform, tandem ) {
       super( { cursor: 'pointer' } );
 
       // @private (read-only) Non-Property attributes
       this.mass = mass;
       this.modelViewTransform = modelViewTransform;
-      this.model = model;
 
       // @public {Rectangle}
       this.rect = new Rectangle( {
