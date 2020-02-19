@@ -41,8 +41,7 @@ define( require => {
       const viewOrigin = new Vector2( VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
         ( this.layoutBounds.maxY - 2 * OneDimensionConstants.SCREEN_VIEW_Y_MARGIN - 300 ) / 2 + OneDimensionConstants.SCREEN_VIEW_Y_MARGIN );
 
-      // @public {ModelViewTransform2}
-      this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2 );
+      const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2 );
 
       const resetAllButton = new ResetAllButton( {
         listener: () => {
@@ -88,13 +87,13 @@ define( require => {
 
       // @private {SpringNode[]} Array that will contain all of the springNodes.
       this.springNodes = model.springs.map( spring => {
-        const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+        const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
         this.addChild( springNode );
         return springNode;
       } );
 
-      this.leftWallNode = new WallNode( model.masses[ 0 ], this.modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
-      this.rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], this.modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
+      this.leftWallNode = new WallNode( model.masses[ 0 ], modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
+      this.rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
 
       this.addChild( this.leftWallNode );
       this.addChild( this.rightWallNode );
@@ -102,7 +101,7 @@ define( require => {
       // @private {MassNode[]} Array that will contain all of the massNodes.
       this.massNodes = [];
       for ( let i = 1; i < model.masses.length - 1; ++i ) {
-        this.massNodes.push( new MassNode1D( model.masses[ i ], this.modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
+        this.massNodes.push( new MassNode1D( model.masses[ i ], modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
         this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
       }
 

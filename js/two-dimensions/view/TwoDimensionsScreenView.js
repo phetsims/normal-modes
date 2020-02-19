@@ -40,8 +40,8 @@ define( require => {
       const viewOrigin = new Vector2( ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
         ( this.layoutBounds.maxY - 2 * TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN );
 
-      // @public {ModelViewTransform2}
-      this.modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 );
+      const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin,
+        ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 );
 
       const resetAllButton = new ResetAllButton( {
         listener: () => {
@@ -75,7 +75,7 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the X axis springNodes.
       this.springXNodes = model.springsX.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );
@@ -84,15 +84,15 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the Y axis springNodes.
       this.springYNodes = model.springsY.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );
       } );
 
       // The springs are added first
-      const topLeftPoint = this.modelViewTransform.modelToViewPosition( new Vector2( -1, 1 ) );
-      const bottomRightPoint = this.modelViewTransform.modelToViewPosition( new Vector2( 1, -1 ) );
+      const topLeftPoint = modelViewTransform.modelToViewPosition( new Vector2( -1, 1 ) );
+      const bottomRightPoint = modelViewTransform.modelToViewPosition( new Vector2( 1, -1 ) );
 
       const borderWalls = new Rectangle( new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
         stroke: Color.toColor( '#333' ),
@@ -116,7 +116,7 @@ define( require => {
       this.massNodes = [];
       for ( let i = 1; i < model.masses.length - 1; ++i ) {
         for ( let j = 1; j < model.masses[ i ].length - 1; ++j ) {
-          this.massNodes.push( new MassNode2D( model.masses[ i ][ j ], this.modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
+          this.massNodes.push( new MassNode2D( model.masses[ i ][ j ], modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
           this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
         }
       }
