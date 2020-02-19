@@ -22,30 +22,24 @@ define( require => {
     /**
      * @param {Mass} mass
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {OneDimensionModel|TwoDimensionsModel} model
      * @param {Tandem} tandem
      */
-    constructor( mass, modelViewTransform, model, tandem ) {
+    constructor( mass, modelViewTransform, tandem ) {
       super( { cursor: 'pointer' } );
-
-      // @private (read-only) Non-Property attributes
-      this.mass = mass;
-      this.modelViewTransform = modelViewTransform;
-      this.model = model;
 
       // TODO - magic number
       this.size = 20;
 
       // @public {Property.<boolean>} determines the visibility of the MassNode
       // TODO - this property is unnecessary (see https://github.com/phetsims/normal-modes/issues/45)
-      this.visibilityProperty = new DerivedProperty( [ this.mass.visibilityProperty ], function( massVisible ) {
+      this.visibilityProperty = new DerivedProperty( [ mass.visibilityProperty ], function( massVisible ) {
         return massVisible;
       } );
 
       // dispose is unnecessary, the MassNode and the dependencies exist for the lifetime of the sim
-      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ],
+      Property.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ],
         ( massPosition, massDisplacement ) => {
-          this.translation = this.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
+          this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
         } );
 
       // TODO - magic numbers

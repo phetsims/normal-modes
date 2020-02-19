@@ -29,7 +29,7 @@ define( require => {
      */
     constructor( mass, modelViewTransform, model, tandem ) {
 
-      super( mass, modelViewTransform, model, tandem );
+      super( mass, modelViewTransform, tandem );
 
       // @public {Rectangle}
       this.rect = new Rectangle( {
@@ -46,29 +46,29 @@ define( require => {
       this.addChild( this.rect );
 
       this.startCallback = ( event, listener ) => {
-        this.model.draggingMassIndexProperty.set( this.model.masses.indexOf( this.mass ) );
+        model.draggingMassIndexProperty.set( model.masses.indexOf( mass ) );
       };
 
       this.dragCallback = ( event, listener ) => {
-        this.model.arrowsVisibilityProperty.set( false );
-        const point = listener.modelPoint.minus( this.mass.equilibriumPositionProperty.get() );
-        if ( this.model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-          const oldY = this.mass.displacementProperty.get().y;
-          this.mass.displacementProperty.set( new Vector2( point.x, oldY ) );
+        model.arrowsVisibilityProperty.set( false );
+        const point = listener.modelPoint.minus( mass.equilibriumPositionProperty.get() );
+        if ( model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
+          const oldY = mass.displacementProperty.get().y;
+          mass.displacementProperty.set( new Vector2( point.x, oldY ) );
         }
         else {
-          const oldX = this.mass.displacementProperty.get().x;
-          this.mass.displacementProperty.set( new Vector2( oldX, point.y ) );
+          const oldX = mass.displacementProperty.get().x;
+          mass.displacementProperty.set( new Vector2( oldX, point.y ) );
         }
       };
 
       this.endCallback = ( event, listener ) => {
-        this.model.draggingMassIndexProperty.set( -1 );
-        this.model.computeModeAmplitudesAndPhases();
+        model.draggingMassIndexProperty.set( -1 );
+        model.computeModeAmplitudesAndPhases();
       };
 
       this.overUpCallback = isOver => {
-        const amplitudeDirection = this.model.amplitudeDirectionProperty.get();
+        const amplitudeDirection = model.amplitudeDirectionProperty.get();
         if ( amplitudeDirection === AmplitudeDirection.VERTICAL ) {
           this.arrows.top.visible = isOver;
           this.arrows.bottom.visible = isOver;
@@ -84,13 +84,13 @@ define( require => {
         start: this.startCallback,
         drag: this.dragCallback,
         end: this.endCallback,
-        transform: this.modelViewTransform
+        transform: modelViewTransform
       } );
 
       this.addInputListener( this.dragListener );
       const callback = this.overUpCallback.bind( this );
       // unlink is unnecessary, the MassNode1D and the dependency exists for the lifetime of the sim
-      this.model.arrowsVisibilityProperty.link( arrowsVisible => {
+      model.arrowsVisibilityProperty.link( arrowsVisible => {
         if ( arrowsVisible ) {
           // unlink is needed when the arrows become invisible
           this.dragListener.isOverProperty.link( callback );
