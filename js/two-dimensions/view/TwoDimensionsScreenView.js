@@ -78,7 +78,7 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the X axis springNodes.
       this.springXNodes = model.springsX.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, this.modelViewTransform, this.model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );
@@ -87,7 +87,7 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the Y axis springNodes.
       this.springYNodes = model.springsY.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, this.model, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, this.modelViewTransform, this.model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );

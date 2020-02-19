@@ -22,10 +22,10 @@ define( require => {
     /**
      * @param {Spring} spring
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {OneDimensionModel} model
+     * @param {Property.<boolean>} springsVisibilityProperty
      * @param {Tandem} tandem
      */
-    constructor( spring, modelViewTransform, model, tandem ) {
+    constructor( spring, modelViewTransform, springsVisibilityProperty, tandem ) {
       super( {
         preventFit: true,
         boundsMethod: 'none',
@@ -34,15 +34,10 @@ define( require => {
         excludeInvisible: true
       } );
 
-      // @private (read-only) Non-Property attributes
-      this.spring = spring;
-      this.modelViewTransform = modelViewTransform;
-      this.model = model;
-
       // @public {Property.<boolean>} determines the visibility of the SpringNode
       // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       this.visibilityProperty = new DerivedProperty(
-        [ this.spring.visibilityProperty, this.model.springsVisibilityProperty ],
+        [ spring.visibilityProperty, springsVisibilityProperty ],
         function( mySpringVisible, springsVisible ) {
           return mySpringVisible && springsVisible;
         } );
@@ -65,15 +60,15 @@ define( require => {
 
       // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       Property.multilink(
-        [ this.spring.leftMass.equilibriumPositionProperty,
-          this.spring.leftMass.displacementProperty,
-          this.spring.rightMass.equilibriumPositionProperty,
-          this.spring.rightMass.displacementProperty
+        [ spring.leftMass.equilibriumPositionProperty,
+          spring.leftMass.displacementProperty,
+          spring.rightMass.equilibriumPositionProperty,
+          spring.rightMass.displacementProperty
         ], ( leftPos, leftDispl, rightPos, rightDispl ) => {
           if ( this.visible ) {
 
-            const p1 = this.modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
-            const p2 = this.modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
+            const p1 = modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
+            const p2 = modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
             if ( p1.distance( p2 ) === 0 ) {
               return;
             }

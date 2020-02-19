@@ -76,7 +76,7 @@ define( require => {
       this.visibilityProperty.reset();
       this.zeroPosition();
     }
-    
+
   }
 
   return normalModes.register( 'Mass', Mass );
