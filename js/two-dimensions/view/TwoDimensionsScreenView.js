@@ -37,9 +37,6 @@ define( require => {
         tandem: tandem
       } );
 
-      // @public {TwoDimensionsModel}
-      this.model = model;
-
       const viewOrigin = new Vector2( ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
         ( this.layoutBounds.maxY - 2 * TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN );
 
@@ -78,7 +75,7 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the X axis springNodes.
       this.springXNodes = model.springsX.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, this.model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );
@@ -87,7 +84,7 @@ define( require => {
       // @private {SpringNode[]} Array that will contain all of the Y axis springNodes.
       this.springYNodes = model.springsY.map( springArray => {
         return springArray.map( spring => {
-          const springNode = new SpringNode( spring, this.modelViewTransform, this.model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
           return springNode;
         } );
@@ -117,9 +114,9 @@ define( require => {
       this.addChild( normalModeAmplitudesAccordionBox );
 
       this.massNodes = [];
-      for ( let i = 1; i < this.model.masses.length - 1; ++i ) {
-        for ( let j = 1; j < this.model.masses[ i ].length - 1; ++j ) {
-          this.massNodes.push( new MassNode2D( this.model.masses[ i ][ j ], this.modelViewTransform, this.model, tandem.createTandem( 'massNodes' ) ) );
+      for ( let i = 1; i < model.masses.length - 1; ++i ) {
+        for ( let j = 1; j < model.masses[ i ].length - 1; ++j ) {
+          this.massNodes.push( new MassNode2D( model.masses[ i ][ j ], this.modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
           this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
         }
       }

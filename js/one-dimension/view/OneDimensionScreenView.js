@@ -36,9 +36,6 @@ define( require => {
         tandem: tandem
       } );
 
-      // @public {OneDimensionModel}
-      this.model = model;
-
       const VIEWBOX_WIDTH = 755 - 8;
 
       const viewOrigin = new Vector2( VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
@@ -91,21 +88,21 @@ define( require => {
 
       // @private {SpringNode[]} Array that will contain all of the springNodes.
       this.springNodes = model.springs.map( spring => {
-        const springNode = new SpringNode( spring, this.modelViewTransform, this.model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+        const springNode = new SpringNode( spring, this.modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
         this.addChild( springNode );
         return springNode;
       } );
 
-      this.leftWallNode = new WallNode( this.model.masses[ 0 ], this.modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
-      this.rightWallNode = new WallNode( this.model.masses[ this.model.masses.length - 1 ], this.modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
+      this.leftWallNode = new WallNode( model.masses[ 0 ], this.modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
+      this.rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], this.modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
 
       this.addChild( this.leftWallNode );
       this.addChild( this.rightWallNode );
 
       // @private {MassNode[]} Array that will contain all of the massNodes.
       this.massNodes = [];
-      for ( let i = 1; i < this.model.masses.length - 1; ++i ) {
-        this.massNodes.push( new MassNode1D( this.model.masses[ i ], this.modelViewTransform, this.model, tandem.createTandem( 'massNodes' ) ) );
+      for ( let i = 1; i < model.masses.length - 1; ++i ) {
+        this.massNodes.push( new MassNode1D( model.masses[ i ], this.modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
         this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
       }
 
