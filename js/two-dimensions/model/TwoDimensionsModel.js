@@ -81,26 +81,22 @@ define( require => {
 
         for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; ++j ) {
           this.modeXAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-            //TODO see https://github.com/phetsims/normal-modes/issues/17
-            // tandem: tandem.createTandem( 'modeXAmplitudeProperty' + i + '_' + j ),
+            tandem: tandem.createTandem( `modeXAmplitudeProperty[${i},${j}]` ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
           } );
 
           this.modeYAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-            //TODO see https://github.com/phetsims/normal-modes/issues/17
-            // tandem: tandem.createTandem( 'modeYAmplitudeProperty' + i + '_' + j ),
+            tandem: tandem.createTandem( `modeYAmplitudeProperty[${i},${j}]` ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
           } );
 
           this.modeXPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-            //TODO see https://github.com/phetsims/normal-modes/issues/17
-            // tandem: tandem.createTandem( 'modeXPhaseProperty' + i + '_' + j ),
+            tandem: tandem.createTandem( `modeXPhaseProperty[${i},${j}]` ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
           } );
 
           this.modeYPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-            //TODO see https://github.com/phetsims/normal-modes/issues/17
-            // tandem: tandem.createTandem( 'modeYPhaseProperty' + i + '_' + j ),
+            tandem: tandem.createTandem( `modeYPhaseProperty[${i},${j}]` ),
             range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
           } );
 
@@ -237,11 +233,8 @@ define( require => {
         for ( let j = 0; j < MAX_MASSES; ++j ) {
           const visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
 
-          //TODO see https://github.com/phetsims/normal-modes/issues/17
-          // const massTandem = tandem.createTandem( 'mass' + i + '_' + j );
-          const massTandem = Tandem.OPTIONAL;
           // All the masses needed are created at once, and exist for the lifetime of the sim
-          this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, massTandem );
+          this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( `mass[${i},${j}]` ) );
 
           if ( x < xFinal - xStep / 2 ) {
             x += xStep;
