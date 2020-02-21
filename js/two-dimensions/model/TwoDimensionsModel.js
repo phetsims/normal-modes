@@ -20,7 +20,6 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Range = require( 'DOT/Range' );
   const Spring = require( 'NORMAL_MODES/common/model/Spring' );
-  const Tandem = require( 'TANDEM/Tandem' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
   const Vector2 = require( 'DOT/Vector2' );
 
