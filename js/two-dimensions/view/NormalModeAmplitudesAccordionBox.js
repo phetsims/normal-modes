@@ -29,7 +29,7 @@ define( require => {
   const normalModeAmplitudesString = require( 'string!NORMAL_MODES/normalModeAmplitudes' );
 
   // constants
-  const PANEL_SIZE = 270;
+  const PANEL_REAL_SIZE = 270;
   const RECT_GRID_UNITS = 5;
   const PADDING_GRID_UNITS = 1;
 
@@ -90,8 +90,8 @@ define( require => {
       } );
 
       // dispose is unnecessary, exists for the lifetime of the sim
-      const gridSizeProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
-        return PANEL_SIZE / ( 1 + ( RECT_GRID_UNITS + PADDING_GRID_UNITS ) * numMasses );
+      const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
+        return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numMasses + PADDING_GRID_UNITS * ( numMasses - 1 ) );
       } );
 
       const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
@@ -110,13 +110,13 @@ define( require => {
         const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
 
         selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
-          maxAmpProperty, gridSizeProperty, selectorRectangleOptions );
+          maxAmpProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
       }
 
       const selectorBox = new Rectangle( {
         children: selectorRectangles,
-        rectHeight: PANEL_SIZE,
-        rectWidth: PANEL_SIZE
+        rectHeight: PANEL_REAL_SIZE,
+        rectWidth: PANEL_REAL_SIZE
       } );
 
       const rightMargin = new HStrut( 15 + PANEL_X_MARGIN );

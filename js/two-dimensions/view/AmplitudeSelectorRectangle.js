@@ -31,10 +31,10 @@ define( require => {
      * @param {number} col
      * @param {DerivedProperty.<Property.<number>[][]>} axisAmplitudesProperty
      * @param {DerivedProperty.<number>} maxAmpProperty
-     * @param {DerivedProperty.<number>} gridSizeProperty
+     * @param {DerivedProperty.<number>} gridToRealSizeRatioProperty
      * @param {Object} [options]
      */
-    constructor( model, row, col, axisAmplitudesProperty, maxAmpProperty, gridSizeProperty, options ) {
+    constructor( model, row, col, axisAmplitudesProperty, maxAmpProperty, gridToRealSizeRatioProperty, options ) {
 
       options = merge( {
         boundsMethod: 'none',
@@ -82,16 +82,16 @@ define( require => {
       this.numMassesChanged = numMasses => {
         if ( this.row < numMasses && this.col < numMasses ) {
           this.visible = true;
-          this.rectWidth = this.rectHeight = options.rectGridSize * gridSizeProperty.get();
+          this.rectWidth = this.rectHeight = options.rectGridSize * gridToRealSizeRatioProperty.get();
 
           this.backgroundRect.rectWidth = this.rectWidth;
           this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
 
-          const gridLeft = options.paddingGridSize + this.col * ( options.paddingGridSize + options.rectGridSize );
-          const gridTop = options.paddingGridSize + this.row * ( options.paddingGridSize + options.rectGridSize );
+          const gridLeft = this.col * ( options.paddingGridSize + options.rectGridSize );
+          const gridTop = this.row * ( options.paddingGridSize + options.rectGridSize );
 
-          this.left = gridSizeProperty.get() * gridLeft;
-          this.top = gridSizeProperty.get() * gridTop;
+          this.left = gridToRealSizeRatioProperty.get() * gridLeft;
+          this.top = gridToRealSizeRatioProperty.get() * gridTop;
         }
         else {
           this.visible = false;
