@@ -13,6 +13,7 @@ define( require => {
   const Property = require( 'AXON/Property' );
   const Screen = require( 'JOIST/Screen' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const NormalModesIconFactory = require( 'NORMAL_MODES/common/view/NormalModesIconFactory' );
   const TwoDimensionsModel = require( 'NORMAL_MODES/two-dimensions/model/TwoDimensionsModel' );
   const TwoDimensionsScreenView = require( 'NORMAL_MODES/two-dimensions/view/TwoDimensionsScreenView' );
@@ -28,7 +29,7 @@ define( require => {
 
       const options = {
         name: screenTwoDimensionsString,
-        backgroundColorProperty: new Property( 'white' ),
+        backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
         homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
         tandem: tandem
       };

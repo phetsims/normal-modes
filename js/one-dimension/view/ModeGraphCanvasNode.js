@@ -14,6 +14,7 @@ define( require => {
   const Dimension2 = require( 'DOT/Dimension2' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
 
   class ModeGraphCanvasNode extends CanvasNode {
@@ -29,12 +30,9 @@ define( require => {
         graphSize: new Dimension2( 133, 22 ),
         graphStartX: 25,
         wallHeight: 8,
-        strokeColor: 'blue',
-        wallColor: 'black',
-        textColor: 'black',
         fontStyle: '16px sans-serif',
         curveResolution: 50
-      }, options );
+      }, NormalModesColors.MODE_GRAPH_COLORS, options );
 
       options.canvasBounds = new Bounds2( 0, 0, options.graphSize.width + options.graphStartX, options.graphSize.height );
       super( options );

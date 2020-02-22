@@ -21,6 +21,7 @@ define( require => {
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
   const RangeWithValue = require( 'DOT/RangeWithValue' );
   const StaticModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/StaticModeGraphCanvasNode' );
@@ -40,7 +41,6 @@ define( require => {
   const phaseString = require( 'string!NORMAL_MODES/phase' );
 
   class NormalModeSpectrumAccordionBox extends AccordionBox {
-    // TODO - comment code
 
     /**
      * @param {OneDimensionModel} model
@@ -201,7 +201,7 @@ define( require => {
       } );
 
       const lineSeparator = new Line( 0, 0, 0, 0, {
-        stroke: 'gray'
+        stroke: NormalModesColors.SEPARATOR_STROKE
       } );
 
       const contentNode = new HBox( {

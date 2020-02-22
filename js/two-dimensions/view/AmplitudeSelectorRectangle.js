@@ -15,11 +15,11 @@ define( require => {
   'use strict';
 
   // modules
-  const Color = require( 'SCENERY/util/Color' );
   const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const FireListener = require( 'SCENERY/listeners/FireListener' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
 
@@ -45,16 +45,16 @@ define( require => {
         rectHeight: 1, /* just a default value */
         cornerRadius: 2,
         lineWidth: 1,
-        stroke: '#202020',
-        fill: 'rgb( 0, 255, 255 )',
-        fillX: 'rgb( 0, 255, 255 )',
-        fillY: 'rgb( 0, 0, 255 )',
+        stroke: NormalModesColors.BUTTON_COLORS.stroke,
+        fill: NormalModesColors.SELECTOR_HORIZONTAL_FILL,
+        fillX: NormalModesColors.SELECTOR_HORIZONTAL_FILL,
+        fillY: NormalModesColors.SELECTOR_VERTICAL_FILL,
         backgroundRect: {
           preventFit: true,
           boundsMethod: 'none',
           left: 0,
           top: 0,
-          fill: Color.toColor( 'rgb( 0, 0, 0)' ).colorUtilsBrighter( .6 ),
+          fill: NormalModesColors.BACKGROUND_RECTANGLE_DEFAULT_FILL,
           rectWidth: 1, /* just a default value */
           rectHeight: 0,
           cornerRadius: 2

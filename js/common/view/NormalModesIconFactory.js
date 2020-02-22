@@ -11,35 +11,32 @@ define( require => {
   'use strict';
 
   // modules
-  const Color = require( 'SCENERY/util/Color' );
+  const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
+  const Path = require( 'SCENERY/nodes/Path' );
+  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Screen = require( 'JOIST/Screen' );
   const ScreenIcon = require( 'JOIST/ScreenIcon' );
-  const Vector2 = require( 'DOT/Vector2' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const Shape = require( 'KITE/Shape' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
+  const Vector2 = require( 'DOT/Vector2' );
 
   // TODO - Fix
   const NormalModesIconFactory = {
 
     createOneDimensionScreenIcon() {
-      // dá de fazer o iconNode com node normal, usando os esquemas de model to view, pelo q eu vi la
 
       const rectSize = Screen.MINIMUM_HOME_SCREEN_ICON_SIZE;
       const iconNode = new Rectangle( 0, 0, rectSize.width, rectSize.height, {
         children: []
       } );
 
-      const mass = new Rectangle( {
-        fill: '#007bff',
-        stroke: Color.toColor( '#007bff' ).colorUtilsDarker( .6 ),
+      const mass = new Rectangle( merge( {
         boundsMethod: 'unstroked',
         lineWidth: 16,
         rectWidth: 80,
         rectHeight: 80
-      } );
+      }, NormalModesColors.MASS_COLORS ) );
 
       const springShape = new Shape().moveTo( 0, 0 ).lineTo( 0, 1 );
 
@@ -48,7 +45,7 @@ define( require => {
         boundsMethod: 'none',
         pickable: false,
         inputEnabled: false,
-        stroke: PhetColorScheme.RED_COLORBLIND,
+        stroke: NormalModesColors.SPRING_STROKE,
         lineWidth: 50
       } );
 
@@ -60,8 +57,7 @@ define( require => {
       spring.translation = new Vector2( iconNode.centerX, iconNode.centerY - 15 );
 
       return new ScreenIcon( iconNode, {
-        fill: Color.toColor( '#ffffff' ),
-        maxIconWidthProportion: 1, /* isso n é o default, pode tirar se quiser */
+        maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } );
     },
@@ -73,7 +69,6 @@ define( require => {
       } );
 
       return new ScreenIcon( iconNode, {
-        fill: Color.toColor( '#ffffff' ),
         maxIconWidthProportion: 1,
         maxIconHeightProportion: 1
       } );

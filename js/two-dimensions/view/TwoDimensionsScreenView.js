@@ -12,11 +12,11 @@ define( require => {
   // modules
   const NormalModeAmplitudesAccordionBox = require( 'NORMAL_MODES/two-dimensions/view/NormalModeAmplitudesAccordionBox' );
   const Bounds2 = require( 'DOT/Bounds2' );
-  const Color = require( 'SCENERY/util/Color' );
   const MassNode2D = require( 'NORMAL_MODES/two-dimensions/view/MassNode2D' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const OptionsPanel = require( 'NORMAL_MODES/common/view/OptionsPanel' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -54,15 +54,13 @@ define( require => {
         tandem: tandem.createTandem( 'resetAllButton' )
       } );
 
-      const optionsPanelOptions = {
+      const optionsPanelOptions = merge( {
         right: this.layoutBounds.maxX - TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
         top: TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
         cornerRadius: 5,
-        fill: NormalModesConstants.PANEL_COLORS.fill,
-        stroke: NormalModesConstants.PANEL_COLORS.stroke,
         xMargin: 8,
         yMargin: 8
-      };
+      }, NormalModesColors.PANEL_COLORS );
 
       const optionsPanel = new OptionsPanel(
         model,
@@ -96,19 +94,17 @@ define( require => {
       const bottomRightPoint = modelViewTransform.modelToViewPosition( new Vector2( 1, -1 ) );
 
       const borderWalls = new Rectangle( new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
-        stroke: Color.toColor( '#333' ),
+        stroke: NormalModesColors.WALL_COLORS.stroke,
         lineWidth: 2
       } );
 
       this.addChild( borderWalls );
 
-      const normalModeAmplitudesAccordionBoxOptions = {
+      const normalModeAmplitudesAccordionBoxOptions = merge( {
         left: borderWalls.right + 10,
         bottom: this.layoutBounds.maxY - TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
-        cornerRadius: 5,
-        fill: NormalModesConstants.PANEL_COLORS.fill,
-        stroke: NormalModesConstants.PANEL_COLORS.stroke
-      };
+        cornerRadius: 5
+      }, NormalModesColors.PANEL_COLORS );
 
       const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, normalModeAmplitudesAccordionBoxOptions );
 

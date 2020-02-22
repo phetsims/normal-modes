@@ -27,7 +27,6 @@ define( require => {
   const MAX_SPRINGS = MAX_MASSES - 1;
 
   class TwoDimensionsModel {
-    // TODO - comment code
 
     /**
      * @param {Tandem} tandem

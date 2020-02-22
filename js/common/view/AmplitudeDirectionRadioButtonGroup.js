@@ -13,6 +13,7 @@ define( require => {
   const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
 
   const ICON_SIZE = 45;
@@ -38,7 +39,7 @@ define( require => {
           tailWidth: 1.5,
           headWidth: 10,
           headHeight: 10,
-          fill: 'black',
+          fill: NormalModesColors.AXES_ARROW_FILL,
           stroke: null,
           maxWidth: ICON_SIZE,
           maxHeight: ICON_SIZE

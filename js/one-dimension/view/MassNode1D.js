@@ -10,16 +10,16 @@ define( require => {
   'use strict';
 
   // modules
-  const Color = require( 'SCENERY/util/Color' );
   const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const MassNode = require( 'NORMAL_MODES/common/view/MassNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class MassNode1D extends MassNode {
-    // TODO - comment code
 
     /**
      * @param {Mass} mass
@@ -32,16 +32,14 @@ define( require => {
       super( mass, modelViewTransform, tandem );
 
       // @public {Rectangle}
-      this.rect = new Rectangle( {
-        fill: '#007bff',
-        stroke: Color.toColor( '#007bff' ).colorUtilsDarker( .6 ),
+      this.rect = new Rectangle( merge( {
         boundsMethod: 'unstroked',
         lineWidth: 4,
         rectWidth: this.size,
         rectHeight: this.size,
         centerX: 0,
         centerY: 0
-      } );
+      }, NormalModesColors.MASS_COLORS ) );
 
       this.addChild( this.rect );
 

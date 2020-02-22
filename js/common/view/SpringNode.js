@@ -12,8 +12,8 @@ define( require => {
   const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Path = require( 'SCENERY/nodes/Path' );
-  const PhetColorScheme = require( 'SCENERY_PHET/PhetColorScheme' );
   const Property = require( 'AXON/Property' );
   const Shape = require( 'KITE/Shape' );
 
@@ -51,7 +51,7 @@ define( require => {
         boundsMethod: 'none',
         pickable: false,
         inputEnabled: false,
-        stroke: PhetColorScheme.RED_COLORBLIND,
+        stroke: NormalModesColors.SPRING_STROKE,
         lineWidth: 5
       } );
       this.addChild( this.line );

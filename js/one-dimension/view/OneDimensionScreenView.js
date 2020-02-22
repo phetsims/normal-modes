@@ -13,9 +13,10 @@ define( require => {
   const NormalModeSpectrumAccordionBox = require( 'NORMAL_MODES/one-dimension/view/NormalModeSpectrumAccordionBox' );
   const NormalModesAccordionBox = require( 'NORMAL_MODES/one-dimension/view/NormalModesAccordionBox' );
   const MassNode1D = require( 'NORMAL_MODES/one-dimension/view/MassNode1D' );
+  const merge = require( 'PHET_CORE/merge' );
   const ModelViewTransform2 = require( 'PHETCOMMON/view/ModelViewTransform2' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
   const OptionsPanel = require( 'NORMAL_MODES/common/view/OptionsPanel' );
   const ResetAllButton = require( 'SCENERY_PHET/buttons/ResetAllButton' );
@@ -54,15 +55,13 @@ define( require => {
         tandem: tandem.createTandem( 'resetAllButton' )
       } );
 
-      const optionsPanelOptions = {
+      const optionsPanelOptions = merge( {
         right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
         top: OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
         cornerRadius: 5,
-        fill: NormalModesConstants.PANEL_COLORS.fill,
-        stroke: NormalModesConstants.PANEL_COLORS.stroke,
         xMargin: 8,
         yMargin: 8
-      };
+      }, NormalModesColors.PANEL_COLORS );
 
       const optionsPanel = new OptionsPanel(
         model,
@@ -70,13 +69,11 @@ define( require => {
         optionsPanelOptions
       );
 
-      const normalModeSpectrumAccordionBoxOptions = {
+      const normalModeSpectrumAccordionBoxOptions = merge( {
         bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
         cornerRadius: 5,
-        fill: NormalModesConstants.PANEL_COLORS.fill,
-        stroke: NormalModesConstants.PANEL_COLORS.stroke,
         centerX: viewOrigin.x
-      };
+      }, NormalModesColors.PANEL_COLORS );
 
       const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, normalModeSpectrumAccordionBoxOptions );
 
@@ -106,12 +103,10 @@ define( require => {
         this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
       }
 
-      this.normalModesAccordionBox = new NormalModesAccordionBox( model, {
+      this.normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
         top: optionsPanel.bottom + 8,
-        right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
-        fill: NormalModesConstants.PANEL_COLORS.fill,
-        stroke: NormalModesConstants.PANEL_COLORS.stroke
-      } );
+        right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
+      }, NormalModesColors.PANEL_COLORS ) );
 
       this.addChild( this.normalModesAccordionBox );
     }

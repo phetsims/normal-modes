@@ -20,6 +20,7 @@ define( require => {
   const HBox = require( 'SCENERY/nodes/HBox' );
   const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
   const NumberControl = require( 'SCENERY_PHET/NumberControl' );
   const OneDimensionConstants = require( 'NORMAL_MODES/one-dimension/OneDimensionConstants' );
@@ -95,12 +96,12 @@ define( require => {
       }
 
       const playPauseButtonOptions = {
-        upFill: NormalModesConstants.BLUE_BTN_UP_COLOR,
-        overFill: NormalModesConstants.BLUE_BTN_OVER_COLOR,
-        disabledFill: NormalModesConstants.BLUE_BTN_DISABLED_COLOR,
-        downFill: NormalModesConstants.BLUE_BTN_DOWN_COLOR,
-        backgroundGradientColorStop0: NormalModesConstants.BLUE_BTN_BORDER_0,
-        backgroundGradientColorStop1: NormalModesConstants.BLUE_BTN_BORDER_1,
+        upFill: NormalModesColors.BLUE_BTN_UP_COLOR,
+        overFill: NormalModesColors.BLUE_BTN_OVER_COLOR,
+        disabledFill: NormalModesColors.BLUE_BTN_DISABLED_COLOR,
+        downFill: NormalModesColors.BLUE_BTN_DOWN_COLOR,
+        backgroundGradientColorStop0: NormalModesColors.BLUE_BTN_BORDER_0,
+        backgroundGradientColorStop1: NormalModesColors.BLUE_BTN_BORDER_1,
         innerButtonLineWidth: 1
       };
 
@@ -120,23 +121,19 @@ define( require => {
         listener: function() { model.singleStep( OneDimensionConstants.FIXED_DT ); }
       } );
 
-      // TODO - rename
-      const strut = new VStrut( playPauseButton.height * 1.15 );
-
       const playAndStepButtons = new HBox( {
         spacing: 7,
         align: 'center',
         children: [
           playPauseButton,
-          strut,
+          new VStrut( playPauseButton.height * 1.15 ), // to avoid resizing the HBox
           stepButton
         ]
       } );
 
       // TODO - magic numbers
-      const textButtonsOptions = {
+      const textButtonsOptions = merge( {
         font: NormalModesConstants.GENERAL_FONT,
-        baseColor: 'hsl(210,0%,85%)',
 
         touchAreaXDilation: 10,
         touchAreaYDilation: 16,
@@ -147,9 +144,8 @@ define( require => {
         buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
         lineWidth: 1.5,
         xMargin: 11,
-        yMargin: 3,
-        stroke: '#202020'
-      };
+        yMargin: 3
+      }, NormalModesColors.BUTTON_COLORS );
 
       // Initial positions button
       const initialPositionsButton = new TextPushButton( initialPositionsString, merge( {

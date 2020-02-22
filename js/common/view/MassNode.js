@@ -11,10 +11,11 @@ define( require => {
 
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  const Color = require( 'SCENERY/util/Color' );
   const DerivedProperty = require( 'AXON/DerivedProperty' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Property = require( 'AXON/Property' );
 
   class MassNode extends Node {
@@ -43,9 +44,7 @@ define( require => {
         } );
 
       // TODO - magic numbers
-      const arrowOptions = {
-        fill: 'rgb(255,255,0)',
-        stroke: Color.toColor( 'rgb(255,255,0)' ).colorUtilsDarker( .6 ),
+      const arrowOptions = merge( {
         boundsMethod: 'unstroked',
         lineWidth: 2,
         tailWidth: 10,
@@ -53,7 +52,7 @@ define( require => {
         headHeight: 16,
         visible: false,
         excludeInvisible: true
-      };
+      }, NormalModesColors.ARROW_COLORS );
 
       const arrowSize = 23;
 

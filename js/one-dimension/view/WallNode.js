@@ -9,9 +9,10 @@ define( require => {
   'use strict';
 
   // modules
-  const Color = require( 'SCENERY/util/Color' );
+  const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Property = require( 'AXON/Property' );
   const Rectangle = require( 'SCENERY/nodes/Rectangle' );
   const Vector2 = require( 'DOT/Vector2' );
@@ -31,15 +32,13 @@ define( require => {
       this.modelViewTransform = modelViewTransform;
 
       // @public {Rectangle}
-      this.rect = new Rectangle( {
-        fill: '#333',
-        stroke: Color.toColor( '#333' ).colorUtilsDarker( .5 ),
+      this.rect = new Rectangle( merge( {
         boundsMethod: 'unstroked',
         lineWidth: 2,
         rectWidth: 6,
         rectHeight: 80,
         cornerRadius: 2
-      } );
+      }, NormalModesColors.WALL_COLORS ) );
       this.addChild( this.rect );
 
       // dispose is unnecessary, the WallNode and the dependencies exist for the lifetime of the sim

@@ -11,10 +11,11 @@ define( require => {
 
   // modules
   const Circle = require( 'SCENERY/nodes/Circle' );
-  const Color = require( 'SCENERY/util/Color' );
   const DragListener = require( 'SCENERY/listeners/DragListener' );
   const MassNode = require( 'NORMAL_MODES/common/view/MassNode' );
+  const merge = require( 'PHET_CORE/merge' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
+  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
   const Vector2 = require( 'DOT/Vector2' );
 
   class MassNode2D extends MassNode {
@@ -30,13 +31,11 @@ define( require => {
       super( mass, modelViewTransform, tandem );
 
       // @public {Circle}
-      this.circle = new Circle( {
+      this.circle = new Circle( merge( {
         radius: this.size / 2,
-        fill: '#007bff',
-        stroke: Color.toColor( '#007bff' ).colorUtilsDarker( .6 ),
         boundsMethod: 'unstroked',
         lineWidth: 4
-      } );
+      }, NormalModesColors.MASS_COLORS ) );
 
       this.addChild( this.circle );
 
