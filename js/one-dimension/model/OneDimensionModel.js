@@ -22,12 +22,11 @@ define( require => {
   const Spring = require( 'NORMAL_MODES/common/model/Spring' );
   const Vector2 = require( 'DOT/Vector2' );
 
-  // counting the static masses on the edges
+  // including the 2 virtual stationary masses at wall positions
   const MAX_MASSES = NormalModesConstants.MAX_MASSES_ROW_LEN + 2;
   const MAX_SPRINGS = MAX_MASSES - 1;
 
   class OneDimensionModel {
-    // TODO - comment code
 
     /**
      * @param {Tandem} tandem
@@ -62,7 +61,7 @@ define( require => {
         range: new Range( 1, 10 )
       } );
 
-      // @public {Property.<string>} the current direction of motion of the visible masses
+      // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
       this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
         tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
       } );
@@ -83,7 +82,6 @@ define( require => {
         this.modeAmplitudeProperty[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
           tandem: tandem.createTandem( 'modeAmplitudeProperty' + i ),
           range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
-          // o slider da amplitude precisa ter um máximo, mas o valor da amplitude não pode - Thiago
         } );
 
         this.modePhaseProperty[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
@@ -125,9 +123,6 @@ define( require => {
 
       // unlink is unnecessary, exists for the lifetime of the sim
       this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
-
-      // unlink is unnecessary, exists for the lifetime of the sim
-      this.amplitudeDirectionProperty.link( this.changedAmplitudeDirection.bind( this ) );
     }
 
     /**
@@ -153,23 +148,7 @@ define( require => {
         }
       }
 
-      this.computeModeAmplitudesAndPhases();
-    }
-
-    /**
-     * Swaps x and y in the displacements and velocities when the direction changes.
-     * @param {AmplitudeDirection} amplitudeDirection - the current direction of motion
-     * @private
-     */
-    changedAmplitudeDirection( amplitudeDirection ) {
-      for ( let i = 1; i <= NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
-        const oldX = this.masses[ i ].displacementProperty.get().x;
-        const oldY = this.masses[ i ].displacementProperty.get().y;
-        const oldVelocityX = this.masses[ i ].velocityProperty.get().x;
-        const oldVelocityY = this.masses[ i ].velocityProperty.get().y;
-        this.masses[ i ].displacementProperty.set( new Vector2( oldY, oldX ) );
-        this.masses[ i ].velocityProperty.set( new Vector2( oldVelocityY, oldVelocityX ) );
-      }
+      this.resetNormalModes();
     }
 
     /**
@@ -233,12 +212,11 @@ define( require => {
       this.draggingMassIndexProperty.reset();
       this.arrowsVisibilityProperty.reset();
 
-      this.zeroPositions();   // calcula modos duas vezes no momento
-      this.resetNormalModes();
+      this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }
 
     /**
-     * Returns masses to the initial position.
+     * Returns masses to the initial position. The sim is paused and the time is set to 0.
      * @public
      */
     initialPositions() {
@@ -249,7 +227,7 @@ define( require => {
     }
 
     /**
-     * Zeroes the masses' positions.
+     * Zeroes the masses' positions. The sim is not paused.
      * @public
      */
     zeroPositions() {
@@ -257,7 +235,7 @@ define( require => {
         this.masses[ i ].zeroPosition();
       }
 
-      this.computeModeAmplitudesAndPhases();
+      this.resetNormalModes();
     }
 
     /**
@@ -279,6 +257,9 @@ define( require => {
         }
       }
       else if ( this.draggingMassIndexProperty.get() <= 0 ) {
+        // Even if the sim is paused, changing the amplitude direction or the amplitudes
+        // and phases should move the masses
+
         this.setExactPositions();
       }
     }
@@ -295,7 +276,6 @@ define( require => {
         this.setVerletPositions( dt );
       }
       else {
-        this.recalculateVelocityAndAcceleration( dt );
         this.setExactPositions();
       }
     }
@@ -349,14 +329,15 @@ define( require => {
 
           this.masses[ i ].velocityProperty.set( v.plus( a.plus( aLast ).multiplyScalar( dt / 2 ) ) );
 
-          // provavelmente é possível fazer isso
-          if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-            this.masses[ i ].velocityProperty.get().y = 0;
-            this.masses[ i ].accelerationProperty.get().y = 0;
-          }
-          else {
-            this.masses[ i ].velocityProperty.get().x = 0;
-            this.masses[ i ].accelerationProperty.get().x = 0;
+          if ( assert ) {
+            if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
+              assert( this.masses[ i ].velocityProperty.get().y === 0, 'bad result of recalculateVelocityAndAcceleration' );
+              assert( this.masses[ i ].accelerationProperty.get().y === 0, 'bad result of recalculateVelocityAndAcceleration' );
+            }
+            else {
+              assert( this.masses[ i ].velocityProperty.get().x === 0, 'bad result of recalculateVelocityAndAcceleration' );
+              assert( this.masses[ i ].accelerationProperty.get().x === 0, 'bad result of recalculateVelocityAndAcceleration' );
+            }
           }
 
         }
@@ -375,29 +356,35 @@ define( require => {
     setExactPositions() {
       const N = this.numVisibleMassesProperty.get();
       for ( let i = 1; i <= N; ++i ) {
+        // for each mass
+
         let displacement = 0;
         let velocity = 0;
+        let acceleration = 0;
 
         for ( let r = 1; r <= N; ++r ) {
+          // for each mode
+
           const j = r - 1;
           const modeAmplitude = this.modeAmplitudeProperty[ j ].get();
           const modeFrequency = this.modeFrequencyProperty[ j ].get();
           const modePhase = this.modePhaseProperty[ j ].get();
-          displacement += modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
+
+          const modeDisplacement = modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
+          displacement += modeDisplacement;
           velocity += ( -modeFrequency ) * modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
+          acceleration += -( modeFrequency ** 2 ) * modeDisplacement;
         }
 
         if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-          const oldY = this.masses[ i ].displacementProperty.get().y;
-          const oldVelocityY = this.masses[ i ].velocityProperty.get().y;
-          this.masses[ i ].displacementProperty.set( new Vector2( displacement, oldY ) );
-          this.masses[ i ].velocityProperty.set( new Vector2( velocity, oldVelocityY ) );
+          this.masses[ i ].displacementProperty.set( new Vector2( displacement, 0 ) );
+          this.masses[ i ].velocityProperty.set( new Vector2( velocity, 0 ) );
+          this.masses[ i ].accelerationProperty.set( new Vector2( acceleration, 0 ) );
         }
         else {
-          const oldX = this.masses[ i ].displacementProperty.get().x;
-          const oldVelocityX = this.masses[ i ].velocityProperty.get().x;
-          this.masses[ i ].displacementProperty.set( new Vector2( oldX, displacement ) );
-          this.masses[ i ].velocityProperty.set( new Vector2( oldVelocityX, velocity ) );
+          this.masses[ i ].displacementProperty.set( new Vector2( 0, displacement ) );
+          this.masses[ i ].velocityProperty.set( new Vector2( 0, velocity ) );
+          this.masses[ i ].accelerationProperty.set( new Vector2( 0, acceleration ) );
         }
       }
     }
@@ -409,10 +396,14 @@ define( require => {
     computeModeAmplitudesAndPhases() {
       this.timeProperty.reset();
       const N = this.numVisibleMassesProperty.get();
-      for ( let i = 1; i <= N; ++i ) { // for each mode
+      for ( let i = 1; i <= N; ++i ) {
+        // for each mode
+
         let AmplitudeTimesCosPhase = 0;
         let AmplitudeTimesSinPhase = 0;
-        for ( let j = 1; j <= N; ++j ) { // for each mass
+        for ( let j = 1; j <= N; ++j ) {
+          // for each mass
+
           let massDisplacement = 0;
           let massVelocity = 0;
           if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {

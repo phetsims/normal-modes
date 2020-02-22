@@ -36,7 +36,6 @@ define( require => {
   // until the images are fully loaded, see https://github.com/phetsims/coulombs-law/issues/70
   SimLauncher.launch( () => {
     const sim = new Sim( normalModesTitleString, [
-      // new IntroScreen ..., TODO
       new OneDimensionScreen( Tandem.ROOT.createTandem( 'oneDimensionScreen' ) ),
       new TwoDimensionsScreen( Tandem.ROOT.createTandem( 'twoDimensionsScreen' ) )
     ], simOptions );

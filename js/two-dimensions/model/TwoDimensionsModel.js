@@ -140,7 +140,7 @@ define( require => {
         tandem: tandem.createTandem( 'arrowsVisibilityProperty' )
       } );
 
-      // @public {Property.<string>} the current direction of motion of the visible masses
+      // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
       this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
         tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
       } );
@@ -208,7 +208,7 @@ define( require => {
       }
 
       this.calculateSineProducts( numMasses );
-      this.computeModeAmplitudesAndPhases();
+      this.resetNormalModes();
     }
 
     /**
@@ -294,12 +294,11 @@ define( require => {
       this.draggingMassIndexesProperty.reset();
       this.arrowsVisibilityProperty.reset();
 
-      this.zeroPositions();
-      this.resetNormalModes();
+      this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }
 
     /**
-     * Returns masses to the initial position.
+     * Returns masses to the initial position. The sim is paused and the time is set to 0.
      * @public
      */
     initialPositions() {
@@ -310,7 +309,7 @@ define( require => {
     }
 
     /**
-     * Zeroes the masses' positions.
+     * Zeroes the masses' positions. The sim is not paused.
      * @public
      */
     zeroPositions() {
@@ -320,7 +319,7 @@ define( require => {
         }
       }
 
-      this.computeModeAmplitudesAndPhases();
+      this.resetNormalModes();
     }
 
     /**
@@ -342,6 +341,9 @@ define( require => {
         }
       }
       else if ( this.draggingMassIndexesProperty.get() === null ) {
+        // Even if the sim is paused, changing the amplitude direction or the amplitudes
+        // and phases should move the masses
+
         this.setExactPositions();
       }
     }
@@ -358,7 +360,6 @@ define( require => {
         this.setVerletPositions( dt );
       }
       else {
-        this.recalculateVelocityAndAcceleration( dt );
         this.setExactPositions();
       }
     }
@@ -440,11 +441,15 @@ define( require => {
       this.amplitudeYTimesCos = [];
       this.freqTimesAmplitudeXTimesSin = [];
       this.freqTimesAmplitudeYTimesSin = [];
+      this.freqSquaredTimesAmplitudeXTimesCos = [];
+      this.freqSquaredTimesAmplitudeYTimesCos = [];
       for ( let r = 1; r <= N; ++r ) {
         this.amplitudeXTimesCos[ r ] = [];
         this.amplitudeYTimesCos[ r ] = [];
         this.freqTimesAmplitudeXTimesSin[ r ] = [];
         this.freqTimesAmplitudeYTimesSin[ r ] = [];
+        this.freqSquaredTimesAmplitudeXTimesCos[ r ] = [];
+        this.freqSquaredTimesAmplitudeYTimesCos[ r ] = [];
         for ( let s = 1; s <= N; ++s ) {
           const modeAmplitudeX = this.modeXAmplitudeProperty[ r - 1 ][ s - 1 ].get();
           const modeAmplitudeY = this.modeYAmplitudeProperty[ r - 1 ][ s - 1 ].get();
@@ -461,17 +466,25 @@ define( require => {
 
           this.freqTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( freqTimesTimeMinusPhsX );
           this.freqTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( freqTimesTimeMinusPhsY );
+
+          this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * Math.cos( freqTimesTimeMinusPhsX );
+          this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * Math.cos( freqTimesTimeMinusPhsY );
         }
       }
       for ( let i = 1; i <= N; ++i ) {
         for ( let j = 1; j <= N; ++j ) {
+          // for each mass
+
           const displacement = new Vector2( 0, 0 );
           const velocity = new Vector2( 0, 0 );
+          const acceleration = new Vector2( 0, 0 );
 
           const sineProductMatrix = this.sineProduct[ i ][ j ];
           for ( let r = 1; r <= N; ++r ) {
             const sineProductArray = sineProductMatrix[ r ];
             for ( let s = 1; s <= N; ++s ) {
+              // for each mode
+
               const sineProduct = sineProductArray[ s ];
 
               displacement.x += sineProduct * this.amplitudeXTimesCos[ r ][ s ];
@@ -479,11 +492,15 @@ define( require => {
 
               velocity.x += sineProduct * this.freqTimesAmplitudeXTimesSin[ r ][ s ];
               velocity.y -= sineProduct * this.freqTimesAmplitudeYTimesSin[ r ][ s ];
+
+              acceleration.x += sineProduct * this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ];
+              acceleration.y -= sineProduct * this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ];
             }
           }
 
           this.masses[ i ][ j ].displacementProperty.set( displacement );
           this.masses[ i ][ j ].velocityProperty.set( velocity );
+          this.masses[ i ][ j ].accelerationProperty.set( acceleration );
 
         }
       }
@@ -497,13 +514,17 @@ define( require => {
       this.timeProperty.reset();
       const N = this.numVisibleMassesProperty.get();
       for ( let r = 1; r <= N; ++r ) {
-        for ( let s = 1; s <= N; ++s ) { // for each mode
+        for ( let s = 1; s <= N; ++s ) {
+          // for each mode
+
           let AmplitudeTimesCosPhaseX = 0;
           let AmplitudeTimesSinPhaseX = 0;
           let AmplitudeTimesCosPhaseY = 0;
           let AmplitudeTimesSinPhaseY = 0;
           for ( let i = 1; i <= N; ++i ) {
-            for ( let j = 1; j <= N; ++j ) { // for each mass
+            for ( let j = 1; j <= N; ++j ) {
+              // for each mass
+
               const massDisplacement = this.masses[ i ][ j ].displacementProperty.get();
               const massVelocity = this.masses[ i ][ j ].velocityProperty.get();
               const modeFrequency = this.modeFrequencyProperty[ r - 1 ][ s - 1 ].get();
