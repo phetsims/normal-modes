@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const Bounds2 = require( 'DOT/Bounds2' );
   const CanvasNode = require( 'SCENERY/nodes/CanvasNode' );
   const Dimension2 = require( 'DOT/Dimension2' );
   const merge = require( 'PHET_CORE/merge' );
@@ -28,13 +27,11 @@ define( require => {
 
       options = merge( {
         graphSize: new Dimension2( 133, 22 ),
-        graphStartX: 25,
         wallHeight: 8,
-        fontStyle: '16px sans-serif',
         curveResolution: 50
       }, NormalModesColors.MODE_GRAPH_COLORS, options );
 
-      options.canvasBounds = new Bounds2( 0, 0, options.graphSize.width + options.graphStartX, options.graphSize.height );
+      options.canvasBounds = options.graphSize.toBounds();
       super( options );
 
       // @private {number} - 0 to 9, determines the normal mode represented
@@ -44,7 +41,7 @@ define( require => {
       this.graphSize = options.graphSize;
 
       // @private {Object} - start point of the graph
-      this.graphStart = { x: options.graphStartX, y: this.graphSize.height / 2 };
+      this.graphStart = { x: 0, y: this.graphSize.height / 2 };
 
       // @private {number} - height of left and right graph walls
       this.wallHeight = options.wallHeight;
@@ -64,12 +61,6 @@ define( require => {
       // @private {String} - left and right wall stroke canvas color
       this.wallColor = options.wallColor;
 
-      // @private {String} - text stroke canvas color
-      this.textColor = options.textColor;
-
-      // @private {String} - canvas font style
-      this.fontStyle = options.fontStyle;
-
       // @private {OneDimensionModel}
       this.model = model;
     }
@@ -80,11 +71,6 @@ define( require => {
      * @public
      */
     paintCanvas( context ) {
-      // draw text (normal mode number)
-      context.fillStyle = this.textColor;
-      context.font = this.fontStyle;
-      context.fillText( ( this.normalModeNumber + 1 ).toString(), 0, this.graphStart.y + 5.5 );
-
       // draw left wall
       context.beginPath();
       context.lineWidth = 2;

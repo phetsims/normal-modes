@@ -11,6 +11,8 @@ define( require => {
 
   // modules
   const AccordionBox = require( 'SUN/AccordionBox' );
+  const HBox = require( 'SCENERY/nodes/HBox' );
+  const HStrut = require( 'SCENERY/nodes/HStrut' );
   const merge = require( 'PHET_CORE/merge' );
   const ModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/ModeGraphCanvasNode' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -71,10 +73,15 @@ define( require => {
       }, options );
 
       const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      const normalModeGraphsAndNumbers = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 
-      // TODO - separate the mode number and right align it
       for ( let i = 0; i < normalModeGraphs.length; i++ ) {
         normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
+        const normalModeNumber = new Text( i + 1, { font: NormalModesConstants.TEST_FONT } );
+        normalModeGraphsAndNumbers[ i ] = new HBox( {
+          spacing: 7,
+          children: [ normalModeNumber, normalModeGraphs[ i ] ]
+        } );
 
         // dispose is unnecessary, exists for the lifetime of the sim
         Property.multilink( [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ], function( time, amp, phase ) {
@@ -82,18 +89,21 @@ define( require => {
         } );
       }
 
+      const avoidResize = new HStrut( normalModeGraphsAndNumbers[ normalModeGraphsAndNumbers.length - 1 ].width );
+
       const graphContainer = new VBox( {
         spacing: 4.8,
-        align: 'center',
-        children: normalModeGraphs
+        align: 'right',
+        children: normalModeGraphsAndNumbers
       } );
 
       super( graphContainer, options );
 
       // dispose is unnecessary, exists for the lifetime of the sim
-      Property.multilink( [ model.numVisibleMassesProperty, this.expandedProperty ], ( numMasses, isExpanded ) => {
-        graphContainer.children = normalModeGraphs.slice( 0, numMasses );
-        graphContainer.children.forEach( graph => graph.update() );
+      model.numVisibleMassesProperty.link( numMasses => {
+        graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numMasses );
+        graphContainer.addChild( avoidResize );
+        normalModeGraphs.forEach( graph => graph.update() );
         this.layout();
       } );
     }
