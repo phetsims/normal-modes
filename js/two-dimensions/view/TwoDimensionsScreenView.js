@@ -62,11 +62,7 @@ define( require => {
         yMargin: 8
       }, NormalModesColors.PANEL_COLORS );
 
-      const optionsPanel = new OptionsPanel(
-        model,
-        false, /* no showPhases checkbox */
-        optionsPanelOptions
-      );
+      const optionsPanel = new OptionsPanel( model, optionsPanelOptions );
 
       this.addChild( optionsPanel );
       this.addChild( resetAllButton );

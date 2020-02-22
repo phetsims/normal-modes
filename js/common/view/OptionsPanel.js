@@ -49,10 +49,9 @@ define( require => {
 
     /**
      * @param {OneDimensionModel|TwoDimensionsModel} model
-     * @param {boolean} doShowPhases
      * @param {Object} [options]
      */
-    constructor( model, doShowPhases, options ) {
+    constructor( model, options ) {
 
       /*
       Model properties used:
@@ -60,21 +59,20 @@ define( require => {
         - simSpeedProperty
         - numVisibleMassesProperty
         - springsVisibilityProperty
-        - phasesVisibilityProperty (if 1D)
+        - phasesVisibilityProperty (if there is one)
       */
 
-      // TODO - create text on a separate line
-      const showSpringsCheckbox = new Checkbox( new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } ), model.springsVisibilityProperty, {
+      const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
+      const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibilityProperty, {
         boxWidth: 16
       } );
       showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
 
-      let showPhasesCheckbox = null;
       let checkboxes = null;
 
-      // TODO - refactor
-      if ( doShowPhases ) {
-        showPhasesCheckbox = new Checkbox( new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } ), model.phasesVisibilityProperty, {
+      if ( model.phasesVisibilityProperty !== undefined ) {
+        const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
+        const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibilityProperty, {
           boxWidth: 16
         } );
         showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
@@ -86,7 +84,7 @@ define( require => {
           ]
         } );
       }
-      else { /* !doShowPhases */
+      else {
         checkboxes = new VBox( {
           spacing: 7,
           children: [

@@ -63,11 +63,7 @@ define( require => {
         yMargin: 8
       }, NormalModesColors.PANEL_COLORS );
 
-      const optionsPanel = new OptionsPanel(
-        model,
-        true, /* show showPhases checkbox */
-        optionsPanelOptions
-      );
+      const optionsPanel = new OptionsPanel( model, optionsPanelOptions );
 
       const normalModeSpectrumAccordionBoxOptions = merge( {
         bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
