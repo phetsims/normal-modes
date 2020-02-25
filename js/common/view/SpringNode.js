@@ -34,19 +34,19 @@ define( require => {
         excludeInvisible: true
       } );
 
-      // @public {Property.<boolean>} determines the visibility of the SpringNode
+      // determines the visibility of the SpringNode
       // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
-      this.visibilityProperty = new DerivedProperty(
+      const visibilityProperty = new DerivedProperty(
         [ spring.visibilityProperty, springsVisibilityProperty ],
         function( mySpringVisible, springsVisible ) {
           return mySpringVisible && springsVisible;
         } );
 
-      // @private {Shape} shape of the spring path
-      this.springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
+      // shape of the spring path
+      const springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
 
-      // @private {Path} line path that represents a string
-      this.line = new Path( this.springShape, {
+      // line path that represents a string
+      const line = new Path( springShape, {
         preventFit: true,
         boundsMethod: 'none',
         pickable: false,
@@ -54,7 +54,7 @@ define( require => {
         stroke: NormalModesColors.SPRING_STROKE,
         lineWidth: 5
       } );
-      this.addChild( this.line );
+      this.addChild( line );
 
       let currentXScaling = 1;
 
@@ -83,7 +83,7 @@ define( require => {
           }
         } );
 
-      this.visibilityProperty.linkAttribute( this, 'visible' );
+      visibilityProperty.linkAttribute( this, 'visible' );
     }
   }
 

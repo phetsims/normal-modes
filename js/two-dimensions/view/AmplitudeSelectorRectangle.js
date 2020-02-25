@@ -65,30 +65,27 @@ define( require => {
 
       super( options );
 
-      this.row = row; // @private
-      this.col = col; // @private
+      const backgroundRect = new Rectangle( options.backgroundRect );
+      this.addChild( backgroundRect );
 
-      this.backgroundRect = new Rectangle( options.backgroundRect );
-      this.addChild( this.backgroundRect );
-
-      this.amplitudeChanged = ( amplitude, axis ) => {
+      const amplitudeChanged = ( amplitude, axis ) => {
         if ( model.amplitudeDirectionProperty.get() === axis ) {
           const maxAmp = maxAmpProperty.get();
           const heightFactor = Math.min( 1, amplitude / maxAmp );
-          this.backgroundRect.rectHeight = this.rectHeight * ( 1 - heightFactor );
+          backgroundRect.rectHeight = this.rectHeight * ( 1 - heightFactor );
         }
       };
 
-      this.numMassesChanged = numMasses => {
-        if ( this.row < numMasses && this.col < numMasses ) {
+      const numMassesChanged = numMasses => {
+        if ( row < numMasses && col < numMasses ) {
           this.visible = true;
           this.rectWidth = this.rectHeight = options.rectGridSize * gridToRealSizeRatioProperty.get();
 
-          this.backgroundRect.rectWidth = this.rectWidth;
-          this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
+          backgroundRect.rectWidth = this.rectWidth;
+          amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), model.amplitudeDirectionProperty.get() );
 
-          const gridLeft = this.col * ( options.paddingGridSize + options.rectGridSize );
-          const gridTop = this.row * ( options.paddingGridSize + options.rectGridSize );
+          const gridLeft = col * ( options.paddingGridSize + options.rectGridSize );
+          const gridTop = row * ( options.paddingGridSize + options.rectGridSize );
 
           this.left = gridToRealSizeRatioProperty.get() * gridLeft;
           this.top = gridToRealSizeRatioProperty.get() * gridTop;
@@ -98,25 +95,25 @@ define( require => {
         }
       };
 
-      this.amplitudeDirectionChanged = amplitudeDirection => {
+      const amplitudeDirectionChanged = amplitudeDirection => {
         this.fill = ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? options.fillY : options.fillX;
-        this.amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
+        amplitudeChanged( axisAmplitudesProperty.get()[ row ][ col ].get(), amplitudeDirection );
       };
 
       // unlink is unnecessary, exists for the lifetime of the sim
       model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
-        this.amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
+        amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
       } );
       // unlink is unnecessary, exists for the lifetime of the sim
       model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
-        this.amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
+        amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
       } );
 
       // unlink is unnecessary, exists for the lifetime of the sim
-      model.numVisibleMassesProperty.link( this.numMassesChanged );
+      model.numVisibleMassesProperty.link( numMassesChanged );
 
       // unlink is unnecessary, exists for the lifetime of the sim
-      model.amplitudeDirectionProperty.link( this.amplitudeDirectionChanged );
+      model.amplitudeDirectionProperty.link( amplitudeDirectionChanged );
 
       const isNear = function( n1, n2 ) {
         const EPS = 10e-5;

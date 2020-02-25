@@ -27,23 +27,18 @@ define( require => {
     constructor( mass, modelViewTransform, tandem ) {
       super( { cursor: 'pointer' } );
 
-      // @private (read-only) Non-Property attributes
-      this.mass = mass;
-      this.modelViewTransform = modelViewTransform;
-
-      // @public {Rectangle}
-      this.rect = new Rectangle( merge( {
+      const rect = new Rectangle( merge( {
         boundsMethod: 'unstroked',
         lineWidth: 2,
         rectWidth: 6,
         rectHeight: 80,
         cornerRadius: 2
       }, NormalModesColors.WALL_COLORS ) );
-      this.addChild( this.rect );
+      this.addChild( rect );
 
       // dispose is unnecessary, the WallNode and the dependencies exist for the lifetime of the sim
-      Property.multilink( [ this.mass.equilibriumPositionProperty, this.mass.displacementProperty ], ( massPosition, massDisplacement ) => {
-        this.translation = this.modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( this.rect.rectWidth / 2, this.rect.rectHeight / 2 ) );
+      Property.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ], ( massPosition, massDisplacement ) => {
+        this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( rect.rectWidth / 2, rect.rectHeight / 2 ) );
       } );
     }
   }

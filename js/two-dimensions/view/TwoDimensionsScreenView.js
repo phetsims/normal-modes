@@ -67,21 +67,17 @@ define( require => {
       this.addChild( optionsPanel );
       this.addChild( resetAllButton );
 
-      // @private {SpringNode[]} Array that will contain all of the X axis springNodes.
-      this.springXNodes = model.springsX.map( springArray => {
-        return springArray.map( spring => {
+      model.springsX.forEach( springArray => {
+        springArray.forEach( spring => {
           const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
-          return springNode;
         } );
       } );
 
-      // @private {SpringNode[]} Array that will contain all of the Y axis springNodes.
-      this.springYNodes = model.springsY.map( springArray => {
-        return springArray.map( spring => {
+      model.springsY.forEach( springArray => {
+        springArray.forEach( spring => {
           const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
           this.addChild( springNode );
-          return springNode;
         } );
       } );
 
@@ -106,13 +102,14 @@ define( require => {
 
       this.addChild( normalModeAmplitudesAccordionBox );
 
-      this.massNodes = [];
-      for ( let i = 1; i < model.masses.length - 1; ++i ) {
-        for ( let j = 1; j < model.masses[ i ].length - 1; ++j ) {
-          this.massNodes.push( new MassNode2D( model.masses[ i ][ j ], modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
-          this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
-        }
-      }
+      // used slice to ignore the virtual stationary masses at the walls
+      model.masses.slice( 1, model.masses.length - 1 ).forEach( massArray => {
+        massArray.slice( 1, massArray.length - 1 ).forEach( mass => {
+          const massNode = new MassNode2D( mass, modelViewTransform, model, tandem.createTandem( 'massNodes' ) );
+          this.addChild( massNode );
+        } );
+      } );
+
     }
   }
 

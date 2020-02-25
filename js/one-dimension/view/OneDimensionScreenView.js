@@ -79,32 +79,29 @@ define( require => {
 
       // The springs are added first
 
-      // @private {SpringNode[]} Array that will contain all of the springNodes.
-      this.springNodes = model.springs.map( spring => {
+      model.springs.forEach( spring => {
         const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
         this.addChild( springNode );
-        return springNode;
       } );
 
-      this.leftWallNode = new WallNode( model.masses[ 0 ], modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
-      this.rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
+      const leftWallNode = new WallNode( model.masses[ 0 ], modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
+      const rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
 
-      this.addChild( this.leftWallNode );
-      this.addChild( this.rightWallNode );
+      this.addChild( leftWallNode );
+      this.addChild( rightWallNode );
 
-      // @private {MassNode[]} Array that will contain all of the massNodes.
-      this.massNodes = [];
-      for ( let i = 1; i < model.masses.length - 1; ++i ) {
-        this.massNodes.push( new MassNode1D( model.masses[ i ], modelViewTransform, model, tandem.createTandem( 'massNodes' ) ) );
-        this.addChild( this.massNodes[ this.massNodes.length - 1 ] );
-      }
+      // used slice to ignore the virtual stationary masses at the walls
+      model.masses.slice( 1, model.masses.length - 1 ).forEach( mass => {
+        const massNode = new MassNode1D( mass, modelViewTransform, model, tandem.createTandem( 'massNodes' ) );
+        this.addChild( massNode );
+      } );
 
-      this.normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
+      const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
         top: optionsPanel.bottom + 8,
         right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
       }, NormalModesColors.PANEL_COLORS ) );
 
-      this.addChild( this.normalModesAccordionBox );
+      this.addChild( normalModesAccordionBox );
     }
   }
 

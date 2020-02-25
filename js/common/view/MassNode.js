@@ -31,9 +31,9 @@ define( require => {
       // TODO - magic number
       this.size = 20;
 
-      // @public {Property.<boolean>} determines the visibility of the MassNode
+      // determines the visibility of the MassNode
       // TODO - this property is unnecessary (see https://github.com/phetsims/normal-modes/issues/45)
-      this.visibilityProperty = new DerivedProperty( [ mass.visibilityProperty ], function( massVisible ) {
+      const visibilityProperty = new DerivedProperty( [ mass.visibilityProperty ], function( massVisible ) {
         return massVisible;
       } );
 
@@ -70,7 +70,7 @@ define( require => {
       this.addChild( this.arrows.right );
       this.addChild( this.arrows.bottom );
 
-      this.visibilityProperty.linkAttribute( this, 'visible' );
+      visibilityProperty.linkAttribute( this, 'visible' );
     }
   }
 

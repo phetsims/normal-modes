@@ -3,7 +3,8 @@
 /**
  * Constants used in multiple locations within this simulation.
  *
- * @author UTFPR
+ * @author Thiago de Mendonça Mildemberger (UTFPR)
+ * @author Franco Barpp Gomes (UTFPR)
  */
 define( require => {
   'use strict';

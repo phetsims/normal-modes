@@ -31,8 +31,7 @@ define( require => {
 
       super( mass, modelViewTransform, tandem );
 
-      // @public {Rectangle}
-      this.rect = new Rectangle( merge( {
+      const rect = new Rectangle( merge( {
         boundsMethod: 'unstroked',
         lineWidth: 4,
         rectWidth: this.size,
@@ -41,13 +40,13 @@ define( require => {
         centerY: 0
       }, NormalModesColors.MASS_COLORS ) );
 
-      this.addChild( this.rect );
+      this.addChild( rect );
 
-      this.startCallback = ( event, listener ) => {
+      const startCallback = ( event, listener ) => {
         model.draggingMassIndexProperty.set( model.masses.indexOf( mass ) );
       };
 
-      this.dragCallback = ( event, listener ) => {
+      const dragCallback = ( event, listener ) => {
         model.arrowsVisibilityProperty.set( false );
         const point = listener.modelPoint.minus( mass.equilibriumPositionProperty.get() );
         if ( model.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
@@ -60,12 +59,12 @@ define( require => {
         }
       };
 
-      this.endCallback = ( event, listener ) => {
+      const endCallback = ( event, listener ) => {
         model.draggingMassIndexProperty.set( -1 );
         model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = isOver => {
+      const overUpCallback = isOver => {
         const amplitudeDirection = model.amplitudeDirectionProperty.get();
         if ( amplitudeDirection === AmplitudeDirection.VERTICAL ) {
           this.arrows.top.visible = isOver;
@@ -77,29 +76,29 @@ define( require => {
         }
       };
 
-      this.dragListener = new DragListener( {
+      const dragListener = new DragListener( {
         applyOffset: true,
-        start: this.startCallback,
-        drag: this.dragCallback,
-        end: this.endCallback,
+        start: startCallback,
+        drag: dragCallback,
+        end: endCallback,
         transform: modelViewTransform
       } );
 
-      this.addInputListener( this.dragListener );
-      const callback = this.overUpCallback.bind( this );
+      this.addInputListener( dragListener );
+      const callback = overUpCallback.bind( this );
       // unlink is unnecessary, the MassNode1D and the dependency exists for the lifetime of the sim
       model.arrowsVisibilityProperty.link( arrowsVisible => {
         if ( arrowsVisible ) {
           // unlink is needed when the arrows become invisible
-          this.dragListener.isOverProperty.link( callback );
+          dragListener.isOverProperty.link( callback );
         }
         else {
           this.arrows.top.visible = false;
           this.arrows.bottom.visible = false;
           this.arrows.left.visible = false;
           this.arrows.right.visible = false;
-          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
-            this.dragListener.isOverProperty.unlink( callback );
+          if ( dragListener.isOverProperty.hasListener( callback ) ) {
+            dragListener.isOverProperty.unlink( callback );
           }
         }
       } );

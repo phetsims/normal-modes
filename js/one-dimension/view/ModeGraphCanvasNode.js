@@ -53,7 +53,7 @@ define( require => {
       this.xStep = this.graphSize.width / this.curveResolution;
 
       // @private {Array.<number>}
-      this.curveYPositions = new Array( this.curveResolution ); // @private
+      this.curveYPositions = new Array( this.curveResolution );
 
       // @private {String} - curve stroke canvas color
       this.strokeColor = options.strokeColor;

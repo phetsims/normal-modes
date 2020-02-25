@@ -55,7 +55,7 @@ define( require => {
       this.curveYPositions = new Array( this.curveResolution );
 
       // @private {String} - curve stroke canvas color
-      this.strokeColor = options.strokeColor; // @private
+      this.strokeColor = options.strokeColor;
 
       // @private {String} - reference line (y = 0) stroke canvas color
       this.referenceLineStrokeColor = options.referenceLineStrokeColor;

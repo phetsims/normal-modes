@@ -30,21 +30,20 @@ define( require => {
 
       super( mass, modelViewTransform, tandem );
 
-      // @public {Circle}
-      this.circle = new Circle( merge( {
+      const circle = new Circle( merge( {
         radius: this.size / 2,
         boundsMethod: 'unstroked',
         lineWidth: 4
       }, NormalModesColors.MASS_COLORS ) );
 
-      this.addChild( this.circle );
+      this.addChild( circle );
 
       const rotationPoint = new Vector2( 0, 0 );
       for ( const arrow in this.arrows ) {
         this.arrows[ arrow ].rotateAround( rotationPoint, Math.PI / 4 );
       }
 
-      this.startCallback = ( event, listener ) => {
+      const startCallback = ( event, listener ) => {
         let foundIndex = -1;
         let foundArray = null;
         for ( let i = 0; i < model.masses.length; i++ ) {
@@ -61,46 +60,46 @@ define( require => {
         } );
       };
 
-      this.dragCallback = ( event, listener ) => {
+      const dragCallback = ( event, listener ) => {
         model.arrowsVisibilityProperty.set( false );
         mass.displacementProperty.set( listener.modelPoint.minus( mass.equilibriumPositionProperty.get() ) );
       };
 
-      this.endCallback = ( event, listener ) => {
+      const endCallback = ( event, listener ) => {
         model.draggingMassIndexesProperty.set( null );
         model.computeModeAmplitudesAndPhases();
       };
 
-      this.overUpCallback = isOver => {
+      const overUpCallback = isOver => {
         this.arrows.top.visible = isOver;
         this.arrows.bottom.visible = isOver;
         this.arrows.left.visible = isOver;
         this.arrows.right.visible = isOver;
       };
 
-      this.dragListener = new DragListener( {
+      const dragListener = new DragListener( {
         applyOffset: true,
-        start: this.startCallback,
-        drag: this.dragCallback,
-        end: this.endCallback,
+        start: startCallback,
+        drag: dragCallback,
+        end: endCallback,
         transform: modelViewTransform
       } );
 
-      this.addInputListener( this.dragListener );
-      const callback = this.overUpCallback.bind( this );
+      this.addInputListener( dragListener );
+      const callback = overUpCallback.bind( this );
       // unlink is unnecessary, the MassNode2D and the dependency exists for the lifetime of the sim
       model.arrowsVisibilityProperty.link( arrowsVisible => {
         if ( arrowsVisible ) {
           // unlink is needed when the arrows become invisible
-          this.dragListener.isOverProperty.link( callback );
+          dragListener.isOverProperty.link( callback );
         }
         else {
           this.arrows.top.visible = false;
           this.arrows.bottom.visible = false;
           this.arrows.left.visible = false;
           this.arrows.right.visible = false;
-          if ( this.dragListener.isOverProperty.hasListener( callback ) ) {
-            this.dragListener.isOverProperty.unlink( callback );
+          if ( dragListener.isOverProperty.hasListener( callback ) ) {
+            dragListener.isOverProperty.unlink( callback );
           }
         }
       } );
