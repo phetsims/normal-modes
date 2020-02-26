@@ -84,7 +84,7 @@ define( require => {
         } );
 
         // dispose is unnecessary, exists for the lifetime of the sim
-        Property.multilink( [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ], function( time, amp, phase ) {
+        Property.multilink( [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ], ( time, amp, phase ) => {
           normalModeGraphs[ i ].update();
         } );
       }

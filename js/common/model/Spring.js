@@ -28,7 +28,7 @@ define( require => {
       // dispose is unnecessary because all masses and springs exist for the lifetime of the sim
       this.visibilityProperty = new DerivedProperty(
         [ this.leftMass.visibilityProperty, this.rightMass.visibilityProperty ],
-        function( leftVisible, rightVisible ) {
+        ( leftVisible, rightVisible ) => {
           return leftVisible;
         } );
     }

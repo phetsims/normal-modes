@@ -115,7 +115,7 @@ define( require => {
       // unlink is unnecessary, exists for the lifetime of the sim
       model.amplitudeDirectionProperty.link( amplitudeDirectionChanged );
 
-      const isNear = function( n1, n2 ) {
+      const isNear = ( n1, n2 ) => {
         const EPS = 10e-5;
         return n1 >= ( n2 - EPS ) && n1 <= ( n2 + EPS );
       };

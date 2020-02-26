@@ -90,7 +90,7 @@ define( require => {
         } );
 
         // dispose is unnecessary, since this class owns the dependency
-        this.modeFrequencyProperty[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], function( numMasses ) {
+        this.modeFrequencyProperty[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
           const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
           const m = OneDimensionConstants.MASSES_MASS_VALUE;
           if ( i >= numMasses ) {

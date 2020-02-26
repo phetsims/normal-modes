@@ -38,7 +38,7 @@ define( require => {
       // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       const visibilityProperty = new DerivedProperty(
         [ spring.visibilityProperty, springsVisibilityProperty ],
-        function( mySpringVisible, springsVisible ) {
+        ( mySpringVisible, springsVisible ) => {
           return mySpringVisible && springsVisible;
         } );
 

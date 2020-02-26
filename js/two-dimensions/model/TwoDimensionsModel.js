@@ -99,7 +99,7 @@ define( require => {
           } );
 
           // dispose is unnecessary, since this class owns the dependency
-          this.modeFrequencyProperty[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], function( numMasses ) {
+          this.modeFrequencyProperty[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
             const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
             const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
             if ( i >= numMasses || j >= numMasses ) {

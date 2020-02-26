@@ -116,7 +116,7 @@ define( require => {
         radius: 18,
         touchAreaDilation: 15,
         isPlayingProperty: model.playingProperty,
-        listener: function() { model.singleStep( OneDimensionConstants.FIXED_DT ); }
+        listener: () => { model.singleStep( OneDimensionConstants.FIXED_DT ); }
       } );
 
       const playAndStepButtons = new HBox( {
@@ -155,7 +155,7 @@ define( require => {
         listener: model.zeroPositions.bind( model )
       }, textButtonsOptions ) );
 
-      const createLayoutFunction5 = function( options ) {
+      const createLayoutFunction5 = options => {
 
         options = merge( {
           align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
