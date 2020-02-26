@@ -45,13 +45,13 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the phases sliders
-      this.phasesVisibilityProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'phasesVisibilityProperty' )
+      this.phasesVisibileProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'phasesVisibileProperty' )
       } );
 
       // @public {Property.<boolean>} determines visibility of the springs
-      this.springsVisibilityProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'springsVisibilityProperty' )
+      this.springsVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'springsVisibleProperty' )
       } );
 
       // @public {Property.<number>} the current number of visible masses
@@ -117,8 +117,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the arrows on the masses
-      this.arrowsVisibilityProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'arrowsVisibilityProperty' )
+      this.arrowsVisibileProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'arrowsVisibileProperty' )
       } );
 
       // unlink is unnecessary, exists for the lifetime of the sim
@@ -140,7 +140,7 @@ define( require => {
         const visible = ( i <= numMasses );
 
         this.masses[ i ].equilibriumPositionProperty.set( new Vector2( x, 0 ) );
-        this.masses[ i ].visibilityProperty.set( visible );
+        this.masses[ i ].visibleProperty.set( visible );
         this.masses[ i ].zeroPosition();
 
         if ( x < xFinal - xStep / 2 ) {
@@ -205,12 +205,12 @@ define( require => {
       this.playingProperty.reset();
       this.timeProperty.reset();
       this.simSpeedProperty.reset();
-      this.phasesVisibilityProperty.reset();
-      this.springsVisibilityProperty.reset();
+      this.phasesVisibileProperty.reset();
+      this.springsVisibleProperty.reset();
       this.numVisibleMassesProperty.reset();
       this.amplitudeDirectionProperty.reset();
       this.draggingMassIndexProperty.reset();
-      this.arrowsVisibilityProperty.reset();
+      this.arrowsVisibileProperty.reset();
 
       this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }

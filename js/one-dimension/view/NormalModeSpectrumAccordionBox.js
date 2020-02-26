@@ -55,7 +55,7 @@ define( require => {
         - modeFrequencyProperty[0..9]
         - amplitudeDirectionProperty
         - numVisibleMassesProperty
-        - phasesVisibilityProperty
+        - phasesVisibileProperty
       */
 
       // from Vector Addition
@@ -217,7 +217,7 @@ define( require => {
       let strut;
 
       // unlink is unnecessary, exists for the lifetime of the sim
-      model.phasesVisibilityProperty.link( phasesVisibility => {
+      model.phasesVisibileProperty.link( phasesVisibility => {
         for ( let i = 1; i < panelColumns.length; ++i ) {
           const j = i - 1;
           panelColumns[ i ].children = ( phasesVisibility ) ?

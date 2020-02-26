@@ -85,7 +85,7 @@ define( require => {
 
       model.springs.forEach( spring => {
         const springNode = new SpringNode(
-          spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+          spring, modelViewTransform, model.springsVisibleProperty, tandem.createTandem( 'springNodes' )
         );
 
         this.addChild( springNode );

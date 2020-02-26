@@ -61,7 +61,7 @@ define( require => {
       };
 
       const dragCallback = ( event, listener ) => {
-        model.arrowsVisibilityProperty.set( false );
+        model.arrowsVisibileProperty.set( false );
         mass.displacementProperty.set( listener.modelPoint.minus( mass.equilibriumPositionProperty.get() ) );
       };
 
@@ -88,7 +88,7 @@ define( require => {
       this.addInputListener( dragListener );
       const callback = overUpCallback.bind( this );
       // unlink is unnecessary, the MassNode2D and the dependency exists for the lifetime of the sim
-      model.arrowsVisibilityProperty.link( arrowsVisible => {
+      model.arrowsVisibileProperty.link( arrowsVisible => {
         if ( arrowsVisible ) {
           // unlink is needed when the arrows become invisible
           dragListener.isOverProperty.link( callback );

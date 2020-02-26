@@ -9,7 +9,6 @@ define( require => {
   'use strict';
 
   // modules
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
   const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
@@ -22,10 +21,10 @@ define( require => {
     /**
      * @param {Spring} spring
      * @param {ModelViewTransform2} modelViewTransform
-     * @param {Property.<boolean>} springsVisibilityProperty
+     * @param {Property.<boolean>} springsVisibleProperty
      * @param {Tandem} tandem
      */
-    constructor( spring, modelViewTransform, springsVisibilityProperty, tandem ) {
+    constructor( spring, modelViewTransform, springsVisibleProperty, tandem ) {
       super( {
         preventFit: true,
         boundsMethod: 'none',
@@ -33,14 +32,6 @@ define( require => {
         inputEnabled: false,
         excludeInvisible: true
       } );
-
-      // determines the visibility of the SpringNode
-      // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
-      const visibilityProperty = new DerivedProperty(
-        [ spring.visibilityProperty, springsVisibilityProperty ],
-        ( mySpringVisible, springsVisible ) => {
-          return mySpringVisible && springsVisible;
-        } );
 
       // shape of the spring path
       const springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
@@ -57,6 +48,15 @@ define( require => {
       this.addChild( line );
 
       let currentXScaling = 1;
+
+      // Determines the visibility of the SpringNode. This is done with a Multilink instead of a DerivedProperty
+      // so that we don't shadow visibleProperty that is inherited from NodeIO (the IO type associated with
+      // superclass Node).  See https://github.com/phetsims/normal-modes/issues/46.
+      // Dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim.
+      Property.multilink(  [ spring.visibleProperty, springsVisibleProperty ],
+        ( springVisible, springsVisible) => {
+          this.visible = ( springVisible && springsVisible );
+        } );
 
       // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
       Property.multilink(
@@ -82,8 +82,6 @@ define( require => {
             this.scale( currentXScaling, 1 );
           }
         } );
-
-      visibilityProperty.linkAttribute( this, 'visible' );
     }
   }
 

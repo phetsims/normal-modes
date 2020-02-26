@@ -58,21 +58,21 @@ define( require => {
         - playingProperty
         - simSpeedProperty
         - numVisibleMassesProperty
-        - springsVisibilityProperty
-        - phasesVisibilityProperty (if there is one)
+        - springsVisibleProperty
+        - phasesVisibileProperty (if there is one)
       */
 
       const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
-      const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibilityProperty, {
+      const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibleProperty, {
         boxWidth: 16
       } );
       showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
 
       let checkboxes = null;
 
-      if ( model.phasesVisibilityProperty !== undefined ) {
+      if ( model.phasesVisibileProperty !== undefined ) {
         const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
-        const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibilityProperty, {
+        const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibileProperty, {
           boxWidth: 16
         } );
         showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );

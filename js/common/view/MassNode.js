@@ -63,7 +63,7 @@ define( require => {
       this.addChild( this.arrows.right );
       this.addChild( this.arrows.bottom );
 
-      mass.visibilityProperty.linkAttribute( this, 'visible' );
+      mass.visibleProperty.linkAttribute( this, 'visible' );
     }
   }
 

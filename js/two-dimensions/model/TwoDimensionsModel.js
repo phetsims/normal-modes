@@ -45,8 +45,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the springs
-      this.springsVisibilityProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'springsVisibilityProperty' )
+      this.springsVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'springsVisibleProperty' )
       } );
 
       // @public {Property.<number>} the current number of visible masses in each row
@@ -136,8 +136,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the arrows on the masses
-      this.arrowsVisibilityProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'arrowsVisibilityProperty' )
+      this.arrowsVisibileProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'arrowsVisibileProperty' )
       } );
 
       // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
@@ -198,7 +198,7 @@ define( require => {
           const visible = ( i <= numMasses && j <= numMasses );
 
           this.masses[ i ][ j ].equilibriumPositionProperty.set( new Vector2( x, y ) );
-          this.masses[ i ][ j ].visibilityProperty.set( visible );
+          this.masses[ i ][ j ].visibleProperty.set( visible );
           this.masses[ i ][ j ].zeroPosition();
 
           if ( x < xFinal - xStep / 2 ) {
@@ -293,10 +293,10 @@ define( require => {
       this.playingProperty.reset();
       this.timeProperty.reset();
       this.simSpeedProperty.reset();
-      this.springsVisibilityProperty.reset();
+      this.springsVisibleProperty.reset();
       this.numVisibleMassesProperty.reset();
       this.draggingMassIndexesProperty.reset();
-      this.arrowsVisibilityProperty.reset();
+      this.arrowsVisibileProperty.reset();
 
       this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }

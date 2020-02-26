@@ -30,8 +30,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines the visibility of the mass
-      this.visibilityProperty = new BooleanProperty( visible, {
-        tandem: tandem.createTandem( 'visibilityProperty' )
+      this.visibleProperty = new BooleanProperty( visible, {
+        tandem: tandem.createTandem( 'visibleProperty' )
       } );
 
       // @public {Property.<Vector2>} mass current displacement (from the equilibrium position)
@@ -73,7 +73,7 @@ define( require => {
      */
     reset() {
       this.equilibriumPositionProperty.reset();
-      this.visibilityProperty.reset();
+      this.visibleProperty.reset();
       this.zeroPosition();
     }
 

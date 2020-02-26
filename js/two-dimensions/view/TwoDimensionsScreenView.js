@@ -70,7 +70,7 @@ define( require => {
       model.springsX.forEach( springArray => {
         springArray.forEach( spring => {
           const springNode = new SpringNode(
-            spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+            spring, modelViewTransform, model.springsVisibleProperty, tandem.createTandem( 'springNodes' )
           );
 
           this.addChild( springNode );
@@ -80,7 +80,7 @@ define( require => {
       model.springsY.forEach( springArray => {
         springArray.forEach( spring => {
           const springNode = new SpringNode(
-            spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+            spring, modelViewTransform, model.springsVisibleProperty, tandem.createTandem( 'springNodes' )
           );
 
           this.addChild( springNode );
