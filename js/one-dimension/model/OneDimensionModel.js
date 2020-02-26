@@ -45,8 +45,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the phases sliders
-      this.phasesVisibileProperty = new BooleanProperty( false, {
-        tandem: tandem.createTandem( 'phasesVisibileProperty' )
+      this.phasesVisibleProperty = new BooleanProperty( false, {
+        tandem: tandem.createTandem( 'phasesVisibleProperty' )
       } );
 
       // @public {Property.<boolean>} determines visibility of the springs
@@ -117,8 +117,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the arrows on the masses
-      this.arrowsVisibileProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'arrowsVisibileProperty' )
+      this.arrowsVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'arrowsVisibleProperty' )
       } );
 
       // unlink is unnecessary, exists for the lifetime of the sim
@@ -205,12 +205,12 @@ define( require => {
       this.playingProperty.reset();
       this.timeProperty.reset();
       this.simSpeedProperty.reset();
-      this.phasesVisibileProperty.reset();
+      this.phasesVisibleProperty.reset();
       this.springsVisibleProperty.reset();
       this.numVisibleMassesProperty.reset();
       this.amplitudeDirectionProperty.reset();
       this.draggingMassIndexProperty.reset();
-      this.arrowsVisibileProperty.reset();
+      this.arrowsVisibleProperty.reset();
 
       this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }

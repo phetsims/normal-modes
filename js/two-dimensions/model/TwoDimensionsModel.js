@@ -136,8 +136,8 @@ define( require => {
       } );
 
       // @public {Property.<boolean>} determines visibility of the arrows on the masses
-      this.arrowsVisibileProperty = new BooleanProperty( true, {
-        tandem: tandem.createTandem( 'arrowsVisibileProperty' )
+      this.arrowsVisibleProperty = new BooleanProperty( true, {
+        tandem: tandem.createTandem( 'arrowsVisibleProperty' )
       } );
 
       // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
@@ -296,7 +296,7 @@ define( require => {
       this.springsVisibleProperty.reset();
       this.numVisibleMassesProperty.reset();
       this.draggingMassIndexesProperty.reset();
-      this.arrowsVisibileProperty.reset();
+      this.arrowsVisibleProperty.reset();
 
       this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
     }

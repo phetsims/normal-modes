@@ -59,7 +59,7 @@ define( require => {
         - simSpeedProperty
         - numVisibleMassesProperty
         - springsVisibleProperty
-        - phasesVisibileProperty (if there is one)
+        - phasesVisibleProperty (if there is one)
       */
 
       const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
@@ -70,9 +70,9 @@ define( require => {
 
       let checkboxes = null;
 
-      if ( model.phasesVisibileProperty !== undefined ) {
+      if ( model.phasesVisibleProperty !== undefined ) {
         const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
-        const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibileProperty, {
+        const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibleProperty, {
           boxWidth: 16
         } );
         showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
