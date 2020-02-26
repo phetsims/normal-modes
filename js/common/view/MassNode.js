@@ -11,7 +11,6 @@ define( require => {
 
   // modules
   const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
   const merge = require( 'PHET_CORE/merge' );
   const Node = require( 'SCENERY/nodes/Node' );
   const normalModes = require( 'NORMAL_MODES/normalModes' );
@@ -30,12 +29,6 @@ define( require => {
 
       // TODO - magic number
       this.size = 20;
-
-      // determines the visibility of the MassNode
-      // TODO - this property is unnecessary (see https://github.com/phetsims/normal-modes/issues/45)
-      const visibilityProperty = new DerivedProperty( [ mass.visibilityProperty ], function( massVisible ) {
-        return massVisible;
-      } );
 
       // dispose is unnecessary, the MassNode and the dependencies exist for the lifetime of the sim
       Property.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ],
@@ -70,7 +63,7 @@ define( require => {
       this.addChild( this.arrows.right );
       this.addChild( this.arrows.bottom );
 
-      visibilityProperty.linkAttribute( this, 'visible' );
+      mass.visibilityProperty.linkAttribute( this, 'visible' );
     }
   }
 
