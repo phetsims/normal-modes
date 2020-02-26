@@ -37,9 +37,11 @@ define( require => {
       this.addChild( rect );
 
       // dispose is unnecessary, the WallNode and the dependencies exist for the lifetime of the sim
-      Property.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ], ( massPosition, massDisplacement ) => {
-        this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( rect.rectWidth / 2, rect.rectHeight / 2 ) );
-      } );
+      Property.multilink(
+        [ mass.equilibriumPositionProperty, mass.displacementProperty ],
+        ( massPosition, massDisplacement ) => {
+          this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) ).subtract( new Vector2( rect.rectWidth / 2, rect.rectHeight / 2 ) );
+        } );
     }
   }
 

@@ -43,7 +43,9 @@ define( require => {
       const viewOrigin = new Vector2( VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
         ( this.layoutBounds.maxY - 2 * OneDimensionConstants.SCREEN_VIEW_Y_MARGIN - 300 ) / 2 + OneDimensionConstants.SCREEN_VIEW_Y_MARGIN );
 
-      const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2 );
+      const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+        Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2
+      );
 
       const resetAllButton = new ResetAllButton( {
         listener: () => {
@@ -71,7 +73,9 @@ define( require => {
         centerX: viewOrigin.x
       }, NormalModesColors.PANEL_COLORS );
 
-      const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, normalModeSpectrumAccordionBoxOptions );
+      const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox(
+        model, normalModeSpectrumAccordionBoxOptions
+      );
 
       this.addChild( normalModeSpectrumAccordionBox );
       this.addChild( optionsPanel );
@@ -80,12 +84,20 @@ define( require => {
       // The springs are added first
 
       model.springs.forEach( spring => {
-        const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+        const springNode = new SpringNode(
+          spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+        );
+
         this.addChild( springNode );
       } );
 
-      const leftWallNode = new WallNode( model.masses[ 0 ], modelViewTransform, tandem.createTandem( 'leftWallNode' ) );
-      const rightWallNode = new WallNode( model.masses[ model.masses.length - 1 ], modelViewTransform, tandem.createTandem( 'rightWallNode' ) );
+      const leftWallNode = new WallNode(
+        model.masses[ 0 ], modelViewTransform, tandem.createTandem( 'leftWallNode' )
+      );
+
+      const rightWallNode = new WallNode(
+        model.masses[ model.masses.length - 1 ], modelViewTransform, tandem.createTandem( 'rightWallNode' )
+      );
 
       this.addChild( leftWallNode );
       this.addChild( rightWallNode );

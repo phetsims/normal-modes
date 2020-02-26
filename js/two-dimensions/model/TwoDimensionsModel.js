@@ -157,6 +157,7 @@ define( require => {
     calculateSineProducts( numMasses ) {
       const N = numMasses;
       this.sineProduct = [];
+
       for ( let i = 1; i <= N; ++i ) {
         this.sineProduct[ i ] = [];
         for ( let j = 1; j <= N; ++j ) {
@@ -164,9 +165,12 @@ define( require => {
 
           for ( let r = 1; r <= N; ++r ) {
             this.sineProduct[ i ][ j ][ r ] = [];
-            for ( let s = 1; s <= N; ++s ) {
 
-              this.sineProduct[ i ][ j ][ r ][ s ] = Math.sin( j * r * Math.PI / ( N + 1 ) ) * Math.sin( i * s * Math.PI / ( N + 1 ) );
+            // no need to recalculate this for each 's'
+            const sin = Math.sin( j * r * Math.PI / ( N + 1 ) );
+
+            for ( let s = 1; s <= N; ++s ) {
+              this.sineProduct[ i ][ j ][ r ][ s ] = sin * Math.sin( i * s * Math.PI / ( N + 1 ) );
             }
           }
         }
@@ -413,7 +417,9 @@ define( require => {
             const sRight = this.masses[ i ][ j + 1 ].displacementProperty.get();
             const sUnder = this.masses[ i + 1 ][ j ].displacementProperty.get();
 
-            this.masses[ i ][ j ].accelerationProperty.set( sLeft.plus( sRight ).plus( sAbove ).plus( sUnder ).subtract( s.timesScalar( 4 ) ).multiplyScalar( k / m ) );
+            this.masses[ i ][ j ].accelerationProperty.set(
+              sLeft.plus( sRight ).plus( sAbove ).plus( sUnder ).subtract( s.timesScalar( 4 ) ).multiplyScalar( k / m )
+            );
 
             const v = this.masses[ i ][ j ].velocityProperty.get();
             const a = this.masses[ i ][ j ].accelerationProperty.get();
@@ -461,14 +467,18 @@ define( require => {
           const freqTimesTimeMinusPhsX = freqTimesTime - modePhaseX;
           const freqTimesTimeMinusPhsY = freqTimesTime - modePhaseY;
 
-          this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * Math.cos( freqTimesTimeMinusPhsX );
-          this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * Math.cos( freqTimesTimeMinusPhsY );
+          // both values are used twice, so it's reasonable to calculate them here
+          const freqTimesTimeMinusPhsXCos = Math.cos( freqTimesTimeMinusPhsX );
+          const freqTimesTimeMinusPhsYCos = Math.cos( freqTimesTimeMinusPhsY );
+
+          this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * freqTimesTimeMinusPhsXCos;
+          this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * freqTimesTimeMinusPhsYCos;
 
           this.freqTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( freqTimesTimeMinusPhsX );
           this.freqTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( freqTimesTimeMinusPhsY );
 
-          this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * Math.cos( freqTimesTimeMinusPhsX );
-          this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * Math.cos( freqTimesTimeMinusPhsY );
+          this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * freqTimesTimeMinusPhsXCos;
+          this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * freqTimesTimeMinusPhsYCos;
         }
       }
       for ( let i = 1; i <= N; ++i ) {
@@ -537,10 +547,19 @@ define( require => {
             }
 
           }
-          this.modeXAmplitudeProperty[ r - 1 ][ s - 1 ].set( Math.sqrt( AmplitudeTimesCosPhaseX ** 2 + AmplitudeTimesSinPhaseX ** 2 ) );
-          this.modeYAmplitudeProperty[ r - 1 ][ s - 1 ].set( Math.sqrt( AmplitudeTimesCosPhaseY ** 2 + AmplitudeTimesSinPhaseY ** 2 ) );
-          this.modeXPhaseProperty[ r - 1 ][ s - 1 ].set( Math.atan2( AmplitudeTimesSinPhaseX, AmplitudeTimesCosPhaseX ) );
-          this.modeYPhaseProperty[ r - 1 ][ s - 1 ].set( Math.atan2( AmplitudeTimesSinPhaseY, AmplitudeTimesCosPhaseY ) );
+          this.modeXAmplitudeProperty[ r - 1 ][ s - 1 ].set(
+            Math.sqrt( AmplitudeTimesCosPhaseX ** 2 + AmplitudeTimesSinPhaseX ** 2 )
+          );
+          this.modeYAmplitudeProperty[ r - 1 ][ s - 1 ].set(
+            Math.sqrt( AmplitudeTimesCosPhaseY ** 2 + AmplitudeTimesSinPhaseY ** 2 )
+          );
+
+          this.modeXPhaseProperty[ r - 1 ][ s - 1 ].set(
+            Math.atan2( AmplitudeTimesSinPhaseX, AmplitudeTimesCosPhaseX )
+          );
+          this.modeYPhaseProperty[ r - 1 ][ s - 1 ].set(
+            Math.atan2( AmplitudeTimesSinPhaseY, AmplitudeTimesCosPhaseY )
+          );
         }
       }
     }

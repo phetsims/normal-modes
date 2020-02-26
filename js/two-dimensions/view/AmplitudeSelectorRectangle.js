@@ -123,7 +123,14 @@ define( require => {
       this.addInputListener( new FireListener( {
         fire: () => {
           const amp = axisAmplitudesProperty.get()[ row ][ col ];
-          amp.set( isNear( amp.get(), maxAmpProperty.get() ) ? TwoDimensionsConstants.MIN_MODE_AMPLITUDE : maxAmpProperty.get() );
+
+          if ( isNear( amp.get(), maxAmpProperty.get() ) ) {
+            amp.set( TwoDimensionsConstants.MIN_MODE_AMPLITUDE );
+          }
+          else {
+            amp.set( maxAmpProperty.get() );
+          }
+
         }
       } ) );
     }

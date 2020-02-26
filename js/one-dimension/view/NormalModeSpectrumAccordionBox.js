@@ -267,7 +267,8 @@ define( require => {
         contentNode.addChild( lineSeparator );
         contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 
-        this.layout(); // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
+        // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
+        this.layout();
         this.centerX = options.centerX;
 
       } );

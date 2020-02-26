@@ -16,7 +16,8 @@ define( require => {
 
   const NormalModesConstants = {
 
-    SCREEN_VIEW_X_MARGIN: 15, // TODO - remove unused constant or use this instead of OneDimensionConstants and TwoDimensionsConstants
+    // TODO - remove unused constant or use this instead of OneDimensionConstants and TwoDimensionsConstants
+    SCREEN_VIEW_X_MARGIN: 15,
     SCREEN_VIEW_Y_MARGIN: 15,
 
     windowScale: 0.6,

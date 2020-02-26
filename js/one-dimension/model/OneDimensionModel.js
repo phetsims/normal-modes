@@ -321,7 +321,9 @@ define( require => {
           const x = this.masses[ i ].displacementProperty.get();
           const xRight = this.masses[ i + 1 ].displacementProperty.get();
 
-          this.masses[ i ].accelerationProperty.set( xLeft.plus( xRight ).subtract( x.timesScalar( 2 ) ).multiplyScalar( k / m ) );
+          this.masses[ i ].accelerationProperty.set(
+            xLeft.plus( xRight ).subtract( x.timesScalar( 2 ) ).multiplyScalar( k / m )
+          );
 
           const v = this.masses[ i ].velocityProperty.get();
           const a = this.masses[ i ].accelerationProperty.get();
@@ -370,9 +372,13 @@ define( require => {
           const modeFrequency = this.modeFrequencyProperty[ j ].get();
           const modePhase = this.modePhaseProperty[ j ].get();
 
-          const modeDisplacement = modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
+          const displacementSin = Math.sin( i * r * Math.PI / ( N + 1 ) );
+          const displacementCos = Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
+          const velocitySin = Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
+
+          const modeDisplacement = modeAmplitude * displacementSin * displacementCos;
           displacement += modeDisplacement;
-          velocity += ( -modeFrequency ) * modeAmplitude * Math.sin( i * r * Math.PI / ( N + 1 ) ) * Math.sin( modeFrequency * this.timeProperty.get() - modePhase );
+          velocity += ( -modeFrequency ) * modeAmplitude * displacementSin * velocitySin;
           acceleration += -( modeFrequency ** 2 ) * modeDisplacement;
         }
 
@@ -415,11 +421,20 @@ define( require => {
             massVelocity = this.masses[ j ].velocityProperty.get().y;
           }
 
-          AmplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * Math.sin( i * j * Math.PI / ( N + 1 ) );
-          AmplitudeTimesSinPhase += ( 2 / ( this.modeFrequencyProperty[ i - 1 ].get() * ( N + 1 ) ) ) * massVelocity * Math.sin( i * j * Math.PI / ( N + 1 ) );
+          const amplitudeSin = Math.sin( i * j * Math.PI / ( N + 1 ) );
+          const modeFrequency = this.modeFrequencyProperty[ i - 1 ].get();
+
+          AmplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * amplitudeSin;
+          AmplitudeTimesSinPhase += ( 2 / ( modeFrequency * ( N + 1 ) ) ) * massVelocity * amplitudeSin;
         }
-        this.modeAmplitudeProperty[ i - 1 ].set( Math.sqrt( AmplitudeTimesCosPhase ** 2 + AmplitudeTimesSinPhase ** 2 ) );
-        this.modePhaseProperty[ i - 1 ].set( Math.atan2( AmplitudeTimesSinPhase, AmplitudeTimesCosPhase ) );
+
+        this.modeAmplitudeProperty[ i - 1 ].set(
+          Math.sqrt( AmplitudeTimesCosPhase ** 2 + AmplitudeTimesSinPhase ** 2 )
+        );
+
+        this.modePhaseProperty[ i - 1 ].set(
+          Math.atan2( AmplitudeTimesSinPhase, AmplitudeTimesCosPhase )
+        );
       }
     }
   }

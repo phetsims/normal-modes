@@ -69,14 +69,20 @@ define( require => {
 
       model.springsX.forEach( springArray => {
         springArray.forEach( spring => {
-          const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode(
+            spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+          );
+
           this.addChild( springNode );
         } );
       } );
 
       model.springsY.forEach( springArray => {
         springArray.forEach( spring => {
-          const springNode = new SpringNode( spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' ) );
+          const springNode = new SpringNode(
+            spring, modelViewTransform, model.springsVisibilityProperty, tandem.createTandem( 'springNodes' )
+          );
+
           this.addChild( springNode );
         } );
       } );
@@ -85,10 +91,11 @@ define( require => {
       const topLeftPoint = modelViewTransform.modelToViewPosition( new Vector2( -1, 1 ) );
       const bottomRightPoint = modelViewTransform.modelToViewPosition( new Vector2( 1, -1 ) );
 
-      const borderWalls = new Rectangle( new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
-        stroke: NormalModesColors.WALL_COLORS.stroke,
-        lineWidth: 2
-      } );
+      const borderWalls = new Rectangle(
+        new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
+          stroke: NormalModesColors.WALL_COLORS.stroke,
+          lineWidth: 2
+        } );
 
       this.addChild( borderWalls );
 
@@ -98,7 +105,9 @@ define( require => {
         cornerRadius: 5
       }, NormalModesColors.PANEL_COLORS );
 
-      const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, normalModeAmplitudesAccordionBoxOptions );
+      const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox(
+        model, normalModeAmplitudesAccordionBoxOptions
+      );
 
       this.addChild( normalModeAmplitudesAccordionBox );
 

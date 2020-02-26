@@ -112,11 +112,17 @@ define( require => {
       const freq = this.model.modeFrequencyProperty[ n ].get();
       const time = this.model.timeProperty.get();
 
+      // put a negative sign in front of it because of y coordinate stuff
+      const heightFactor = -( 2 * this.graphSize.height / 3 );
+
+      // this result is the same for all curve positions, so it's more efficient to only run it once
+      const cos = Math.cos( freq * time - phase );
+
       for ( let i = 0; i < this.curveYPositions.length; i++ ) {
         const x = i / this.curveResolution;
 
-        // put a negative sign in front of it because of y coordinate stuff
-        this.curveYPositions[ i ] = -( 2 * this.graphSize.height / 3 ) * ( amp * Math.sin( x * ( n + 1 ) * Math.PI ) * Math.cos( freq * time - phase ) ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
+        const sin = Math.sin( x * ( n + 1 ) * Math.PI );
+        this.curveYPositions[ i ] = heightFactor * ( amp * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
       }
 
       // indicate that this should be repainted during the next paint cycle
