@@ -64,11 +64,11 @@ define( require => {
           spring.leftMass.displacementProperty,
           spring.rightMass.equilibriumPositionProperty,
           spring.rightMass.displacementProperty
-        ], ( leftPos, leftDispl, rightPos, rightDispl ) => {
+        ], ( leftEquilibriumPosition, leftDisplacement, rightEquilibriumPosition, rightDisplacement ) => {
           if ( this.visible ) {
 
-            const p1 = modelViewTransform.modelToViewPosition( leftPos.plus( leftDispl ) );
-            const p2 = modelViewTransform.modelToViewPosition( rightPos.plus( rightDispl ) );
+            const p1 = modelViewTransform.modelToViewPosition( leftEquilibriumPosition.plus( leftDisplacement ) );
+            const p2 = modelViewTransform.modelToViewPosition( rightEquilibriumPosition.plus( rightDisplacement ) );
             if ( p1.distance( p2 ) === 0 ) {
               return;
             }
