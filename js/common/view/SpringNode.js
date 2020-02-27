@@ -5,85 +5,82 @@
  *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Node = require( 'SCENERY/nodes/Node' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
-  const Path = require( 'SCENERY/nodes/Path' );
-  const Property = require( 'AXON/Property' );
-  const Shape = require( 'KITE/Shape' );
+import Property from '../../../../axon/js/Property.js';
+import Shape from '../../../../kite/js/Shape.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
+import Path from '../../../../scenery/js/nodes/Path.js';
+import normalModes from '../../normalModes.js';
+import NormalModesColors from '../NormalModesColors.js';
 
-  class SpringNode extends Node {
+class SpringNode extends Node {
 
-    /**
-     * @param {Spring} spring
-     * @param {ModelViewTransform2} modelViewTransform
-     * @param {Property.<boolean>} springsVisibleProperty
-     * @param {Tandem} tandem
-     */
-    constructor( spring, modelViewTransform, springsVisibleProperty, tandem ) {
-      super( {
-        preventFit: true,
-        boundsMethod: 'none',
-        pickable: false,
-        inputEnabled: false,
-        excludeInvisible: true
+  /**
+   * @param {Spring} spring
+   * @param {ModelViewTransform2} modelViewTransform
+   * @param {Property.<boolean>} springsVisibleProperty
+   * @param {Tandem} tandem
+   */
+  constructor( spring, modelViewTransform, springsVisibleProperty, tandem ) {
+    super( {
+      preventFit: true,
+      boundsMethod: 'none',
+      pickable: false,
+      inputEnabled: false,
+      excludeInvisible: true
+    } );
+
+    // shape of the spring path
+    const springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
+
+    // line path that represents a string
+    const line = new Path( springShape, {
+      preventFit: true,
+      boundsMethod: 'none',
+      pickable: false,
+      inputEnabled: false,
+      stroke: NormalModesColors.SPRING_STROKE,
+      lineWidth: 5
+    } );
+    this.addChild( line );
+
+    let currentXScaling = 1;
+
+    // Determines the visibility of the SpringNode. This is done with a Multilink instead of a DerivedProperty
+    // so that we don't shadow visibleProperty that is inherited from NodeIO (the IO type associated with
+    // superclass Node).  See https://github.com/phetsims/normal-modes/issues/46.
+    // Dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim.
+    Property.multilink( [ spring.visibleProperty, springsVisibleProperty ],
+      ( springVisible, springsVisible ) => {
+        this.visible = ( springVisible && springsVisible );
       } );
 
-      // shape of the spring path
-      const springShape = new Shape().moveTo( 0, 0 ).lineTo( 1, 0 );
+    // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
+    Property.multilink(
+      [ spring.leftMass.equilibriumPositionProperty,
+        spring.leftMass.displacementProperty,
+        spring.rightMass.equilibriumPositionProperty,
+        spring.rightMass.displacementProperty
+      ], ( leftEquilibriumPosition, leftDisplacement, rightEquilibriumPosition, rightDisplacement ) => {
+        if ( this.visible ) {
 
-      // line path that represents a string
-      const line = new Path( springShape, {
-        preventFit: true,
-        boundsMethod: 'none',
-        pickable: false,
-        inputEnabled: false,
-        stroke: NormalModesColors.SPRING_STROKE,
-        lineWidth: 5
-      } );
-      this.addChild( line );
-
-      let currentXScaling = 1;
-
-      // Determines the visibility of the SpringNode. This is done with a Multilink instead of a DerivedProperty
-      // so that we don't shadow visibleProperty that is inherited from NodeIO (the IO type associated with
-      // superclass Node).  See https://github.com/phetsims/normal-modes/issues/46.
-      // Dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim.
-      Property.multilink(  [ spring.visibleProperty, springsVisibleProperty ],
-        ( springVisible, springsVisible) => {
-          this.visible = ( springVisible && springsVisible );
-        } );
-
-      // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
-      Property.multilink(
-        [ spring.leftMass.equilibriumPositionProperty,
-          spring.leftMass.displacementProperty,
-          spring.rightMass.equilibriumPositionProperty,
-          spring.rightMass.displacementProperty
-        ], ( leftEquilibriumPosition, leftDisplacement, rightEquilibriumPosition, rightDisplacement ) => {
-          if ( this.visible ) {
-
-            const p1 = modelViewTransform.modelToViewPosition( leftEquilibriumPosition.plus( leftDisplacement ) );
-            const p2 = modelViewTransform.modelToViewPosition( rightEquilibriumPosition.plus( rightDisplacement ) );
-            if ( p1.distance( p2 ) === 0 ) {
-              return;
-            }
-
-            this.scale( 1 / currentXScaling, 1 );
-
-            currentXScaling = p1.distance( p2 );
-
-            this.translation = p1;
-            this.rotation = p2.minus( p1 ).angle;
-            this.scale( currentXScaling, 1 );
+          const p1 = modelViewTransform.modelToViewPosition( leftEquilibriumPosition.plus( leftDisplacement ) );
+          const p2 = modelViewTransform.modelToViewPosition( rightEquilibriumPosition.plus( rightDisplacement ) );
+          if ( p1.distance( p2 ) === 0 ) {
+            return;
           }
-        } );
-    }
-  }
 
-  return normalModes.register( 'SpringNode', SpringNode );
-} );
+          this.scale( 1 / currentXScaling, 1 );
+
+          currentXScaling = p1.distance( p2 );
+
+          this.translation = p1;
+          this.rotation = p2.minus( p1 ).angle;
+          this.scale( currentXScaling, 1 );
+        }
+      } );
+  }
+}
+
+normalModes.register( 'SpringNode', SpringNode );
+export default SpringNode;

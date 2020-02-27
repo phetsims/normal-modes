@@ -6,60 +6,58 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  const ArrowNode = require( 'SCENERY_PHET/ArrowNode' );
-  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
-  const merge = require( 'PHET_CORE/merge' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
-  const RadioButtonGroup = require( 'SUN/buttons/RadioButtonGroup' );
+import merge from '../../../../phet-core/js/merge.js';
+import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
+import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import normalModes from '../../normalModes.js';
+import AmplitudeDirection from '../model/AmplitudeDirection.js';
+import NormalModesColors from '../NormalModesColors.js';
 
-  const ICON_SIZE = 45;
+const ICON_SIZE = 45;
 
-  class AmplitudeDirectionRadioButtonGroup extends RadioButtonGroup {
+class AmplitudeDirectionRadioButtonGroup extends RadioButtonGroup {
 
-    /**
-     * @param {Property.<AmplitudeDirection>} amplitudeDirectionProperty
-     * @param {Object} [options]
-     */
-    constructor( amplitudeDirectionProperty, options ) {
+  /**
+   * @param {Property.<AmplitudeDirection>} amplitudeDirectionProperty
+   * @param {Object} [options]
+   */
+  constructor( amplitudeDirectionProperty, options ) {
 
-      options = merge( {
-        deselectedLineWidth: 1,
-        selectedLineWidth: 1.5,
-        cornerRadius: 8,
-        deselectedButtonOpacity: 0.35,
-        buttonContentXMargin: 8,
-        buttonContentYMargin: 8,
-        orientation: 'vertical',
-        axesArrowOptions: {
-          doubleHead: true,
-          tailWidth: 1.5,
-          headWidth: 10,
-          headHeight: 10,
-          fill: NormalModesColors.AXES_ARROW_FILL,
-          stroke: null,
-          maxWidth: ICON_SIZE,
-          maxHeight: ICON_SIZE
-        }
-      }, options );
+    options = merge( {
+      deselectedLineWidth: 1,
+      selectedLineWidth: 1.5,
+      cornerRadius: 8,
+      deselectedButtonOpacity: 0.35,
+      buttonContentXMargin: 8,
+      buttonContentYMargin: 8,
+      orientation: 'vertical',
+      axesArrowOptions: {
+        doubleHead: true,
+        tailWidth: 1.5,
+        headWidth: 10,
+        headHeight: 10,
+        fill: NormalModesColors.AXES_ARROW_FILL,
+        stroke: null,
+        maxWidth: ICON_SIZE,
+        maxHeight: ICON_SIZE
+      }
+    }, options );
 
-      const horizontalButtonDescription = {
-        value: AmplitudeDirection.HORIZONTAL,
-        node: new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrowOptions )
-      };
+    const horizontalButtonDescription = {
+      value: AmplitudeDirection.HORIZONTAL,
+      node: new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrowOptions )
+    };
 
-      const verticalButtonDescription = {
-        value: AmplitudeDirection.VERTICAL,
-        node: new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrowOptions )
-      };
+    const verticalButtonDescription = {
+      value: AmplitudeDirection.VERTICAL,
+      node: new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrowOptions )
+    };
 
-      super( amplitudeDirectionProperty, [ horizontalButtonDescription, verticalButtonDescription ], options );
-    }
-
+    super( amplitudeDirectionProperty, [ horizontalButtonDescription, verticalButtonDescription ], options );
   }
 
-  return normalModes.register( 'AmplitudeDirectionRadioButtonGroup', AmplitudeDirectionRadioButtonGroup );
-} );
+}
+
+normalModes.register( 'AmplitudeDirectionRadioButtonGroup', AmplitudeDirectionRadioButtonGroup );
+export default AmplitudeDirectionRadioButtonGroup;

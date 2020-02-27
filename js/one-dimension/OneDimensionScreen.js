@@ -6,41 +6,39 @@
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
-  const NormalModesIconFactory = require( 'NORMAL_MODES/common/view/NormalModesIconFactory' );
-  const OneDimensionModel = require( 'NORMAL_MODES/one-dimension/model/OneDimensionModel' );
-  const OneDimensionScreenView = require( 'NORMAL_MODES/one-dimension/view/OneDimensionScreenView' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import NormalModesColors from '../common/NormalModesColors.js';
+import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
+import normalModesStrings from '../normal-modes-strings.js';
+import normalModes from '../normalModes.js';
+import OneDimensionModel from './model/OneDimensionModel.js';
+import OneDimensionScreenView from './view/OneDimensionScreenView.js';
 
-  const screenOneDimensionString = require( 'string!NORMAL_MODES/screen.one-dimension' );
+const screenOneDimensionString = normalModesStrings.screen[ 'one-dimension' ];
 
-  class OneDimensionScreen extends Screen {
+class OneDimensionScreen extends Screen {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-      const options = {
-        name: screenOneDimensionString,
-        backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
-        homeScreenIcon: NormalModesIconFactory.createOneDimensionScreenIcon(),
-        tandem: tandem
-      };
+    const options = {
+      name: screenOneDimensionString,
+      backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
+      homeScreenIcon: NormalModesIconFactory.createOneDimensionScreenIcon(),
+      tandem: tandem
+    };
 
-      super(
-        () => new OneDimensionModel( tandem.createTandem( 'model' ) ),
-        model => new OneDimensionScreenView( model, tandem.createTandem( 'view' ) ),
-        options
-      );
-    }
+    super(
+      () => new OneDimensionModel( tandem.createTandem( 'model' ) ),
+      model => new OneDimensionScreenView( model, tandem.createTandem( 'view' ) ),
+      options
+    );
   }
+}
 
-  return normalModes.register( 'OneDimensionScreen', OneDimensionScreen );
-} );
+normalModes.register( 'OneDimensionScreen', OneDimensionScreen );
+export default OneDimensionScreen;

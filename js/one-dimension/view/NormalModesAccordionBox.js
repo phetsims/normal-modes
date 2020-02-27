@@ -6,110 +6,107 @@
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AccordionBox = require( 'SUN/AccordionBox' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const merge = require( 'PHET_CORE/merge' );
-  const ModeGraphCanvasNode = require( 'NORMAL_MODES/one-dimension/view/ModeGraphCanvasNode' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
-  const Property = require( 'AXON/Property' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const VBox = require( 'SCENERY/nodes/VBox' );
+import Property from '../../../../axon/js/Property.js';
+import merge from '../../../../phet-core/js/merge.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import VBox from '../../../../scenery/js/nodes/VBox.js';
+import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
+import normalModesStrings from '../../normal-modes-strings.js';
+import normalModes from '../../normalModes.js';
+import ModeGraphCanvasNode from './ModeGraphCanvasNode.js';
 
-  // strings
-  const normalModesTitleString = require( 'string!NORMAL_MODES/normal-modes.title' );
+const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
 
-  class NormalModesAccordionBox extends AccordionBox {
+class NormalModesAccordionBox extends AccordionBox {
 
-    /**
-     * @param {OneDimensionModel} model
-     * @param {Object} [options]
-     */
-    constructor( model, options ) {
+  /**
+   * @param {OneDimensionModel} model
+   * @param {Object} [options]
+   */
+  constructor( model, options ) {
 
-      /*
-      Model properties used:
-        - timeProperty
-        - numVisibleMassesProperty
-        - modeAmplitudeProperty[0..9]
-        - modePhaseProperty[0..9]
-      */
+    /*
+    Model properties used:
+      - timeProperty
+      - numVisibleMassesProperty
+      - modeAmplitudeProperty[0..9]
+      - modePhaseProperty[0..9]
+    */
 
-      // from Vector Addition
-      const PANEL_CORNER_RADIUS = 5;
-      const PANEL_X_MARGIN = 7;
-      const PANEL_Y_MARGIN = 8;
+    // from Vector Addition
+    const PANEL_CORNER_RADIUS = 5;
+    const PANEL_X_MARGIN = 7;
+    const PANEL_Y_MARGIN = 8;
 
-      const titleNode = new Text( normalModesTitleString, { font: NormalModesConstants.CONTROL_FONT } );
+    const titleNode = new Text( normalModesTitleString, { font: NormalModesConstants.CONTROL_FONT } );
 
-      options = merge( {
-        resize: true,
+    options = merge( {
+      resize: true,
 
-        cornerRadius: PANEL_CORNER_RADIUS,
-        contentXMargin: 15,
-        contentYMargin: PANEL_Y_MARGIN,
-        contentXSpacing: PANEL_X_MARGIN,
-        contentYSpacing: 1,
-        buttonXMargin: PANEL_X_MARGIN,
-        buttonYMargin: PANEL_Y_MARGIN,
-        titleYMargin: PANEL_Y_MARGIN,
-        titleXMargin: PANEL_X_MARGIN,
-        titleXSpacing: PANEL_X_MARGIN,
-        titleAlignX: 'center',
-        expandCollapseButtonOptions: {
-          sideLength: 18,
-          touchAreaXDilation: 6,
-          touchAreaYDilation: 6
-        },
+      cornerRadius: PANEL_CORNER_RADIUS,
+      contentXMargin: 15,
+      contentYMargin: PANEL_Y_MARGIN,
+      contentXSpacing: PANEL_X_MARGIN,
+      contentYSpacing: 1,
+      buttonXMargin: PANEL_X_MARGIN,
+      buttonYMargin: PANEL_Y_MARGIN,
+      titleYMargin: PANEL_Y_MARGIN,
+      titleXMargin: PANEL_X_MARGIN,
+      titleXSpacing: PANEL_X_MARGIN,
+      titleAlignX: 'center',
+      expandCollapseButtonOptions: {
+        sideLength: 18,
+        touchAreaXDilation: 6,
+        touchAreaYDilation: 6
+      },
 
-        titleNode: titleNode,
-        showTitleWhenExpanded: true
+      titleNode: titleNode,
+      showTitleWhenExpanded: true
 
-      }, options );
+    }, options );
 
-      const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      const normalModeGraphsAndNumbers = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    const normalModeGraphsAndNumbers = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 
-      for ( let i = 0; i < normalModeGraphs.length; i++ ) {
-        normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
-        const normalModeNumber = new Text( i + 1, { font: NormalModesConstants.TEST_FONT } );
-        normalModeGraphsAndNumbers[ i ] = new HBox( {
-          spacing: 7,
-          children: [ normalModeNumber, normalModeGraphs[ i ] ]
-        } );
-
-        // dispose is unnecessary, exists for the lifetime of the sim
-        Property.multilink(
-          [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ],
-          ( time, amp, phase ) => {
-            normalModeGraphs[ i ].update();
-          } );
-      }
-
-      const avoidResize = new HStrut( normalModeGraphsAndNumbers[ normalModeGraphsAndNumbers.length - 1 ].width );
-
-      const graphContainer = new VBox( {
-        spacing: 4.8,
-        align: 'right',
-        children: normalModeGraphsAndNumbers
+    for ( let i = 0; i < normalModeGraphs.length; i++ ) {
+      normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
+      const normalModeNumber = new Text( i + 1, { font: NormalModesConstants.TEST_FONT } );
+      normalModeGraphsAndNumbers[ i ] = new HBox( {
+        spacing: 7,
+        children: [ normalModeNumber, normalModeGraphs[ i ] ]
       } );
-
-      super( graphContainer, options );
 
       // dispose is unnecessary, exists for the lifetime of the sim
-      model.numVisibleMassesProperty.link( numMasses => {
-        graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numMasses );
-        graphContainer.addChild( avoidResize );
-        normalModeGraphs.forEach( graph => graph.update() );
-        this.layout();
-      } );
+      Property.multilink(
+        [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ],
+        ( time, amp, phase ) => {
+          normalModeGraphs[ i ].update();
+        } );
     }
-  }
 
-  return normalModes.register( 'NormalModesAccordionBox', NormalModesAccordionBox );
-} );
+    const avoidResize = new HStrut( normalModeGraphsAndNumbers[ normalModeGraphsAndNumbers.length - 1 ].width );
+
+    const graphContainer = new VBox( {
+      spacing: 4.8,
+      align: 'right',
+      children: normalModeGraphsAndNumbers
+    } );
+
+    super( graphContainer, options );
+
+    // dispose is unnecessary, exists for the lifetime of the sim
+    model.numVisibleMassesProperty.link( numMasses => {
+      graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numMasses );
+      graphContainer.addChild( avoidResize );
+      normalModeGraphs.forEach( graph => graph.update() );
+      this.layout();
+    } );
+  }
+}
+
+normalModes.register( 'NormalModesAccordionBox', NormalModesAccordionBox );
+export default NormalModesAccordionBox;

@@ -5,14 +5,11 @@
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Enumeration = require( 'PHET_CORE/Enumeration' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import normalModes from '../../normalModes.js';
 
-  const AmplitudeDirection = Enumeration.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
+const AmplitudeDirection = Enumeration.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
 
-  return normalModes.register( 'AmplitudeDirection', AmplitudeDirection );
-} );
+normalModes.register( 'AmplitudeDirection', AmplitudeDirection );
+export default AmplitudeDirection;

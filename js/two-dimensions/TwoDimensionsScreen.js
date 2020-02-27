@@ -6,41 +6,39 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  * @author Franco Barpp Gomes (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const Property = require( 'AXON/Property' );
-  const Screen = require( 'JOIST/Screen' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesColors = require( 'NORMAL_MODES/common/NormalModesColors' );
-  const NormalModesIconFactory = require( 'NORMAL_MODES/common/view/NormalModesIconFactory' );
-  const TwoDimensionsModel = require( 'NORMAL_MODES/two-dimensions/model/TwoDimensionsModel' );
-  const TwoDimensionsScreenView = require( 'NORMAL_MODES/two-dimensions/view/TwoDimensionsScreenView' );
+import Property from '../../../axon/js/Property.js';
+import Screen from '../../../joist/js/Screen.js';
+import NormalModesColors from '../common/NormalModesColors.js';
+import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
+import normalModesStrings from '../normal-modes-strings.js';
+import normalModes from '../normalModes.js';
+import TwoDimensionsModel from './model/TwoDimensionsModel.js';
+import TwoDimensionsScreenView from './view/TwoDimensionsScreenView.js';
 
-  const screenTwoDimensionsString = require( 'string!NORMAL_MODES/screen.two-dimensions' );
+const screenTwoDimensionsString = normalModesStrings.screen[ 'two-dimensions' ];
 
-  class TwoDimensionsScreen extends Screen {
+class TwoDimensionsScreen extends Screen {
 
-    /**
-     * @param {Tandem} tandem
-     */
-    constructor( tandem ) {
+  /**
+   * @param {Tandem} tandem
+   */
+  constructor( tandem ) {
 
-      const options = {
-        name: screenTwoDimensionsString,
-        backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
-        homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
-        tandem: tandem
-      };
+    const options = {
+      name: screenTwoDimensionsString,
+      backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
+      homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
+      tandem: tandem
+    };
 
-      super(
-        () => new TwoDimensionsModel( tandem.createTandem( 'model' ) ),
-        model => new TwoDimensionsScreenView( model, tandem.createTandem( 'view' ) ),
-        options
-      );
-    }
+    super(
+      () => new TwoDimensionsModel( tandem.createTandem( 'model' ) ),
+      model => new TwoDimensionsScreenView( model, tandem.createTandem( 'view' ) ),
+      options
+    );
   }
+}
 
-  return normalModes.register( 'TwoDimensionsScreen', TwoDimensionsScreen );
-} );
+normalModes.register( 'TwoDimensionsScreen', TwoDimensionsScreen );
+export default TwoDimensionsScreen;

@@ -6,132 +6,129 @@
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const AccordionBox = require( 'SUN/AccordionBox' );
-  const AmplitudeSelectorRectangle = require( 'NORMAL_MODES/two-dimensions/view/AmplitudeSelectorRectangle' );
-  const Color = require( 'SCENERY/util/Color' );
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const AmplitudeDirection = require( 'NORMAL_MODES/common/model/AmplitudeDirection' );
-  const AmplitudeDirectionRadioButtonGroup = require( 'NORMAL_MODES/common/view/AmplitudeDirectionRadioButtonGroup' );
-  const HBox = require( 'SCENERY/nodes/HBox' );
-  const HStrut = require( 'SCENERY/nodes/HStrut' );
-  const merge = require( 'PHET_CORE/merge' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
-  const NormalModesConstants = require( 'NORMAL_MODES/common/NormalModesConstants' );
-  const Rectangle = require( 'SCENERY/nodes/Rectangle' );
-  const Text = require( 'SCENERY/nodes/Text' );
-  const TwoDimensionsConstants = require( 'NORMAL_MODES/two-dimensions/TwoDimensionsConstants' );
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import merge from '../../../../phet-core/js/merge.js';
+import HBox from '../../../../scenery/js/nodes/HBox.js';
+import HStrut from '../../../../scenery/js/nodes/HStrut.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../scenery/js/util/Color.js';
+import AccordionBox from '../../../../sun/js/AccordionBox.js';
+import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
+import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
+import normalModesStrings from '../../normal-modes-strings.js';
+import normalModes from '../../normalModes.js';
+import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
+import AmplitudeSelectorRectangle from './AmplitudeSelectorRectangle.js';
 
-  // strings
-  const normalModeAmplitudesString = require( 'string!NORMAL_MODES/normalModeAmplitudes' );
+const normalModeAmplitudesString = normalModesStrings.normalModeAmplitudes;
 
-  // constants
-  const PANEL_REAL_SIZE = 270;
-  const RECT_GRID_UNITS = 5;
-  const PADDING_GRID_UNITS = 1;
+// constants
+const PANEL_REAL_SIZE = 270;
+const RECT_GRID_UNITS = 5;
+const PADDING_GRID_UNITS = 1;
 
-  class NormalModeAmplitudesAccordionBox extends AccordionBox {
+class NormalModeAmplitudesAccordionBox extends AccordionBox {
 
-    /**
-     * @param {TwoDimensionsModel} model
-     * @param {Object} [options]
-     */
-    constructor( model, options ) {
+  /**
+   * @param {TwoDimensionsModel} model
+   * @param {Object} [options]
+   */
+  constructor( model, options ) {
 
-      /*
-      Model properties used:
-        - amplitudeDirectionProperty
-        - modeXAmplitudeProperty
-        - modeYAmplitudeProperty
-      */
+    /*
+    Model properties used:
+      - amplitudeDirectionProperty
+      - modeXAmplitudeProperty
+      - modeYAmplitudeProperty
+    */
 
-      // from Vector Addition
-      const PANEL_CORNER_RADIUS = 5;
-      const PANEL_X_MARGIN = 9;
-      const PANEL_Y_MARGIN = 10;
+    // from Vector Addition
+    const PANEL_CORNER_RADIUS = 5;
+    const PANEL_X_MARGIN = 9;
+    const PANEL_Y_MARGIN = 10;
 
-      options = merge( {
-        resize: true,
+    options = merge( {
+      resize: true,
 
-        cornerRadius: PANEL_CORNER_RADIUS,
-        contentXMargin: -24 - 2 * PANEL_X_MARGIN,
-        contentYMargin: PANEL_Y_MARGIN,
-        contentXSpacing: PANEL_X_MARGIN,
-        contentYSpacing: 1,
-        buttonXMargin: PANEL_X_MARGIN,
-        buttonYMargin: PANEL_Y_MARGIN,
-        titleYMargin: PANEL_Y_MARGIN,
-        titleXMargin: PANEL_X_MARGIN,
-        titleXSpacing: PANEL_X_MARGIN,
-        titleAlignX: 'left',
-        expandCollapseButtonOptions: {
-          sideLength: 22,
-          touchAreaXDilation: 6,
-          touchAreaYDilation: 6
-        },
+      cornerRadius: PANEL_CORNER_RADIUS,
+      contentXMargin: -24 - 2 * PANEL_X_MARGIN,
+      contentYMargin: PANEL_Y_MARGIN,
+      contentXSpacing: PANEL_X_MARGIN,
+      contentYSpacing: 1,
+      buttonXMargin: PANEL_X_MARGIN,
+      buttonYMargin: PANEL_Y_MARGIN,
+      titleYMargin: PANEL_Y_MARGIN,
+      titleXMargin: PANEL_X_MARGIN,
+      titleXSpacing: PANEL_X_MARGIN,
+      titleAlignX: 'left',
+      expandCollapseButtonOptions: {
+        sideLength: 22,
+        touchAreaXDilation: 6,
+        touchAreaYDilation: 6
+      },
 
-        titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
-        showTitleWhenExpanded: false
-      }, options );
+      titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
+      showTitleWhenExpanded: false
+    }, options );
 
-      const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
+    const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
 
-      // dispose is unnecessary, exists for the lifetime of the sim
-      const axisAmplitudesProperty = new DerivedProperty( [ model.amplitudeDirectionProperty ],
-        amplitudeDirection => {
-          return ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
-        } );
-
-      // dispose is unnecessary, exists for the lifetime of the sim
-      const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
-        return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numMasses - 1 ];
+    // dispose is unnecessary, exists for the lifetime of the sim
+    const axisAmplitudesProperty = new DerivedProperty( [ model.amplitudeDirectionProperty ],
+      amplitudeDirection => {
+        return ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? model.modeYAmplitudeProperty : model.modeXAmplitudeProperty;
       } );
 
-      // dispose is unnecessary, exists for the lifetime of the sim
-      const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
-        return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numMasses + PADDING_GRID_UNITS * ( numMasses - 1 ) );
-      } );
+    // dispose is unnecessary, exists for the lifetime of the sim
+    const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
+      return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numMasses - 1 ];
+    } );
 
-      const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
-      const selectorRectangles = new Array( selectorRectanglesLength );
+    // dispose is unnecessary, exists for the lifetime of the sim
+    const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
+      return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numMasses + PADDING_GRID_UNITS * ( numMasses - 1 ) );
+    } );
 
-      const selectorRectangleOptions = {
-        rectGridSize: RECT_GRID_UNITS,
-        paddingGridSize: PADDING_GRID_UNITS,
-        backgroundRect: {
-          fill: Color.toColor( options.fill ).colorUtilsBrighter( 0.6 )
-        }
-      };
+    const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
+    const selectorRectangles = new Array( selectorRectanglesLength );
 
-      for ( let i = 0; i < selectorRectanglesLength; i++ ) {
-        const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_ROW_LEN );
-        const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
-
-        selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
-          maxAmpProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
+    const selectorRectangleOptions = {
+      rectGridSize: RECT_GRID_UNITS,
+      paddingGridSize: PADDING_GRID_UNITS,
+      backgroundRect: {
+        fill: Color.toColor( options.fill ).colorUtilsBrighter( 0.6 )
       }
+    };
 
-      const selectorBox = new Rectangle( {
-        children: selectorRectangles,
-        rectHeight: PANEL_REAL_SIZE,
-        rectWidth: PANEL_REAL_SIZE
-      } );
+    for ( let i = 0; i < selectorRectanglesLength; i++ ) {
+      const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_ROW_LEN );
+      const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
 
-      const rightMargin = new HStrut( 15 + PANEL_X_MARGIN );
-      const leftMargin = new HStrut( PANEL_X_MARGIN );
-
-      const contentNode = new HBox( {
-        spacing: 0,
-        align: 'center',
-        children: [ amplitudeDirectionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
-      } );
-
-      super( contentNode, options );
+      selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
+        maxAmpProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
     }
-  }
 
-  return normalModes.register( 'NormalModeAmplitudesAccordionBox', NormalModeAmplitudesAccordionBox );
-} );
+    const selectorBox = new Rectangle( {
+      children: selectorRectangles,
+      rectHeight: PANEL_REAL_SIZE,
+      rectWidth: PANEL_REAL_SIZE
+    } );
+
+    const rightMargin = new HStrut( 15 + PANEL_X_MARGIN );
+    const leftMargin = new HStrut( PANEL_X_MARGIN );
+
+    const contentNode = new HBox( {
+      spacing: 0,
+      align: 'center',
+      children: [ amplitudeDirectionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
+    } );
+
+    super( contentNode, options );
+  }
+}
+
+normalModes.register( 'NormalModeAmplitudesAccordionBox', NormalModeAmplitudesAccordionBox );
+export default NormalModeAmplitudesAccordionBox;

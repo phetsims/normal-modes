@@ -5,34 +5,31 @@
  *
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
-define( require => {
-  'use strict';
 
-  // modules
-  const DerivedProperty = require( 'AXON/DerivedProperty' );
-  const normalModes = require( 'NORMAL_MODES/normalModes' );
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import normalModes from '../../normalModes.js';
 
-  class Spring {
+class Spring {
 
-    /**
-     * @param {Mass} leftMass
-     * @param {Mass} rightMass
-     */
-    constructor( leftMass, rightMass ) {
+  /**
+   * @param {Mass} leftMass
+   * @param {Mass} rightMass
+   */
+  constructor( leftMass, rightMass ) {
 
-      // @private (read-only) Non-property attributes
-      this.leftMass = leftMass;
-      this.rightMass = rightMass;
+    // @private (read-only) Non-property attributes
+    this.leftMass = leftMass;
+    this.rightMass = rightMass;
 
-      // @public {Property.<boolean>} determines the visibility of the spring
-      // dispose is unnecessary because all masses and springs exist for the lifetime of the sim
-      this.visibleProperty = new DerivedProperty(
-        [ this.leftMass.visibleProperty, this.rightMass.visibleProperty ],
-        ( leftVisible, rightVisible ) => {
-          return leftVisible;
-        } );
-    }
+    // @public {Property.<boolean>} determines the visibility of the spring
+    // dispose is unnecessary because all masses and springs exist for the lifetime of the sim
+    this.visibleProperty = new DerivedProperty(
+      [ this.leftMass.visibleProperty, this.rightMass.visibleProperty ],
+      ( leftVisible, rightVisible ) => {
+        return leftVisible;
+      } );
   }
+}
 
-  return normalModes.register( 'Spring', Spring );
-} );
+normalModes.register( 'Spring', Spring );
+export default Spring;
