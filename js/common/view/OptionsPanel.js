@@ -152,7 +152,8 @@ class OptionsPanel extends Panel {
       listener: model.zeroPositions.bind( model )
     }, textButtonsOptions ) );
 
-    const createLayoutFunction5 = options => {
+    // Creates option.layoutFunction for NumberControl instances
+    const createLayoutFunction = options => {
 
       options = merge( {
         align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
@@ -187,7 +188,7 @@ class OptionsPanel extends Panel {
 
     const speedControlOptions = {
       delta: OneDimensionConstants.DELTA_SPEED,
-      layoutFunction: createLayoutFunction5(),
+      layoutFunction: createLayoutFunction(),
       includeArrowButtons: false,
       sliderOptions: {
         trackSize: new Dimension2( 150, 3 ),
@@ -235,7 +236,7 @@ class OptionsPanel extends Panel {
     } );
 
     const numVisibleMassesControlOptions = {
-      layoutFunction: createLayoutFunction5(),
+      layoutFunction: createLayoutFunction(),
       includeArrowButtons: false,
       sliderOptions: {
         trackSize: new Dimension2( 150, 3 ),
