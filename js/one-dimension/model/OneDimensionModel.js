@@ -107,7 +107,6 @@ class OneDimensionModel {
         tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex}]` ),
         phetioType: DerivedPropertyIO( NumberIO )
       } );
-
     }
 
     // @public {Mass[]} Array that will contain all of the masses.
