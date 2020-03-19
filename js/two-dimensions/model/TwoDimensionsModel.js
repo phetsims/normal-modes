@@ -8,11 +8,13 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import Mass from '../../common/model/Mass.js';
 import Spring from '../../common/model/Spring.js';
@@ -78,23 +80,27 @@ class TwoDimensionsModel {
 
       for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; ++j ) {
 
+        // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
+        const tandemIndex1 = i + 1;
+        const tandemIndex2 = j + 1;
+
         this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeXAmplitudeProperties[${i},${j}]` ),
+          tandem: tandem.createTandem( `modeXAmplitudeProperties[${tandemIndex1},${tandemIndex2}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeYAmplitudeProperties[${i},${j}]` ),
+          tandem: tandem.createTandem( `modeYAmplitudeProperties[${tandemIndex1},${tandemIndex2}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeXPhaseProperties[${i},${j}]` ),
+          tandem: tandem.createTandem( `modeXPhaseProperties[${tandemIndex1},${tandemIndex2}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
         this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeYPhaseProperties[${i},${j}]` ),
+          tandem: tandem.createTandem( `modeYPhaseProperties[${tandemIndex1},${tandemIndex2}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
@@ -110,6 +116,9 @@ class TwoDimensionsModel {
             const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numMasses + 1 ) );
             return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
           }
+        }, {
+          tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex1},${tandemIndex2}]` ),
+          phetioType: DerivedPropertyIO( NumberIO )
         } );
       }
     }
@@ -233,10 +242,12 @@ class TwoDimensionsModel {
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       for ( let j = 0; j < MAX_MASSES; ++j ) {
+
         const visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
 
-        // All the masses needed are created at once, and exist for the lifetime of the sim
-        this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( `mass[${i},${j}]` ) );
+        // All the masses needed are created at once, and exist for the lifetime of the sim.
+        // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
+        this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( `mass[${i+1},${j+1}]` ) );
 
         if ( x < xFinal - xStep / 2 ) {
           x += xStep;

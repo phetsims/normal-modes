@@ -8,10 +8,12 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
+import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import Mass from '../../common/model/Mass.js';
 import Spring from '../../common/model/Spring.js';
@@ -78,13 +80,16 @@ class OneDimensionModel {
 
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
 
+      // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
+      const tandemIndex = i + 1;
+
       this.modeAmplitudeProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
-        tandem: tandem.createTandem( `modeAmplitudeProperties[${i}]` ),
+        tandem: tandem.createTandem( `modeAmplitudeProperties[${tandemIndex}]` ),
         range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
       this.modePhaseProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
-        tandem: tandem.createTandem( `modePhaseProperties[${i}]` ),
+        tandem: tandem.createTandem( `modePhaseProperties[${tandemIndex}]` ),
         range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
       } );
 
@@ -99,7 +104,8 @@ class OneDimensionModel {
           return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
         }
       }, {
-        tandem: tandem.createTandem( `modeFrequencyProperties[${i}]` )
+        tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex}]` ),
+        phetioType: DerivedPropertyIO( NumberIO )
       } );
 
     }
