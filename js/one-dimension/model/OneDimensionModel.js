@@ -79,12 +79,12 @@ class OneDimensionModel {
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
 
       this.modeAmplitudeProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
-        tandem: tandem.createTandem( 'modeAmplitudeProperties' + i ),
+        tandem: tandem.createTandem( `modeAmplitudeProperties[${i}]` ),
         range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
       this.modePhaseProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
-        tandem: tandem.createTandem( 'modePhaseProperties' + i ),
+        tandem: tandem.createTandem( `modePhaseProperties[${i}]` ),
         range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
       } );
 
@@ -98,6 +98,8 @@ class OneDimensionModel {
         else {
           return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
         }
+      }, {
+        tandem: tandem.createTandem( `modeFrequencyProperties[${i}]` )
       } );
 
     }
