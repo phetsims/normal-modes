@@ -61,42 +61,45 @@ class TwoDimensionsModel {
     // @public {number} Accumulated delta-time
     this.dt = 0;
 
-    // @public {NumberProperty[][]}
-    this.modeXAmplitudeProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeYAmplitudeProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeXPhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeYPhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeFrequencyProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    // @public {NumberProperty[][]} 2-dimensional arrays of Properties for each mode
+    this.modeXAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeYAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeXPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeYPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
-      this.modeXAmplitudeProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeYAmplitudeProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeXPhaseProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeYPhaseProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeFrequencyProperty[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+
+      this.modeXAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      this.modeYAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      this.modeXPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      this.modeYPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      this.modeFrequencyProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 
       for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; ++j ) {
-        this.modeXAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeXAmplitudeProperty[${i},${j}]` ),
+
+        this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
+          tandem: tandem.createTandem( `modeXAmplitudeProperties[${i},${j}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
-        this.modeYAmplitudeProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeYAmplitudeProperty[${i},${j}]` ),
+        this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
+          tandem: tandem.createTandem( `modeYAmplitudeProperties[${i},${j}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
-        this.modeXPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeXPhaseProperty[${i},${j}]` ),
+        this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
+          tandem: tandem.createTandem( `modeXPhaseProperties[${i},${j}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
-        this.modeYPhaseProperty[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeYPhaseProperty[${i},${j}]` ),
+        this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
+          tandem: tandem.createTandem( `modeYPhaseProperties[${i},${j}]` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
         // dispose is unnecessary, since this class owns the dependency
-        this.modeFrequencyProperty[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
+        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
           const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
           const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
           if ( i >= numMasses || j >= numMasses ) {
@@ -274,10 +277,10 @@ class TwoDimensionsModel {
   resetNormalModes() {
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
       for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; j++ ) {
-        this.modeXAmplitudeProperty[ i ][ j ].reset();
-        this.modeYAmplitudeProperty[ i ][ j ].reset();
-        this.modeXPhaseProperty[ i ][ j ].reset();
-        this.modeYPhaseProperty[ i ][ j ].reset();
+        this.modeXAmplitudeProperties[ i ][ j ].reset();
+        this.modeYAmplitudeProperties[ i ][ j ].reset();
+        this.modeXPhaseProperties[ i ][ j ].reset();
+        this.modeYPhaseProperties[ i ][ j ].reset();
       }
     }
   }
@@ -454,11 +457,11 @@ class TwoDimensionsModel {
       this.freqSquaredTimesAmplitudeXTimesCos[ r ] = [];
       this.freqSquaredTimesAmplitudeYTimesCos[ r ] = [];
       for ( let s = 1; s <= N; ++s ) {
-        const modeAmplitudeX = this.modeXAmplitudeProperty[ r - 1 ][ s - 1 ].get();
-        const modeAmplitudeY = this.modeYAmplitudeProperty[ r - 1 ][ s - 1 ].get();
-        const modeFrequency = this.modeFrequencyProperty[ r - 1 ][ s - 1 ].get();
-        const modePhaseX = this.modeXPhaseProperty[ r - 1 ][ s - 1 ].get();
-        const modePhaseY = this.modeYPhaseProperty[ r - 1 ][ s - 1 ].get();
+        const modeAmplitudeX = this.modeXAmplitudeProperties[ r - 1 ][ s - 1 ].get();
+        const modeAmplitudeY = this.modeYAmplitudeProperties[ r - 1 ][ s - 1 ].get();
+        const modeFrequency = this.modeFrequencyProperties[ r - 1 ][ s - 1 ].get();
+        const modePhaseX = this.modeXPhaseProperties[ r - 1 ][ s - 1 ].get();
+        const modePhaseY = this.modeYPhaseProperties[ r - 1 ][ s - 1 ].get();
 
         const freqTimesTime = modeFrequency * this.timeProperty.get();
         const freqTimesTimeMinusPhsX = freqTimesTime - modePhaseX;
@@ -534,7 +537,7 @@ class TwoDimensionsModel {
 
             const massDisplacement = this.masses[ i ][ j ].displacementProperty.get();
             const massVelocity = this.masses[ i ][ j ].velocityProperty.get();
-            const modeFrequency = this.modeFrequencyProperty[ r - 1 ][ s - 1 ].get();
+            const modeFrequency = this.modeFrequencyProperties[ r - 1 ][ s - 1 ].get();
             const constantTimesSineProduct = ( 4 / ( ( N + 1 ) * ( N + 1 ) ) ) * this.sineProduct[ i ][ j ][ r ][ s ];
 
             AmplitudeTimesCosPhaseX += constantTimesSineProduct * massDisplacement.x;
@@ -544,17 +547,17 @@ class TwoDimensionsModel {
           }
 
         }
-        this.modeXAmplitudeProperty[ r - 1 ][ s - 1 ].set(
+        this.modeXAmplitudeProperties[ r - 1 ][ s - 1 ].set(
           Math.sqrt( AmplitudeTimesCosPhaseX ** 2 + AmplitudeTimesSinPhaseX ** 2 )
         );
-        this.modeYAmplitudeProperty[ r - 1 ][ s - 1 ].set(
+        this.modeYAmplitudeProperties[ r - 1 ][ s - 1 ].set(
           Math.sqrt( AmplitudeTimesCosPhaseY ** 2 + AmplitudeTimesSinPhaseY ** 2 )
         );
 
-        this.modeXPhaseProperty[ r - 1 ][ s - 1 ].set(
+        this.modeXPhaseProperties[ r - 1 ][ s - 1 ].set(
           Math.atan2( AmplitudeTimesSinPhaseX, AmplitudeTimesCosPhaseX )
         );
-        this.modeYPhaseProperty[ r - 1 ][ s - 1 ].set(
+        this.modeYPhaseProperties[ r - 1 ][ s - 1 ].set(
           Math.atan2( AmplitudeTimesSinPhaseY, AmplitudeTimesCosPhaseY )
         );
       }

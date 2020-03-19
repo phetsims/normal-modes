@@ -104,9 +104,9 @@ class ModeGraphCanvasNode extends CanvasNode {
   update() {
 
     const n = this.normalModeNumber;
-    const amp = this.model.modeAmplitudeProperty[ n ].get();
-    const phase = this.model.modePhaseProperty[ n ].get();
-    const freq = this.model.modeFrequencyProperty[ n ].get();
+    const amp = this.model.modeAmplitudeProperties[ n ].get();
+    const phase = this.model.modePhaseProperties[ n ].get();
+    const freq = this.model.modeFrequencyProperties[ n ].get();
     const time = this.model.timeProperty.get();
 
     // put a negative sign in front of it because of y coordinate stuff

@@ -71,23 +71,25 @@ class OneDimensionModel {
     // @public {number} Accumulated delta-time
     this.dt = 0;
 
-    // @public {NumberProperty[]}
-    this.modeAmplitudeProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modePhaseProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeFrequencyProperty = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    // @public {NumberProperty[]} 1-dimensional arrays of Properties for each mode
+    this.modeAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modePhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
-      this.modeAmplitudeProperty[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
-        tandem: tandem.createTandem( 'modeAmplitudeProperty' + i ),
+
+      this.modeAmplitudeProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
+        tandem: tandem.createTandem( 'modeAmplitudeProperties' + i ),
         range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
-      this.modePhaseProperty[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
-        tandem: tandem.createTandem( 'modePhaseProperty' + i ),
+      this.modePhaseProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
+        tandem: tandem.createTandem( 'modePhaseProperties' + i ),
         range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
       } );
 
       // dispose is unnecessary, since this class owns the dependency
-      this.modeFrequencyProperty[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
+      this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
         const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
         const m = OneDimensionConstants.MASSES_MASS_VALUE;
         if ( i >= numMasses ) {
@@ -189,8 +191,8 @@ class OneDimensionModel {
    */
   resetNormalModes() {
     for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
-      this.modeAmplitudeProperty[ i ].reset();
-      this.modePhaseProperty[ i ].reset();
+      this.modeAmplitudeProperties[ i ].reset();
+      this.modePhaseProperties[ i ].reset();
     }
   }
 
@@ -365,9 +367,9 @@ class OneDimensionModel {
         // for each mode
 
         const j = r - 1;
-        const modeAmplitude = this.modeAmplitudeProperty[ j ].get();
-        const modeFrequency = this.modeFrequencyProperty[ j ].get();
-        const modePhase = this.modePhaseProperty[ j ].get();
+        const modeAmplitude = this.modeAmplitudeProperties[ j ].get();
+        const modeFrequency = this.modeFrequencyProperties[ j ].get();
+        const modePhase = this.modePhaseProperties[ j ].get();
 
         const displacementSin = Math.sin( i * r * Math.PI / ( N + 1 ) );
         const displacementCos = Math.cos( modeFrequency * this.timeProperty.get() - modePhase );
@@ -419,17 +421,17 @@ class OneDimensionModel {
         }
 
         const amplitudeSin = Math.sin( i * j * Math.PI / ( N + 1 ) );
-        const modeFrequency = this.modeFrequencyProperty[ i - 1 ].get();
+        const modeFrequency = this.modeFrequencyProperties[ i - 1 ].get();
 
         AmplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * amplitudeSin;
         AmplitudeTimesSinPhase += ( 2 / ( modeFrequency * ( N + 1 ) ) ) * massVelocity * amplitudeSin;
       }
 
-      this.modeAmplitudeProperty[ i - 1 ].set(
+      this.modeAmplitudeProperties[ i - 1 ].set(
         Math.sqrt( AmplitudeTimesCosPhase ** 2 + AmplitudeTimesSinPhase ** 2 )
       );
 
-      this.modePhaseProperty[ i - 1 ].set(
+      this.modePhaseProperties[ i - 1 ].set(
         Math.atan2( AmplitudeTimesSinPhase, AmplitudeTimesCosPhase )
       );
     }

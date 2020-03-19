@@ -98,11 +98,11 @@ class AmplitudeSelectorRectangle extends Rectangle {
     };
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.modeXAmplitudeProperty[ row ][ col ].link( amplitude => {
+    model.modeXAmplitudeProperties[ row ][ col ].link( amplitude => {
       amplitudeChanged( amplitude, AmplitudeDirection.HORIZONTAL );
     } );
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.modeYAmplitudeProperty[ row ][ col ].link( amplitude => {
+    model.modeYAmplitudeProperties[ row ][ col ].link( amplitude => {
       amplitudeChanged( amplitude, AmplitudeDirection.VERTICAL );
     } );
 

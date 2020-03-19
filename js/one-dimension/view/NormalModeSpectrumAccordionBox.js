@@ -47,9 +47,9 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
 
     /*
     Model properties used:
-      - modeAmplitudeProperty[0..9]
-      - modePhaseProperty[0..9]
-      - modeFrequencyProperty[0..9]
+      - modeAmplitudeProperties[0..9]
+      - modePhaseProperties[0..9]
+      - modeFrequencyProperties[0..9]
       - amplitudeDirectionProperty
       - numVisibleMassesProperty
       - phasesVisibleProperty
@@ -108,7 +108,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       const m = OneDimensionConstants.MASSES_MASS_VALUE;
 
       ampSliders[ i ] = new VSlider(
-        model.modeAmplitudeProperty[ i ],
+        model.modeAmplitudeProperties[ i ],
         new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
           OneDimensionConstants.MAX_MODE_AMPLITUDE,
           OneDimensionConstants.INIT_MODE_AMPLITUDE ),
@@ -116,7 +116,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       );
 
       phaseSliders[ i ] = new VSlider(
-        model.modePhaseProperty[ i ],
+        model.modePhaseProperties[ i ],
         new RangeWithValue( OneDimensionConstants.MIN_MODE_PHASE,
           OneDimensionConstants.MAX_MODE_PHASE,
           OneDimensionConstants.INIT_MODE_PHASE ),
@@ -128,7 +128,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         { font: NormalModesConstants.CONTROL_FONT }
       );
 
-      const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
+      const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
       frequencyText[ i ] = new Text(
         StringUtils.fillIn( frequencyRatioOmegaPatternString, {
           frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
@@ -136,7 +136,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         { font: NormalModesConstants.SMALL_FONT, maxWidth: 60 }
       );
 
-      modeGraphs[ i ] = new StaticModeGraphCanvasNode( i, model.modeFrequencyProperty[ i ] );
+      modeGraphs[ i ] = new StaticModeGraphCanvasNode( i, model.modeFrequencyProperties[ i ] );
     }
 
     const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1 );
@@ -252,7 +252,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       for ( let i = 0; i < numMasses; i++ ) {
         const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
         const m = OneDimensionConstants.MASSES_MASS_VALUE;
-        const frequencyRatio = model.modeFrequencyProperty[ i ].get() / Math.sqrt( k / m );
+        const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
 
         modeGraphs[ i ].update();
         frequencyText[ i ].text = StringUtils.fillIn( frequencyRatioOmegaPatternString, {

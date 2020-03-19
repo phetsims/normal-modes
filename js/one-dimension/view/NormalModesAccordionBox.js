@@ -33,8 +33,8 @@ class NormalModesAccordionBox extends AccordionBox {
     Model properties used:
       - timeProperty
       - numVisibleMassesProperty
-      - modeAmplitudeProperty[0..9]
-      - modePhaseProperty[0..9]
+      - modeAmplitudeProperties[0..9]
+      - modePhaseProperties[0..9]
     */
 
     // from Vector Addition
@@ -82,7 +82,7 @@ class NormalModesAccordionBox extends AccordionBox {
 
       // dispose is unnecessary, exists for the lifetime of the sim
       Property.multilink(
-        [ model.timeProperty, model.modeAmplitudeProperty[ i ], model.modePhaseProperty[ i ] ],
+        [ model.timeProperty, model.modeAmplitudeProperties[ i ], model.modePhaseProperties[ i ] ],
         ( time, amp, phase ) => {
           normalModeGraphs[ i ].update();
         } );

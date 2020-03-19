@@ -19,10 +19,10 @@ class StaticModeGraphCanvasNode extends CanvasNode {
 
   /**
    * @param {number} normalModeNumber
-   * @param {Property.<number>} modeFrequencyProperty
+   * @param {Property.<number>} modeFrequencyProperties
    * @param {Object} [options]
    */
-  constructor( normalModeNumber, modeFrequencyProperty, options ) {
+  constructor( normalModeNumber, modeFrequencyProperties, options ) {
 
     options = merge( {
       graphSize: new Dimension2( 40, 25 ),
@@ -58,7 +58,7 @@ class StaticModeGraphCanvasNode extends CanvasNode {
     this.referenceLineStrokeColor = options.referenceLineStrokeColor;
 
     // @private {Property.<number>}
-    this.modeFrequencyProperty = modeFrequencyProperty;
+    this.modeFrequencyProperties = modeFrequencyProperties;
   }
 
   /**
@@ -99,7 +99,7 @@ class StaticModeGraphCanvasNode extends CanvasNode {
     const n = this.normalModeNumber;
     const amp = 0.15;
     const phase = 0;
-    const freq = this.modeFrequencyProperty.get();
+    const freq = this.modeFrequencyProperties.get();
     const time = 0;
 
     // put a negative sign in front of it because of y coordinate stuff
