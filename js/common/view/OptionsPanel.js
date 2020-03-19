@@ -255,7 +255,9 @@ class OptionsPanel extends Panel {
         font: NormalModesConstants.GENERAL_FONT
       },
       numberDisplayOptions: {
-        font: NormalModesConstants.GENERAL_FONT
+        textOptions: {
+          font: NormalModesConstants.GENERAL_FONT
+        }
       }
     };
 
