@@ -123,14 +123,14 @@ class TwoDimensionsModel {
       }
     }
 
-    // @public {Mass[][]} Array with the arrays that will contain all of the masses.
+    // @public {Mass[][]} 2-dimensional array that will contain all of the masses.
     this.masses = new Array( MAX_MASSES );
     for ( let i = 0; i < MAX_MASSES; ++i ) {
       this.masses[ i ] = new Array( MAX_MASSES );
     }
     this.createDefaultMasses( tandem );
 
-    // @public {Spring[][]} Array with the arrays that will contain all of the springs.
+    // @public {Spring[][]} 2-dimensional array that will contain all of the springs.
     this.springsX = new Array( MAX_SPRINGS );
     this.springsY = new Array( MAX_SPRINGS );
     for ( let i = 0; i < MAX_SPRINGS; ++i ) {
