@@ -15,7 +15,7 @@ import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModesStrings from '../../normal-modes-strings.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
 import ModeGraphCanvasNode from './ModeGraphCanvasNode.js';
 

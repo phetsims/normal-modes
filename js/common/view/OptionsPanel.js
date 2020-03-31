@@ -26,7 +26,7 @@ import RectangularButtonView from '../../../../sun/js/buttons/RectangularButtonV
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import normalModesStrings from '../../normal-modes-strings.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
 import OneDimensionConstants from '../../one-dimension/OneDimensionConstants.js';
 import NormalModesColors from '../NormalModesColors.js';

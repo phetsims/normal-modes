@@ -25,7 +25,7 @@ import VSlider from '../../../../sun/js/VSlider.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModesStrings from '../../normal-modes-strings.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
 import OneDimensionConstants from '../OneDimensionConstants.js';
 import StaticModeGraphCanvasNode from './StaticModeGraphCanvasNode.js';

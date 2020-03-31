@@ -10,7 +10,7 @@
 import Sim from '../../joist/js/Sim.js';
 import SimLauncher from '../../joist/js/SimLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import normalModesStrings from './normal-modes-strings.js';
+import normalModesStrings from './normalModesStrings.js';
 import OneDimensionScreen from './one-dimension/OneDimensionScreen.js';
 import TwoDimensionsScreen from './two-dimensions/TwoDimensionsScreen.js';
 

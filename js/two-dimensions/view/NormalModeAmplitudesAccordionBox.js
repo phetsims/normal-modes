@@ -18,7 +18,7 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModesStrings from '../../normal-modes-strings.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
 import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
 import AmplitudeSelectorRectangle from './AmplitudeSelectorRectangle.js';
