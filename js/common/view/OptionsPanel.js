@@ -167,10 +167,12 @@ class OptionsPanel extends Panel {
         return new VBox( {
           align: options.align,
           spacing: options.ySpacing,
+          excludeInvisibleChildrenFromBounds: false,
           children: [
             new HBox( {
               spacing: options.titleXSpacing,
-              children: [ titleNode, numberDisplay ]
+              children: [ titleNode, numberDisplay ],
+              excludeInvisibleChildrenFromBounds: false
             } ),
             new HBox( {
               spacing: options.arrowButtonsXSpacing,
@@ -179,7 +181,8 @@ class OptionsPanel extends Panel {
                 leftArrowButton,
                 slider,
                 rightArrowButton
-              ]
+              ],
+              excludeInvisibleChildrenFromBounds: false
             } )
           ]
         } );
