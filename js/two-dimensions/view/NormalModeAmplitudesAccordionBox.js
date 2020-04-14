@@ -83,13 +83,13 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       } );
 
     // dispose is unnecessary, exists for the lifetime of the sim
-    const maxAmpProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
-      return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numMasses - 1 ];
+    const maxAmplitudeProperty = new DerivedProperty( [ model.numberVisibleMassesProperty ], numberMasses => {
+      return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numberMasses - 1 ];
     } );
 
     // dispose is unnecessary, exists for the lifetime of the sim
-    const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numVisibleMassesProperty ], numMasses => {
-      return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numMasses + PADDING_GRID_UNITS * ( numMasses - 1 ) );
+    const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numberVisibleMassesProperty ], numberMasses => {
+      return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numberMasses + PADDING_GRID_UNITS * ( numberMasses - 1 ) );
     } );
 
     const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
@@ -108,7 +108,7 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
 
       selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
-        maxAmpProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
+        maxAmplitudeProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
     }
 
     const selectorBox = new Rectangle( {

@@ -104,22 +104,22 @@ class ModeGraphCanvasNode extends CanvasNode {
   update() {
 
     const n = this.normalModeNumber;
-    const amp = this.model.modeAmplitudeProperties[ n ].get();
+    const amplitude = this.model.modeAmplitudeProperties[ n ].get();
     const phase = this.model.modePhaseProperties[ n ].get();
-    const freq = this.model.modeFrequencyProperties[ n ].get();
+    const frequency = this.model.modeFrequencyProperties[ n ].get();
     const time = this.model.timeProperty.get();
 
     // put a negative sign in front of it because of y coordinate stuff
     const heightFactor = -( 2 * this.graphSize.height / 3 );
 
     // this result is the same for all curve positions, so it's more efficient to only run it once
-    const cos = Math.cos( freq * time - phase );
+    const cos = Math.cos( frequency * time - phase );
 
     for ( let i = 0; i < this.curveYPositions.length; i++ ) {
       const x = i / this.curveResolution;
 
       const sin = Math.sin( x * ( n + 1 ) * Math.PI );
-      this.curveYPositions[ i ] = heightFactor * ( amp * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
+      this.curveYPositions[ i ] = heightFactor * ( amplitude * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
     }
 
     // indicate that this should be repainted during the next paint cycle

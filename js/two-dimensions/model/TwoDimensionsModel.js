@@ -49,8 +49,8 @@ class TwoDimensionsModel {
     } );
 
     // @public {Property.<number>} the current number of visible masses in each row
-    this.numVisibleMassesProperty = new NumberProperty( 2, {
-      tandem: tandem.createTandem( 'numVisibleMassesProperty' ),
+    this.numberVisibleMassesProperty = new NumberProperty( 2, {
+      tandem: tandem.createTandem( 'numberVisibleMassesProperty' ),
       numberType: 'Integer',
       range: new Range( 1, 10 )
     } );
@@ -105,15 +105,15 @@ class TwoDimensionsModel {
         } );
 
         // dispose is unnecessary, since this class owns the dependency
-        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
+        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numberVisibleMassesProperty ], numberMasses => {
           const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
           const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
-          if ( i >= numMasses || j >= numMasses ) {
+          if ( i >= numberMasses || j >= numberMasses ) {
             return 0;
           }
           else {
-            const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
-            const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numMasses + 1 ) );
+            const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
+            const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numberMasses + 1 ) );
             return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
           }
         }, {
@@ -155,16 +155,16 @@ class TwoDimensionsModel {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+    this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
   }
 
   /**
    * Calculates the sine products.
-   * @param {number} numMasses - the current number of visible masses in the simulation
+   * @param {number} numberMasses - the current number of visible masses in the simulation
    * @private
    */
-  calculateSineProducts( numMasses ) {
-    const N = numMasses;
+  calculateSineProducts( numberMasses ) {
+    const N = numberMasses;
     this.sineProduct = [];
 
     for ( let i = 1; i <= N; ++i ) {
@@ -188,23 +188,23 @@ class TwoDimensionsModel {
 
   /**
    * Creates MAX_MASSES masses in the correct positions.
-   * @param {number} numMasses - the current number of visible masses in the simulation
+   * @param {number} numberMasses - the current number of visible masses in the simulation
    * @private
    */
-  changedNumberOfMasses( numMasses ) {
+  changedNumberOfMasses( numberMasses ) {
 
     let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( numMasses + 1 );
+    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( numberMasses + 1 );
     const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
     let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( numMasses + 1 );
+    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( numberMasses + 1 );
     const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS - TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       x = TwoDimensionsConstants.LEFT_WALL_X_POS;
       for ( let j = 0; j < MAX_MASSES; ++j ) {
-        const visible = ( i <= numMasses && j <= numMasses );
+        const visible = ( i <= numberMasses && j <= numberMasses );
 
         this.masses[ i ][ j ].equilibriumPositionProperty.set( new Vector2( x, y ) );
         this.masses[ i ][ j ].visibleProperty.set( visible );
@@ -220,7 +220,7 @@ class TwoDimensionsModel {
       }
     }
 
-    this.calculateSineProducts( numMasses );
+    this.calculateSineProducts( numberMasses );
     this.resetNormalModes();
   }
 
@@ -230,20 +230,20 @@ class TwoDimensionsModel {
    * @private
    */
   createDefaultMasses( tandem ) {
-    const defaultMassesNum = this.numVisibleMassesProperty.get();
+    const defaultMassesNumber = this.numberVisibleMassesProperty.get();
 
     let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNum + 1 );
+    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
     const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
 
     let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( defaultMassesNum + 1 );
+    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( defaultMassesNumber + 1 );
     const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       for ( let j = 0; j < MAX_MASSES; ++j ) {
 
-        const visible = ( i <= defaultMassesNum && j <= defaultMassesNum );
+        const visible = ( i <= defaultMassesNumber && j <= defaultMassesNumber );
 
         // All the masses needed are created at once, and exist for the lifetime of the sim.
         // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
@@ -258,7 +258,7 @@ class TwoDimensionsModel {
         y += yStep;
       }
     }
-    this.calculateSineProducts( defaultMassesNum );
+    this.calculateSineProducts( defaultMassesNumber );
   }
 
   /**
@@ -305,7 +305,7 @@ class TwoDimensionsModel {
     this.timeProperty.reset();
     this.simSpeedProperty.reset();
     this.springsVisibleProperty.reset();
-    this.numVisibleMassesProperty.reset();
+    this.numberVisibleMassesProperty.reset();
     this.draggingMassIndexesProperty.reset();
     this.arrowsVisibleProperty.reset();
 
@@ -386,7 +386,7 @@ class TwoDimensionsModel {
    * @private
    */
   setVerletPositions( dt ) {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       for ( let j = 1; j <= N; ++j ) {
         const dragging = this.draggingMassIndexesProperty.get();
@@ -414,7 +414,7 @@ class TwoDimensionsModel {
    * @private
    */
   recalculateVelocityAndAcceleration( dt ) {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       for ( let j = 1; j <= N; ++j ) {
         const dragging = this.draggingMassIndexesProperty.get();
@@ -452,21 +452,21 @@ class TwoDimensionsModel {
    * @private
    */
   setExactPositions() {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
 
     this.amplitudeXTimesCos = [];
     this.amplitudeYTimesCos = [];
-    this.freqTimesAmplitudeXTimesSin = [];
-    this.freqTimesAmplitudeYTimesSin = [];
-    this.freqSquaredTimesAmplitudeXTimesCos = [];
-    this.freqSquaredTimesAmplitudeYTimesCos = [];
+    this.frequencyTimesAmplitudeXTimesSin = [];
+    this.frequencyTimesAmplitudeYTimesSin = [];
+    this.frequencySquaredTimesAmplitudeXTimesCos = [];
+    this.frequencySquaredTimesAmplitudeYTimesCos = [];
     for ( let r = 1; r <= N; ++r ) {
       this.amplitudeXTimesCos[ r ] = [];
       this.amplitudeYTimesCos[ r ] = [];
-      this.freqTimesAmplitudeXTimesSin[ r ] = [];
-      this.freqTimesAmplitudeYTimesSin[ r ] = [];
-      this.freqSquaredTimesAmplitudeXTimesCos[ r ] = [];
-      this.freqSquaredTimesAmplitudeYTimesCos[ r ] = [];
+      this.frequencyTimesAmplitudeXTimesSin[ r ] = [];
+      this.frequencyTimesAmplitudeYTimesSin[ r ] = [];
+      this.frequencySquaredTimesAmplitudeXTimesCos[ r ] = [];
+      this.frequencySquaredTimesAmplitudeYTimesCos[ r ] = [];
       for ( let s = 1; s <= N; ++s ) {
         const modeAmplitudeX = this.modeXAmplitudeProperties[ r - 1 ][ s - 1 ].get();
         const modeAmplitudeY = this.modeYAmplitudeProperties[ r - 1 ][ s - 1 ].get();
@@ -474,22 +474,22 @@ class TwoDimensionsModel {
         const modePhaseX = this.modeXPhaseProperties[ r - 1 ][ s - 1 ].get();
         const modePhaseY = this.modeYPhaseProperties[ r - 1 ][ s - 1 ].get();
 
-        const freqTimesTime = modeFrequency * this.timeProperty.get();
-        const freqTimesTimeMinusPhsX = freqTimesTime - modePhaseX;
-        const freqTimesTimeMinusPhsY = freqTimesTime - modePhaseY;
+        const frequencyTimesTime = modeFrequency * this.timeProperty.get();
+        const frequencyTimesTimeMinusPhsX = frequencyTimesTime - modePhaseX;
+        const frequencyTimesTimeMinusPhsY = frequencyTimesTime - modePhaseY;
 
         // both values are used twice, so it's reasonable to calculate them here
-        const freqTimesTimeMinusPhsXCos = Math.cos( freqTimesTimeMinusPhsX );
-        const freqTimesTimeMinusPhsYCos = Math.cos( freqTimesTimeMinusPhsY );
+        const frequencyTimesTimeMinusPhsXCos = Math.cos( frequencyTimesTimeMinusPhsX );
+        const frequencyTimesTimeMinusPhsYCos = Math.cos( frequencyTimesTimeMinusPhsY );
 
-        this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * freqTimesTimeMinusPhsXCos;
-        this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * freqTimesTimeMinusPhsYCos;
+        this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
+        this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
 
-        this.freqTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( freqTimesTimeMinusPhsX );
-        this.freqTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( freqTimesTimeMinusPhsY );
+        this.frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhsX );
+        this.frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhsY );
 
-        this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * freqTimesTimeMinusPhsXCos;
-        this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * freqTimesTimeMinusPhsYCos;
+        this.frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
+        this.frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
       }
     }
     for ( let i = 1; i <= N; ++i ) {
@@ -511,11 +511,11 @@ class TwoDimensionsModel {
             displacement.x += sineProduct * this.amplitudeXTimesCos[ r ][ s ];
             displacement.y -= sineProduct * this.amplitudeYTimesCos[ r ][ s ];
 
-            velocity.x += sineProduct * this.freqTimesAmplitudeXTimesSin[ r ][ s ];
-            velocity.y -= sineProduct * this.freqTimesAmplitudeYTimesSin[ r ][ s ];
+            velocity.x += sineProduct * this.frequencyTimesAmplitudeXTimesSin[ r ][ s ];
+            velocity.y -= sineProduct * this.frequencyTimesAmplitudeYTimesSin[ r ][ s ];
 
-            acceleration.x += sineProduct * this.freqSquaredTimesAmplitudeXTimesCos[ r ][ s ];
-            acceleration.y -= sineProduct * this.freqSquaredTimesAmplitudeYTimesCos[ r ][ s ];
+            acceleration.x += sineProduct * this.frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ];
+            acceleration.y -= sineProduct * this.frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ];
           }
         }
 
@@ -533,7 +533,7 @@ class TwoDimensionsModel {
    */
   computeModeAmplitudesAndPhases() {
     this.timeProperty.reset();
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let r = 1; r <= N; ++r ) {
       for ( let s = 1; s <= N; ++s ) {
         // for each mode

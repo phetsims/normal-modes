@@ -27,11 +27,11 @@ class AmplitudeSelectorRectangle extends Rectangle {
    * @param {number} row
    * @param {number} col
    * @param {DerivedProperty.<Property.<number>[][]>} axisAmplitudesProperty
-   * @param {DerivedProperty.<number>} maxAmpProperty
+   * @param {DerivedProperty.<number>} maxAmplitudeProperty
    * @param {DerivedProperty.<number>} gridToRealSizeRatioProperty
    * @param {Object} [options]
    */
-  constructor( model, row, col, axisAmplitudesProperty, maxAmpProperty, gridToRealSizeRatioProperty, options ) {
+  constructor( model, row, col, axisAmplitudesProperty, maxAmplitudeProperty, gridToRealSizeRatioProperty, options ) {
 
     options = merge( {
       boundsMethod: 'none',
@@ -67,14 +67,14 @@ class AmplitudeSelectorRectangle extends Rectangle {
 
     const amplitudeChanged = ( amplitude, axis ) => {
       if ( model.amplitudeDirectionProperty.get() === axis ) {
-        const maxAmp = maxAmpProperty.get();
-        const heightFactor = Math.min( 1, amplitude / maxAmp );
+        const maxAmplitude = maxAmplitudeProperty.get();
+        const heightFactor = Math.min( 1, amplitude / maxAmplitude );
         backgroundRect.rectHeight = this.rectHeight * ( 1 - heightFactor );
       }
     };
 
-    const numMassesChanged = numMasses => {
-      if ( row < numMasses && col < numMasses ) {
+    const numberMassesChanged = numberMasses => {
+      if ( row < numberMasses && col < numberMasses ) {
         this.visible = true;
         this.rectWidth = this.rectHeight = options.rectGridSize * gridToRealSizeRatioProperty.get();
 
@@ -107,7 +107,7 @@ class AmplitudeSelectorRectangle extends Rectangle {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.numVisibleMassesProperty.link( numMassesChanged );
+    model.numberVisibleMassesProperty.link( numberMassesChanged );
 
     // unlink is unnecessary, exists for the lifetime of the sim
     model.amplitudeDirectionProperty.link( amplitudeDirectionChanged );
@@ -119,13 +119,13 @@ class AmplitudeSelectorRectangle extends Rectangle {
 
     this.addInputListener( new FireListener( {
       fire: () => {
-        const amp = axisAmplitudesProperty.get()[ row ][ col ];
+        const amplitude = axisAmplitudesProperty.get()[ row ][ col ];
 
-        if ( isNear( amp.get(), maxAmpProperty.get() ) ) {
-          amp.set( TwoDimensionsConstants.MIN_MODE_AMPLITUDE );
+        if ( isNear( amplitude.get(), maxAmplitudeProperty.get() ) ) {
+          amplitude.set( TwoDimensionsConstants.MIN_MODE_AMPLITUDE );
         }
         else {
-          amp.set( maxAmpProperty.get() );
+          amplitude.set( maxAmplitudeProperty.get() );
         }
 
       }

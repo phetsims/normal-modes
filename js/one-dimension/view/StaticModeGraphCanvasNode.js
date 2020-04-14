@@ -97,22 +97,22 @@ class StaticModeGraphCanvasNode extends CanvasNode {
   update() {
 
     const n = this.normalModeNumber;
-    const amp = 0.15;
+    const amplitude = 0.15;
     const phase = 0;
-    const freq = this.modeFrequencyProperties.get();
+    const frequency = this.modeFrequencyProperties.get();
     const time = 0;
 
     // put a negative sign in front of it because of y coordinate stuff
     const heightFactor = -( 2 * this.graphSize.height / 3 );
 
     // this result is the same for all curve positions, so it's more efficient to only run it once
-    const cos = Math.cos( freq * time - phase );
+    const cos = Math.cos( frequency * time - phase );
 
     for ( let i = 0; i < this.curveYPositions.length; i++ ) {
       const x = i / this.curveResolution;
 
       const sin = Math.sin( x * ( n + 1 ) * Math.PI );
-      this.curveYPositions[ i ] = heightFactor * ( amp * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
+      this.curveYPositions[ i ] = heightFactor * ( amplitude * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
     }
   }
 }

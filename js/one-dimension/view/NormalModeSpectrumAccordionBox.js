@@ -51,7 +51,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       - modePhaseProperties[0..9]
       - modeFrequencyProperties[0..9]
       - amplitudeDirectionProperty
-      - numVisibleMassesProperty
+      - numberVisibleMassesProperty
       - phasesVisibleProperty
     */
 
@@ -83,13 +83,13 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       showTitleWhenExpanded: false
     }, options );
 
-    const ampSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    const amplitudeSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
     const phaseSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
     const modeLabels = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
     const frequencyText = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
     const modeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
 
-    const ampSliderOptions = {
+    const amplitudeSliderOptions = {
       trackSize: new Dimension2( 3, 100 ),
       thumbSize: new Dimension2( 26, 15 ),
       thumbTouchAreaXDilation: 15,
@@ -103,16 +103,16 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       thumbTouchAreaYDilation: 15
     };
 
-    for ( let i = 0; i < ampSliders.length; i++ ) {
+    for ( let i = 0; i < amplitudeSliders.length; i++ ) {
       const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
       const m = OneDimensionConstants.MASSES_MASS_VALUE;
 
-      ampSliders[ i ] = new VSlider(
+      amplitudeSliders[ i ] = new VSlider(
         model.modeAmplitudeProperties[ i ],
         new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
           OneDimensionConstants.MAX_MODE_AMPLITUDE,
           OneDimensionConstants.INIT_MODE_AMPLITUDE ),
-        ampSliderOptions
+        amplitudeSliderOptions
       );
 
       phaseSliders[ i ] = new VSlider(
@@ -204,7 +204,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     const contentNode = new HBox( {
       spacing: 9.8,
       align: 'center',
-      children: panelColumns.slice( 0, model.numVisibleMassesProperty.get() + 1 )
+      children: panelColumns.slice( 0, model.numberVisibleMassesProperty.get() + 1 )
     } );
 
     const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
@@ -218,8 +218,8 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       for ( let i = 1; i < panelColumns.length; ++i ) {
         const j = i - 1;
         panelColumns[ i ].children = ( phasesVisibility ) ?
-          [ modeGraphs[ j ], modeLabels[ j ], ampSliders[ j ], frequencyText[ j ], phaseSliders[ j ] ] :
-          [ modeGraphs[ j ], modeLabels[ j ], ampSliders[ j ], frequencyText[ j ] ];
+          [ modeGraphs[ j ], modeLabels[ j ], amplitudeSliders[ j ], frequencyText[ j ], phaseSliders[ j ] ] :
+          [ modeGraphs[ j ], modeLabels[ j ], amplitudeSliders[ j ], frequencyText[ j ] ];
       }
 
       lineSeparator.setY2( panelColumns[ 1 ].bounds.height * 0.8 );
@@ -235,7 +235,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         [ strut, normalModeLabel, amplitudeLabel, frequencyLabel ];
 
       normalModeLabel.centerY = modeLabels[ 0 ].centerY;
-      amplitudeLabel.centerY = ampSliders[ 0 ].centerY;
+      amplitudeLabel.centerY = amplitudeSliders[ 0 ].centerY;
       frequencyLabel.centerY = frequencyText[ 0 ].centerY;
       phaseBox.centerY = phaseSliders[ 0 ].centerY;
 
@@ -248,8 +248,8 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.numVisibleMassesProperty.link( numMasses => {
-      for ( let i = 0; i < numMasses; i++ ) {
+    model.numberVisibleMassesProperty.link( numberMasses => {
+      for ( let i = 0; i < numberMasses; i++ ) {
         const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
         const m = OneDimensionConstants.MASSES_MASS_VALUE;
         const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
@@ -260,7 +260,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         } );
       }
 
-      contentNode.children = panelColumns.slice( 0, numMasses + 1 );
+      contentNode.children = panelColumns.slice( 0, numberMasses + 1 );
       contentNode.addChild( lineSeparator );
       contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 

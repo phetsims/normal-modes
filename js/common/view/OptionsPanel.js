@@ -54,7 +54,7 @@ class OptionsPanel extends Panel {
     Model properties used:
       - playingProperty
       - simSpeedProperty
-      - numVisibleMassesProperty
+      - numberVisibleMassesProperty
       - springsVisibleProperty
       - phasesVisibleProperty (if there is one)
     */
@@ -91,12 +91,12 @@ class OptionsPanel extends Panel {
     }
 
     const playPauseButtonOptions = {
-      upFill: NormalModesColors.BLUE_BTN_UP_COLOR,
-      overFill: NormalModesColors.BLUE_BTN_OVER_COLOR,
-      disabledFill: NormalModesColors.BLUE_BTN_DISABLED_COLOR,
-      downFill: NormalModesColors.BLUE_BTN_DOWN_COLOR,
-      backgroundGradientColorStop0: NormalModesColors.BLUE_BTN_BORDER_0,
-      backgroundGradientColorStop1: NormalModesColors.BLUE_BTN_BORDER_1,
+      upFill: NormalModesColors.BLUE_BUTTON_UP_COLOR,
+      overFill: NormalModesColors.BLUE_BUTTON_OVER_COLOR,
+      disabledFill: NormalModesColors.BLUE_BUTTON_DISABLED_COLOR,
+      downFill: NormalModesColors.BLUE_BUTTON_DOWN_COLOR,
+      backgroundGradientColorStop0: NormalModesColors.BLUE_BUTTON_BORDER_0,
+      backgroundGradientColorStop1: NormalModesColors.BLUE_BUTTON_BORDER_1,
       innerButtonLineWidth: 1
     };
 
@@ -233,12 +233,12 @@ class OptionsPanel extends Panel {
       speedControlOptions
     );
 
-    const temp = new VBox( {
+    const playSpeedControlsBox = new VBox( {
       align: 'center',
       children: [ playAndStepButtons, speedControl ]
     } );
 
-    const numVisibleMassesControlOptions = {
+    const numberVisibleMassesControlOptions = {
       layoutFunction: createLayoutFunction(),
       includeArrowButtons: false,
       sliderOptions: {
@@ -264,23 +264,23 @@ class OptionsPanel extends Panel {
       }
     };
 
-    const numVisibleMassesControl = new NumberControl(
+    const numberVisibleMassesControl = new NumberControl(
       numberOfMassesString,
-      model.numVisibleMassesProperty,
+      model.numberVisibleMassesProperty,
       new RangeWithValue( NormalModesConstants.MIN_MASSES_ROW_LEN,
         NormalModesConstants.MAX_MASSES_ROW_LEN,
         NormalModesConstants.INIT_MASSES_ROW_LEN ),
-      numVisibleMassesControlOptions
+      numberVisibleMassesControlOptions
     );
 
     const contentNode = new VBox( {
       spacing: 7,
       align: 'center',
       children: [
-        temp,
+        playSpeedControlsBox,
         initialPositionsButton,
         zeroPositionsButton,
-        numVisibleMassesControl,
+        numberVisibleMassesControl,
         checkboxes
       ]
     } );

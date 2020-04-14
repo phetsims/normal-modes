@@ -54,8 +54,8 @@ class OneDimensionModel {
     } );
 
     // @public {Property.<number>} the current number of visible masses
-    this.numVisibleMassesProperty = new NumberProperty( 3, {
-      tandem: tandem.createTandem( 'numVisibleMassesProperty' ),
+    this.numberVisibleMassesProperty = new NumberProperty( 3, {
+      tandem: tandem.createTandem( 'numberVisibleMassesProperty' ),
       numberType: 'Integer',
       range: new Range( 1, 10 )
     } );
@@ -94,14 +94,14 @@ class OneDimensionModel {
       } );
 
       // dispose is unnecessary, since this class owns the dependency
-      this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numVisibleMassesProperty ], numMasses => {
+      this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numberVisibleMassesProperty ], numberMasses => {
         const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
         const m = OneDimensionConstants.MASSES_MASS_VALUE;
-        if ( i >= numMasses ) {
+        if ( i >= numberMasses ) {
           return 0;
         }
         else {
-          return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numMasses + 1 ) );
+          return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
         }
       }, {
         tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex}]` ),
@@ -128,22 +128,22 @@ class OneDimensionModel {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    this.numVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+    this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
   }
 
   /**
    * Relocates all masses to their correct positions.
-   * @param {number} numMasses - the current number of visible masses in the simulation
+   * @param {number} numberMasses - the current number of visible masses in the simulation
    * @private
    */
-  changedNumberOfMasses( numMasses ) {
+  changedNumberOfMasses( numberMasses ) {
 
     let x = OneDimensionConstants.LEFT_WALL_X_POS;
-    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( numMasses + 1 );
+    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( numberMasses + 1 );
     const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
-      const visible = ( i <= numMasses );
+      const visible = ( i <= numberMasses );
 
       this.masses[ i ].equilibriumPositionProperty.set( new Vector2( x, 0 ) );
       this.masses[ i ].visibleProperty.set( visible );
@@ -163,14 +163,14 @@ class OneDimensionModel {
    * @private
    */
   createDefaultMasses( tandem ) {
-    const defaultMassesNum = this.numVisibleMassesProperty.get();
+    const defaultMassesNumber = this.numberVisibleMassesProperty.get();
 
     let x = OneDimensionConstants.LEFT_WALL_X_POS;
-    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( defaultMassesNum + 1 );
+    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( defaultMassesNumber + 1 );
     const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
-      const visible = ( i <= defaultMassesNum );
+      const visible = ( i <= defaultMassesNumber );
 
       // All the masses needed are created at once, and exist for the lifetime of the sim
       this.masses[ i ] = new Mass( new Vector2( x, 0 ), visible, tandem.createTandem( 'mass' + i ) );
@@ -213,7 +213,7 @@ class OneDimensionModel {
     this.simSpeedProperty.reset();
     this.phasesVisibleProperty.reset();
     this.springsVisibleProperty.reset();
-    this.numVisibleMassesProperty.reset();
+    this.numberVisibleMassesProperty.reset();
     this.amplitudeDirectionProperty.reset();
     this.draggingMassIndexProperty.reset();
     this.arrowsVisibleProperty.reset();
@@ -293,7 +293,7 @@ class OneDimensionModel {
    * @private
    */
   setVerletPositions( dt ) {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       if ( i !== this.draggingMassIndexProperty.get() ) {
 
@@ -317,7 +317,7 @@ class OneDimensionModel {
    * @private
    */
   recalculateVelocityAndAcceleration( dt ) {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       if ( i !== this.draggingMassIndexProperty.get() ) {
 
@@ -362,7 +362,7 @@ class OneDimensionModel {
    * @private
    */
   setExactPositions() {
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       // for each mass
 
@@ -407,7 +407,7 @@ class OneDimensionModel {
    */
   computeModeAmplitudesAndPhases() {
     this.timeProperty.reset();
-    const N = this.numVisibleMassesProperty.get();
+    const N = this.numberVisibleMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       // for each mode
 

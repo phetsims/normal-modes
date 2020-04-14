@@ -21,12 +21,12 @@ const NormalModesColors = {
   SCREEN_BACKGROUND: 'white',
 
   // Colors for the play button (based on waves on a string sim)
-  BLUE_BTN_UP_COLOR: new Color( 'hsl( 210, 70%, 75% )' ),
-  BLUE_BTN_OVER_COLOR: new Color( 'hsl( 210, 90%, 80% )' ),
-  BLUE_BTN_DISABLED_COLOR: new Color( 'rgb( 180, 180, 180 )' ),
-  BLUE_BTN_DOWN_COLOR: new Color( 'hsl( 210, 80%, 70% )' ),
-  BLUE_BTN_BORDER_0: new Color( 'transparent' ),
-  BLUE_BTN_BORDER_1: new Color( 'transparent' ),
+  BLUE_BUTTON_UP_COLOR: new Color( 'hsl( 210, 70%, 75% )' ),
+  BLUE_BUTTON_OVER_COLOR: new Color( 'hsl( 210, 90%, 80% )' ),
+  BLUE_BUTTON_DISABLED_COLOR: new Color( 'rgb( 180, 180, 180 )' ),
+  BLUE_BUTTON_DOWN_COLOR: new Color( 'hsl( 210, 80%, 70% )' ),
+  BLUE_BUTTON_BORDER_0: new Color( 'transparent' ),
+  BLUE_BUTTON_BORDER_1: new Color( 'transparent' ),
 
   // Color scheme for panels in the whole sim
   PANEL_COLORS: {
