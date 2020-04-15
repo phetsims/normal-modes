@@ -456,11 +456,9 @@ class TwoDimensionsModel {
    * @private
    */
   setExactPositions() {
-    // TODO - review naming verbosity, mainly in order to address #28
-    // (see https://github.com/phetsims/normal-modes/issues/28) but
-    // also for better readability
     const N = this.numberVisibleMassesProperty.get();
 
+    // The names of these arrays correspond to the formulas used to compute their values
     const amplitudeXTimesCos = [];
     const amplitudeYTimesCos = [];
     const frequencyTimesAmplitudeXTimesSin = [];
@@ -494,11 +492,17 @@ class TwoDimensionsModel {
         amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhaseXCos;
         amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhaseYCos;
 
-        frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhaseX );
-        frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhaseY );
+        frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX
+                                                     * Math.sin( frequencyTimesTimeMinusPhaseX );
 
-        frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhaseXCos;
-        frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhaseYCos;
+        frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY
+                                                     * Math.sin( frequencyTimesTimeMinusPhaseY );
+
+        frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX
+                                                            * frequencyTimesTimeMinusPhaseXCos;
+
+        frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY
+                                                            * frequencyTimesTimeMinusPhaseYCos;
       }
     }
     for ( let i = 1; i <= N; ++i ) {
