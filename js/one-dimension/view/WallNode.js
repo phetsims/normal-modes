@@ -37,8 +37,8 @@ class WallNode extends Node {
     Property.multilink(
       [ mass.equilibriumPositionProperty, mass.displacementProperty ],
       ( massPosition, massDisplacement ) => {
-        this.translation = modelViewTransform.modelToViewPosition(massPosition.plus( massDisplacement ) )
-                           .subtract( new Vector2( rect.rectWidth / 2, rect.rectHeight / 2 ) );
+        this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) )
+          .subtract( new Vector2( rect.rectWidth / 2, rect.rectHeight / 2 ) );
       } );
   }
 }
