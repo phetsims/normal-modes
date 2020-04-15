@@ -461,19 +461,19 @@ class TwoDimensionsModel {
     // also for better readability
     const N = this.numberVisibleMassesProperty.get();
 
-    this.amplitudeXTimesCos = [];
-    this.amplitudeYTimesCos = [];
-    this.frequencyTimesAmplitudeXTimesSin = [];
-    this.frequencyTimesAmplitudeYTimesSin = [];
-    this.frequencySquaredTimesAmplitudeXTimesCos = [];
-    this.frequencySquaredTimesAmplitudeYTimesCos = [];
+    const amplitudeXTimesCos = [];
+    const amplitudeYTimesCos = [];
+    const frequencyTimesAmplitudeXTimesSin = [];
+    const frequencyTimesAmplitudeYTimesSin = [];
+    const frequencySquaredTimesAmplitudeXTimesCos = [];
+    const frequencySquaredTimesAmplitudeYTimesCos = [];
     for ( let r = 1; r <= N; ++r ) {
-      this.amplitudeXTimesCos[ r ] = [];
-      this.amplitudeYTimesCos[ r ] = [];
-      this.frequencyTimesAmplitudeXTimesSin[ r ] = [];
-      this.frequencyTimesAmplitudeYTimesSin[ r ] = [];
-      this.frequencySquaredTimesAmplitudeXTimesCos[ r ] = [];
-      this.frequencySquaredTimesAmplitudeYTimesCos[ r ] = [];
+      amplitudeXTimesCos[ r ] = [];
+      amplitudeYTimesCos[ r ] = [];
+      frequencyTimesAmplitudeXTimesSin[ r ] = [];
+      frequencyTimesAmplitudeYTimesSin[ r ] = [];
+      frequencySquaredTimesAmplitudeXTimesCos[ r ] = [];
+      frequencySquaredTimesAmplitudeYTimesCos[ r ] = [];
       for ( let s = 1; s <= N; ++s ) {
         const modeAmplitudeX = this.modeXAmplitudeProperties[ r - 1 ][ s - 1 ].get();
         const modeAmplitudeY = this.modeYAmplitudeProperties[ r - 1 ][ s - 1 ].get();
@@ -489,14 +489,14 @@ class TwoDimensionsModel {
         const frequencyTimesTimeMinusPhsXCos = Math.cos( frequencyTimesTimeMinusPhsX );
         const frequencyTimesTimeMinusPhsYCos = Math.cos( frequencyTimesTimeMinusPhsY );
 
-        this.amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
-        this.amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
+        amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
+        amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
 
-        this.frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhsX );
-        this.frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhsY );
+        frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhsX );
+        frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhsY );
 
-        this.frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
-        this.frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
+        frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
+        frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
       }
     }
     for ( let i = 1; i <= N; ++i ) {
@@ -515,14 +515,14 @@ class TwoDimensionsModel {
 
             const sineProduct = sineProductArray[ s ];
 
-            displacement.x += sineProduct * this.amplitudeXTimesCos[ r ][ s ];
-            displacement.y -= sineProduct * this.amplitudeYTimesCos[ r ][ s ];
+            displacement.x += sineProduct * amplitudeXTimesCos[ r ][ s ];
+            displacement.y -= sineProduct * amplitudeYTimesCos[ r ][ s ];
 
-            velocity.x += sineProduct * this.frequencyTimesAmplitudeXTimesSin[ r ][ s ];
-            velocity.y -= sineProduct * this.frequencyTimesAmplitudeYTimesSin[ r ][ s ];
+            velocity.x += sineProduct * frequencyTimesAmplitudeXTimesSin[ r ][ s ];
+            velocity.y -= sineProduct * frequencyTimesAmplitudeYTimesSin[ r ][ s ];
 
-            acceleration.x += sineProduct * this.frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ];
-            acceleration.y -= sineProduct * this.frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ];
+            acceleration.x += sineProduct * frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ];
+            acceleration.y -= sineProduct * frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ];
           }
         }
 
