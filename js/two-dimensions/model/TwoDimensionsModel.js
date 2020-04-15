@@ -467,6 +467,7 @@ class TwoDimensionsModel {
     const frequencyTimesAmplitudeYTimesSin = [];
     const frequencySquaredTimesAmplitudeXTimesCos = [];
     const frequencySquaredTimesAmplitudeYTimesCos = [];
+
     for ( let r = 1; r <= N; ++r ) {
       amplitudeXTimesCos[ r ] = [];
       amplitudeYTimesCos[ r ] = [];
@@ -474,6 +475,7 @@ class TwoDimensionsModel {
       frequencyTimesAmplitudeYTimesSin[ r ] = [];
       frequencySquaredTimesAmplitudeXTimesCos[ r ] = [];
       frequencySquaredTimesAmplitudeYTimesCos[ r ] = [];
+
       for ( let s = 1; s <= N; ++s ) {
         const modeAmplitudeX = this.modeXAmplitudeProperties[ r - 1 ][ s - 1 ].get();
         const modeAmplitudeY = this.modeYAmplitudeProperties[ r - 1 ][ s - 1 ].get();
@@ -482,21 +484,21 @@ class TwoDimensionsModel {
         const modePhaseY = this.modeYPhaseProperties[ r - 1 ][ s - 1 ].get();
 
         const frequencyTimesTime = modeFrequency * this.timeProperty.get();
-        const frequencyTimesTimeMinusPhsX = frequencyTimesTime - modePhaseX;
-        const frequencyTimesTimeMinusPhsY = frequencyTimesTime - modePhaseY;
+        const frequencyTimesTimeMinusPhaseX = frequencyTimesTime - modePhaseX;
+        const frequencyTimesTimeMinusPhaseY = frequencyTimesTime - modePhaseY;
 
         // both values are used twice, so it's reasonable to calculate them here
-        const frequencyTimesTimeMinusPhsXCos = Math.cos( frequencyTimesTimeMinusPhsX );
-        const frequencyTimesTimeMinusPhsYCos = Math.cos( frequencyTimesTimeMinusPhsY );
+        const frequencyTimesTimeMinusPhaseXCos = Math.cos( frequencyTimesTimeMinusPhaseX );
+        const frequencyTimesTimeMinusPhaseYCos = Math.cos( frequencyTimesTimeMinusPhaseY );
 
-        amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
-        amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
+        amplitudeXTimesCos[ r ][ s ] = modeAmplitudeX * frequencyTimesTimeMinusPhaseXCos;
+        amplitudeYTimesCos[ r ][ s ] = modeAmplitudeY * frequencyTimesTimeMinusPhaseYCos;
 
-        frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhsX );
-        frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhsY );
+        frequencyTimesAmplitudeXTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeX * Math.sin( frequencyTimesTimeMinusPhaseX );
+        frequencyTimesAmplitudeYTimesSin[ r ][ s ] = -modeFrequency * modeAmplitudeY * Math.sin( frequencyTimesTimeMinusPhaseY );
 
-        frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhsXCos;
-        frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhsYCos;
+        frequencySquaredTimesAmplitudeXTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeX * frequencyTimesTimeMinusPhaseXCos;
+        frequencySquaredTimesAmplitudeYTimesCos[ r ][ s ] = -( modeFrequency ** 2 ) * modeAmplitudeY * frequencyTimesTimeMinusPhaseYCos;
       }
     }
     for ( let i = 1; i <= N; ++i ) {
