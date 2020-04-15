@@ -79,7 +79,9 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
     // dispose is unnecessary, exists for the lifetime of the sim
     const axisAmplitudesProperty = new DerivedProperty( [ model.amplitudeDirectionProperty ],
       amplitudeDirection => {
-        return ( amplitudeDirection === AmplitudeDirection.VERTICAL ) ? model.modeYAmplitudeProperties : model.modeXAmplitudeProperties;
+        return ( amplitudeDirection === AmplitudeDirection.VERTICAL )
+               ? model.modeYAmplitudeProperties
+               : model.modeXAmplitudeProperties;
       } );
 
     // dispose is unnecessary, exists for the lifetime of the sim

@@ -34,12 +34,18 @@ class TwoDimensionsScreenView extends ScreenView {
       tandem: tandem
     } );
 
+    // TODO - magic numbers
     // The center point of borderWalls
-    const viewOrigin = new Vector2( ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
-      ( this.layoutBounds.maxY - 2 * TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN ) / 2 + TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN );
+    const viewOrigin = new Vector2(
+      ( this.layoutBounds.maxX - 420 ) / 2,
+      ( this.layoutBounds.maxY ) / 2
+    );
 
-    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping( Vector2.ZERO, viewOrigin,
-      ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2 );
+    const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
+      Vector2.ZERO,
+      viewOrigin,
+      ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2
+    );
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {

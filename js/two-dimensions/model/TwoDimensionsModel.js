@@ -105,21 +105,25 @@ class TwoDimensionsModel {
         } );
 
         // dispose is unnecessary, since this class owns the dependency
-        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numberVisibleMassesProperty ], numberMasses => {
-          const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
-          const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
-          if ( i >= numberMasses || j >= numberMasses ) {
-            return 0;
+        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty([ this.numberVisibleMassesProperty ],
+          numberMasses => {
+            const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
+            const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
+            if ( i >= numberMasses || j >= numberMasses ) {
+              return 0;
+            }
+            else {
+              const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
+              const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numberMasses + 1 ) );
+              return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
+            }
+          },
+          {
+            tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex1},${tandemIndex2}]` ),
+            phetioType: DerivedPropertyIO( NumberIO )
           }
-          else {
-            const omegaI = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
-            const omegaJ = 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( j + 1 ) / ( numberMasses + 1 ) );
-            return Math.sqrt( omegaI ** 2 + omegaJ ** 2 );
-          }
-        }, {
-          tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex1},${tandemIndex2}]` ),
-          phetioType: DerivedPropertyIO( NumberIO )
-        } );
+        );
+
       }
     }
 
@@ -452,6 +456,9 @@ class TwoDimensionsModel {
    * @private
    */
   setExactPositions() {
+    // TODO - review naming verbosity, mainly in order to address #28
+    // (see https://github.com/phetsims/normal-modes/issues/28) but
+    // also for better readability
     const N = this.numberVisibleMassesProperty.get();
 
     this.amplitudeXTimesCos = [];

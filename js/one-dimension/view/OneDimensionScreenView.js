@@ -34,11 +34,15 @@ class OneDimensionScreenView extends ScreenView {
       tandem: tandem
     } );
 
+    // TODO - fix, see https://github.com/phetsims/normal-modes/issues/52
     const VIEWBOX_WIDTH = 755 - 8;
 
+    // TODO - magic numbers
     // The midpoint between leftWall and rightWall
-    const viewOrigin = new Vector2( VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
-      ( this.layoutBounds.maxY - 2 * OneDimensionConstants.SCREEN_VIEW_Y_MARGIN - 300 ) / 2 + OneDimensionConstants.SCREEN_VIEW_Y_MARGIN );
+    const viewOrigin = new Vector2(
+      VIEWBOX_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
+      ( this.layoutBounds.maxY - 300 ) / 2
+    );
 
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO, viewOrigin, VIEWBOX_WIDTH / 2
