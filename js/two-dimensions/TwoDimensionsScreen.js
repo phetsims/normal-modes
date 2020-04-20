@@ -11,12 +11,12 @@ import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import NormalModesColors from '../common/NormalModesColors.js';
 import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
-import normalModesStrings from '../normalModesStrings.js';
 import normalModes from '../normalModes.js';
+import normalModesStrings from '../normalModesStrings.js';
 import TwoDimensionsModel from './model/TwoDimensionsModel.js';
 import TwoDimensionsScreenView from './view/TwoDimensionsScreenView.js';
 
-const screenTwoDimensionsString = normalModesStrings.screen[ 'two-dimensions' ];
+const screenTwoDimensionsString = normalModesStrings.screen.twoDimensions;
 
 class TwoDimensionsScreen extends Screen {
 
