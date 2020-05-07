@@ -8,7 +8,7 @@
  */
 
 import Sim from '../../joist/js/Sim.js';
-import SimLauncher from '../../joist/js/SimLauncher.js';
+import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
 import normalModesStrings from './normalModesStrings.js';
 import OneDimensionScreen from './one-dimension/OneDimensionScreen.js';
@@ -29,9 +29,9 @@ const simOptions = {
   }
 };
 
-// launch the sim - beware that scenery Image nodes created outside of SimLauncher.launch() will have zero bounds
+// launch the sim - beware that scenery Image nodes created outside of simLauncher.launch() will have zero bounds
 // until the images are fully loaded, see https://github.com/phetsims/coulombs-law/issues/70
-SimLauncher.launch( () => {
+simLauncher.launch( () => {
   const sim = new Sim( normalModesTitleString, [
     new OneDimensionScreen( Tandem.ROOT.createTandem( 'oneDimensionScreen' ) ),
     new TwoDimensionsScreen( Tandem.ROOT.createTandem( 'twoDimensionsScreen' ) )
