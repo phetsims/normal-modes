@@ -36,14 +36,14 @@ The one object that does need to be disposed is a VStrut inside _NormalModeSpect
 ### Assertions
 
 The implementation doesn't have many cases of assert, aside from the ones in PhET libraries. 
-There is one case of assert to keep an eye out for, though, during velocity and acceleration computations in _OneDimensionModel_. They check whether the direction of those Properties coincide with the selected movement axis. However, this shouldn't be something to worry about unless you're making changes in the way those Properties are computed.
+There is one case of assert to keep an eye out for, though, during velocity and acceleration computations in _OneDimensionModel_. It checks whether the direction of those Properties coincide with the selected movement axis. However, this shouldn't be something to worry about unless you're making changes in the way those Properties are computed.
 
 ### Screen Differences
 
 Here's a more objective view on what each screen has/does. For a basic overview, [model.md](https://github.com/phetsims/normal-modes/blob/master/doc/model.md) is enough.
 
 The _One Dimension_ screen has, basically:
-* An _NormalModesControlPanel_ that allows:
+* A _NormalModesControlPanel_ that allows:
     * Playing/pausing and stepping.
     * Changing the simulation speed.
     * Changing the number of masses.
