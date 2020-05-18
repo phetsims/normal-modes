@@ -40,10 +40,9 @@ To adjust each normal mode amplitude (_Normal Mode Amplitudes_ panel):
 Note that the amplitude values are represented by a progress bar inside each rectangle, from the 
 bottom to the top.
 
-## Side menu
+## Additional Controls
 
-It's also possible to control more general simulation settings through the side menu, the _Options_
-panel:
+It's also possible to control more general simulation settings through control panel at the upper-right:
 
 * pause, step and resume the simulation
 * manage simulation speed
