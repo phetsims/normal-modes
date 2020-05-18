@@ -43,7 +43,7 @@ There is one case of assert to keep an eye out for, though, during velocity and 
 Here's a more objective view on what each screen has/does. For a basic overview, [model.md](https://github.com/phetsims/normal-modes/blob/master/doc/model.md) is enough.
 
 The _One Dimension_ screen has, basically:
-* An _OptionsPanel_ that allows:
+* An _NormalModesControlPanel_ that allows:
     * Playing/pausing and stepping.
     * Changing the simulation speed.
     * Changing the number of masses.
@@ -58,7 +58,7 @@ The _One Dimension_ screen has, basically:
 * A row of _MassNode1D_, between _WallNode_ (s). These masses can be moved (only in the active _AmplitudeDirection_) even when the simulation is running.
 
 The _Two Dimensions_ screen is a bit different from _One Dimension_:
-* The _OptionsPanel_ has the same options, except for the show/hide phases checkbox.
+* The _NormalModesControlPanel_ has the same options, except for the show/hide phases checkbox.
 * It doesn't have amplitude and phase sliders; it has, instead, a box with a grid of _AmplitudeSelectorRectangle_ (s).
     * Each _AmplitudeSelectorRectangle_ represents a normal mode through its row and column and the respective mode amplitude by how much it's 'filled'.
     * The _AmplitudeDirection_ buttons are inside the grid panel. They now set which direction of the normal mode amplitude the _AmplitudeSelectorRectangle_ (s) represent.
