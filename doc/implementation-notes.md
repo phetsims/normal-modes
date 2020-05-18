@@ -36,7 +36,7 @@ The one object that does need to be disposed is a VStrut inside _NormalModeSpect
 ### Assertions
 
 The implementation doesn't have many cases of assert, aside from the ones in PhET libraries. 
-There is one case of assert to keep an eye out for, though, during velocity and acceleration computations in _OneDimensionModel_. They check whether the direction of those properties coincide with the selected movement axis. However, this shouldn't be something to worry about unless you're making changes in the way those properties are computed.
+There is one case of assert to keep an eye out for, though, during velocity and acceleration computations in _OneDimensionModel_. They check whether the direction of those Properties coincide with the selected movement axis. However, this shouldn't be something to worry about unless you're making changes in the way those Properties are computed.
 
 ### Screen Differences
 
