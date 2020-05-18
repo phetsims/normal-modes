@@ -1,8 +1,8 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * Options panel for both 1D and 2D views.
- * Contains:
+ * NormalModesControlPanel contains controls for both 1D and 2D views, including:
+ *
  *  - Play/pause button
  *  - Speed slider selector
  *  - Step button
@@ -26,8 +26,8 @@ import RectangularButtonView from '../../../../sun/js/buttons/RectangularButtonV
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import OneDimensionConstants from '../../one-dimension/OneDimensionConstants.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
@@ -42,7 +42,7 @@ const slowString = normalModesStrings.slow;
 const speedString = normalModesStrings.speed;
 const zeroPositionsString = normalModesStrings.zeroPositions;
 
-class OptionsPanel extends Panel {
+class NormalModesControlPanel extends Panel {
 
   /**
    * @param {OneDimensionModel|TwoDimensionsModel} model
@@ -289,5 +289,5 @@ class OptionsPanel extends Panel {
   }
 }
 
-normalModes.register( 'OptionsPanel', OptionsPanel );
-export default OptionsPanel;
+normalModes.register( 'NormalModesControlPanel', NormalModesControlPanel );
+export default NormalModesControlPanel;

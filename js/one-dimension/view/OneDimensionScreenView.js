@@ -13,7 +13,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
-import OptionsPanel from '../../common/view/OptionsPanel.js';
+import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
 import normalModes from '../../normalModes.js';
 import OneDimensionConstants from '../OneDimensionConstants.js';
@@ -58,7 +58,7 @@ class OneDimensionScreenView extends ScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    const optionsPanelOptions = merge( {
+    const controlPanelOptions = merge( {
       right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
@@ -66,7 +66,7 @@ class OneDimensionScreenView extends ScreenView {
       yMargin: 8
     }, NormalModesColors.PANEL_COLORS );
 
-    const optionsPanel = new OptionsPanel( model, optionsPanelOptions );
+    const controlPanel = new NormalModesControlPanel( model, controlPanelOptions );
 
     const normalModeSpectrumAccordionBoxOptions = merge( {
       bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
@@ -79,7 +79,7 @@ class OneDimensionScreenView extends ScreenView {
     );
 
     this.addChild( normalModeSpectrumAccordionBox );
-    this.addChild( optionsPanel );
+    this.addChild( controlPanel );
     this.addChild( resetAllButton );
 
     // The springs are added first
@@ -110,7 +110,7 @@ class OneDimensionScreenView extends ScreenView {
     } );
 
     const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
-      top: optionsPanel.bottom + 8,
+      top: controlPanel.bottom + 8,
       right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
     }, NormalModesColors.PANEL_COLORS ) );
 

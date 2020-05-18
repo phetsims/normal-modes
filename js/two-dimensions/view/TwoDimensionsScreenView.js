@@ -15,7 +15,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
-import OptionsPanel from '../../common/view/OptionsPanel.js';
+import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
 import normalModes from '../../normalModes.js';
 import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
@@ -57,7 +57,7 @@ class TwoDimensionsScreenView extends ScreenView {
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
-    const optionsPanelOptions = merge( {
+    const controlPanelOptions = merge( {
       right: this.layoutBounds.maxX - TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
@@ -65,9 +65,9 @@ class TwoDimensionsScreenView extends ScreenView {
       yMargin: 8
     }, NormalModesColors.PANEL_COLORS );
 
-    const optionsPanel = new OptionsPanel( model, optionsPanelOptions );
+    const controlPanel = new NormalModesControlPanel( model, controlPanelOptions );
 
-    this.addChild( optionsPanel );
+    this.addChild( controlPanel );
     this.addChild( resetAllButton );
 
     model.springsX.forEach( springArray => {
