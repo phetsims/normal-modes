@@ -17,7 +17,7 @@ class ModeGraphCanvasNode extends CanvasNode {
 
   /**
    * @param {OneDimensionModel} model
-   * @param {number} normalNodeNumber
+   * @param {number} normalNodeNumber - index of the corresponding normal mode, starting from 0
    * @param {Object} [options]
    */
   constructor( model, normalNodeNumber, options ) {

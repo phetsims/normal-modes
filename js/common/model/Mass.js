@@ -15,7 +15,7 @@ import normalModes from '../../normalModes.js';
 class Mass {
 
   /**
-   * @param {Vector2} equilibriumPosition
+   * @param {Vector2} equilibriumPosition - mass position in model coordinates when springs are at default length
    * @param {boolean} visible
    * @param {Tandem} tandem
    */
