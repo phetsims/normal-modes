@@ -251,7 +251,11 @@ class TwoDimensionsModel {
 
         // All the masses needed are created at once, and exist for the lifetime of the sim.
         // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
-        this.masses[ i ][ j ] = new Mass( new Vector2( x, y ), visible, tandem.createTandem( `mass[${i + 1},${j + 1}]` ) );
+        this.masses[ i ][ j ] = new Mass(
+          new Vector2( x, y ),
+          visible,
+          tandem.createTandem( `mass[${i + 1},${j + 1}]` )
+        );
 
         if ( x < xFinal - xStep / 2 ) {
           x += xStep;
