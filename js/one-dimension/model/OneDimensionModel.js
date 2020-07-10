@@ -411,8 +411,8 @@ class OneDimensionModel {
     for ( let i = 1; i <= N; ++i ) {
       // for each mode
 
-      let AmplitudeTimesCosPhase = 0;
-      let AmplitudeTimesSinPhase = 0;
+      let amplitudeTimesCosPhase = 0;
+      let amplitudeTimesSinPhase = 0;
       for ( let j = 1; j <= N; ++j ) {
         // for each mass
 
@@ -430,16 +430,16 @@ class OneDimensionModel {
         const amplitudeSin = Math.sin( i * j * Math.PI / ( N + 1 ) );
         const modeFrequency = this.modeFrequencyProperties[ i - 1 ].get();
 
-        AmplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * amplitudeSin;
-        AmplitudeTimesSinPhase += ( 2 / ( modeFrequency * ( N + 1 ) ) ) * massVelocity * amplitudeSin;
+        amplitudeTimesCosPhase += ( 2 / ( N + 1 ) ) * massDisplacement * amplitudeSin;
+        amplitudeTimesSinPhase += ( 2 / ( modeFrequency * ( N + 1 ) ) ) * massVelocity * amplitudeSin;
       }
 
       this.modeAmplitudeProperties[ i - 1 ].set(
-        Math.sqrt( AmplitudeTimesCosPhase ** 2 + AmplitudeTimesSinPhase ** 2 )
+        Math.sqrt( amplitudeTimesCosPhase ** 2 + amplitudeTimesSinPhase ** 2 )
       );
 
       this.modePhaseProperties[ i - 1 ].set(
-        Math.atan2( AmplitudeTimesSinPhase, AmplitudeTimesCosPhase )
+        Math.atan2( amplitudeTimesSinPhase, amplitudeTimesCosPhase )
       );
     }
   }
