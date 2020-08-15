@@ -84,12 +84,12 @@ class OneDimensionModel {
       const tandemIndex = i + 1;
 
       this.modeAmplitudeProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
-        tandem: tandem.createTandem( `modeAmplitudeProperties[${tandemIndex}]` ),
+        tandem: tandem.createTandem( `modeAmplitude${tandemIndex}Property` ),
         range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
       this.modePhaseProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
-        tandem: tandem.createTandem( `modePhaseProperties[${tandemIndex}]` ),
+        tandem: tandem.createTandem( `modePhase${tandemIndex}Property` ),
         range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
       } );
 
@@ -104,7 +104,7 @@ class OneDimensionModel {
           return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
         }
       }, {
-        tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex}]` ),
+        tandem: tandem.createTandem( `modeFrequency${tandemIndex}Property` ),
         phetioType: DerivedPropertyIO( NumberIO )
       } );
     }

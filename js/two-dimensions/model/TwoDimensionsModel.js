@@ -85,22 +85,22 @@ class TwoDimensionsModel {
         const tandemIndex2 = j + 1;
 
         this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeXAmplitudeProperties[${tandemIndex1},${tandemIndex2}]` ),
+          tandem: tandem.createTandem( `modeXAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeYAmplitudeProperties[${tandemIndex1},${tandemIndex2}]` ),
+          tandem: tandem.createTandem( `modeYAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeXPhaseProperties[${tandemIndex1},${tandemIndex2}]` ),
+          tandem: tandem.createTandem( `modeXPhase[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
         this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
-          tandem: tandem.createTandem( `modeYPhaseProperties[${tandemIndex1},${tandemIndex2}]` ),
+          tandem: tandem.createTandem( `modeYPhase[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
         } );
 
@@ -119,7 +119,7 @@ class TwoDimensionsModel {
             }
           },
           {
-            tandem: tandem.createTandem( `modeFrequencyProperties[${tandemIndex1},${tandemIndex2}]` ),
+            tandem: tandem.createTandem( `modeFrequency[${tandemIndex1},${tandemIndex2}]Property` ),
             phetioType: DerivedPropertyIO( NumberIO )
           }
         );
