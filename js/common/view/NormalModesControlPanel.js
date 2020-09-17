@@ -100,7 +100,7 @@ class NormalModesControlPanel extends Panel {
       innerButtonLineWidth: 1
     };
 
-    // TODO - magic numbers
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     const playPauseButton = new PlayPauseButton( model.playingProperty, {
       radius: 18,
       scaleFactorWhenPaused: 1.15,
@@ -126,7 +126,7 @@ class NormalModesControlPanel extends Panel {
       ]
     } );
 
-    // TODO - magic numbers
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     const textButtonsOptions = merge( {
       font: NormalModesConstants.GENERAL_FONT,
 

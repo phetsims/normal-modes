@@ -24,7 +24,7 @@ class MassNode extends Node {
   constructor( mass, modelViewTransform, tandem ) {
     super( { cursor: 'pointer' } );
 
-    // TODO - magic number
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic number
     this.size = 20;
 
     // dispose is unnecessary, the MassNode and the dependencies exist for the lifetime of the sim
@@ -33,7 +33,7 @@ class MassNode extends Node {
         this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
       } );
 
-    // TODO - magic numbers
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     const arrowOptions = merge( {
       boundsMethod: 'unstroked',
       lineWidth: 2,

@@ -37,7 +37,7 @@ class OneDimensionScreenView extends ScreenView {
       tandem: tandem
     } );
 
-    // TODO - magic numbers
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     // The midpoint between leftWall and rightWall
     const viewOrigin = new Vector2(
       VIEW_SPRING_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,

@@ -34,7 +34,7 @@ class TwoDimensionsScreenView extends ScreenView {
       tandem: tandem
     } );
 
-    // TODO - magic numbers
+    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     // The center point of borderWalls
     const viewOrigin = new Vector2(
       ( this.layoutBounds.maxX - 420 ) / 2,
