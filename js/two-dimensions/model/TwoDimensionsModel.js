@@ -8,7 +8,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import DerivedPropertyIO from '../../../../axon/js/DerivedPropertyIO.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
@@ -120,10 +119,9 @@ class TwoDimensionsModel {
           },
           {
             tandem: tandem.createTandem( `modeFrequency[${tandemIndex1},${tandemIndex2}]Property` ),
-            phetioType: DerivedPropertyIO( NumberIO )
+            phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
           }
         );
-
       }
     }
 
