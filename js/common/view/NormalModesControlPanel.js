@@ -22,7 +22,7 @@ import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import VStrut from '../../../../scenery/js/nodes/VStrut.js';
-import RectangularButtonView from '../../../../sun/js/buttons/RectangularButtonView.js';
+import RectangularButton from '../../../../sun/js/buttons/RectangularButton.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
@@ -136,7 +136,7 @@ class NormalModesControlPanel extends Panel {
       mouseAreaXDilation: 5,
       mouseAreaYDilation: 5,
 
-      buttonAppearanceStrategy: RectangularButtonView.FlatAppearanceStrategy,
+      buttonAppearanceStrategy: RectangularButton.FlatAppearanceStrategy,
       lineWidth: 1.5,
       xMargin: 11,
       yMargin: 3
