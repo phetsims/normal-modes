@@ -9,14 +9,14 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
-import RadioButtonGroup from '../../../../sun/js/buttons/RadioButtonGroup.js';
+import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
 import normalModes from '../../normalModes.js';
 import AmplitudeDirection from '../model/AmplitudeDirection.js';
 import NormalModesColors from '../NormalModesColors.js';
 
 const ICON_SIZE = 45;
 
-class AmplitudeDirectionRadioButtonGroup extends RadioButtonGroup {
+class AmplitudeDirectionRadioButtonGroup extends RectangularRadioButtonGroup {
 
   /**
    * @param {Property.<AmplitudeDirection>} amplitudeDirectionProperty
