@@ -103,7 +103,7 @@ class NormalModesControlPanel extends Panel {
     // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     const playPauseButton = new PlayPauseButton( model.playingProperty, {
       radius: 18,
-      scaleFactorWhenPaused: 1.15,
+      scaleFactorWhenNotPlaying: 1.15,
       touchAreaDilation: 18,
       pauseOptions: playPauseButtonOptions,
       playOptions: playPauseButtonOptions
