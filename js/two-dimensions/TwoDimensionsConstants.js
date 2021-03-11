@@ -43,7 +43,7 @@ const TwoDimensionsConstants = {
   FIXED_DT: 1 / 60
 };
 
-const baseMaxAmplitude = .3;
+const baseMaxAmplitude = 0.3;
 for ( let i = 0; i < maxAmplitudes.length; i++ ) {
   // this is the way the original sim does
   const springLength = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( i + 2 );

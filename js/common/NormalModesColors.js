@@ -37,22 +37,22 @@ const NormalModesColors = {
   // The colors for the arrows in the masses
   ARROW_COLORS: {
     fill: ARROW_FILL,
-    stroke: Color.toColor( ARROW_FILL ).colorUtilsDarker( .6 )
+    stroke: Color.toColor( ARROW_FILL ).colorUtilsDarker( 0.6 )
   },
 
   // The colors of the 2D amplitude selectors
   SELECTOR_HORIZONTAL_FILL: 'rgb( 0, 255, 255 )',
   SELECTOR_VERTICAL_FILL: 'rgb( 0, 0, 255 )',
-  BACKGROUND_RECTANGLE_DEFAULT_FILL: Color.toColor( 'rgb( 0, 0, 0 )' ).colorUtilsBrighter( .6 ),
+  BACKGROUND_RECTANGLE_DEFAULT_FILL: Color.toColor( 'rgb( 0, 0, 0 )' ).colorUtilsBrighter( 0.6 ),
 
   MASS_COLORS: {
     fill: MASS_FILL,
-    stroke: Color.toColor( MASS_FILL ).colorUtilsDarker( .6 )
+    stroke: Color.toColor( MASS_FILL ).colorUtilsDarker( 0.6 )
   },
 
   WALL_COLORS: {
     fill: WALL_FILL,
-    stroke: Color.toColor( WALL_FILL ).colorUtilsDarker( .5 )
+    stroke: Color.toColor( WALL_FILL ).colorUtilsDarker( 0.5 )
   },
 
   BUTTON_COLORS: {
