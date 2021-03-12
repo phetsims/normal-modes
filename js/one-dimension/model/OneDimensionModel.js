@@ -172,7 +172,7 @@ class OneDimensionModel {
       const visible = ( i <= defaultMassesNumber );
 
       // All the masses needed are created at once, and exist for the lifetime of the sim
-      this.masses[ i ] = new Mass( new Vector2( x, 0 ), visible, tandem.createTandem( 'mass' + i ) );
+      this.masses[ i ] = new Mass( new Vector2( x, 0 ), visible, tandem.createTandem( `mass${i}` ) );
 
       if ( x < xFinal ) {
         x += xStep;
