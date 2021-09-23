@@ -12,6 +12,7 @@
  * @author Franco Barpp Gomes {UTFPR}
  */
 
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -112,7 +113,7 @@ class NormalModesControlPanel extends Panel {
     const stepButton = new StepForwardButton( {
       radius: 18,
       touchAreaDilation: 15,
-      isPlayingProperty: model.playingProperty,
+      enabledProperty: DerivedProperty.not( model.playingProperty ),
       listener: () => { model.singleStep( OneDimensionConstants.FIXED_DT ); }
     } );
 
