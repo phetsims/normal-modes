@@ -18,10 +18,9 @@ const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
 
 const simOptions = {
   credits: {
-    //TODO https://github.com/phetsims/normal-modes/issues/19, fill in credits
-    leadDesign: '',
-    softwareDevelopment: '',
-    team: '',
+    leadDesign: 'Diana L\u00f3pez Tavares, Mike Dubson',
+    softwareDevelopment: 'Franco Barpp Gomes (UTFPR), Thiago de Mendon\u00e7a Mildemberger (UTFPR)',
+    team: 'Mindy Gratny, Isam Hasan, Patricia Loeblein, Chris Malley (PixelZoom, Inc.), Jonathan Olson, Ariel Paul, Kathy Perkins, Amy Rouinfar',
     qualityAssurance: '',
     graphicArts: '',
     soundDesign: '',
