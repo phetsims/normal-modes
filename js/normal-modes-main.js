@@ -18,9 +18,9 @@ const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
 
 const simOptions = {
   credits: {
-    leadDesign: 'Diana L\u00f3pez Tavares, Mike Dubson',
+    leadDesign: 'Mike Dubson',
     softwareDevelopment: 'Franco Barpp Gomes (UTFPR), Thiago de Mendon\u00e7a Mildemberger (UTFPR)',
-    team: 'Mindy Gratny, Isam Hasan, Patricia Loeblein, Chris Malley (PixelZoom, Inc.), Jonathan Olson, Ariel Paul, Kathy Perkins, Amy Rouinfar',
+    team: 'Mindy Gratny, Isam Hasan, Patricia Loeblein, Diana L\u00f3pez Tavares, Chris Malley (PixelZoom, Inc.), Jonathan Olson, Ariel Paul, Kathy Perkins, Amy Rouinfar',
     qualityAssurance: '',
     graphicArts: '',
     soundDesign: '',
