@@ -7,6 +7,7 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 
+import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -14,6 +15,7 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
+import NormalModesQueryParameters from '../../common/NormalModesQueryParameters.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
 import normalModes from '../../normalModes.js';
@@ -103,9 +105,19 @@ class OneDimensionScreenView extends ScreenView {
     this.addChild( leftWallNode );
     this.addChild( rightWallNode );
 
+    // Drag bounds for the masses, centered on the walls. Height is adjustable via ?dragBoundsHeight1D.
+    // See https://github.com/phetsims/normal-modes/issues/68
+    const dragBoundsView = new Bounds2(
+      leftWallNode.right,
+      leftWallNode.centerY - NormalModesQueryParameters.dragBoundsHeight1D / 2,
+      rightWallNode.left,
+      leftWallNode.centerY + NormalModesQueryParameters.dragBoundsHeight1D / 2
+    );
+    const dragBoundsModel = modelViewTransform.viewToModelBounds( dragBoundsView );
+
     // used slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( mass => {
-      const massNode = new MassNode1D( mass, modelViewTransform, model, tandem.createTandem( 'massNodes' ) );
+      const massNode = new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, tandem.createTandem( 'massNodes' ) );
       this.addChild( massNode );
     } );
 

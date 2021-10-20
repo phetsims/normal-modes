@@ -84,8 +84,8 @@ class MassNode2D extends MassNode {
       transform: modelViewTransform,
       dragBoundsProperty: new Property( dragBounds )
     } );
-
     this.addInputListener( dragListener );
+
     const callback = overUpCallback.bind( this );
     // unlink is unnecessary, the MassNode2D and the dependency exists for the lifetime of the sim
     model.arrowsVisibleProperty.link( arrowsVisible => {

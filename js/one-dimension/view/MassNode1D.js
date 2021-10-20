@@ -7,6 +7,7 @@
  * @author Franco Barpp Gomes (UTFPR)
  */
 
+import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import DragListener from '../../../../scenery/js/listeners/DragListener.js';
@@ -22,9 +23,10 @@ class MassNode1D extends MassNode {
    * @param {Mass} mass
    * @param {ModelViewTransform2} modelViewTransform
    * @param {OneDimensionModel} model
+   * @param {Bounds2} dragBounds
    * @param {Tandem} tandem
    */
-  constructor( mass, modelViewTransform, model, tandem ) {
+  constructor( mass, modelViewTransform, model, dragBounds, tandem ) {
 
     super( mass, modelViewTransform, tandem );
 
@@ -78,10 +80,11 @@ class MassNode1D extends MassNode {
       start: startCallback,
       drag: dragCallback,
       end: endCallback,
-      transform: modelViewTransform
+      transform: modelViewTransform,
+      dragBoundsProperty: new Property( dragBounds )
     } );
-
     this.addInputListener( dragListener );
+
     const callback = overUpCallback.bind( this );
     // unlink is unnecessary, the MassNode1D and the dependency exists for the lifetime of the sim
     model.arrowsVisibleProperty.link( arrowsVisible => {
