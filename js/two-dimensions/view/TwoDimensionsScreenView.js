@@ -114,10 +114,13 @@ class TwoDimensionsScreenView extends ScreenView {
 
     this.addChild( normalModeAmplitudesAccordionBox );
 
+    // Drag bounds for the masses is defined by borderWalls.
+    const massDragBounds = modelViewTransform.viewToModelBounds( borderWalls.bounds );
+
     // used slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( massArray => {
       massArray.slice( 1, massArray.length - 1 ).forEach( mass => {
-        const massNode = new MassNode2D( mass, modelViewTransform, model, tandem.createTandem( 'massNodes' ) );
+        const massNode = new MassNode2D( mass, modelViewTransform, model, massDragBounds, tandem.createTandem( 'massNodes' ) );
         this.addChild( massNode );
       } );
     } );
