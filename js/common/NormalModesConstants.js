@@ -31,9 +31,9 @@ const NormalModesConstants = {
 
   // Amplitude
   MIN_AMPLITUDE: 0,
-  MAX_AMPLITUDE: 0.2, // for One Dimension screen
+  MAX_AMPLITUDE: 0.1, // for One Dimension screen
   INITIAL_AMPLITUDE: 0,
-  
+
   // Phase
   MIN_PHASE: -Math.PI,
   MAX_PHASE: Math.PI,

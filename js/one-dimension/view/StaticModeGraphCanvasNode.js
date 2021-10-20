@@ -97,7 +97,7 @@ class StaticModeGraphCanvasNode extends CanvasNode {
   update() {
 
     const n = this.normalModeNumber;
-    const amplitude = 0.15;
+    const amplitude = 0.075;
     const phase = 0;
     const frequency = this.modeFrequencyProperty.get();
     const time = 0;
