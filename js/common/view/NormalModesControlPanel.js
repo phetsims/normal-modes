@@ -6,17 +6,13 @@
  * @author Franco Barpp Gomes {UTFPR}
  */
 
-import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
-import PlayPauseButton from '../../../../scenery-phet/js/buttons/PlayPauseButton.js';
-import StepForwardButton from '../../../../scenery-phet/js/buttons/StepForwardButton.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
-import VStrut from '../../../../scenery/js/nodes/VStrut.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
@@ -25,16 +21,21 @@ import normalModes from '../../normalModes.js';
 import normalModesStrings from '../../normalModesStrings.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
+import PlayPauseSpeedControl from './PlayPauseSpeedControl.js';
 
-const fastString = normalModesStrings.fast;
-const initialPositionsString = normalModesStrings.initialPositions;
-const normalString = normalModesStrings.normal;
-const numberOfMassesString = normalModesStrings.numberOfMasses;
-const showPhasesString = normalModesStrings.showPhases;
-const showSpringsString = normalModesStrings.showSprings;
-const slowString = normalModesStrings.slow;
-const speedString = normalModesStrings.speed;
-const zeroPositionsString = normalModesStrings.zeroPositions;
+// constants
+const TEXT_PUSH_BUTTON_OPTIONS = merge( {
+  font: NormalModesConstants.GENERAL_FONT,
+  touchAreaXDilation: 10,
+  touchAreaYDilation: 16,
+  touchAreaYShift: 6,
+  mouseAreaXDilation: 5,
+  mouseAreaYDilation: 5,
+  buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
+  lineWidth: 1.5,
+  xMargin: 11,
+  yMargin: 3
+}, NormalModesColors.BUTTON_COLORS );
 
 class NormalModesControlPanel extends Panel {
 
@@ -46,123 +47,25 @@ class NormalModesControlPanel extends Panel {
 
     const controls = [];
 
-    const playPauseButtonOptions = {
-      upFill: NormalModesColors.BLUE_BUTTON_UP_COLOR,
-      overFill: NormalModesColors.BLUE_BUTTON_OVER_COLOR,
-      disabledFill: NormalModesColors.BLUE_BUTTON_DISABLED_COLOR,
-      downFill: NormalModesColors.BLUE_BUTTON_DOWN_COLOR,
-      backgroundGradientColorStop0: NormalModesColors.BLUE_BUTTON_BORDER_0,
-      backgroundGradientColorStop1: NormalModesColors.BLUE_BUTTON_BORDER_1,
-      innerButtonLineWidth: 1
-    };
-
-    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
-    const playPauseButton = new PlayPauseButton( model.playingProperty, {
-      radius: 18,
-      scaleFactorWhenNotPlaying: 1.15,
-      touchAreaDilation: 18,
-      pauseOptions: playPauseButtonOptions,
-      playOptions: playPauseButtonOptions
-    } );
-
-    const stepButton = new StepForwardButton( {
-      radius: 18,
-      touchAreaDilation: 15,
-      enabledProperty: DerivedProperty.not( model.playingProperty ),
-      listener: () => { model.singleStep( NormalModesConstants.FIXED_DT ); }
-    } );
-
-    const playAndStepButtons = new HBox( {
-      spacing: 7,
-      align: 'center',
-      children: [
-        playPauseButton,
-        new VStrut( playPauseButton.height * 1.15 ), // to avoid resizing the HBox
-        stepButton
-      ]
-    } );
-
-    // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
-    const textButtonsOptions = merge( {
-      font: NormalModesConstants.GENERAL_FONT,
-
-      touchAreaXDilation: 10,
-      touchAreaYDilation: 16,
-      touchAreaYShift: 6,
-      mouseAreaXDilation: 5,
-      mouseAreaYDilation: 5,
-
-      buttonAppearanceStrategy: ButtonNode.FlatAppearanceStrategy,
-      lineWidth: 1.5,
-      xMargin: 11,
-      yMargin: 3
-    }, NormalModesColors.BUTTON_COLORS );
-
-    const speedControlOptions = {
-      delta: NormalModesConstants.DELTA_SPEED,
-      layoutFunction: createLayoutFunction(),
-      includeArrowButtons: false,
-      sliderOptions: {
-        trackSize: new Dimension2( 150, 3 ),
-        thumbSize: new Dimension2( 11, 19 ),
-        thumbTouchAreaXDilation: 12,
-        thumbTouchAreaYDilation: 15,
-        majorTickLength: 10,
-        minorTickLength: 5,
-        majorTicks: [
-          {
-            value: NormalModesConstants.MIN_SPEED,
-            label: new Text( slowString, { font: NormalModesConstants.SMALLER_FONT } )
-          },
-          {
-            value: NormalModesConstants.INITIAL_SPEED,
-            label: new Text( normalString, { font: NormalModesConstants.SMALLER_FONT } )
-          },
-          {
-            value: NormalModesConstants.MAX_SPEED,
-            label: new Text( fastString, { font: NormalModesConstants.SMALLER_FONT } )
-          }
-        ],
-        minorTickSpacing: NormalModesConstants.DELTA_SPEED
-      },
-      titleNodeOptions: {
-        font: NormalModesConstants.GENERAL_FONT
-      },
-      numberDisplayOptions: {
-        visible: false
-      }
-    };
-
-    const speedControl = new NumberControl(
-      speedString,
-      model.simSpeedProperty,
-      new RangeWithValue( NormalModesConstants.MIN_SPEED,
-        NormalModesConstants.MAX_SPEED,
-        NormalModesConstants.INITIAL_SPEED ),
-      speedControlOptions
-    );
-
-    const playSpeedControlsBox = new VBox( {
-      align: 'center',
-      children: [ playAndStepButtons, speedControl ]
-    } );
-    controls.push( playSpeedControlsBox );
+    // Play/Pause buttons and speed slider
+    const playPauseSpeedControl = new PlayPauseSpeedControl( model );
+    controls.push( playPauseSpeedControl );
 
     // Initial Positions button
-    const initialPositionsButton = new TextPushButton( initialPositionsString, merge( {
+    const initialPositionsButton = new TextPushButton( normalModesStrings.initialPositions, merge( {
       listener: model.initialPositions.bind( model )
-    }, textButtonsOptions ) );
+    }, TEXT_PUSH_BUTTON_OPTIONS ) );
     controls.push( initialPositionsButton );
 
     // Zero Positions button
-    const zeroPositionsButton = new TextPushButton( zeroPositionsString, merge( {
+    const zeroPositionsButton = new TextPushButton( normalModesStrings.zeroPositions, merge( {
       listener: model.zeroPositions.bind( model )
-    }, textButtonsOptions ) );
+    }, TEXT_PUSH_BUTTON_OPTIONS ) );
     controls.push( zeroPositionsButton );
 
     // Number of Masses
     const numberOfMassesControl = new NumberControl(
-      numberOfMassesString,
+      normalModesStrings.numberOfMasses,
       model.numberVisibleMassesProperty,
       new RangeWithValue( NormalModesConstants.MIN_MASSES_PER_ROW,
         NormalModesConstants.MAX_MASSES_PER_ROW,
@@ -194,7 +97,7 @@ class NormalModesControlPanel extends Panel {
     controls.push( numberOfMassesControl );
 
     // Show Springs checkbox
-    const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
+    const showSpringsText = new Text( normalModesStrings.showSprings, { font: NormalModesConstants.GENERAL_FONT } );
     const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibleProperty, {
       boxWidth: 16
     } );
@@ -203,7 +106,7 @@ class NormalModesControlPanel extends Panel {
 
     // Show Phases checkbox
     if ( model.phasesVisibleProperty !== undefined ) {
-      const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
+      const showPhasesText = new Text( normalModesStrings.showPhases, { font: NormalModesConstants.GENERAL_FONT } );
       const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibleProperty, {
         boxWidth: 16
       } );
@@ -261,6 +164,9 @@ function createLayoutFunction( options ) {
     } );
   };
 }
+
+// @public TODO delete this
+NormalModesControlPanel.createLayoutFunction = createLayoutFunction;
 
 normalModes.register( 'NormalModesControlPanel', NormalModesControlPanel );
 export default NormalModesControlPanel;
