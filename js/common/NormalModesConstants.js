@@ -16,14 +16,6 @@ const NormalModesConstants = {
   SCREEN_VIEW_X_MARGIN: 15,
   SCREEN_VIEW_Y_MARGIN: 15,
 
-  windowScale: 0.6,
-
-  // how much the window front should overlap the window back
-  windowXOffset: 5,
-
-  // how much to horizontally shift the window (to center)
-  windowShift: 1,
-
   REALLY_SMALL_FONT: new PhetFont( 12 ),
   SMALL_FONT: new PhetFont( 13 ),
   GENERAL_FONT: new PhetFont( 14 ),
