@@ -33,7 +33,7 @@ class OneDimensionScreen extends Screen {
     };
 
     super(
-      () => new OneDimensionModel( tandem.createTandem( 'model' ) ),
+      () => new OneDimensionModel( { tandem: tandem.createTandem( 'model' ) } ),
       model => new OneDimensionScreenView( model, tandem.createTandem( 'view' ) ),
       options
     );

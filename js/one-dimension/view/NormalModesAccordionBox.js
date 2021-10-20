@@ -29,14 +29,6 @@ class NormalModesAccordionBox extends AccordionBox {
    */
   constructor( model, options ) {
 
-    /*
-    Model properties used:
-      - timeProperty
-      - numberVisibleMassesProperty
-      - modeAmplitudeProperties[0..9]
-      - modePhaseProperties[0..9]
-    */
-
     // from Vector Addition
     const PANEL_CORNER_RADIUS = 5;
     const PANEL_X_MARGIN = 7;
@@ -99,8 +91,8 @@ class NormalModesAccordionBox extends AccordionBox {
     super( graphContainer, options );
 
     // dispose is unnecessary, exists for the lifetime of the sim
-    model.numberVisibleMassesProperty.link( numberMasses => {
-      graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numberMasses );
+    model.numberOfMassesProperty.link( numberOfMasses => {
+      graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numberOfMasses );
       graphContainer.addChild( avoidResize );
       normalModeGraphs.forEach( graph => graph.update() );
       this.layout();

@@ -66,7 +66,7 @@ class NormalModesControlPanel extends Panel {
     // Number of Masses
     const numberOfMassesControl = new NumberControl(
       normalModesStrings.numberOfMasses,
-      model.numberVisibleMassesProperty,
+      model.numberOfMassesProperty,
       new RangeWithValue( NormalModesConstants.MIN_MASSES_PER_ROW,
         NormalModesConstants.MAX_MASSES_PER_ROW,
         NormalModesConstants.INITIAL_MASSES_PER_ROW ), {

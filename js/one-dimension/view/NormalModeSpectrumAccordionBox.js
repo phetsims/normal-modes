@@ -44,16 +44,6 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
    */
   constructor( model, options ) {
 
-    /*
-    Model properties used:
-      - modeAmplitudeProperties[0..9]
-      - modePhaseProperties[0..9]
-      - modeFrequencyProperties[0..9]
-      - amplitudeDirectionProperty
-      - numberVisibleMassesProperty
-      - phasesVisibleProperty
-    */
-
     // from Vector Addition
     const PANEL_CORNER_RADIUS = 5;
     const PANEL_X_MARGIN = 10;
@@ -203,7 +193,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     const contentNode = new HBox( {
       spacing: 9.8,
       align: 'center',
-      children: panelColumns.slice( 0, model.numberVisibleMassesProperty.get() + 1 )
+      children: panelColumns.slice( 0, model.numberOfMassesProperty.get() + 1 )
     } );
 
     const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
@@ -247,8 +237,8 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.numberVisibleMassesProperty.link( numberMasses => {
-      for ( let i = 0; i < numberMasses; i++ ) {
+    model.numberOfMassesProperty.link( numberOfMasses => {
+      for ( let i = 0; i < numberOfMasses; i++ ) {
         const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
         const m = NormalModesConstants.MASSES_MASS_VALUE;
         const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
@@ -259,7 +249,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         } );
       }
 
-      contentNode.children = panelColumns.slice( 0, numberMasses + 1 );
+      contentNode.children = panelColumns.slice( 0, numberOfMasses + 1 );
       contentNode.addChild( lineSeparator );
       contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 

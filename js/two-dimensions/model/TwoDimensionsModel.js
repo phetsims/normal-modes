@@ -6,16 +6,16 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 
-import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Property from '../../../../axon/js/Property.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
-import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import Mass from '../../common/model/Mass.js';
+import NormalModesModel from '../../common/model/NormalModesModel.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
@@ -23,43 +23,19 @@ import normalModes from '../../normalModes.js';
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
 
-class TwoDimensionsModel {
+class TwoDimensionsModel extends NormalModesModel {
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( tandem ) {
+  constructor( options ) {
 
-    // @public {Property.<boolean>} determines whether the sim is in a play/pause state
-    this.playingProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'playingProperty' )
-    } );
+    options = merge( {
+      numberOfMasses: 3,
+      tandem: Tandem.REQUIRED
+    }, options );
 
-    // @public {Property.<number>} determines the speed at which the sim plays
-    this.simSpeedProperty = new NumberProperty( NormalModesConstants.INITIAL_SPEED, {
-      tandem: tandem.createTandem( 'simSpeedProperty' ),
-      range: new Range( NormalModesConstants.MIN_SPEED, NormalModesConstants.MAX_SPEED )
-    } );
-
-    // @public {Property.<boolean>} determines visibility of the springs
-    this.springsVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'springsVisibleProperty' )
-    } );
-
-    // @public {Property.<number>} the current number of visible masses in each row
-    this.numberVisibleMassesProperty = new NumberProperty( 2, {
-      tandem: tandem.createTandem( 'numberVisibleMassesProperty' ),
-      numberType: 'Integer',
-      range: new Range( 1, 10 )
-    } );
-
-    // @public {Property.<number>} the current time
-    this.timeProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'timeProperty' )
-    } );
-
-    // @public {number} Accumulated delta-time
-    this.dt = 0;
+    super( options );
 
     // @public {NumberProperty[][]} 2-dimensional arrays of Properties for each mode
     this.modeXAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
@@ -83,27 +59,27 @@ class TwoDimensionsModel {
         const tandemIndex2 = j + 1;
 
         this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeXAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
+          tandem: options.tandem.createTandem( `modeXAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
-          tandem: tandem.createTandem( `modeYAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
+          tandem: options.tandem.createTandem( `modeYAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
         this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
-          tandem: tandem.createTandem( `modeXPhase[${tandemIndex1},${tandemIndex2}]Property` ),
+          tandem: options.tandem.createTandem( `modeXPhase[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
         } );
 
         this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
-          tandem: tandem.createTandem( `modeYPhase[${tandemIndex1},${tandemIndex2}]Property` ),
+          tandem: options.tandem.createTandem( `modeYPhase[${tandemIndex1},${tandemIndex2}]Property` ),
           range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
         } );
 
         // dispose is unnecessary, since this class owns the dependency
-        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numberVisibleMassesProperty ],
+        this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numberOfMassesProperty ],
           numberMasses => {
             const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
             const m = NormalModesConstants.MASSES_MASS_VALUE;
@@ -117,7 +93,7 @@ class TwoDimensionsModel {
             }
           },
           {
-            tandem: tandem.createTandem( `modeFrequency[${tandemIndex1},${tandemIndex2}]Property` ),
+            tandem: options.tandem.createTandem( `modeFrequency[${tandemIndex1},${tandemIndex2}]Property` ),
             phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
           }
         );
@@ -129,7 +105,7 @@ class TwoDimensionsModel {
     for ( let i = 0; i < MAX_MASSES; ++i ) {
       this.masses[ i ] = new Array( MAX_MASSES );
     }
-    this.createDefaultMasses( tandem );
+    this.createDefaultMasses( options.tandem );
 
     // @public {Spring[][]} 2-dimensional array that will contain all of the springs.
     this.springsX = new Array( MAX_SPRINGS );
@@ -142,21 +118,11 @@ class TwoDimensionsModel {
 
     // @public {Property.<number[]|null>} the indexes of the mass being dragged (an object with and 'i' and a 'j')
     this.draggingMassIndexesProperty = new Property( null, {
-      tandem: tandem.createTandem( 'draggingMassIndexesProperty' )
-    } );
-
-    // @public {Property.<boolean>} determines visibility of the arrows on the masses
-    this.arrowsVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'arrowsVisibleProperty' )
-    } );
-
-    // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
-    this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
-      tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
+      tandem: options.tandem.createTandem( 'draggingMassIndexesProperty' )
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+    this.numberOfMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
 
     // This is the way the original Flash sim does this.
     // The maximum range will be [0,baseMaxAmplitude] for 1 mass.
@@ -168,7 +134,7 @@ class TwoDimensionsModel {
     }
 
     // @public
-    this.maxAmplitudeProperty = new DerivedProperty( [ this.numberVisibleMassesProperty ],
+    this.maxAmplitudeProperty = new DerivedProperty( [ this.numberOfMassesProperty ],
       numberMasses => maxAmplitudes[ numberMasses - 1 ]
     );
   }
@@ -245,7 +211,7 @@ class TwoDimensionsModel {
    * @private
    */
   createDefaultMasses( tandem ) {
-    const defaultMassesNumber = this.numberVisibleMassesProperty.get();
+    const defaultMassesNumber = this.numberOfMassesProperty.get();
 
     let x = NormalModesConstants.LEFT_WALL_X_POS;
     const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
@@ -318,16 +284,11 @@ class TwoDimensionsModel {
   /**
    * Resets the model.
    * @public
+   * @override
    */
   reset() {
-    this.playingProperty.reset();
-    this.timeProperty.reset();
-    this.simSpeedProperty.reset();
-    this.springsVisibleProperty.reset();
-    this.numberVisibleMassesProperty.reset();
+    super.reset();
     this.draggingMassIndexesProperty.reset();
-    this.arrowsVisibleProperty.reset();
-
     this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
   }
 
@@ -405,7 +366,7 @@ class TwoDimensionsModel {
    * @private
    */
   setVerletPositions( dt ) {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       for ( let j = 1; j <= N; ++j ) {
         const dragging = this.draggingMassIndexesProperty.get();
@@ -433,7 +394,7 @@ class TwoDimensionsModel {
    * @private
    */
   recalculateVelocityAndAcceleration( dt ) {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       for ( let j = 1; j <= N; ++j ) {
         const dragging = this.draggingMassIndexesProperty.get();
@@ -471,7 +432,7 @@ class TwoDimensionsModel {
    * @private
    */
   setExactPositions() {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
 
     // The names of these arrays correspond to the formulas used to compute their values
     const amplitudeXTimesCos = [];
@@ -561,7 +522,7 @@ class TwoDimensionsModel {
    */
   computeModeAmplitudesAndPhases() {
     this.timeProperty.reset();
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let r = 1; r <= N; ++r ) {
       for ( let s = 1; s <= N; ++s ) {
         // for each mode

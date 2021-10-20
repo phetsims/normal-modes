@@ -73,8 +73,8 @@ class AmplitudeSelectorRectangle extends Rectangle {
       }
     };
 
-    const numberMassesChanged = numberMasses => {
-      if ( row < numberMasses && col < numberMasses ) {
+    const numberOfMassesChanged = numberOfMasses => {
+      if ( row < numberOfMasses && col < numberOfMasses ) {
         this.visible = true;
         this.rectWidth = this.rectHeight = options.rectGridSize * gridToRealSizeRatioProperty.get();
 
@@ -107,7 +107,7 @@ class AmplitudeSelectorRectangle extends Rectangle {
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    model.numberVisibleMassesProperty.link( numberMassesChanged );
+    model.numberOfMassesProperty.link( numberOfMassesChanged );
 
     // unlink is unnecessary, exists for the lifetime of the sim
     model.amplitudeDirectionProperty.link( amplitudeDirectionChanged );

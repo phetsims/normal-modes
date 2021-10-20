@@ -84,8 +84,8 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       } );
 
     // dispose is unnecessary, exists for the lifetime of the sim
-    const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numberVisibleMassesProperty ], numberMasses => {
-      return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numberMasses + PADDING_GRID_UNITS * ( numberMasses - 1 ) );
+    const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numberOfMassesProperty ], numberOfMasses => {
+      return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numberOfMasses + PADDING_GRID_UNITS * ( numberOfMasses - 1 ) );
     } );
 
     const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_PER_ROW ** 2;

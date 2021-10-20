@@ -8,13 +8,15 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
+import merge from '../../../../phet-core/js/merge.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import Mass from '../../common/model/Mass.js';
+import NormalModesModel from '../../common/model/NormalModesModel.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
@@ -23,53 +25,24 @@ import normalModes from '../../normalModes.js';
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
 
-class OneDimensionModel {
+class OneDimensionModel extends NormalModesModel {
 
   /**
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( tandem ) {
+  constructor( options ) {
 
-    // @public {Property.<boolean>} determines whether the sim is in a play/pause state
-    this.playingProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'playingProperty' )
-    } );
+    options = merge( {
+      numberOfMasses: 3,
+      tandem: Tandem.REQUIRED
+    }, options );
 
-    // @public {Property.<number>} determines the speed at which the sim plays
-    this.simSpeedProperty = new NumberProperty( NormalModesConstants.INITIAL_SPEED, {
-      tandem: tandem.createTandem( 'simSpeedProperty' ),
-      range: new Range( NormalModesConstants.MIN_SPEED, NormalModesConstants.MAX_SPEED )
-    } );
+    super( options );
 
     // @public {Property.<boolean>} determines visibility of the phases sliders
     this.phasesVisibleProperty = new BooleanProperty( false, {
-      tandem: tandem.createTandem( 'phasesVisibleProperty' )
+      tandem: options.tandem.createTandem( 'phasesVisibleProperty' )
     } );
-
-    // @public {Property.<boolean>} determines visibility of the springs
-    this.springsVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'springsVisibleProperty' )
-    } );
-
-    // @public {Property.<number>} the current number of visible masses
-    this.numberVisibleMassesProperty = new NumberProperty( 3, {
-      tandem: tandem.createTandem( 'numberVisibleMassesProperty' ),
-      numberType: 'Integer',
-      range: new Range( 1, 10 )
-    } );
-
-    // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
-    this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
-      tandem: tandem.createTandem( 'amplitudeDirectionProperty' )
-    } );
-
-    // @public {Property.<number>} the current time
-    this.timeProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'timeProperty' )
-    } );
-
-    // @public {number} Accumulated delta-time
-    this.dt = 0;
 
     // @public {NumberProperty[]} 1-dimensional arrays of Properties for each mode
     this.modeAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
@@ -82,17 +55,17 @@ class OneDimensionModel {
       const tandemIndex = i + 1;
 
       this.modeAmplitudeProperties[ i ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
-        tandem: tandem.createTandem( `modeAmplitude${tandemIndex}Property` ),
+        tandem: options.tandem.createTandem( `modeAmplitude${tandemIndex}Property` ),
         range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
       this.modePhaseProperties[ i ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
-        tandem: tandem.createTandem( `modePhase${tandemIndex}Property` ),
+        tandem: options.tandem.createTandem( `modePhase${tandemIndex}Property` ),
         range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
       } );
 
       // dispose is unnecessary, since this class owns the dependency
-      this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numberVisibleMassesProperty ], numberMasses => {
+      this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numberOfMassesProperty ], numberMasses => {
         const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
         const m = NormalModesConstants.MASSES_MASS_VALUE;
         if ( i >= numberMasses ) {
@@ -102,14 +75,14 @@ class OneDimensionModel {
           return 2 * Math.sqrt( k / m ) * Math.sin( Math.PI / 2 * ( i + 1 ) / ( numberMasses + 1 ) );
         }
       }, {
-        tandem: tandem.createTandem( `modeFrequency${tandemIndex}Property` ),
+        tandem: options.tandem.createTandem( `modeFrequency${tandemIndex}Property` ),
         phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
       } );
     }
 
     // @public {Mass[]} Array that will contain all of the masses.
     this.masses = new Array( MAX_MASSES );
-    this.createDefaultMasses( tandem );
+    this.createDefaultMasses( options.tandem );
 
     // @public {Spring[]} Array that will contain all of the springs.
     this.springs = new Array( MAX_SPRINGS );
@@ -117,16 +90,11 @@ class OneDimensionModel {
 
     // @public {Property.<number>} the index of the mass being dragged
     this.draggingMassIndexProperty = new NumberProperty( 0, {
-      tandem: tandem.createTandem( 'draggingMassIndexProperty' )
-    } );
-
-    // @public {Property.<boolean>} determines visibility of the arrows on the masses
-    this.arrowsVisibleProperty = new BooleanProperty( true, {
-      tandem: tandem.createTandem( 'arrowsVisibleProperty' )
+      tandem: options.tandem.createTandem( 'draggingMassIndexProperty' )
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
-    this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+    this.numberOfMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
   }
 
   /**
@@ -161,7 +129,7 @@ class OneDimensionModel {
    * @private
    */
   createDefaultMasses( tandem ) {
-    const defaultMassesNumber = this.numberVisibleMassesProperty.get();
+    const defaultMassesNumber = this.numberOfMassesProperty.get();
 
     let x = NormalModesConstants.LEFT_WALL_X_POS;
     const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
@@ -204,18 +172,12 @@ class OneDimensionModel {
   /**
    * Resets the model.
    * @public
+   * @override
    */
   reset() {
-    this.playingProperty.reset();
-    this.timeProperty.reset();
-    this.simSpeedProperty.reset();
+    super.reset();
     this.phasesVisibleProperty.reset();
-    this.springsVisibleProperty.reset();
-    this.numberVisibleMassesProperty.reset();
-    this.amplitudeDirectionProperty.reset();
     this.draggingMassIndexProperty.reset();
-    this.arrowsVisibleProperty.reset();
-
     this.zeroPositions(); // the amplitudes and phases are reset because of zeroPositions
   }
 
@@ -291,7 +253,7 @@ class OneDimensionModel {
    * @private
    */
   setVerletPositions( dt ) {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       if ( i !== this.draggingMassIndexProperty.get() ) {
 
@@ -315,7 +277,7 @@ class OneDimensionModel {
    * @private
    */
   recalculateVelocityAndAcceleration( dt ) {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       if ( i !== this.draggingMassIndexProperty.get() ) {
 
@@ -360,7 +322,7 @@ class OneDimensionModel {
    * @private
    */
   setExactPositions() {
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       // for each mass
 
@@ -405,7 +367,7 @@ class OneDimensionModel {
    */
   computeModeAmplitudesAndPhases() {
     this.timeProperty.reset();
-    const N = this.numberVisibleMassesProperty.get();
+    const N = this.numberOfMassesProperty.get();
     for ( let i = 1; i <= N; ++i ) {
       // for each mode
 

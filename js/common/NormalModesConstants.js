@@ -7,6 +7,7 @@
  * @author Franco Barpp Gomes (UTFPR)
  */
 
+import Range from '../../../dot/js/Range.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
 import normalModes from '../normalModes.js';
 
@@ -24,6 +25,7 @@ const NormalModesConstants = {
   FIXED_DT: 1 / 60,
 
   // Masses
+  NUMBER_OF_MASSES_RANGE: new Range( 1, 10 ),
   MASSES_MASS_VALUE: 0.1,
 
   // Springs
