@@ -115,6 +115,7 @@ class TwoDimensionsScreenView extends ScreenView {
     this.addChild( normalModeAmplitudesAccordionBox );
 
     // Drag bounds for the masses is defined by borderWalls.
+    // See https://github.com/phetsims/normal-modes/issues/68
     const massDragBounds = modelViewTransform.viewToModelBounds( borderWalls.bounds );
 
     // used slice to ignore the virtual stationary masses at the walls
