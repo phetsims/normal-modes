@@ -1,13 +1,7 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
 /**
- * NormalModesControlPanel contains controls for both 1D and 2D views, including:
- *
- *  - Play/pause button
- *  - Speed slider selector
- *  - Step button
- *  - Initial and Zero positions buttons
- *  - Number of mass nodes slider selector
+ * NormalModesControlPanel contains controls for both 1D and 2D views.
  *
  * @author Franco Barpp Gomes {UTFPR}
  */
@@ -50,45 +44,7 @@ class NormalModesControlPanel extends Panel {
    */
   constructor( model, options ) {
 
-    /*
-    Model properties used:
-      - playingProperty
-      - simSpeedProperty
-      - numberVisibleMassesProperty
-      - springsVisibleProperty
-      - phasesVisibleProperty (if there is one)
-    */
-
-    const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
-    const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibleProperty, {
-      boxWidth: 16
-    } );
-    showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
-
-    let checkboxes = null;
-
-    if ( model.phasesVisibleProperty !== undefined ) {
-      const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
-      const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibleProperty, {
-        boxWidth: 16
-      } );
-      showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
-      checkboxes = new VBox( {
-        spacing: 7,
-        children: [
-          showSpringsCheckbox,
-          showPhasesCheckbox
-        ]
-      } );
-    }
-    else {
-      checkboxes = new VBox( {
-        spacing: 7,
-        children: [
-          showSpringsCheckbox
-        ]
-      } );
-    }
+    const controls = [];
 
     const playPauseButtonOptions = {
       upFill: NormalModesColors.BLUE_BUTTON_UP_COLOR,
@@ -142,53 +98,6 @@ class NormalModesControlPanel extends Panel {
       yMargin: 3
     }, NormalModesColors.BUTTON_COLORS );
 
-    // Initial positions button
-    const initialPositionsButton = new TextPushButton( initialPositionsString, merge( {
-      listener: model.initialPositions.bind( model )
-    }, textButtonsOptions ) );
-
-    // Zero positions button
-    const zeroPositionsButton = new TextPushButton( zeroPositionsString, merge( {
-      listener: model.zeroPositions.bind( model )
-    }, textButtonsOptions ) );
-
-    // Creates option.layoutFunction for NumberControl instances
-    const createLayoutFunction = options => {
-
-      options = merge( {
-        align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
-        titleXSpacing: 5, // {number} horizontal spacing between title and number
-        arrowButtonsXSpacing: 15, // {number} horizontal spacing between arrow buttons and slider
-        ySpacing: 3 // {number} vertical spacing between rows
-      }, options );
-
-      return ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
-        const includeArrowButtons = !!leftArrowButton; // if there aren't arrow buttons, then exclude them
-        return new VBox( {
-          align: options.align,
-          spacing: options.ySpacing,
-          excludeInvisibleChildrenFromBounds: false,
-          children: [
-            new HBox( {
-              spacing: options.titleXSpacing,
-              children: [ titleNode, numberDisplay ],
-              excludeInvisibleChildrenFromBounds: false
-            } ),
-            new HBox( {
-              spacing: options.arrowButtonsXSpacing,
-              resize: false, // prevent slider from causing a resize when thumb is at min or max
-              children: !includeArrowButtons ? [ slider ] : [
-                leftArrowButton,
-                slider,
-                rightArrowButton
-              ],
-              excludeInvisibleChildrenFromBounds: false
-            } )
-          ]
-        } );
-      };
-    };
-
     const speedControlOptions = {
       delta: NormalModesConstants.DELTA_SPEED,
       layoutFunction: createLayoutFunction(),
@@ -237,56 +146,120 @@ class NormalModesControlPanel extends Panel {
       align: 'center',
       children: [ playAndStepButtons, speedControl ]
     } );
+    controls.push( playSpeedControlsBox );
 
-    const numberVisibleMassesControlOptions = {
-      layoutFunction: createLayoutFunction(),
-      includeArrowButtons: false,
-      sliderOptions: {
-        trackSize: new Dimension2( 150, 3 ),
-        thumbSize: new Dimension2( 11, 19 ),
-        thumbTouchAreaXDilation: 12,
-        thumbTouchAreaYDilation: 15,
-        majorTickLength: 10,
-        minorTickLength: 5,
-        majorTicks: [
-          { value: NormalModesConstants.MIN_MASSES_PER_ROW, label: '' },
-          { value: NormalModesConstants.MAX_MASSES_PER_ROW, label: '' }
-        ],
-        minorTickSpacing: NormalModesConstants.MIN_MASSES_PER_ROW
-      },
-      titleNodeOptions: {
-        font: NormalModesConstants.GENERAL_FONT
-      },
-      numberDisplayOptions: {
-        textOptions: {
-          font: NormalModesConstants.GENERAL_FONT
-        }
-      }
-    };
+    // Initial Positions button
+    const initialPositionsButton = new TextPushButton( initialPositionsString, merge( {
+      listener: model.initialPositions.bind( model )
+    }, textButtonsOptions ) );
+    controls.push( initialPositionsButton );
 
-    const numberVisibleMassesControl = new NumberControl(
+    // Zero Positions button
+    const zeroPositionsButton = new TextPushButton( zeroPositionsString, merge( {
+      listener: model.zeroPositions.bind( model )
+    }, textButtonsOptions ) );
+    controls.push( zeroPositionsButton );
+
+    // Number of Masses
+    const numberOfMassesControl = new NumberControl(
       numberOfMassesString,
       model.numberVisibleMassesProperty,
       new RangeWithValue( NormalModesConstants.MIN_MASSES_PER_ROW,
         NormalModesConstants.MAX_MASSES_PER_ROW,
-        NormalModesConstants.INITIAL_MASSES_PER_ROW ),
-      numberVisibleMassesControlOptions
-    );
+        NormalModesConstants.INITIAL_MASSES_PER_ROW ), {
+        layoutFunction: createLayoutFunction(),
+        includeArrowButtons: false,
+        sliderOptions: {
+          trackSize: new Dimension2( 150, 3 ),
+          thumbSize: new Dimension2( 11, 19 ),
+          thumbTouchAreaXDilation: 12,
+          thumbTouchAreaYDilation: 15,
+          majorTickLength: 10,
+          minorTickLength: 5,
+          majorTicks: [
+            { value: NormalModesConstants.MIN_MASSES_PER_ROW, label: '' },
+            { value: NormalModesConstants.MAX_MASSES_PER_ROW, label: '' }
+          ],
+          minorTickSpacing: NormalModesConstants.MIN_MASSES_PER_ROW
+        },
+        titleNodeOptions: {
+          font: NormalModesConstants.GENERAL_FONT
+        },
+        numberDisplayOptions: {
+          textOptions: {
+            font: NormalModesConstants.GENERAL_FONT
+          }
+        }
+      } );
+    controls.push( numberOfMassesControl );
+
+    // Show Springs checkbox
+    const showSpringsText = new Text( showSpringsString, { font: NormalModesConstants.GENERAL_FONT } );
+    const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibleProperty, {
+      boxWidth: 16
+    } );
+    showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
+    controls.push( showSpringsCheckbox );
+
+    // Show Phases checkbox
+    if ( model.phasesVisibleProperty !== undefined ) {
+      const showPhasesText = new Text( showPhasesString, { font: NormalModesConstants.GENERAL_FONT } );
+      const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibleProperty, {
+        boxWidth: 16
+      } );
+      showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
+      controls.push( showPhasesCheckbox );
+    }
 
     const contentNode = new VBox( {
       spacing: 7,
       align: 'center',
-      children: [
-        playSpeedControlsBox,
-        initialPositionsButton,
-        zeroPositionsButton,
-        numberVisibleMassesControl,
-        checkboxes
-      ]
+      children: controls
     } );
 
     super( contentNode, options );
   }
+}
+
+/**
+ * Creates option.layoutFunction for NumberControl instances.
+ * @param {Object} [options]
+ * @returns {function}
+ */
+function createLayoutFunction( options ) {
+
+  options = merge( {
+    align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
+    titleXSpacing: 5, // {number} horizontal spacing between title and number
+    arrowButtonsXSpacing: 15, // {number} horizontal spacing between arrow buttons and slider
+    ySpacing: 3 // {number} vertical spacing between rows
+  }, options );
+
+  return ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
+    const includeArrowButtons = !!leftArrowButton; // if there aren't arrow buttons, then exclude them
+    return new VBox( {
+      align: options.align,
+      spacing: options.ySpacing,
+      excludeInvisibleChildrenFromBounds: false,
+      children: [
+        new HBox( {
+          spacing: options.titleXSpacing,
+          children: [ titleNode, numberDisplay ],
+          excludeInvisibleChildrenFromBounds: false
+        } ),
+        new HBox( {
+          spacing: options.arrowButtonsXSpacing,
+          resize: false, // prevent slider from causing a resize when thumb is at min or max
+          children: !includeArrowButtons ? [ slider ] : [
+            leftArrowButton,
+            slider,
+            rightArrowButton
+          ],
+          excludeInvisibleChildrenFromBounds: false
+        } )
+      ]
+    } );
+  };
 }
 
 normalModes.register( 'NormalModesControlPanel', NormalModesControlPanel );
