@@ -159,8 +159,9 @@ class TwoDimensionsModel {
     this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
 
     // This is the way the original Flash sim does this.
-    const maxAmplitudes = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    // The maximum range will be [0,baseMaxAmplitude] for 1 mass.
     const baseMaxAmplitude = 0.3;
+    const maxAmplitudes = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
     for ( let i = 0; i < maxAmplitudes.length; i++ ) {
       const springLength = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( i + 2 );
       maxAmplitudes[ i ] = baseMaxAmplitude * springLength;
