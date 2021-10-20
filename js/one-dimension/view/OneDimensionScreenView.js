@@ -13,6 +13,7 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesQueryParameters from '../../common/NormalModesQueryParameters.js';
@@ -114,6 +115,13 @@ class OneDimensionScreenView extends ScreenView {
       leftWallNode.centerY + NormalModesQueryParameters.dragBoundsHeight1D / 2
     );
     const dragBoundsModel = modelViewTransform.viewToModelBounds( dragBoundsView );
+
+    if ( NormalModesQueryParameters.showDragBounds1D ) {
+      console.log( 'drawing drag bounds' );
+      this.addChild( new Rectangle( dragBoundsView, {
+        stroke: 'red'
+      } ) );
+    }
 
     // used slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( mass => {

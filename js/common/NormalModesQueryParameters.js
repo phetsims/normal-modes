@@ -26,6 +26,11 @@ const NormalModesQueryParameters = QueryStringMachine.getAll( {
     type: 'number',
     defaultValue: 100,
     isValidValue: value => ( value > 0 )
+  },
+
+  // Draws the drag bounds for masses in the 'One Dimension' screen as a red rectangle.
+  showDragBounds1D: {
+    type: 'flag'
   }
 } );
 
