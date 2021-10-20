@@ -13,21 +13,49 @@ import normalModes from '../normalModes.js';
 const NormalModesConstants = {
 
   // ScreenView margins
-  SCREEN_VIEW_X_MARGIN: 15,
-  SCREEN_VIEW_Y_MARGIN: 15,
+  SCREEN_VIEW_X_MARGIN: 10,
+  SCREEN_VIEW_Y_MARGIN: 10,
 
-  // fonts
-  REALLY_SMALL_FONT: new PhetFont( 12 ),
-  SMALL_FONT: new PhetFont( 13 ),
-  GENERAL_FONT: new PhetFont( 14 ),
-  MODE_NUMBER_FONT: new PhetFont( 16 ),
-  CONTROL_FONT: new PhetFont( 18 ),
+  // Time
+  MIN_SPEED: 0.02,
+  MAX_SPEED: 3,
+  INITIAL_SPEED: 1,
+  DELTA_SPEED: 0.1,
+  FIXED_DT: 1 / 60,
+
+  // Masses
+  MASSES_MASS_VALUE: 0.1,
+
+  // Springs
+  SPRING_CONSTANT_VALUE: 0.1 * 4 * Math.PI ** 2,
+
+  // Amplitude
+  MIN_AMPLITUDE: 0,
+  MAX_AMPLITUDE: 0.2, // for One Dimension screen
+  INITIAL_AMPLITUDE: 0,
+  
+  // Phase
+  MIN_PHASE: -Math.PI,
+  MAX_PHASE: Math.PI,
+  INITIAL_PHASE: 0,
 
   // number of masses per row, for both 1D and 2D
   MIN_MASSES_PER_ROW: 1,
   MAX_MASSES_PER_ROW: 10,
-  INITIAL_MASSES_PER_ROW: 3
+  INITIAL_MASSES_PER_ROW: 3,
 
+  //TODO ???
+  LEFT_WALL_X_POS: -1,
+  TOP_WALL_Y_POS: 1,
+  DISTANCE_BETWEEN_X_WALLS: 2,
+  DISTANCE_BETWEEN_Y_WALLS: 2,
+
+  // fonts
+  CONTROL_FONT: new PhetFont( 18 ),
+  MODE_NUMBER_FONT: new PhetFont( 16 ),
+  GENERAL_FONT: new PhetFont( 14 ),
+  SMALL_FONT: new PhetFont( 13 ),
+  SMALLER_FONT: new PhetFont( 12 )
 };
 
 normalModes.register( 'NormalModesConstants', NormalModesConstants );

@@ -25,9 +25,8 @@ import VSlider from '../../../../sun/js/VSlider.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
-import OneDimensionConstants from '../OneDimensionConstants.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import StaticModeGraphCanvasNode from './StaticModeGraphCanvasNode.js';
 
 const amplitudeString = normalModesStrings.amplitude;
@@ -104,22 +103,22 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     };
 
     for ( let i = 0; i < amplitudeSliders.length; i++ ) {
-      const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
-      const m = OneDimensionConstants.MASSES_MASS_VALUE;
+      const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+      const m = NormalModesConstants.MASSES_MASS_VALUE;
 
       amplitudeSliders[ i ] = new VSlider(
         model.modeAmplitudeProperties[ i ],
-        new RangeWithValue( OneDimensionConstants.MIN_MODE_AMPLITUDE,
-          OneDimensionConstants.MAX_MODE_AMPLITUDE,
-          OneDimensionConstants.INIT_MODE_AMPLITUDE ),
+        new RangeWithValue( NormalModesConstants.MIN_AMPLITUDE,
+          NormalModesConstants.MAX_AMPLITUDE,
+          NormalModesConstants.INITIAL_AMPLITUDE ),
         amplitudeSliderOptions
       );
 
       phaseSliders[ i ] = new VSlider(
         model.modePhaseProperties[ i ],
-        new RangeWithValue( OneDimensionConstants.MIN_MODE_PHASE,
-          OneDimensionConstants.MAX_MODE_PHASE,
-          OneDimensionConstants.INIT_MODE_PHASE ),
+        new RangeWithValue( NormalModesConstants.MIN_PHASE,
+          NormalModesConstants.MAX_PHASE,
+          NormalModesConstants.INITIAL_PHASE ),
         phaseSliderOptions
       );
 
@@ -250,8 +249,8 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
     // unlink is unnecessary, exists for the lifetime of the sim
     model.numberVisibleMassesProperty.link( numberMasses => {
       for ( let i = 0; i < numberMasses; i++ ) {
-        const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
-        const m = OneDimensionConstants.MASSES_MASS_VALUE;
+        const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+        const m = NormalModesConstants.MASSES_MASS_VALUE;
         const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
 
         modeGraphs[ i ].update();

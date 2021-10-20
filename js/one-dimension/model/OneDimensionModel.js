@@ -18,7 +18,6 @@ import Mass from '../../common/model/Mass.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
-import OneDimensionConstants from '../OneDimensionConstants.js';
 
 // including the 2 virtual stationary masses at wall positions
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
@@ -37,9 +36,9 @@ class OneDimensionModel {
     } );
 
     // @public {Property.<number>} determines the speed at which the sim plays
-    this.simSpeedProperty = new NumberProperty( OneDimensionConstants.INIT_SPEED, {
+    this.simSpeedProperty = new NumberProperty( NormalModesConstants.INITIAL_SPEED, {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      range: new Range( OneDimensionConstants.MIN_SPEED, OneDimensionConstants.MAX_SPEED )
+      range: new Range( NormalModesConstants.MIN_SPEED, NormalModesConstants.MAX_SPEED )
     } );
 
     // @public {Property.<boolean>} determines visibility of the phases sliders
@@ -82,20 +81,20 @@ class OneDimensionModel {
       // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
       const tandemIndex = i + 1;
 
-      this.modeAmplitudeProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_AMPLITUDE, {
+      this.modeAmplitudeProperties[ i ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
         tandem: tandem.createTandem( `modeAmplitude${tandemIndex}Property` ),
-        range: new Range( OneDimensionConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
+        range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
       } );
 
-      this.modePhaseProperties[ i ] = new NumberProperty( OneDimensionConstants.INIT_MODE_PHASE, {
+      this.modePhaseProperties[ i ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
         tandem: tandem.createTandem( `modePhase${tandemIndex}Property` ),
-        range: new Range( OneDimensionConstants.MIN_MODE_PHASE, OneDimensionConstants.MAX_MODE_PHASE )
+        range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
       } );
 
       // dispose is unnecessary, since this class owns the dependency
       this.modeFrequencyProperties[ i ] = new DerivedProperty( [ this.numberVisibleMassesProperty ], numberMasses => {
-        const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
-        const m = OneDimensionConstants.MASSES_MASS_VALUE;
+        const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+        const m = NormalModesConstants.MASSES_MASS_VALUE;
         if ( i >= numberMasses ) {
           return 0;
         }
@@ -137,9 +136,9 @@ class OneDimensionModel {
    */
   changedNumberOfMasses( numberMasses ) {
 
-    let x = OneDimensionConstants.LEFT_WALL_X_POS;
-    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( numberMasses + 1 );
-    const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
+    let x = NormalModesConstants.LEFT_WALL_X_POS;
+    const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( numberMasses + 1 );
+    const xFinal = NormalModesConstants.LEFT_WALL_X_POS + NormalModesConstants.DISTANCE_BETWEEN_X_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       const visible = ( i <= numberMasses );
@@ -164,9 +163,9 @@ class OneDimensionModel {
   createDefaultMasses( tandem ) {
     const defaultMassesNumber = this.numberVisibleMassesProperty.get();
 
-    let x = OneDimensionConstants.LEFT_WALL_X_POS;
-    const xStep = OneDimensionConstants.DISTANCE_BETWEEN_WALLS / ( defaultMassesNumber + 1 );
-    const xFinal = OneDimensionConstants.LEFT_WALL_X_POS + OneDimensionConstants.DISTANCE_BETWEEN_WALLS;
+    let x = NormalModesConstants.LEFT_WALL_X_POS;
+    const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
+    const xFinal = NormalModesConstants.LEFT_WALL_X_POS + NormalModesConstants.DISTANCE_BETWEEN_X_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       const visible = ( i <= defaultMassesNumber );
@@ -256,9 +255,9 @@ class OneDimensionModel {
     if ( this.playingProperty.get() ) {
       this.dt += dt;
 
-      while ( this.dt >= OneDimensionConstants.FIXED_DT ) {
-        this.dt -= OneDimensionConstants.FIXED_DT;
-        this.singleStep( OneDimensionConstants.FIXED_DT );
+      while ( this.dt >= NormalModesConstants.FIXED_DT ) {
+        this.dt -= NormalModesConstants.FIXED_DT;
+        this.singleStep( NormalModesConstants.FIXED_DT );
       }
     }
     else if ( this.draggingMassIndexProperty.get() <= 0 ) {
@@ -320,8 +319,8 @@ class OneDimensionModel {
     for ( let i = 1; i <= N; ++i ) {
       if ( i !== this.draggingMassIndexProperty.get() ) {
 
-        const k = OneDimensionConstants.SPRING_CONSTANT_VALUE;
-        const m = OneDimensionConstants.MASSES_MASS_VALUE;
+        const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+        const m = NormalModesConstants.MASSES_MASS_VALUE;
         const xLeft = this.masses[ i - 1 ].displacementProperty.get();
         const x = this.masses[ i ].displacementProperty.get();
         const xRight = this.masses[ i + 1 ].displacementProperty.get();

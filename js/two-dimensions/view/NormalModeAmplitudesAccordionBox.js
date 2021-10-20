@@ -18,9 +18,8 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
-import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import AmplitudeSelectorRectangle from './AmplitudeSelectorRectangle.js';
 
 const normalModeAmplitudesString = normalModesStrings.normalModeAmplitudes;
@@ -85,11 +84,6 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       } );
 
     // dispose is unnecessary, exists for the lifetime of the sim
-    const maxAmplitudeProperty = new DerivedProperty( [ model.numberVisibleMassesProperty ], numberMasses => {
-      return TwoDimensionsConstants.MAX_MODE_AMPLITUDE[ numberMasses - 1 ];
-    } );
-
-    // dispose is unnecessary, exists for the lifetime of the sim
     const gridToRealSizeRatioProperty = new DerivedProperty( [ model.numberVisibleMassesProperty ], numberMasses => {
       return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numberMasses + PADDING_GRID_UNITS * ( numberMasses - 1 ) );
     } );
@@ -110,7 +104,7 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       const col = i % NormalModesConstants.MAX_MASSES_PER_ROW;
 
       selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
-        maxAmplitudeProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
+        model.maxAmplitudeProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );
     }
 
     const selectorBox = new Rectangle( {

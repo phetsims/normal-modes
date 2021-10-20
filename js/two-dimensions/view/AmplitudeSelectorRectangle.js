@@ -17,8 +17,8 @@ import FireListener from '../../../../scenery/js/listeners/FireListener.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
-import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
 
 class AmplitudeSelectorRectangle extends Rectangle {
 
@@ -122,7 +122,7 @@ class AmplitudeSelectorRectangle extends Rectangle {
         const amplitude = axisAmplitudesProperty.get()[ row ][ col ];
 
         if ( isNear( amplitude.get(), maxAmplitudeProperty.get() ) ) {
-          amplitude.set( TwoDimensionsConstants.MIN_MODE_AMPLITUDE );
+          amplitude.set( NormalModesConstants.MIN_AMPLITUDE );
         }
         else {
           amplitude.set( maxAmplitudeProperty.get() );

@@ -13,10 +13,10 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
 import normalModes from '../../normalModes.js';
-import OneDimensionConstants from '../OneDimensionConstants.js';
 import MassNode1D from './MassNode1D.js';
 import NormalModesAccordionBox from './NormalModesAccordionBox.js';
 import NormalModeSpectrumAccordionBox from './NormalModeSpectrumAccordionBox.js';
@@ -40,7 +40,7 @@ class OneDimensionScreenView extends ScreenView {
     // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     // The midpoint between leftWall and rightWall
     const viewOrigin = new Vector2(
-      VIEW_SPRING_WIDTH / 2 + OneDimensionConstants.SCREEN_VIEW_X_MARGIN + 4,
+      VIEW_SPRING_WIDTH / 2 + NormalModesConstants.SCREEN_VIEW_X_MARGIN + 4,
       ( this.layoutBounds.maxY - 300 ) / 2
     );
 
@@ -53,14 +53,14 @@ class OneDimensionScreenView extends ScreenView {
         this.interruptSubtreeInput(); // cancel interactions that may be in progress
         model.reset();
       },
-      right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN,
+      bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     const controlPanelOptions = merge( {
-      right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
-      top: OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
+      top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       xMargin: 8,
       yMargin: 8
@@ -69,7 +69,7 @@ class OneDimensionScreenView extends ScreenView {
     const controlPanel = new NormalModesControlPanel( model, controlPanelOptions );
 
     const normalModeSpectrumAccordionBoxOptions = merge( {
-      bottom: this.layoutBounds.maxY - OneDimensionConstants.SCREEN_VIEW_Y_MARGIN,
+      bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       centerX: viewOrigin.x
     }, NormalModesColors.PANEL_COLORS );
@@ -111,7 +111,7 @@ class OneDimensionScreenView extends ScreenView {
 
     const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
       top: controlPanel.bottom + 8,
-      right: this.layoutBounds.maxX - OneDimensionConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
     }, NormalModesColors.PANEL_COLORS ) );
 
     this.addChild( normalModesAccordionBox );

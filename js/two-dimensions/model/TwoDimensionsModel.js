@@ -19,7 +19,6 @@ import Mass from '../../common/model/Mass.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
-import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
 
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
@@ -37,9 +36,9 @@ class TwoDimensionsModel {
     } );
 
     // @public {Property.<number>} determines the speed at which the sim plays
-    this.simSpeedProperty = new NumberProperty( TwoDimensionsConstants.INIT_SPEED, {
+    this.simSpeedProperty = new NumberProperty( NormalModesConstants.INITIAL_SPEED, {
       tandem: tandem.createTandem( 'simSpeedProperty' ),
-      range: new Range( TwoDimensionsConstants.MIN_SPEED, TwoDimensionsConstants.MAX_SPEED )
+      range: new Range( NormalModesConstants.MIN_SPEED, NormalModesConstants.MAX_SPEED )
     } );
 
     // @public {Property.<boolean>} determines visibility of the springs
@@ -83,31 +82,31 @@ class TwoDimensionsModel {
         const tandemIndex1 = i + 1;
         const tandemIndex2 = j + 1;
 
-        this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
+        this.modeXAmplitudeProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
           tandem: tandem.createTandem( `modeXAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
-          range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
+          range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
-        this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_AMPLITUDE, {
+        this.modeYAmplitudeProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_AMPLITUDE, {
           tandem: tandem.createTandem( `modeYAmplitude[${tandemIndex1},${tandemIndex2}]Property` ),
-          range: new Range( TwoDimensionsConstants.MIN_MODE_AMPLITUDE, Number.POSITIVE_INFINITY )
+          range: new Range( NormalModesConstants.MIN_AMPLITUDE, Number.POSITIVE_INFINITY )
         } );
 
-        this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
+        this.modeXPhaseProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
           tandem: tandem.createTandem( `modeXPhase[${tandemIndex1},${tandemIndex2}]Property` ),
-          range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
+          range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
         } );
 
-        this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( TwoDimensionsConstants.INIT_MODE_PHASE, {
+        this.modeYPhaseProperties[ i ][ j ] = new NumberProperty( NormalModesConstants.INITIAL_PHASE, {
           tandem: tandem.createTandem( `modeYPhase[${tandemIndex1},${tandemIndex2}]Property` ),
-          range: new Range( TwoDimensionsConstants.MIN_MODE_PHASE, TwoDimensionsConstants.MAX_MODE_PHASE )
+          range: new Range( NormalModesConstants.MIN_PHASE, NormalModesConstants.MAX_PHASE )
         } );
 
         // dispose is unnecessary, since this class owns the dependency
         this.modeFrequencyProperties[ i ][ j ] = new DerivedProperty( [ this.numberVisibleMassesProperty ],
           numberMasses => {
-            const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
-            const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
+            const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+            const m = NormalModesConstants.MASSES_MASS_VALUE;
             if ( i >= numberMasses || j >= numberMasses ) {
               return 0;
             }
@@ -158,6 +157,19 @@ class TwoDimensionsModel {
 
     // unlink is unnecessary, exists for the lifetime of the sim
     this.numberVisibleMassesProperty.link( this.changedNumberOfMasses.bind( this ) );
+
+    // This is the way the original Flash sim does this.
+    const maxAmplitudes = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const baseMaxAmplitude = 0.3;
+    for ( let i = 0; i < maxAmplitudes.length; i++ ) {
+      const springLength = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( i + 2 );
+      maxAmplitudes[ i ] = baseMaxAmplitude * springLength;
+    }
+
+    // @public
+    this.maxAmplitudeProperty = new DerivedProperty( [ this.numberVisibleMassesProperty ],
+      numberMasses => maxAmplitudes[ numberMasses - 1 ]
+    );
   }
 
   /**
@@ -195,16 +207,16 @@ class TwoDimensionsModel {
    */
   changedNumberOfMasses( numberMasses ) {
 
-    let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( numberMasses + 1 );
-    const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
+    let x = NormalModesConstants.LEFT_WALL_X_POS;
+    const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( numberMasses + 1 );
+    const xFinal = NormalModesConstants.LEFT_WALL_X_POS + NormalModesConstants.DISTANCE_BETWEEN_X_WALLS;
 
-    let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( numberMasses + 1 );
-    const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS - TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
+    let y = NormalModesConstants.TOP_WALL_Y_POS;
+    const yStep = NormalModesConstants.DISTANCE_BETWEEN_Y_WALLS / ( numberMasses + 1 );
+    const yFinal = NormalModesConstants.TOP_WALL_Y_POS - NormalModesConstants.DISTANCE_BETWEEN_Y_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
-      x = TwoDimensionsConstants.LEFT_WALL_X_POS;
+      x = NormalModesConstants.LEFT_WALL_X_POS;
       for ( let j = 0; j < MAX_MASSES; ++j ) {
         const visible = ( i <= numberMasses && j <= numberMasses );
 
@@ -234,13 +246,13 @@ class TwoDimensionsModel {
   createDefaultMasses( tandem ) {
     const defaultMassesNumber = this.numberVisibleMassesProperty.get();
 
-    let x = TwoDimensionsConstants.LEFT_WALL_X_POS;
-    const xStep = TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
-    const xFinal = TwoDimensionsConstants.LEFT_WALL_X_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_X_WALLS;
+    let x = NormalModesConstants.LEFT_WALL_X_POS;
+    const xStep = NormalModesConstants.DISTANCE_BETWEEN_X_WALLS / ( defaultMassesNumber + 1 );
+    const xFinal = NormalModesConstants.LEFT_WALL_X_POS + NormalModesConstants.DISTANCE_BETWEEN_X_WALLS;
 
-    let y = TwoDimensionsConstants.TOP_WALL_Y_POS;
-    const yStep = TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS / ( defaultMassesNumber + 1 );
-    const yFinal = TwoDimensionsConstants.TOP_WALL_Y_POS + TwoDimensionsConstants.DISTANCE_BETWEEN_Y_WALLS;
+    let y = NormalModesConstants.TOP_WALL_Y_POS;
+    const yStep = NormalModesConstants.DISTANCE_BETWEEN_Y_WALLS / ( defaultMassesNumber + 1 );
+    const yFinal = NormalModesConstants.TOP_WALL_Y_POS + NormalModesConstants.DISTANCE_BETWEEN_Y_WALLS;
 
     for ( let i = 0; i < MAX_MASSES; i++ ) {
       for ( let j = 0; j < MAX_MASSES; ++j ) {
@@ -356,9 +368,9 @@ class TwoDimensionsModel {
     if ( this.playingProperty.get() ) {
       this.dt += dt;
 
-      while ( this.dt >= TwoDimensionsConstants.FIXED_DT ) {
-        this.dt -= TwoDimensionsConstants.FIXED_DT;
-        this.singleStep( TwoDimensionsConstants.FIXED_DT );
+      while ( this.dt >= NormalModesConstants.FIXED_DT ) {
+        this.dt -= NormalModesConstants.FIXED_DT;
+        this.singleStep( NormalModesConstants.FIXED_DT );
       }
     }
     else if ( this.draggingMassIndexesProperty.get() === null ) {
@@ -426,8 +438,8 @@ class TwoDimensionsModel {
         const dragging = this.draggingMassIndexesProperty.get();
         if ( !dragging || dragging.i !== i || dragging.j !== j ) {
 
-          const k = TwoDimensionsConstants.SPRING_CONSTANT_VALUE;
-          const m = TwoDimensionsConstants.MASSES_MASS_VALUE;
+          const k = NormalModesConstants.SPRING_CONSTANT_VALUE;
+          const m = NormalModesConstants.MASSES_MASS_VALUE;
           const sLeft = this.masses[ i ][ j - 1 ].displacementProperty.get();
           const sAbove = this.masses[ i - 1 ][ j ].displacementProperty.get();
           const s = this.masses[ i ][ j ].displacementProperty.get();

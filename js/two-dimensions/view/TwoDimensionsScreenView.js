@@ -15,10 +15,10 @@ import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransfo
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
 import normalModes from '../../normalModes.js';
-import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
 import MassNode2D from './MassNode2D.js';
 import NormalModeAmplitudesAccordionBox from './NormalModeAmplitudesAccordionBox.js';
 
@@ -44,7 +44,7 @@ class TwoDimensionsScreenView extends ScreenView {
     const modelViewTransform = ModelViewTransform2.createSinglePointScaleInvertedYMapping(
       Vector2.ZERO,
       viewOrigin,
-      ( this.layoutBounds.maxX - 2 * TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2
+      ( this.layoutBounds.maxX - 2 * NormalModesConstants.SCREEN_VIEW_X_MARGIN - 420 ) / 2
     );
 
     const resetAllButton = new ResetAllButton( {
@@ -52,14 +52,14 @@ class TwoDimensionsScreenView extends ScreenView {
         this.interruptSubtreeInput(); // cancel interactions that may be in progress
         model.reset();
       },
-      right: this.layoutBounds.maxX - TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN,
-      bottom: this.layoutBounds.maxY - TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN,
+      bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: tandem.createTandem( 'resetAllButton' )
     } );
 
     const controlPanelOptions = merge( {
-      right: this.layoutBounds.maxX - TwoDimensionsConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
-      top: TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
+      top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       xMargin: 8,
       yMargin: 8
@@ -104,7 +104,7 @@ class TwoDimensionsScreenView extends ScreenView {
 
     const normalModeAmplitudesAccordionBoxOptions = merge( {
       left: borderWalls.right + 10,
-      bottom: this.layoutBounds.maxY - TwoDimensionsConstants.SCREEN_VIEW_Y_MARGIN,
+      bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5
     }, NormalModesColors.PANEL_COLORS );
 

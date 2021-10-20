@@ -12,8 +12,8 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
+import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
-import OneDimensionConstants from '../OneDimensionConstants.js';
 
 class StaticModeGraphCanvasNode extends CanvasNode {
 
@@ -112,7 +112,7 @@ class StaticModeGraphCanvasNode extends CanvasNode {
       const x = i / this.curveResolution;
 
       const sin = Math.sin( x * ( n + 1 ) * Math.PI );
-      this.curveYPositions[ i ] = heightFactor * ( amplitude * sin * cos ) / OneDimensionConstants.MAX_MODE_AMPLITUDE;
+      this.curveYPositions[ i ] = heightFactor * ( amplitude * sin * cos ) / NormalModesConstants.MAX_AMPLITUDE;
     }
   }
 }

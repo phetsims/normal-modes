@@ -29,7 +29,6 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
 import normalModes from '../../normalModes.js';
 import normalModesStrings from '../../normalModesStrings.js';
-import OneDimensionConstants from '../../one-dimension/OneDimensionConstants.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
 
@@ -114,7 +113,7 @@ class NormalModesControlPanel extends Panel {
       radius: 18,
       touchAreaDilation: 15,
       enabledProperty: DerivedProperty.not( model.playingProperty ),
-      listener: () => { model.singleStep( OneDimensionConstants.FIXED_DT ); }
+      listener: () => { model.singleStep( NormalModesConstants.FIXED_DT ); }
     } );
 
     const playAndStepButtons = new HBox( {
@@ -191,7 +190,7 @@ class NormalModesControlPanel extends Panel {
     };
 
     const speedControlOptions = {
-      delta: OneDimensionConstants.DELTA_SPEED,
+      delta: NormalModesConstants.DELTA_SPEED,
       layoutFunction: createLayoutFunction(),
       includeArrowButtons: false,
       sliderOptions: {
@@ -203,19 +202,19 @@ class NormalModesControlPanel extends Panel {
         minorTickLength: 5,
         majorTicks: [
           {
-            value: OneDimensionConstants.MIN_SPEED,
-            label: new Text( slowString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+            value: NormalModesConstants.MIN_SPEED,
+            label: new Text( slowString, { font: NormalModesConstants.SMALLER_FONT } )
           },
           {
-            value: OneDimensionConstants.INIT_SPEED,
-            label: new Text( normalString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+            value: NormalModesConstants.INITIAL_SPEED,
+            label: new Text( normalString, { font: NormalModesConstants.SMALLER_FONT } )
           },
           {
-            value: OneDimensionConstants.MAX_SPEED,
-            label: new Text( fastString, { font: NormalModesConstants.REALLY_SMALL_FONT } )
+            value: NormalModesConstants.MAX_SPEED,
+            label: new Text( fastString, { font: NormalModesConstants.SMALLER_FONT } )
           }
         ],
-        minorTickSpacing: OneDimensionConstants.DELTA_SPEED
+        minorTickSpacing: NormalModesConstants.DELTA_SPEED
       },
       titleNodeOptions: {
         font: NormalModesConstants.GENERAL_FONT
@@ -228,9 +227,9 @@ class NormalModesControlPanel extends Panel {
     const speedControl = new NumberControl(
       speedString,
       model.simSpeedProperty,
-      new RangeWithValue( OneDimensionConstants.MIN_SPEED,
-        OneDimensionConstants.MAX_SPEED,
-        OneDimensionConstants.INIT_SPEED ),
+      new RangeWithValue( NormalModesConstants.MIN_SPEED,
+        NormalModesConstants.MAX_SPEED,
+        NormalModesConstants.INITIAL_SPEED ),
       speedControlOptions
     );
 
