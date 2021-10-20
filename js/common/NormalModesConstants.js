@@ -12,20 +12,21 @@ import normalModes from '../normalModes.js';
 
 const NormalModesConstants = {
 
-  // TODO - remove unused constant or use this instead of OneDimensionConstants and TwoDimensionsConstants
+  // ScreenView margins
   SCREEN_VIEW_X_MARGIN: 15,
   SCREEN_VIEW_Y_MARGIN: 15,
 
+  // fonts
   REALLY_SMALL_FONT: new PhetFont( 12 ),
   SMALL_FONT: new PhetFont( 13 ),
   GENERAL_FONT: new PhetFont( 14 ),
-  TEST_FONT: new PhetFont( 16 ), // TODO - change name and see if we use all these fonts
+  MODE_NUMBER_FONT: new PhetFont( 16 ),
   CONTROL_FONT: new PhetFont( 18 ),
 
-  // number of masses in a row for both 1d and 2d
-  MIN_MASSES_ROW_LEN: 1,
-  INIT_MASSES_ROW_LEN: 3,
-  MAX_MASSES_ROW_LEN: 10
+  // number of masses per row, for both 1D and 2D
+  MIN_MASSES_PER_ROW: 1,
+  MAX_MASSES_PER_ROW: 10,
+  INITIAL_MASSES_PER_ROW: 3
 
 };
 

@@ -250,10 +250,10 @@ class NormalModesControlPanel extends Panel {
         majorTickLength: 10,
         minorTickLength: 5,
         majorTicks: [
-          { value: NormalModesConstants.MIN_MASSES_ROW_LEN, label: '' },
-          { value: NormalModesConstants.MAX_MASSES_ROW_LEN, label: '' }
+          { value: NormalModesConstants.MIN_MASSES_PER_ROW, label: '' },
+          { value: NormalModesConstants.MAX_MASSES_PER_ROW, label: '' }
         ],
-        minorTickSpacing: NormalModesConstants.MIN_MASSES_ROW_LEN
+        minorTickSpacing: NormalModesConstants.MIN_MASSES_PER_ROW
       },
       titleNodeOptions: {
         font: NormalModesConstants.GENERAL_FONT
@@ -268,9 +268,9 @@ class NormalModesControlPanel extends Panel {
     const numberVisibleMassesControl = new NumberControl(
       numberOfMassesString,
       model.numberVisibleMassesProperty,
-      new RangeWithValue( NormalModesConstants.MIN_MASSES_ROW_LEN,
-        NormalModesConstants.MAX_MASSES_ROW_LEN,
-        NormalModesConstants.INIT_MASSES_ROW_LEN ),
+      new RangeWithValue( NormalModesConstants.MIN_MASSES_PER_ROW,
+        NormalModesConstants.MAX_MASSES_PER_ROW,
+        NormalModesConstants.INITIAL_MASSES_PER_ROW ),
       numberVisibleMassesControlOptions
     );
 

@@ -11,7 +11,7 @@ import NormalModesConstants from '../common/NormalModesConstants.js';
 import normalModes from '../normalModes.js';
 
 /* as the default distances between masses decrease a lot, the max amplitudes must change */
-const maxAmplitudes = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+const maxAmplitudes = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
 const TwoDimensionsConstants = {
 

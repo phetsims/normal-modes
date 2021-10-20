@@ -69,12 +69,12 @@ class NormalModesAccordionBox extends AccordionBox {
 
     }, options );
 
-    const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    const normalModeGraphsAndNumbers = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    const normalModeGraphs = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const normalModeGraphsAndNumbers = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
     for ( let i = 0; i < normalModeGraphs.length; i++ ) {
       normalModeGraphs[ i ] = new ModeGraphCanvasNode( model, i );
-      const normalModeNumber = new Text( i + 1, { font: NormalModesConstants.TEST_FONT } );
+      const normalModeNumber = new Text( i + 1, { font: NormalModesConstants.MODE_NUMBER_FONT } );
       normalModeGraphsAndNumbers[ i ] = new HBox( {
         spacing: 7,
         children: [ normalModeNumber, normalModeGraphs[ i ] ]

@@ -94,7 +94,7 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       return PANEL_REAL_SIZE / ( RECT_GRID_UNITS * numberMasses + PADDING_GRID_UNITS * ( numberMasses - 1 ) );
     } );
 
-    const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_ROW_LEN ** 2;
+    const selectorRectanglesLength = NormalModesConstants.MAX_MASSES_PER_ROW ** 2;
     const selectorRectangles = new Array( selectorRectanglesLength );
 
     const selectorRectangleOptions = {
@@ -106,8 +106,8 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
     };
 
     for ( let i = 0; i < selectorRectanglesLength; i++ ) {
-      const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_ROW_LEN );
-      const col = i % NormalModesConstants.MAX_MASSES_ROW_LEN;
+      const row = Math.trunc( i / NormalModesConstants.MAX_MASSES_PER_ROW );
+      const col = i % NormalModesConstants.MAX_MASSES_PER_ROW;
 
       selectorRectangles[ i ] = new AmplitudeSelectorRectangle( model, row, col, axisAmplitudesProperty,
         maxAmplitudeProperty, gridToRealSizeRatioProperty, selectorRectangleOptions );

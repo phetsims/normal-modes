@@ -83,11 +83,11 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       showTitleWhenExpanded: false
     }, options );
 
-    const amplitudeSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    const phaseSliders = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    const modeLabels = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    const frequencyText = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    const modeGraphs = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    const amplitudeSliders = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const phaseSliders = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const modeLabels = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const frequencyText = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    const modeGraphs = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
     const amplitudeSliderOptions = {
       trackSize: new Dimension2( 3, 100 ),
@@ -139,7 +139,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       modeGraphs[ i ] = new StaticModeGraphCanvasNode( i, model.modeFrequencyProperties[ i ] );
     }
 
-    const panelColumns = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN + 1 );
+    const panelColumns = new Array( NormalModesConstants.MAX_MASSES_PER_ROW + 1 );
 
     const normalModeLabel = new Text(
       normalModeString,

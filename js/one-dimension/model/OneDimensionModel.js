@@ -21,7 +21,7 @@ import normalModes from '../../normalModes.js';
 import OneDimensionConstants from '../OneDimensionConstants.js';
 
 // including the 2 virtual stationary masses at wall positions
-const MAX_MASSES = NormalModesConstants.MAX_MASSES_ROW_LEN + 2;
+const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
 
 class OneDimensionModel {
@@ -73,11 +73,11 @@ class OneDimensionModel {
     this.dt = 0;
 
     // @public {NumberProperty[]} 1-dimensional arrays of Properties for each mode
-    this.modeAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modePhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modePhaseProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
-    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
+    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_PER_ROW; i++ ) {
 
       // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
       const tandemIndex = i + 1;
@@ -196,7 +196,7 @@ class OneDimensionModel {
    * @public
    */
   resetNormalModes() {
-    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
+    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_PER_ROW; i++ ) {
       this.modeAmplitudeProperties[ i ].reset();
       this.modePhaseProperties[ i ].reset();
     }

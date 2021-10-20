@@ -21,7 +21,7 @@ import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
 import TwoDimensionsConstants from '../TwoDimensionsConstants.js';
 
-const MAX_MASSES = NormalModesConstants.MAX_MASSES_ROW_LEN + 2;
+const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
 
 class TwoDimensionsModel {
@@ -63,21 +63,21 @@ class TwoDimensionsModel {
     this.dt = 0;
 
     // @public {NumberProperty[][]} 2-dimensional arrays of Properties for each mode
-    this.modeXAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeYAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeXPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeYPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+    this.modeXAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modeYAmplitudeProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modeXPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modeYPhaseProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+    this.modeFrequencyProperties = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
-    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
+    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_PER_ROW; i++ ) {
 
-      this.modeXAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeYAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeXPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeYPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
-      this.modeFrequencyProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_ROW_LEN );
+      this.modeXAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+      this.modeYAmplitudeProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+      this.modeXPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+      this.modeYPhaseProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
+      this.modeFrequencyProperties[ i ] = new Array( NormalModesConstants.MAX_MASSES_PER_ROW );
 
-      for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; ++j ) {
+      for ( let j = 0; j < NormalModesConstants.MAX_MASSES_PER_ROW; ++j ) {
 
         // Use 1-based indexing for the tandem names. See https://github.com/phetsims/normal-modes/issues/55
         const tandemIndex1 = i + 1;
@@ -292,8 +292,8 @@ class TwoDimensionsModel {
    * @public
    */
   resetNormalModes() {
-    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_ROW_LEN; i++ ) {
-      for ( let j = 0; j < NormalModesConstants.MAX_MASSES_ROW_LEN; j++ ) {
+    for ( let i = 0; i < NormalModesConstants.MAX_MASSES_PER_ROW; i++ ) {
+      for ( let j = 0; j < NormalModesConstants.MAX_MASSES_PER_ROW; j++ ) {
         this.modeXAmplitudeProperties[ i ][ j ].reset();
         this.modeYAmplitudeProperties[ i ][ j ].reset();
         this.modeXPhaseProperties[ i ][ j ].reset();
