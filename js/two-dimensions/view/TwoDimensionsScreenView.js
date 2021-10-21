@@ -59,7 +59,9 @@ class TwoDimensionsScreenView extends ScreenView {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
+    this.addChild( resetAllButton );
 
+    // Untitled control panel
     const controlPanel = new NormalModesControlPanel( model, merge( {
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -68,10 +70,9 @@ class TwoDimensionsScreenView extends ScreenView {
       yMargin: 8,
       numberOfMassesFormatter: value => Math.pow( value, 2 ) // See https://github.com/phetsims/normal-modes/issues/69
     }, NormalModesColors.PANEL_COLORS ) );
-
     this.addChild( controlPanel );
-    this.addChild( resetAllButton );
 
+    // Springs
     model.springsX.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
@@ -80,7 +81,6 @@ class TwoDimensionsScreenView extends ScreenView {
         this.addChild( springNode );
       } );
     } );
-
     model.springsY.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
@@ -90,10 +90,9 @@ class TwoDimensionsScreenView extends ScreenView {
       } );
     } );
 
-    // The springs are added first
+    // Walls (box)
     const topLeftPoint = modelViewTransform.modelToViewPosition( new Vector2( -1, 1 ) );
     const bottomRightPoint = modelViewTransform.modelToViewPosition( new Vector2( 1, -1 ) );
-
     const borderWalls = new Rectangle(
       new Bounds2( topLeftPoint.x, topLeftPoint.y, bottomRightPoint.x, bottomRightPoint.y ), {
         stroke: NormalModesColors.WALL_COLORS.stroke,
@@ -101,6 +100,7 @@ class TwoDimensionsScreenView extends ScreenView {
       } );
     this.addChild( borderWalls );
 
+    // Normal Mode Amplitudes accordion box
     const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, merge( {
       left: borderWalls.right + 10,
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -112,7 +112,7 @@ class TwoDimensionsScreenView extends ScreenView {
     // See https://github.com/phetsims/normal-modes/issues/68
     const massDragBounds = modelViewTransform.viewToModelBounds( borderWalls.bounds );
 
-    // used slice to ignore the virtual stationary masses at the walls
+    // Masses - use slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( massArray => {
       massArray.slice( 1, massArray.length - 1 ).forEach( mass => {
         const massNode = new MassNode2D( mass, modelViewTransform, model, massDragBounds, options.tandem.createTandem( 'massNodes' ) );

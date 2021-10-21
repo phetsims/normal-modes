@@ -63,7 +63,9 @@ class OneDimensionScreenView extends ScreenView {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
+    this.addChild( resetAllButton );
 
+    // Untitled control panel
     const controlPanel = new NormalModesControlPanel( model, merge( {
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -71,19 +73,17 @@ class OneDimensionScreenView extends ScreenView {
       xMargin: 8,
       yMargin: 8
     }, NormalModesColors.PANEL_COLORS ) );
+    this.addChild( controlPanel );
 
+    // Normal Mode Spectrum accordion box
     const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, merge( {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       centerX: viewOrigin.x
     }, NormalModesColors.PANEL_COLORS ) );
-
     this.addChild( normalModeSpectrumAccordionBox );
-    this.addChild( controlPanel );
-    this.addChild( resetAllButton );
 
-    // The springs are added first
-
+    // Springs
     model.springs.forEach( spring => {
       const springNode = new SpringNode(
         spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
@@ -91,14 +91,13 @@ class OneDimensionScreenView extends ScreenView {
       this.addChild( springNode );
     } );
 
+    // Left and right walls
     const leftWallNode = new WallNode(
       model.masses[ 0 ], modelViewTransform, options.tandem.createTandem( 'leftWallNode' )
     );
-
     const rightWallNode = new WallNode(
       model.masses[ model.masses.length - 1 ], modelViewTransform, options.tandem.createTandem( 'rightWallNode' )
     );
-
     this.addChild( leftWallNode );
     this.addChild( rightWallNode );
 
@@ -112,6 +111,7 @@ class OneDimensionScreenView extends ScreenView {
     );
     const dragBoundsModel = modelViewTransform.viewToModelBounds( dragBoundsView );
 
+    // Render the drag bounds
     if ( NormalModesQueryParameters.showDragBounds1D ) {
       console.log( 'drawing drag bounds' );
       this.addChild( new Rectangle( dragBoundsView, {
@@ -119,12 +119,13 @@ class OneDimensionScreenView extends ScreenView {
       } ) );
     }
 
-    // used slice to ignore the virtual stationary masses at the walls
+    // Masses - use slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( mass => {
       const massNode = new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, options.tandem.createTandem( 'massNodes' ) );
       this.addChild( massNode );
     } );
 
+    // Normal Modes accordion box
     const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
       top: controlPanel.bottom + 8,
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
