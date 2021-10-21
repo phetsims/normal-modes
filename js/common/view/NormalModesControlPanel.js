@@ -6,10 +6,7 @@
  * @author Franco Barpp Gomes {UTFPR}
  */
 
-import Dimension2 from '../../../../dot/js/Dimension2.js';
-import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
-import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
@@ -24,6 +21,7 @@ import normalModes from '../../normalModes.js';
 import normalModesStrings from '../../normalModesStrings.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
+import NumberOfMassesControl from './NumberOfMassesControl.js';
 
 // constants
 const TEXT_PUSH_BUTTON_OPTIONS = merge( {
@@ -66,37 +64,11 @@ class NormalModesControlPanel extends Panel {
     controls.push( zeroPositionsButton );
 
     // Number of Masses
-    const numberOfMassesControl = new NumberControl(
-      normalModesStrings.numberOfMasses,
-      model.numberOfMassesProperty,
-      new RangeWithValue( NormalModesConstants.MIN_MASSES_PER_ROW,
-        NormalModesConstants.MAX_MASSES_PER_ROW,
-        NormalModesConstants.INITIAL_MASSES_PER_ROW ), {
-        layoutFunction: createLayoutFunction(),
-        includeArrowButtons: false,
-        sliderOptions: {
-          trackSize: new Dimension2( 150, 3 ),
-          thumbSize: new Dimension2( 11, 19 ),
-          thumbTouchAreaXDilation: 12,
-          thumbTouchAreaYDilation: 15,
-          majorTickLength: 10,
-          minorTickLength: 5,
-          majorTicks: [
-            { value: NormalModesConstants.MIN_MASSES_PER_ROW, label: '' },
-            { value: NormalModesConstants.MAX_MASSES_PER_ROW, label: '' }
-          ],
-          minorTickSpacing: NormalModesConstants.MIN_MASSES_PER_ROW
-        },
-        titleNodeOptions: {
-          font: NormalModesConstants.GENERAL_FONT
-        },
-        numberDisplayOptions: {
-          numberFormatter: options.numberOfMassesFormatter,
-          textOptions: {
-            font: NormalModesConstants.GENERAL_FONT
-          }
-        }
-      } );
+    const numberOfMassesControl = new NumberOfMassesControl( model.numberOfMassesProperty, {
+      numberDisplayOptions: {
+        numberFormatter: options.numberOfMassesFormatter
+      }
+    } );
     controls.push( numberOfMassesControl );
 
     // Show Springs checkbox
