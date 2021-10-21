@@ -68,7 +68,7 @@ function createLayoutFunction( options ) {
     align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
     titleXSpacing: 5, // {number} horizontal spacing between title and number
     arrowButtonsXSpacing: 15, // {number} horizontal spacing between arrow buttons and slider
-    ySpacing: 3 // {number} vertical spacing between rows
+    ySpacing: 8 // {number} vertical spacing between rows
   }, options );
 
   return ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
