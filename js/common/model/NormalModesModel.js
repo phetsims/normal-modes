@@ -54,6 +54,7 @@ class NormalModesModel {
     } );
 
     // @public {Property.<number>} the current number of visible masses
+    //TODO this is actually the number of masses per row. In the 'Two Dimensions' screen, the number of masses is this value squared.
     this.numberOfMassesProperty = new NumberProperty( options.numberOfMasses, {
       numberType: 'Integer',
       range: NormalModesConstants.NUMBER_OF_MASSES_RANGE,
