@@ -31,7 +31,6 @@ class TwoDimensionsModel extends NormalModesModel {
   constructor( options ) {
 
     options = merge( {
-      numberOfMasses: 3,
       tandem: Tandem.REQUIRED
     }, options );
 

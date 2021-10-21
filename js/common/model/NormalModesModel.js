@@ -25,7 +25,7 @@ class NormalModesModel {
   constructor( options ) {
 
     options = merge( {
-      numberOfMasses: 1,
+      numberOfMasses: 3,
       tandem: Tandem.REQUIRED
     }, options );
 
