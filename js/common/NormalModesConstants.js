@@ -20,10 +20,6 @@ const NormalModesConstants = {
   SCREEN_VIEW_Y_MARGIN: 10,
 
   // Time
-  MIN_SPEED: 0.02,
-  MAX_SPEED: 3,
-  INITIAL_SPEED: 1,
-  DELTA_SPEED: 0.1,
   FIXED_DT: 1 / 60,
 
   // dt will be scaled by these amounts, depending on the speed selection for the sim.
