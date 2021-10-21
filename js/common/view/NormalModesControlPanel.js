@@ -1,7 +1,8 @@
 // Copyright 2020-2021, University of Colorado Boulder
 
 /**
- * NormalModesControlPanel contains controls for both 1D and 2D views.
+ * NormalModesControlPanel is the untitled control panel that appears in the upper-right corner of the screen.
+ * It contains controls for both 1D and 2D views.
  *
  * @author Franco Barpp Gomes {UTFPR}
  */

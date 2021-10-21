@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * AccordionBox containing amplitude selection for the horizontal and vertical 2D normal modes.
+ * NormalModeAmplitudesAccordionBox is the accordion box titled 'Normal Mode Amplitudes'. It displays an NxN grid.
  *
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)

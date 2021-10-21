@@ -1,7 +1,7 @@
 // Copyright 2020, University of Colorado Boulder
 
 /**
- * AccordionBox containing one ModeGraphsCanvasNode for each normal mode.
+ * NormalModesAccordionBox is the accordion box titled 'Normal Modes'. It shows a plot for each normal mode.
  *
  * @author Franco Barpp Gomes (UTFPR)
  * @author Thiago de Mendonça Mildemberger (UTFPR)
