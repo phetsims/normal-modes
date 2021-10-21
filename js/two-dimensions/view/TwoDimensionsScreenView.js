@@ -14,6 +14,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Tandem from '../../../../tandem/js/Tandem.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
@@ -26,13 +27,15 @@ class TwoDimensionsScreenView extends ScreenView {
 
   /**
    * @param {TwoDimensionsModel} model
-   * @param {Tandem} tandem
+   * @param {Object} [options]
    */
-  constructor( model, tandem ) {
+  constructor( model, options ) {
 
-    super( {
-      tandem: tandem
-    } );
+    options = merge( {
+      tandem: Tandem.REQUIRED
+    }, options );
+
+    super( options );
 
     // TODO https://github.com/phetsims/normal-modes/issues/38 magic numbers
     // The center point of borderWalls
@@ -54,7 +57,7 @@ class TwoDimensionsScreenView extends ScreenView {
       },
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
-      tandem: tandem.createTandem( 'resetAllButton' )
+      tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
     const controlPanelOptions = merge( {
@@ -73,9 +76,8 @@ class TwoDimensionsScreenView extends ScreenView {
     model.springsX.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
-          spring, modelViewTransform, model.springsVisibleProperty, tandem.createTandem( 'springNodes' )
+          spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
         );
-
         this.addChild( springNode );
       } );
     } );
@@ -83,9 +85,8 @@ class TwoDimensionsScreenView extends ScreenView {
     model.springsY.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
-          spring, modelViewTransform, model.springsVisibleProperty, tandem.createTandem( 'springNodes' )
+          spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
         );
-
         this.addChild( springNode );
       } );
     } );
@@ -121,11 +122,10 @@ class TwoDimensionsScreenView extends ScreenView {
     // used slice to ignore the virtual stationary masses at the walls
     model.masses.slice( 1, model.masses.length - 1 ).forEach( massArray => {
       massArray.slice( 1, massArray.length - 1 ).forEach( mass => {
-        const massNode = new MassNode2D( mass, modelViewTransform, model, massDragBounds, tandem.createTandem( 'massNodes' ) );
+        const massNode = new MassNode2D( mass, modelViewTransform, model, massDragBounds, options.tandem.createTandem( 'massNodes' ) );
         this.addChild( massNode );
       } );
     } );
-
   }
 }
 

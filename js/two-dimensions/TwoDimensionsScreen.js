@@ -34,7 +34,7 @@ class TwoDimensionsScreen extends Screen {
 
     super(
       () => new TwoDimensionsModel( { tandem: tandem.createTandem( 'model' ) } ),
-      model => new TwoDimensionsScreenView( model, tandem.createTandem( 'view' ) ),
+      model => new TwoDimensionsScreenView( model, { tandem: tandem.createTandem( 'view' ) } ),
       options
     );
   }
