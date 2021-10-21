@@ -8,7 +8,6 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
 import Color from '../../../../scenery/js/util/Color.js';
@@ -117,50 +116,6 @@ class NormalModesControlPanel extends Panel {
     super( contentNode, options );
   }
 }
-
-/**
- * Creates option.layoutFunction for NumberControl instances.
- * @param {Object} [options]
- * @returns {function}
- */
-function createLayoutFunction( options ) {
-
-  options = merge( {
-    align: 'center', // {string} horizontal alignment of rows, 'left'|'right'|'center'
-    titleXSpacing: 5, // {number} horizontal spacing between title and number
-    arrowButtonsXSpacing: 15, // {number} horizontal spacing between arrow buttons and slider
-    ySpacing: 3 // {number} vertical spacing between rows
-  }, options );
-
-  return ( titleNode, numberDisplay, slider, leftArrowButton, rightArrowButton ) => {
-    const includeArrowButtons = !!leftArrowButton; // if there aren't arrow buttons, then exclude them
-    return new VBox( {
-      align: options.align,
-      spacing: options.ySpacing,
-      excludeInvisibleChildrenFromBounds: false,
-      children: [
-        new HBox( {
-          spacing: options.titleXSpacing,
-          children: [ titleNode, numberDisplay ],
-          excludeInvisibleChildrenFromBounds: false
-        } ),
-        new HBox( {
-          spacing: options.arrowButtonsXSpacing,
-          resize: false, // prevent slider from causing a resize when thumb is at min or max
-          children: !includeArrowButtons ? [ slider ] : [
-            leftArrowButton,
-            slider,
-            rightArrowButton
-          ],
-          excludeInvisibleChildrenFromBounds: false
-        } )
-      ]
-    } );
-  };
-}
-
-// @public TODO delete this
-NormalModesControlPanel.createLayoutFunction = createLayoutFunction;
 
 normalModes.register( 'NormalModesControlPanel', NormalModesControlPanel );
 export default NormalModesControlPanel;
