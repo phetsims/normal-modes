@@ -23,7 +23,7 @@ class ModeGraphCanvasNode extends CanvasNode {
   constructor( model, normalNodeNumber, options ) {
 
     options = merge( {
-      graphSize: new Dimension2( 133, 22 ),
+      graphSize: new Dimension2( 133, 11 ),
       wallHeight: 8,
       curveResolution: 50
     }, NormalModesColors.MODE_GRAPH_COLORS, options );

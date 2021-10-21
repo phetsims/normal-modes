@@ -83,7 +83,7 @@ class NormalModesAccordionBox extends AccordionBox {
     const avoidResize = new HStrut( normalModeGraphsAndNumbers[ normalModeGraphsAndNumbers.length - 1 ].width );
 
     const graphContainer = new VBox( {
-      spacing: 4.8,
+      spacing: 9,
       align: 'right',
       children: normalModeGraphsAndNumbers
     } );
