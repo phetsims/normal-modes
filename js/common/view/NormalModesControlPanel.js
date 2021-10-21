@@ -103,10 +103,10 @@ class NormalModesControlPanel extends Panel {
 
     // Horizontal separator, inserted before time control
     const separatorWidth = _.maxBy( controls, control => control.width ).width;
-    const seperator = new HSeparator( separatorWidth, {
+    const separator = new HSeparator( separatorWidth, {
       stroke: Color.grayColor( 180 )
     } );
-    controls.splice( controls.indexOf( timeControlNode ), 0, seperator );
+    controls.splice( controls.indexOf( timeControlNode ), 0, separator );
 
     const contentNode = new VBox( {
       spacing: 12,
