@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2021, University of Colorado Boulder
 
 /**
  * This node draws a static normal mode graph with a fixed amplitude to represent the normal mode.
