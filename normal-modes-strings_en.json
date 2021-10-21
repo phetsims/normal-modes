@@ -8,9 +8,6 @@
   "screen.twoDimensions": {
     "value": "Two Dimensions"
   },
-  "speed": {
-    "value": "Speed"
-  },
   "initialPositions": {
     "value": "Initial Positions"
   },
@@ -25,15 +22,6 @@
   },
   "showPhases": {
     "value": "Show Phases"
-  },
-  "slow": {
-    "value": "slow"
-  },
-  "normal": {
-    "value": "normal"
-  },
-  "fast": {
-    "value": "fast"
   },
   "normalMode": {
     "value": "Normal Mode:"
