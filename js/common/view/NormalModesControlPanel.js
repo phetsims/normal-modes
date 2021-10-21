@@ -45,6 +45,10 @@ class NormalModesControlPanel extends Panel {
    */
   constructor( model, options ) {
 
+    options = merge( {
+      numberOfMassesFormatter: null // see NumberDisplay numberFormatter
+    }, options );
+
     const controls = [];
 
     // Play/Pause buttons and speed slider
@@ -89,6 +93,7 @@ class NormalModesControlPanel extends Panel {
           font: NormalModesConstants.GENERAL_FONT
         },
         numberDisplayOptions: {
+          numberFormatter: options.numberOfMassesFormatter,
           textOptions: {
             font: NormalModesConstants.GENERAL_FONT
           }

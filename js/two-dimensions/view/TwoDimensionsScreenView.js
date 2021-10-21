@@ -65,7 +65,8 @@ class TwoDimensionsScreenView extends ScreenView {
       top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       xMargin: 8,
-      yMargin: 8
+      yMargin: 8,
+      numberOfMassesFormatter: value => Math.pow( value, 2 )
     }, NormalModesColors.PANEL_COLORS ) );
 
     this.addChild( controlPanel );

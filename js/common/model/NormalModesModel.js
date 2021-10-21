@@ -55,9 +55,9 @@ class NormalModesModel {
 
     // @public {Property.<number>} the current number of visible masses
     this.numberOfMassesProperty = new NumberProperty( options.numberOfMasses, {
-      tandem: options.tandem.createTandem( 'numberOfMassesProperty' ),
       numberType: 'Integer',
-      range: NormalModesConstants.NUMBER_OF_MASSES_RANGE
+      range: NormalModesConstants.NUMBER_OF_MASSES_RANGE,
+      tandem: options.tandem.createTandem( 'numberOfMassesProperty' )
     } );
 
     // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
