@@ -64,25 +64,19 @@ class OneDimensionScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    const controlPanelOptions = merge( {
+    const controlPanel = new NormalModesControlPanel( model, merge( {
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       xMargin: 8,
       yMargin: 8
-    }, NormalModesColors.PANEL_COLORS );
+    }, NormalModesColors.PANEL_COLORS ) );
 
-    const controlPanel = new NormalModesControlPanel( model, controlPanelOptions );
-
-    const normalModeSpectrumAccordionBoxOptions = merge( {
+    const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, merge( {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       centerX: viewOrigin.x
-    }, NormalModesColors.PANEL_COLORS );
-
-    const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox(
-      model, normalModeSpectrumAccordionBoxOptions
-    );
+    }, NormalModesColors.PANEL_COLORS ) );
 
     this.addChild( normalModeSpectrumAccordionBox );
     this.addChild( controlPanel );
@@ -94,7 +88,6 @@ class OneDimensionScreenView extends ScreenView {
       const springNode = new SpringNode(
         spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
       );
-
       this.addChild( springNode );
     } );
 

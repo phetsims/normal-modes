@@ -60,15 +60,13 @@ class TwoDimensionsScreenView extends ScreenView {
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
 
-    const controlPanelOptions = merge( {
+    const controlPanel = new NormalModesControlPanel( model, merge( {
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10,
       top: NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5,
       xMargin: 8,
       yMargin: 8
-    }, NormalModesColors.PANEL_COLORS );
-
-    const controlPanel = new NormalModesControlPanel( model, controlPanelOptions );
+    }, NormalModesColors.PANEL_COLORS ) );
 
     this.addChild( controlPanel );
     this.addChild( resetAllButton );
@@ -100,19 +98,13 @@ class TwoDimensionsScreenView extends ScreenView {
         stroke: NormalModesColors.WALL_COLORS.stroke,
         lineWidth: 2
       } );
-
     this.addChild( borderWalls );
 
-    const normalModeAmplitudesAccordionBoxOptions = merge( {
+    const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, merge( {
       left: borderWalls.right + 10,
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5
-    }, NormalModesColors.PANEL_COLORS );
-
-    const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox(
-      model, normalModeAmplitudesAccordionBoxOptions
-    );
-
+    }, NormalModesColors.PANEL_COLORS ) );
     this.addChild( normalModeAmplitudesAccordionBox );
 
     // Drag bounds for the masses is defined by borderWalls.
