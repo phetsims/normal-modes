@@ -102,7 +102,7 @@ class TwoDimensionsScreenView extends ScreenView {
 
     // Normal Mode Amplitudes accordion box
     const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, merge( {
-      left: borderWalls.right + 10,
+      left: borderWalls.right + 6,
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5
     }, NormalModesColors.PANEL_COLORS ) );
