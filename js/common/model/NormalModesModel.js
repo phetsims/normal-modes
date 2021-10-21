@@ -8,10 +8,11 @@
  */
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
+import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
-import Range from '../../../../dot/js/Range.js';
 import merge from '../../../../phet-core/js/merge.js';
+import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import normalModes from '../../normalModes.js';
 import NormalModesConstants from '../NormalModesConstants.js';
@@ -42,11 +43,16 @@ class NormalModesModel {
       tandem: options.tandem.createTandem( 'playingProperty' )
     } );
 
-    // @public {Property.<number>} determines the speed at which the sim plays
-    this.simSpeedProperty = new NumberProperty( NormalModesConstants.INITIAL_SPEED, {
-      range: new Range( NormalModesConstants.MIN_SPEED, NormalModesConstants.MAX_SPEED ),
-      tandem: options.tandem.createTandem( 'simSpeedProperty' )
+    // @public used by the time control to select a speed
+    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+      validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ]
     } );
+
+    // @private {DerivedProperty.<number>} multiplier for dt used in step
+    this.timeScaleProperty = new DerivedProperty(
+      [ this.timeSpeedProperty ],
+      timeSpeed => ( timeSpeed === TimeSpeed.NORMAL ) ? NormalModesConstants.NORMAL_SPEED : NormalModesConstants.SLOW_SPEED
+    );
 
     // @public {Property.<boolean>} determines visibility of the springs
     this.springsVisibleProperty = new BooleanProperty( true, {
@@ -78,7 +84,7 @@ class NormalModesModel {
   reset() {
     this.dt = 0;
     this.playingProperty.reset();
-    this.simSpeedProperty.reset();
+    this.timeSpeedProperty.reset();
     this.springsVisibleProperty.reset();
     this.numberOfMassesProperty.reset();
     this.amplitudeDirectionProperty.reset();

@@ -24,6 +24,10 @@ const NormalModesConstants = {
   DELTA_SPEED: 0.1,
   FIXED_DT: 1 / 60,
 
+  // dt will be scaled by these amounts, depending on the speed selection for the sim.
+  NORMAL_SPEED: 1,
+  SLOW_SPEED: 0.2,
+
   // Masses
   NUMBER_OF_MASSES_RANGE: new Range( 1, 10 ),
   MASSES_MASS_VALUE: 0.1,

@@ -235,7 +235,7 @@ class OneDimensionModel extends NormalModesModel {
    * @public
    */
   singleStep( dt ) {
-    dt *= this.simSpeedProperty.get();
+    dt *= this.timeScaleProperty.get();
     this.timeProperty.set( this.timeProperty.get() + dt );
     if ( this.draggingMassIndexProperty.get() > 0 ) {
       this.setVerletPositions( dt );

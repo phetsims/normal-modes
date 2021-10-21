@@ -10,18 +10,20 @@ import Dimension2 from '../../../../dot/js/Dimension2.js';
 import RangeWithValue from '../../../../dot/js/RangeWithValue.js';
 import merge from '../../../../phet-core/js/merge.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
+import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import VBox from '../../../../scenery/js/nodes/VBox.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
+import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
 import normalModes from '../../normalModes.js';
 import normalModesStrings from '../../normalModesStrings.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
-import PlayPauseSpeedControl from './PlayPauseSpeedControl.js';
 
 // constants
 const TEXT_PUSH_BUTTON_OPTIONS = merge( {
@@ -50,10 +52,6 @@ class NormalModesControlPanel extends Panel {
     }, options );
 
     const controls = [];
-
-    // Play/Pause buttons and speed slider
-    const playPauseSpeedControl = new PlayPauseSpeedControl( model );
-    controls.push( playPauseSpeedControl );
 
     // Initial Positions button
     const initialPositionsButton = new TextPushButton( normalModesStrings.initialPositions, merge( {
@@ -119,8 +117,27 @@ class NormalModesControlPanel extends Panel {
       controls.push( showPhasesCheckbox );
     }
 
+    // Time control
+    const timeControlNode = new TimeControlNode( model.playingProperty, {
+      timeSpeedProperty: model.timeSpeedProperty,
+      buttonGroupXSpacing: 20,
+      playPauseStepButtonOptions: {
+        stepForwardButtonOptions: {
+          listener: () => model.singleStep( NormalModesConstants.FIXED_DT )
+        }
+      }
+    } );
+    controls.push( timeControlNode );
+
+    // Horizontal separator, inserted before time control
+    const separatorWidth = _.maxBy( controls, control => control.width ).width;
+    const seperator = new HSeparator( separatorWidth, {
+      stroke: Color.grayColor( 180 )
+    } );
+    controls.splice( controls.indexOf( timeControlNode ), 0, seperator );
+
     const contentNode = new VBox( {
-      spacing: 7,
+      spacing: 12,
       align: 'center',
       children: controls
     } );
