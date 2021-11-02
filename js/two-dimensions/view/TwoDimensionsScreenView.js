@@ -13,6 +13,7 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
@@ -60,7 +61,6 @@ class TwoDimensionsScreenView extends ScreenView {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
-    this.addChild( resetAllButton );
 
     // Untitled control panel
     const controlPanel = new NormalModesControlPanel( model, merge( {
@@ -71,23 +71,24 @@ class TwoDimensionsScreenView extends ScreenView {
       yMargin: 8,
       numberOfMassesFormatter: value => Math.pow( value, 2 ) // See https://github.com/phetsims/normal-modes/issues/69
     }, NormalModesColors.PANEL_COLORS ) );
-    this.addChild( controlPanel );
 
     // Springs
+    const xSpringNodes = [];
     model.springsX.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
           spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
         );
-        this.addChild( springNode );
+        xSpringNodes.push( springNode );
       } );
     } );
+    const ySpringNodes = [];
     model.springsY.forEach( springArray => {
       springArray.forEach( spring => {
         const springNode = new SpringNode(
           spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
         );
-        this.addChild( springNode );
+        ySpringNodes.push( springNode );
       } );
     } );
 
@@ -99,7 +100,6 @@ class TwoDimensionsScreenView extends ScreenView {
         stroke: NormalModesColors.WALL_COLORS.stroke,
         lineWidth: 2
       } );
-    this.addChild( borderWalls );
 
     // Normal Mode Amplitudes accordion box
     const normalModeAmplitudesAccordionBox = new NormalModeAmplitudesAccordionBox( model, merge( {
@@ -107,19 +107,32 @@ class TwoDimensionsScreenView extends ScreenView {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       cornerRadius: 5
     }, NormalModesColors.PANEL_COLORS ) );
-    this.addChild( normalModeAmplitudesAccordionBox );
 
     // Drag bounds for the masses is defined by borderWalls.
     // See https://github.com/phetsims/normal-modes/issues/68
     const massDragBounds = modelViewTransform.viewToModelBounds( borderWalls.bounds );
 
     // Masses - use slice to ignore the virtual stationary masses at the walls
+    const massNodes = [];
     model.masses.slice( 1, model.masses.length - 1 ).forEach( massArray => {
       massArray.slice( 1, massArray.length - 1 ).forEach( mass => {
         const massNode = new MassNode2D( mass, modelViewTransform, model, massDragBounds, options.tandem.createTandem( 'massNodes' ) );
-        this.addChild( massNode );
+        massNodes.push( massNode );
       } );
     } );
+
+    const screenViewRootNode = new Node( {
+      children: [
+        controlPanel,
+        normalModeAmplitudesAccordionBox,
+        resetAllButton,
+        ...xSpringNodes,
+        ...ySpringNodes,
+        borderWalls,
+        ...massNodes
+      ]
+    } );
+    this.addChild( screenViewRootNode );
 
     const resetView = () => {
       normalModeAmplitudesAccordionBox.expandedProperty.reset();

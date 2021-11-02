@@ -13,6 +13,7 @@ import ScreenView from '../../../../joist/js/ScreenView.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ModelViewTransform2 from '../../../../phetcommon/js/view/ModelViewTransform2.js';
 import ResetAllButton from '../../../../scenery-phet/js/buttons/ResetAllButton.js';
+import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
@@ -64,7 +65,6 @@ class OneDimensionScreenView extends ScreenView {
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
       tandem: options.tandem.createTandem( 'resetAllButton' )
     } );
-    this.addChild( resetAllButton );
 
     // Untitled control panel
     const controlPanel = new NormalModesControlPanel( model, merge( {
@@ -74,7 +74,6 @@ class OneDimensionScreenView extends ScreenView {
       xMargin: 8,
       yMargin: 8
     }, NormalModesColors.PANEL_COLORS ) );
-    this.addChild( controlPanel );
 
     // Normal Mode Spectrum accordion box
     const normalModeSpectrumAccordionBox = new NormalModeSpectrumAccordionBox( model, merge( {
@@ -82,15 +81,11 @@ class OneDimensionScreenView extends ScreenView {
       cornerRadius: 5,
       centerX: viewOrigin.x
     }, NormalModesColors.PANEL_COLORS ) );
-    this.addChild( normalModeSpectrumAccordionBox );
 
     // Springs
-    model.springs.forEach( spring => {
-      const springNode = new SpringNode(
-        spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
-      );
-      this.addChild( springNode );
-    } );
+    const springNodes = model.springs.map( spring => new SpringNode(
+      spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
+    ) );
 
     // Left and right walls
     const leftWallNode = new WallNode(
@@ -99,8 +94,6 @@ class OneDimensionScreenView extends ScreenView {
     const rightWallNode = new WallNode(
       model.masses[ model.masses.length - 1 ], modelViewTransform, options.tandem.createTandem( 'rightWallNode' )
     );
-    this.addChild( leftWallNode );
-    this.addChild( rightWallNode );
 
     // Drag bounds for the masses, centered on the walls. Height is adjustable via ?dragBoundsHeight1D.
     // See https://github.com/phetsims/normal-modes/issues/68
@@ -112,6 +105,32 @@ class OneDimensionScreenView extends ScreenView {
     );
     const dragBoundsModel = modelViewTransform.viewToModelBounds( dragBoundsView );
 
+    // Masses - use slice to ignore the virtual stationary masses at the walls
+    const massNodes = model.masses
+      .slice( 1, model.masses.length - 1 )
+      .map( mass =>
+        new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, options.tandem.createTandem( 'massNodes' ) ) );
+
+    // Normal Modes accordion box
+    const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
+      top: controlPanel.bottom + 8,
+      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
+    }, NormalModesColors.PANEL_COLORS ) );
+
+    const screenViewRootNode = new Node( {
+      children: [
+        controlPanel,
+        normalModesAccordionBox,
+        normalModeSpectrumAccordionBox,
+        resetAllButton,
+        ...springNodes,
+        leftWallNode,
+        rightWallNode,
+        ...massNodes
+      ]
+    } );
+    this.addChild( screenViewRootNode );
+
     // Render the drag bounds
     if ( NormalModesQueryParameters.showDragBounds1D ) {
       console.log( 'drawing drag bounds' );
@@ -119,19 +138,6 @@ class OneDimensionScreenView extends ScreenView {
         stroke: 'red'
       } ) );
     }
-
-    // Masses - use slice to ignore the virtual stationary masses at the walls
-    model.masses.slice( 1, model.masses.length - 1 ).forEach( mass => {
-      const massNode = new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, options.tandem.createTandem( 'massNodes' ) );
-      this.addChild( massNode );
-    } );
-
-    // Normal Modes accordion box
-    const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
-      top: controlPanel.bottom + 8,
-      right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN - resetAllButton.width - 10
-    }, NormalModesColors.PANEL_COLORS ) );
-    this.addChild( normalModesAccordionBox );
 
     const resetView = () => {
       normalModeSpectrumAccordionBox.expandedProperty.reset();
