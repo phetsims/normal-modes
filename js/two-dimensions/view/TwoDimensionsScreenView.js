@@ -54,6 +54,7 @@ class TwoDimensionsScreenView extends ScreenView {
       listener: () => {
         this.interruptSubtreeInput(); // cancel interactions that may be in progress
         model.reset();
+        resetView();
       },
       right: this.layoutBounds.maxX - NormalModesConstants.SCREEN_VIEW_X_MARGIN,
       bottom: this.layoutBounds.maxY - NormalModesConstants.SCREEN_VIEW_Y_MARGIN,
@@ -119,6 +120,10 @@ class TwoDimensionsScreenView extends ScreenView {
         this.addChild( massNode );
       } );
     } );
+
+    const resetView = () => {
+      normalModeAmplitudesAccordionBox.expandedProperty.reset();
+    };
   }
 }
 
