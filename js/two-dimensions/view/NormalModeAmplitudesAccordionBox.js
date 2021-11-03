@@ -10,7 +10,6 @@
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import HBox from '../../../../scenery/js/nodes/HBox.js';
-import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import Color from '../../../../scenery/js/util/Color.js';
@@ -37,31 +36,14 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
    */
   constructor( model, options ) {
 
-    /*
-    Model properties used:
-      - amplitudeDirectionProperty
-      - modeXAmplitudeProperties
-      - modeYAmplitudeProperties
-    */
-
-    // from Vector Addition
-    const PANEL_CORNER_RADIUS = 5;
-    const PANEL_X_MARGIN = 9;
-    const PANEL_Y_MARGIN = 10;
-
     options = merge( {
       resize: true,
-
-      cornerRadius: PANEL_CORNER_RADIUS,
-      contentXMargin: -24 - 2 * PANEL_X_MARGIN,
-      contentYMargin: PANEL_Y_MARGIN,
-      contentXSpacing: PANEL_X_MARGIN,
-      contentYSpacing: 1,
-      buttonXMargin: PANEL_X_MARGIN,
-      buttonYMargin: PANEL_Y_MARGIN,
-      titleYMargin: PANEL_Y_MARGIN,
-      titleXMargin: PANEL_X_MARGIN,
-      titleXSpacing: PANEL_X_MARGIN,
+      cornerRadius: 5,
+      contentXMargin: 8,
+      contentYSpacing: 2,
+      buttonXMargin: 6,
+      buttonYMargin: 10,
+      titleXSpacing: 10,
       titleAlignX: 'left',
       expandCollapseButtonOptions: {
         sideLength: 22,
@@ -69,8 +51,7 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
         touchAreaYDilation: 6
       },
 
-      titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } ),
-      showTitleWhenExpanded: false
+      titleNode: new Text( normalModeAmplitudesString, { font: NormalModesConstants.CONTROL_FONT } )
     }, options );
 
     const amplitudeDirectionRadioButtonGroup = new AmplitudeDirectionRadioButtonGroup( model.amplitudeDirectionProperty );
@@ -113,13 +94,10 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
       rectWidth: PANEL_REAL_SIZE
     } );
 
-    const rightMargin = new HStrut( 15 + PANEL_X_MARGIN );
-    const leftMargin = new HStrut( PANEL_X_MARGIN );
-
     const contentNode = new HBox( {
-      spacing: 0,
+      spacing: 8,
       align: 'center',
-      children: [ amplitudeDirectionRadioButtonGroup, leftMargin, selectorBox, rightMargin ]
+      children: [ amplitudeDirectionRadioButtonGroup, selectorBox ]
     } );
 
     super( contentNode, options );
