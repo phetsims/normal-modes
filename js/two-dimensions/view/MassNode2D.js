@@ -43,20 +43,7 @@ class MassNode2D extends MassNode {
     }
 
     const startCallback = ( event, listener ) => {
-      let foundIndex = -1;
-      let foundArray = null;
-      for ( let i = 0; i < model.masses.length; i++ ) {
-        const array = model.masses[ i ];
-        foundIndex = array.indexOf( mass );
-        if ( foundIndex !== -1 ) {
-          foundArray = array;
-          break;
-        }
-      }
-      model.draggingMassIndexesProperty.set( {
-        i: model.masses.indexOf( foundArray ),
-        j: foundIndex
-      } );
+      model.draggingMassIndexesProperty.set( model.getMassIndexes( mass ) );
     };
 
     const dragCallback = ( event, listener ) => {
@@ -65,7 +52,7 @@ class MassNode2D extends MassNode {
     };
 
     const endCallback = ( event, listener ) => {
-      model.draggingMassIndexesProperty.set( null );
+      !dragListener.interrupted && model.draggingMassIndexesProperty.set( null );
       model.computeModeAmplitudesAndPhases();
     };
 
@@ -100,6 +87,18 @@ class MassNode2D extends MassNode {
         this.arrows.right.visible = false;
         if ( dragListener.isOverProperty.hasListener( callback ) ) {
           dragListener.isOverProperty.unlink( callback );
+        }
+      }
+    } );
+
+    //TODO https://github.com/phetsims/normal-modes/issues/78, workaround for lack of multitouch support
+    // If the mass associated with this Node is not the one being dragged, then cancel any drag related
+    // to this Node that may be in progress.
+    model.draggingMassIndexesProperty.link( draggingMassIndexes => {
+      if ( draggingMassIndexes ) {
+        const massIndexes = model.getMassIndexes( mass ); // {i:number, j:number}
+        if ( !( draggingMassIndexes.i === massIndexes.i && draggingMassIndexes.j === massIndexes.j ) ) {
+          this.interruptSubtreeInput();
         }
       }
     } );

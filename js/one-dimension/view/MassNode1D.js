@@ -59,7 +59,7 @@ class MassNode1D extends MassNode {
     };
 
     const endCallback = ( event, listener ) => {
-      model.draggingMassIndexProperty.set( -1 );
+      !dragListener.interrupted && model.draggingMassIndexProperty.set( -1 );
       model.computeModeAmplitudesAndPhases();
     };
 
@@ -100,6 +100,15 @@ class MassNode1D extends MassNode {
         if ( dragListener.isOverProperty.hasListener( callback ) ) {
           dragListener.isOverProperty.unlink( callback );
         }
+      }
+    } );
+
+    //TODO https://github.com/phetsims/normal-modes/issues/78, workaround for lack of multitouch support
+    // If the mass associated with this Node is not the one being dragged, then cancel any drag related
+    // to this Node that may be in progress.
+    model.draggingMassIndexProperty.link( draggingMassIndex => {
+      if ( draggingMassIndex !== model.masses.indexOf( mass ) ) {
+        this.interruptSubtreeInput();
       }
     } );
   }

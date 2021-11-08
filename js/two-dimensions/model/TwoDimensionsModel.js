@@ -562,6 +562,30 @@ class TwoDimensionsModel extends NormalModesModel {
       }
     }
   }
+
+  /**
+   * Gets the indexes for a specified mass. This was moved here from MassNode2D.
+   * @param {Mass} mass
+   * @returns {{i: number, j: number}}
+   * @public
+   */
+  getMassIndexes( mass ) {
+    let foundIndex = -1;
+    let foundArray = null;
+    for ( let i = 0; i < this.masses.length; i++ ) {
+      const array = this.masses[ i ];
+      foundIndex = array.indexOf( mass );
+      if ( foundIndex !== -1 ) {
+        foundArray = array;
+        break;
+      }
+    }
+    assert && assert( foundIndex !== -1 );
+    return {
+      i: this.masses.indexOf( foundArray ),
+      j: foundIndex
+    };
+  }
 }
 
 normalModes.register( 'TwoDimensionsModel', TwoDimensionsModel );
