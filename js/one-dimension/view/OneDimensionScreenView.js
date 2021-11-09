@@ -83,9 +83,11 @@ class OneDimensionScreenView extends ScreenView {
     }, NormalModesColors.PANEL_COLORS ) );
 
     // Springs
-    const springNodes = model.springs.map( spring => new SpringNode(
-      spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
-    ) );
+    const springNodesParent = new Node( {
+      children: model.springs.map( spring => new SpringNode(
+        spring, modelViewTransform, model.springsVisibleProperty, options.tandem.createTandem( 'springNodes' )
+      ) )
+    } );
 
     // Left and right walls
     const leftWallNode = new WallNode(
@@ -106,10 +108,12 @@ class OneDimensionScreenView extends ScreenView {
     const dragBoundsModel = modelViewTransform.viewToModelBounds( dragBoundsView );
 
     // Masses - use slice to ignore the virtual stationary masses at the walls
-    const massNodes = model.masses
-      .slice( 1, model.masses.length - 1 )
-      .map( mass =>
-        new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, options.tandem.createTandem( 'massNodes' ) ) );
+    const massNodesParent = new Node( {
+      children: model.masses
+        .slice( 1, model.masses.length - 1 )
+        .map( mass =>
+          new MassNode1D( mass, modelViewTransform, model, dragBoundsModel, options.tandem.createTandem( 'massNodes' ) ) )
+    } );
 
     // Normal Modes accordion box
     const normalModesAccordionBox = new NormalModesAccordionBox( model, merge( {
@@ -123,10 +127,10 @@ class OneDimensionScreenView extends ScreenView {
         normalModesAccordionBox,
         normalModeSpectrumAccordionBox,
         resetAllButton,
-        ...springNodes,
+        springNodesParent,
         leftWallNode,
         rightWallNode,
-        ...massNodes
+        massNodesParent
       ]
     } );
     this.addChild( screenViewRootNode );
@@ -138,6 +142,11 @@ class OneDimensionScreenView extends ScreenView {
         stroke: 'red'
       } ) );
     }
+
+    // When the number of masses is changed, interrupt any dragging that may be in progress.
+    model.numberOfMassesProperty.link( numberOfMasses => {
+      massNodesParent.interruptSubtreeInput();
+    } );
 
     const resetView = () => {
       normalModeSpectrumAccordionBox.expandedProperty.reset();
