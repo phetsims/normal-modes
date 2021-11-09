@@ -21,10 +21,7 @@ const simOptions = {
     leadDesign: 'Mike Dubson',
     softwareDevelopment: 'Franco Barpp Gomes (UTFPR), Thiago de Mendon\u00e7a Mildemberger (UTFPR)',
     team: 'Mindy Gratny, Isam Hasan, Patricia Loeblein, Diana L\u00f3pez Tavares, Chris Malley (PixelZoom, Inc.), Jonathan Olson, Ariel Paul, Kathy Perkins, Amy Rouinfar',
-    qualityAssurance: '',
-    graphicArts: '',
-    soundDesign: '',
-    thanks: ''
+    qualityAssurance: 'Emily Miller, Nancy Salpepi, Kathryn Woessner'
   }
 };
 
