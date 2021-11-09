@@ -91,6 +91,9 @@ class TwoDimensionsScreenView extends ScreenView {
         ySpringNodes.push( springNode );
       } );
     } );
+    const springNodesParent = new Node( {
+      children: [ ...xSpringNodes, ...ySpringNodes ]
+    } );
 
     // Walls (box)
     const topLeftPoint = modelViewTransform.modelToViewPosition( new Vector2( -1, 1 ) );
@@ -120,19 +123,26 @@ class TwoDimensionsScreenView extends ScreenView {
         massNodes.push( massNode );
       } );
     } );
+    const massNodesParent = new Node( {
+      children: massNodes
+    } );
 
     const screenViewRootNode = new Node( {
       children: [
         controlPanel,
         normalModeAmplitudesAccordionBox,
         resetAllButton,
-        ...xSpringNodes,
-        ...ySpringNodes,
+        springNodesParent,
         borderWalls,
-        ...massNodes
+        massNodesParent
       ]
     } );
     this.addChild( screenViewRootNode );
+
+    // When the number of masses is changed, interrupt any dragging that may be in progress.
+    model.numberOfMassesProperty.link( numberOfMasses => {
+      massNodesParent.interruptSubtreeInput();
+    } );
 
     const resetView = () => {
       normalModeAmplitudesAccordionBox.expandedProperty.reset();
