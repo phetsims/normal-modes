@@ -109,7 +109,7 @@ class NormalModesControlPanel extends Panel {
     controls.splice( controls.indexOf( timeControlNode ), 0, separator );
 
     const contentNode = new VBox( {
-      spacing: 15,
+      spacing: 12,
       align: 'center',
       children: controls
     } );
