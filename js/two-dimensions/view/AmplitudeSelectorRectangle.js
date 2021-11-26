@@ -13,8 +13,8 @@
  */
 
 import merge from '../../../../phet-core/js/merge.js';
-import FireListener from '../../../../scenery/js/listeners/FireListener.js';
-import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import { FireListener } from '../../../../scenery/js/imports.js';
+import { Rectangle } from '../../../../scenery/js/imports.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
