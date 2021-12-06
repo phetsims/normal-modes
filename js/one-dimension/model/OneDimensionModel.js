@@ -297,16 +297,18 @@ class OneDimensionModel extends NormalModesModel {
         this.masses[ i ].velocityProperty.set( v.plus( a.plus( aLast ).multiplyScalar( dt / 2 ) ) );
 
         if ( assert ) {
+          const velocity = this.masses[ i ].velocityProperty.get();
+          const acceleration = this.masses[ i ].accelerationProperty.get();
+          const prefix = `recalculateVelocityAndAcceleration: N=${N} i=${i}`;
           if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-            assert( this.masses[ i ].velocityProperty.get().y === 0, 'bad result of recalculateVelocityAndAcceleration' );
-            assert( this.masses[ i ].accelerationProperty.get().y === 0, 'bad result of recalculateVelocityAndAcceleration' );
+            assert( velocity.y === 0, `${prefix} velocity=${velocity}, expected non-zero x component` );
+            assert( acceleration.y === 0, `${prefix} acceleration=${acceleration}, expected non-zero x component` );
           }
           else {
-            assert( this.masses[ i ].velocityProperty.get().x === 0, 'bad result of recalculateVelocityAndAcceleration' );
-            assert( this.masses[ i ].accelerationProperty.get().x === 0, 'bad result of recalculateVelocityAndAcceleration' );
+            assert( velocity.x === 0, `${prefix} velocity=${velocity}, expected non-zero y component` );
+            assert( acceleration.x === 0, `${prefix} acceleration.x=${acceleration}, expected non-zero y component` );
           }
         }
-
       }
       else {
         this.masses[ i ].accelerationProperty.set( new Vector2( 0, 0 ) );
