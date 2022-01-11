@@ -9,7 +9,7 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
+import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
@@ -44,7 +44,7 @@ class NormalModesModel {
     } );
 
     // @public used by the time control to select a speed
-    this.timeSpeedProperty = new EnumerationProperty( TimeSpeed, TimeSpeed.NORMAL, {
+    this.timeSpeedProperty = new EnumerationDeprecatedProperty( TimeSpeed, TimeSpeed.NORMAL, {
       validValues: [ TimeSpeed.NORMAL, TimeSpeed.SLOW ]
     } );
 
@@ -68,7 +68,7 @@ class NormalModesModel {
     } );
 
     // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
-    this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
+    this.amplitudeDirectionProperty = new EnumerationDeprecatedProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
       tandem: options.tandem.createTandem( 'amplitudeDirectionProperty' )
     } );
 
