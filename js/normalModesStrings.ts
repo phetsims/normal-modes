@@ -9,24 +9,24 @@ import normalModes from './normalModes.js';
 
 type StringsType = {
   'normal-modes': {
-    'title': string
-  },
+    'title': string;
+  };
   'screen': {
-    'oneDimension': string,
-    'twoDimensions': string
-  },
-  'initialPositions': string,
-  'zeroPositions': string,
-  'numberOfMasses': string,
-  'showSprings': string,
-  'showPhases': string,
-  'normalMode': string,
-  'amplitude': string,
-  'normalModeSpectrum': string,
-  'phase': string,
-  'frequency': string,
-  'frequencyRatioOmegaPattern': string,
-  'normalModeAmplitudes': string
+    'oneDimension': string;
+    'twoDimensions': string;
+  };
+  'initialPositions': string;
+  'zeroPositions': string;
+  'numberOfMasses': string;
+  'showSprings': string;
+  'showPhases': string;
+  'normalMode': string;
+  'amplitude': string;
+  'normalModeSpectrum': string;
+  'phase': string;
+  'frequency': string;
+  'frequencyRatioOmegaPattern': string;
+  'normalModeAmplitudes': string;
 };
 
 const normalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
