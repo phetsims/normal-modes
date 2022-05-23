@@ -6,7 +6,7 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import { Shape } from '../../../../kite/js/imports.js';
 import { Node } from '../../../../scenery/js/imports.js';
 import { Path } from '../../../../scenery/js/imports.js';
@@ -50,13 +50,13 @@ class SpringNode extends Node {
     // so that we don't shadow visibleProperty that is inherited from NodeIO (the IO Type associated with
     // superclass Node).  See https://github.com/phetsims/normal-modes/issues/46.
     // Dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim.
-    Property.multilink( [ spring.visibleProperty, springsVisibleProperty ],
+    Multilink.multilink( [ spring.visibleProperty, springsVisibleProperty ],
       ( springVisible, springsVisible ) => {
         this.visible = ( springVisible && springsVisible );
       } );
 
     // dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim
-    Property.multilink(
+    Multilink.multilink(
       [ spring.leftMass.equilibriumPositionProperty,
         spring.leftMass.displacementProperty,
         spring.rightMass.equilibriumPositionProperty,

@@ -7,7 +7,7 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { HBox } from '../../../../scenery/js/imports.js';
 import { HStrut } from '../../../../scenery/js/imports.js';
@@ -73,7 +73,7 @@ class NormalModesAccordionBox extends AccordionBox {
       } );
 
       // dispose is unnecessary, exists for the lifetime of the sim
-      Property.multilink(
+      Multilink.multilink(
         [ model.timeProperty, model.modeAmplitudeProperties[ i ], model.modePhaseProperties[ i ] ],
         ( time, amplitude, phase ) => {
           normalModeGraphs[ i ].update();

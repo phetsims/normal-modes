@@ -6,7 +6,7 @@
  * @author Thiago de Mendonça Mildemberger (UTFPR)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -34,7 +34,7 @@ class WallNode extends Node {
     this.addChild( rect );
 
     // dispose is unnecessary, the WallNode and the dependencies exist for the lifetime of the sim
-    Property.multilink(
+    Multilink.multilink(
       [ mass.equilibriumPositionProperty, mass.displacementProperty ],
       ( massPosition, massDisplacement ) => {
         this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) )

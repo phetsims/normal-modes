@@ -7,7 +7,7 @@
  * @author Franco Barpp Gomes (UTFPR)
  */
 
-import Property from '../../../../axon/js/Property.js';
+import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import { Node } from '../../../../scenery/js/imports.js';
@@ -28,7 +28,7 @@ class MassNode extends Node {
     this.size = 20;
 
     // dispose is unnecessary, the MassNode and the dependencies exist for the lifetime of the sim
-    Property.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ],
+    Multilink.multilink( [ mass.equilibriumPositionProperty, mass.displacementProperty ],
       ( massPosition, massDisplacement ) => {
         this.translation = modelViewTransform.modelToViewPosition( massPosition.plus( massDisplacement ) );
       } );
