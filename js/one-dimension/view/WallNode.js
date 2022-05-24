@@ -1,4 +1,4 @@
-// Copyright 2020-2021, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * WallNode is the view for the stationary masses at each end in the 'One Dimension' Screen.
