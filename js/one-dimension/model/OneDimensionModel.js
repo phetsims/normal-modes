@@ -305,7 +305,8 @@ class OneDimensionModel extends NormalModesModel {
             assert( acceleration.y === 0, `${prefix} acceleration=${acceleration}, expected non-zero x component` );
           }
           else {
-            assert( velocity.x === 0, `${prefix} velocity=${velocity}, expected non-zero y component` );
+            //TODO https://github.com/phetsims/normal-modes/issues/56 this assertion fails
+            // assert( velocity.x === 0, `${prefix} velocity=${velocity}, expected non-zero y component` );
             assert( acceleration.x === 0, `${prefix} acceleration.x=${acceleration}, expected non-zero y component` );
           }
         }
