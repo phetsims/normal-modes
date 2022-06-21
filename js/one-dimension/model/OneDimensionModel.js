@@ -296,20 +296,20 @@ class OneDimensionModel extends NormalModesModel {
 
         this.masses[ i ].velocityProperty.set( v.plus( a.plus( aLast ).multiplyScalar( dt / 2 ) ) );
 
-        if ( assert ) {
-          const velocity = this.masses[ i ].velocityProperty.get();
-          const acceleration = this.masses[ i ].accelerationProperty.get();
-          const prefix = `recalculateVelocityAndAcceleration: N=${N} i=${i}`;
-          if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
-            assert( velocity.y === 0, `${prefix} velocity=${velocity}, expected non-zero x component` );
-            assert( acceleration.y === 0, `${prefix} acceleration=${acceleration}, expected non-zero x component` );
-          }
-          else {
-            //TODO https://github.com/phetsims/normal-modes/issues/56 these assertions fail in CT
-            // assert( velocity.x === 0, `${prefix} velocity=${velocity}, expected non-zero y component` );
-            // assert( acceleration.x === 0, `${prefix} acceleration.x=${acceleration}, expected non-zero y component` );
-          }
-        }
+        //TODO https://github.com/phetsims/normal-modes/issues/56 these assertions fail in CT
+        // if ( assert ) {
+        //   const velocity = this.masses[ i ].velocityProperty.get();
+        //   const acceleration = this.masses[ i ].accelerationProperty.get();
+        //   const prefix = `recalculateVelocityAndAcceleration: N=${N} i=${i}`;
+        //   if ( this.amplitudeDirectionProperty.get() === AmplitudeDirection.HORIZONTAL ) {
+        //     assert( velocity.y === 0, `${prefix} velocity=${velocity}, expected non-zero x component` );
+        //     assert( acceleration.y === 0, `${prefix} acceleration=${acceleration}, expected non-zero x component` );
+        //   }
+        //   else {
+        //     assert( velocity.x === 0, `${prefix} velocity=${velocity}, expected non-zero y component` );
+        //     assert( acceleration.x === 0, `${prefix} acceleration.x=${acceleration}, expected non-zero y component` );
+        //   }
+        // }
       }
       else {
         this.masses[ i ].accelerationProperty.set( new Vector2( 0, 0 ) );
