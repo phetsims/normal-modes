@@ -73,7 +73,7 @@ class NormalModesControlPanel extends Panel {
 
     // Show Springs checkbox
     const showSpringsText = new Text( normalModesStrings.showSprings, { font: NormalModesConstants.GENERAL_FONT } );
-    const showSpringsCheckbox = new Checkbox( showSpringsText, model.springsVisibleProperty, {
+    const showSpringsCheckbox = new Checkbox( model.springsVisibleProperty, showSpringsText, {
       boxWidth: 16
     } );
     showSpringsCheckbox.touchArea = showSpringsCheckbox.localBounds.dilatedXY( 10, 6 );
@@ -82,7 +82,7 @@ class NormalModesControlPanel extends Panel {
     // Show Phases checkbox
     if ( model.phasesVisibleProperty !== undefined ) {
       const showPhasesText = new Text( normalModesStrings.showPhases, { font: NormalModesConstants.GENERAL_FONT } );
-      const showPhasesCheckbox = new Checkbox( showPhasesText, model.phasesVisibleProperty, {
+      const showPhasesCheckbox = new Checkbox( model.phasesVisibleProperty, showPhasesText, {
         boxWidth: 16
       } );
       showPhasesCheckbox.touchArea = showPhasesCheckbox.localBounds.dilatedXY( 10, 6 );
