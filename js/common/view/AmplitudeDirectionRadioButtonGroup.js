@@ -25,12 +25,14 @@ class AmplitudeDirectionRadioButtonGroup extends RectangularRadioButtonGroup {
   constructor( amplitudeDirectionProperty, options ) {
 
     options = merge( {
-      deselectedLineWidth: 1,
-      selectedLineWidth: 1.5,
-      cornerRadius: 8,
-      deselectedButtonOpacity: 0.35,
-      buttonContentXMargin: 8,
-      buttonContentYMargin: 8,
+      radioButtonOptions: {
+        deselectedLineWidth: 1,
+        selectedLineWidth: 1.5,
+        cornerRadius: 8,
+        deselectedButtonOpacity: 0.35,
+        xMargin: 8,
+        yMargin: 8
+      },
       orientation: 'vertical',
       axesArrowOptions: {
         doubleHead: true,
