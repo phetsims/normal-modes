@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2022, University of Colorado Boulder
 
 /**
  * Radio button group used to select movement axis (1D) or normal mode amplitude selector axes (2D).
