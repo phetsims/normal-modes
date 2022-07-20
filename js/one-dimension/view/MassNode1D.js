@@ -10,8 +10,7 @@
 import Property from '../../../../axon/js/Property.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { DragListener } from '../../../../scenery/js/imports.js';
-import { Rectangle } from '../../../../scenery/js/imports.js';
+import { DragListener, Rectangle } from '../../../../scenery/js/imports.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import MassNode from '../../common/view/MassNode.js';

@@ -9,9 +9,7 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
-import { Color } from '../../../../scenery/js/imports.js';
+import { Color, Text, VBox } from '../../../../scenery/js/imports.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';

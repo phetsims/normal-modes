@@ -9,14 +9,11 @@
 
 import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { HBox } from '../../../../scenery/js/imports.js';
-import { HStrut } from '../../../../scenery/js/imports.js';
-import { Text } from '../../../../scenery/js/imports.js';
-import { VBox } from '../../../../scenery/js/imports.js';
+import { HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModesStrings from '../../normalModesStrings.js';
 import normalModes from '../../normalModes.js';
+import normalModesStrings from '../../normalModesStrings.js';
 import ModeGraphCanvasNode from './ModeGraphCanvasNode.js';
 
 const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
