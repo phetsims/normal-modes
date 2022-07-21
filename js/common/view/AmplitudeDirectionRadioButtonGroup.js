@@ -29,9 +29,11 @@ class AmplitudeDirectionRadioButtonGroup extends RectangularRadioButtonGroup {
         deselectedLineWidth: 1,
         selectedLineWidth: 1.5,
         cornerRadius: 8,
-        deselectedButtonOpacity: 0.35,
         xMargin: 8,
-        yMargin: 8
+        yMargin: 8,
+        buttonAppearanceStrategyOptions: {
+          deselectedButtonOpacity: 0.35
+        }
       },
       orientation: 'vertical',
       axesArrowOptions: {
