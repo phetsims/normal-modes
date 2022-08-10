@@ -93,7 +93,7 @@ class TwoDimensionsModel extends NormalModesModel {
           },
           {
             tandem: options.tandem.createTandem( `modeFrequency[${tandemIndex1},${tandemIndex2}]Property` ),
-            phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+            phetioValueType: NumberIO
           }
         );
       }

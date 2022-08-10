@@ -75,7 +75,7 @@ class OneDimensionModel extends NormalModesModel {
         }
       }, {
         tandem: options.tandem.createTandem( `modeFrequency${tandemIndex}Property` ),
-        phetioType: DerivedProperty.DerivedPropertyIO( NumberIO )
+        phetioValueType: NumberIO
       } );
     }
 
