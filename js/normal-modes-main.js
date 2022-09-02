@@ -14,7 +14,7 @@ import normalModesStrings from './normalModesStrings.js';
 import OneDimensionScreen from './one-dimension/OneDimensionScreen.js';
 import TwoDimensionsScreen from './two-dimensions/TwoDimensionsScreen.js';
 
-const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
+const normalModesTitleStringProperty = normalModesStrings[ 'normal-modes' ].titleStringProperty;
 
 const simOptions = {
   credits: {
@@ -28,7 +28,7 @@ const simOptions = {
 // launch the sim - beware that scenery Image nodes created outside of simLauncher.launch() will have zero bounds
 // until the images are fully loaded, see https://github.com/phetsims/coulombs-law/issues/70
 simLauncher.launch( () => {
-  const sim = new Sim( normalModesTitleString, [
+  const sim = new Sim( normalModesTitleStringProperty, [
     new OneDimensionScreen( Tandem.ROOT.createTandem( 'oneDimensionScreen' ) ),
     new TwoDimensionsScreen( Tandem.ROOT.createTandem( 'twoDimensionsScreen' ) )
   ], simOptions );
