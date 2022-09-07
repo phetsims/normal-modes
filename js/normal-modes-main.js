@@ -10,11 +10,11 @@
 import Sim from '../../joist/js/Sim.js';
 import simLauncher from '../../joist/js/simLauncher.js';
 import Tandem from '../../tandem/js/Tandem.js';
-import normalModesStrings from './normalModesStrings.js';
+import NormalModesStrings from './NormalModesStrings.js';
 import OneDimensionScreen from './one-dimension/OneDimensionScreen.js';
 import TwoDimensionsScreen from './two-dimensions/TwoDimensionsScreen.js';
 
-const normalModesTitleStringProperty = normalModesStrings[ 'normal-modes' ].titleStringProperty;
+const normalModesTitleStringProperty = NormalModesStrings[ 'normal-modes' ].titleStringProperty;
 
 const simOptions = {
   credits: {

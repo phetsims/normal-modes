@@ -16,7 +16,7 @@ import Checkbox from '../../../../sun/js/Checkbox.js';
 import HSeparator from '../../../../sun/js/HSeparator.js';
 import Panel from '../../../../sun/js/Panel.js';
 import normalModes from '../../normalModes.js';
-import normalModesStrings from '../../normalModesStrings.js';
+import NormalModesStrings from '../../NormalModesStrings.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
 import NumberOfMassesControl from './NumberOfMassesControl.js';
@@ -50,13 +50,13 @@ class NormalModesControlPanel extends Panel {
     const controls = [];
 
     // Initial Positions button
-    const initialPositionsButton = new TextPushButton( normalModesStrings.initialPositions, merge( {
+    const initialPositionsButton = new TextPushButton( NormalModesStrings.initialPositions, merge( {
       listener: model.initialPositions.bind( model )
     }, TEXT_PUSH_BUTTON_OPTIONS ) );
     controls.push( initialPositionsButton );
 
     // Zero Positions button
-    const zeroPositionsButton = new TextPushButton( normalModesStrings.zeroPositions, merge( {
+    const zeroPositionsButton = new TextPushButton( NormalModesStrings.zeroPositions, merge( {
       listener: model.zeroPositions.bind( model )
     }, TEXT_PUSH_BUTTON_OPTIONS ) );
     controls.push( zeroPositionsButton );
@@ -70,7 +70,7 @@ class NormalModesControlPanel extends Panel {
     controls.push( numberOfMassesControl );
 
     // Show Springs checkbox
-    const showSpringsText = new Text( normalModesStrings.showSprings, { font: NormalModesConstants.GENERAL_FONT } );
+    const showSpringsText = new Text( NormalModesStrings.showSprings, { font: NormalModesConstants.GENERAL_FONT } );
     const showSpringsCheckbox = new Checkbox( model.springsVisibleProperty, showSpringsText, {
       boxWidth: 16
     } );
@@ -79,7 +79,7 @@ class NormalModesControlPanel extends Panel {
 
     // Show Phases checkbox
     if ( model.phasesVisibleProperty !== undefined ) {
-      const showPhasesText = new Text( normalModesStrings.showPhases, { font: NormalModesConstants.GENERAL_FONT } );
+      const showPhasesText = new Text( NormalModesStrings.showPhases, { font: NormalModesConstants.GENERAL_FONT } );
       const showPhasesCheckbox = new Checkbox( model.phasesVisibleProperty, showPhasesText, {
         boxWidth: 16
       } );

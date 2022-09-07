@@ -12,11 +12,11 @@ import Screen from '../../../joist/js/Screen.js';
 import NormalModesColors from '../common/NormalModesColors.js';
 import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
 import normalModes from '../normalModes.js';
-import normalModesStrings from '../normalModesStrings.js';
+import NormalModesStrings from '../NormalModesStrings.js';
 import OneDimensionModel from './model/OneDimensionModel.js';
 import OneDimensionScreenView from './view/OneDimensionScreenView.js';
 
-const screenOneDimensionString = normalModesStrings.screen.oneDimension;
+const screenOneDimensionString = NormalModesStrings.screen.oneDimension;
 
 class OneDimensionScreen extends Screen {
 

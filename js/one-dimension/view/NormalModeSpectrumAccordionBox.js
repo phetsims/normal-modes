@@ -21,15 +21,15 @@ import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
 import normalModes from '../../normalModes.js';
-import normalModesStrings from '../../normalModesStrings.js';
+import NormalModesStrings from '../../NormalModesStrings.js';
 import StaticModeGraphCanvasNode from './StaticModeGraphCanvasNode.js';
 
-const amplitudeString = normalModesStrings.amplitude;
-const frequencyString = normalModesStrings.frequency;
-const frequencyRatioOmegaPatternString = normalModesStrings.frequencyRatioOmegaPattern;
-const normalModeSpectrumString = normalModesStrings.normalModeSpectrum;
-const normalModeString = normalModesStrings.normalMode;
-const phaseString = normalModesStrings.phase;
+const amplitudeString = NormalModesStrings.amplitude;
+const frequencyString = NormalModesStrings.frequency;
+const frequencyRatioOmegaPatternString = NormalModesStrings.frequencyRatioOmegaPattern;
+const normalModeSpectrumString = NormalModesStrings.normalModeSpectrum;
+const normalModeString = NormalModesStrings.normalMode;
+const phaseString = NormalModesStrings.phase;
 
 class NormalModeSpectrumAccordionBox extends AccordionBox {
 

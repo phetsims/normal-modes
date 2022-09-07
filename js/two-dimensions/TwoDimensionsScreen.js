@@ -12,11 +12,11 @@ import Screen from '../../../joist/js/Screen.js';
 import NormalModesColors from '../common/NormalModesColors.js';
 import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
 import normalModes from '../normalModes.js';
-import normalModesStrings from '../normalModesStrings.js';
+import NormalModesStrings from '../NormalModesStrings.js';
 import TwoDimensionsModel from './model/TwoDimensionsModel.js';
 import TwoDimensionsScreenView from './view/TwoDimensionsScreenView.js';
 
-const screenTwoDimensionsString = normalModesStrings.screen.twoDimensions;
+const screenTwoDimensionsString = NormalModesStrings.screen.twoDimensions;
 
 class TwoDimensionsScreen extends Screen {
 

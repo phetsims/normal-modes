@@ -15,10 +15,10 @@ import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
 import normalModes from '../../normalModes.js';
-import normalModesStrings from '../../normalModesStrings.js';
+import NormalModesStrings from '../../NormalModesStrings.js';
 import AmplitudeSelectorRectangle from './AmplitudeSelectorRectangle.js';
 
-const normalModeAmplitudesString = normalModesStrings.normalModeAmplitudes;
+const normalModeAmplitudesString = NormalModesStrings.normalModeAmplitudes;
 
 // constants
 const PANEL_REAL_SIZE = 270;

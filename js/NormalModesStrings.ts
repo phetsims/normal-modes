@@ -45,8 +45,8 @@ type StringsType = {
   'normalModeAmplitudesStringProperty': TReadOnlyProperty<string>;
 };
 
-const normalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
+const NormalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
 
-normalModes.register( 'normalModesStrings', normalModesStrings );
+normalModes.register( 'NormalModesStrings', NormalModesStrings );
 
-export default normalModesStrings;
+export default NormalModesStrings;

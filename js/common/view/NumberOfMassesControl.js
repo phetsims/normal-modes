@@ -12,7 +12,7 @@ import merge from '../../../../phet-core/js/merge.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import { HBox, VBox } from '../../../../scenery/js/imports.js';
 import normalModes from '../../normalModes.js';
-import normalModesStrings from '../../normalModesStrings.js';
+import NormalModesStrings from '../../NormalModesStrings.js';
 import NormalModesConstants from '../NormalModesConstants.js';
 
 class NumberOfMassesControl extends NumberControl {
@@ -52,7 +52,7 @@ class NumberOfMassesControl extends NumberControl {
       }
     }, options );
 
-    super( normalModesStrings.numberOfMasses, numberOfMassesProperty, range, options );
+    super( NormalModesStrings.numberOfMasses, numberOfMassesProperty, range, options );
   }
 }
 

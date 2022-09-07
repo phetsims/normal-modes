@@ -13,10 +13,10 @@ import { HBox, HStrut, Text, VBox } from '../../../../scenery/js/imports.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';
-import normalModesStrings from '../../normalModesStrings.js';
+import NormalModesStrings from '../../NormalModesStrings.js';
 import ModeGraphCanvasNode from './ModeGraphCanvasNode.js';
 
-const normalModesTitleString = normalModesStrings[ 'normal-modes' ].title;
+const normalModesTitleString = NormalModesStrings[ 'normal-modes' ].title;
 
 class NormalModesAccordionBox extends AccordionBox {
 
