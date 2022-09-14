@@ -16,8 +16,6 @@ import NormalModesStrings from '../NormalModesStrings.js';
 import TwoDimensionsModel from './model/TwoDimensionsModel.js';
 import TwoDimensionsScreenView from './view/TwoDimensionsScreenView.js';
 
-const screenTwoDimensionsString = NormalModesStrings.screen.twoDimensions;
-
 class TwoDimensionsScreen extends Screen {
 
   /**
@@ -26,7 +24,7 @@ class TwoDimensionsScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: screenTwoDimensionsString,
+      name: NormalModesStrings.screen.twoDimensionsStringProperty,
       backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
       homeScreenIcon: NormalModesIconFactory.createTwoDimensionsScreenIcon(),
       tandem: tandem

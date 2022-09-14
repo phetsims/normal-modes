@@ -16,8 +16,6 @@ import NormalModesStrings from '../NormalModesStrings.js';
 import OneDimensionModel from './model/OneDimensionModel.js';
 import OneDimensionScreenView from './view/OneDimensionScreenView.js';
 
-const screenOneDimensionString = NormalModesStrings.screen.oneDimension;
-
 class OneDimensionScreen extends Screen {
 
   /**
@@ -26,7 +24,7 @@ class OneDimensionScreen extends Screen {
   constructor( tandem ) {
 
     const options = {
-      name: screenOneDimensionString,
+      name: NormalModesStrings.screen.oneDimensionStringProperty,
       backgroundColorProperty: new Property( NormalModesColors.SCREEN_BACKGROUND ),
       homeScreenIcon: NormalModesIconFactory.createOneDimensionScreenIcon(),
       tandem: tandem
