@@ -5,44 +5,44 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import TReadOnlyProperty from '../../axon/js/TReadOnlyProperty.js';
+import LinkableProperty from '../../axon/js/LinkableProperty.js';
 import normalModes from './normalModes.js';
 
 type StringsType = {
   'normal-modes': {
     'title': string;
-    'titleStringProperty': TReadOnlyProperty<string>;
+    'titleStringProperty': LinkableProperty<string>;
   };
   'screen': {
     'oneDimension': string;
-    'oneDimensionStringProperty': TReadOnlyProperty<string>;
+    'oneDimensionStringProperty': LinkableProperty<string>;
     'twoDimensions': string;
-    'twoDimensionsStringProperty': TReadOnlyProperty<string>;
+    'twoDimensionsStringProperty': LinkableProperty<string>;
   };
   'initialPositions': string;
-  'initialPositionsStringProperty': TReadOnlyProperty<string>;
+  'initialPositionsStringProperty': LinkableProperty<string>;
   'zeroPositions': string;
-  'zeroPositionsStringProperty': TReadOnlyProperty<string>;
+  'zeroPositionsStringProperty': LinkableProperty<string>;
   'numberOfMasses': string;
-  'numberOfMassesStringProperty': TReadOnlyProperty<string>;
+  'numberOfMassesStringProperty': LinkableProperty<string>;
   'showSprings': string;
-  'showSpringsStringProperty': TReadOnlyProperty<string>;
+  'showSpringsStringProperty': LinkableProperty<string>;
   'showPhases': string;
-  'showPhasesStringProperty': TReadOnlyProperty<string>;
+  'showPhasesStringProperty': LinkableProperty<string>;
   'normalMode': string;
-  'normalModeStringProperty': TReadOnlyProperty<string>;
+  'normalModeStringProperty': LinkableProperty<string>;
   'amplitude': string;
-  'amplitudeStringProperty': TReadOnlyProperty<string>;
+  'amplitudeStringProperty': LinkableProperty<string>;
   'normalModeSpectrum': string;
-  'normalModeSpectrumStringProperty': TReadOnlyProperty<string>;
+  'normalModeSpectrumStringProperty': LinkableProperty<string>;
   'phase': string;
-  'phaseStringProperty': TReadOnlyProperty<string>;
+  'phaseStringProperty': LinkableProperty<string>;
   'frequency': string;
-  'frequencyStringProperty': TReadOnlyProperty<string>;
+  'frequencyStringProperty': LinkableProperty<string>;
   'frequencyRatioOmegaPattern': string;
-  'frequencyRatioOmegaPatternStringProperty': TReadOnlyProperty<string>;
+  'frequencyRatioOmegaPatternStringProperty': LinkableProperty<string>;
   'normalModeAmplitudes': string;
-  'normalModeAmplitudesStringProperty': TReadOnlyProperty<string>;
+  'normalModeAmplitudesStringProperty': LinkableProperty<string>;
 };
 
 const NormalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
