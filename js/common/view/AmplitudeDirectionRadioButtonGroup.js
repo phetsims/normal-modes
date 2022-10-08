@@ -50,12 +50,12 @@ class AmplitudeDirectionRadioButtonGroup extends RectangularRadioButtonGroup {
 
     const horizontalButtonDescription = {
       value: AmplitudeDirection.HORIZONTAL,
-      node: new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrowOptions )
+      createNode: tandem => new ArrowNode( 0, 0, ICON_SIZE, 0, options.axesArrowOptions )
     };
 
     const verticalButtonDescription = {
       value: AmplitudeDirection.VERTICAL,
-      node: new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrowOptions )
+      createNode: tandem => new ArrowNode( 0, 0, 0, ICON_SIZE, options.axesArrowOptions )
     };
 
     super( amplitudeDirectionProperty, [ horizontalButtonDescription, verticalButtonDescription ], options );
