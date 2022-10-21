@@ -9,11 +9,10 @@
 
 import merge from '../../../../phet-core/js/merge.js';
 import TimeControlNode from '../../../../scenery-phet/js/TimeControlNode.js';
-import { Color, Text, VBox } from '../../../../scenery/js/imports.js';
+import { Color, HSeparator, Text, VBox } from '../../../../scenery/js/imports.js';
 import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
-import HSeparatorDeprecated from '../../../../sun/js/HSeparatorDeprecated.js';
 import Panel from '../../../../sun/js/Panel.js';
 import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
@@ -100,8 +99,7 @@ class NormalModesControlPanel extends Panel {
     controls.push( timeControlNode );
 
     // Horizontal separator, inserted before time control
-    const separatorWidth = _.maxBy( controls, control => control.width ).width;
-    const separator = new HSeparatorDeprecated( separatorWidth, {
+    const separator = new HSeparator( {
       stroke: Color.grayColor( 180 )
     } );
     controls.splice( controls.indexOf( timeControlNode ), 0, separator );
