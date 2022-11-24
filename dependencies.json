@@ -29,11 +29,11 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "be952cd2860721ac463cb1fc05b92cad19cd8ead",
+    "sha": "81619344ca1d7bdfa6b143ecb8bfb28729015cf6",
     "branch": "1.0"
   },
   "perennial-alias": {
-    "sha": "5e59ac38d32425e914bf8e9c13d980a9a89b2805",
+    "sha": "fe2357c56eb38e791b809953e7f75afcfbd2a42e",
     "branch": "HEAD"
   },
   "phet-core": {
