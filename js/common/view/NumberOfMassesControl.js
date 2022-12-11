@@ -18,12 +18,11 @@ import NormalModesConstants from '../NormalModesConstants.js';
 class NumberOfMassesControl extends NumberControl {
 
   /**
-   * @param {Property.<number>} numberOfMassesProperty
+   * @param {NumberProperty} numberOfMassesProperty
    * @param {Object} [options]
    */
   constructor( numberOfMassesProperty, options ) {
 
-    assert && assert( numberOfMassesProperty.range );
     const range = numberOfMassesProperty.range;
 
     options = merge( {
