@@ -1,16 +1,21 @@
 // Copyright 2020-2022, University of Colorado Boulder
 
-// @ts-nocheck
 /**
  * Direction of motion for masses.
  *
  * @author Chris Malley (PixelZoom, Inc.)
  */
 
-import EnumerationDeprecated from '../../../../phet-core/js/EnumerationDeprecated.js';
+import Enumeration from '../../../../phet-core/js/Enumeration.js';
+import EnumerationValue from '../../../../phet-core/js/EnumerationValue.js';
 import normalModes from '../../normalModes.js';
 
-const AmplitudeDirection = EnumerationDeprecated.byKeys( [ 'HORIZONTAL', 'VERTICAL' ] );
+export default class AmplitudeDirection extends EnumerationValue {
+
+  public static readonly HORIZONTAL = new AmplitudeDirection();
+  public static readonly VERTICAL = new AmplitudeDirection();
+
+  public static readonly enumeration = new Enumeration( AmplitudeDirection );
+}
 
 normalModes.register( 'AmplitudeDirection', AmplitudeDirection );
-export default AmplitudeDirection;

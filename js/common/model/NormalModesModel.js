@@ -9,7 +9,6 @@
 
 import BooleanProperty from '../../../../axon/js/BooleanProperty.js';
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import EnumerationDeprecatedProperty from '../../../../axon/js/EnumerationDeprecatedProperty.js';
 import EnumerationProperty from '../../../../axon/js/EnumerationProperty.js';
 import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
@@ -68,8 +67,8 @@ class NormalModesModel {
       tandem: options.tandem.createTandem( 'numberOfMassesProperty' )
     } );
 
-    // @public {Property.<AmplitudeDirection>} the current direction of motion of the visible masses
-    this.amplitudeDirectionProperty = new EnumerationDeprecatedProperty( AmplitudeDirection, AmplitudeDirection.VERTICAL, {
+    // @public the current direction of motion of the visible masses
+    this.amplitudeDirectionProperty = new EnumerationProperty( AmplitudeDirection.VERTICAL, {
       tandem: options.tandem.createTandem( 'amplitudeDirectionProperty' )
     } );
 
