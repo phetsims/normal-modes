@@ -239,7 +239,7 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
         const frequencyRatio = model.modeFrequencyProperties[ i ].get() / Math.sqrt( k / m );
 
         modeGraphs[ i ].update();
-        frequencyText[ i ].text = StringUtils.fillIn( frequencyRatioOmegaPatternString, {
+        frequencyText[ i ].string = StringUtils.fillIn( frequencyRatioOmegaPatternString, {
           frequencyRatio: Utils.toFixed( frequencyRatio, 2 )
         } );
       }
