@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2023, University of Colorado Boulder
 
 /**
  * NormalModesAccordionBox is the accordion box titled 'Normal Mode Spectrum'.
