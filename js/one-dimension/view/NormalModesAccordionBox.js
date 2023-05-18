@@ -92,7 +92,6 @@ class NormalModesAccordionBox extends AccordionBox {
       graphContainer.children = normalModeGraphsAndNumbers.slice( 0, numberOfMasses );
       graphContainer.addChild( avoidResize );
       normalModeGraphs.forEach( graph => graph.update() );
-      this.layout();
     } );
   }
 }

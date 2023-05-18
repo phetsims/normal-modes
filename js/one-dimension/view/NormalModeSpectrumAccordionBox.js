@@ -248,8 +248,6 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
       contentNode.addChild( lineSeparator );
       contentNode.addChild( amplitudeDirectionRadioButtonGroup );
 
-      // needed to center based on the recalculated layout (layout should be a private method, TODO: fix)
-      this.layout();
       this.centerX = options.centerX;
 
     } );
