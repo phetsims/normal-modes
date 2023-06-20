@@ -5,44 +5,44 @@
  */
 /* eslint-disable */
 import getStringModule from '../../chipper/js/getStringModule.js';
-import LinkableProperty from '../../axon/js/LinkableProperty.js';
+import type LocalizedStringProperty from '../../chipper/js/LocalizedStringProperty.js';
 import normalModes from './normalModes.js';
 
 type StringsType = {
   'normal-modes': {
     'title': string;
-    'titleStringProperty': LinkableProperty<string>;
+    'titleStringProperty': LocalizedStringProperty;
   };
   'screen': {
     'oneDimension': string;
-    'oneDimensionStringProperty': LinkableProperty<string>;
+    'oneDimensionStringProperty': LocalizedStringProperty;
     'twoDimensions': string;
-    'twoDimensionsStringProperty': LinkableProperty<string>;
+    'twoDimensionsStringProperty': LocalizedStringProperty;
   };
   'initialPositions': string;
-  'initialPositionsStringProperty': LinkableProperty<string>;
+  'initialPositionsStringProperty': LocalizedStringProperty;
   'zeroPositions': string;
-  'zeroPositionsStringProperty': LinkableProperty<string>;
+  'zeroPositionsStringProperty': LocalizedStringProperty;
   'numberOfMasses': string;
-  'numberOfMassesStringProperty': LinkableProperty<string>;
+  'numberOfMassesStringProperty': LocalizedStringProperty;
   'showSprings': string;
-  'showSpringsStringProperty': LinkableProperty<string>;
+  'showSpringsStringProperty': LocalizedStringProperty;
   'showPhases': string;
-  'showPhasesStringProperty': LinkableProperty<string>;
+  'showPhasesStringProperty': LocalizedStringProperty;
   'normalMode': string;
-  'normalModeStringProperty': LinkableProperty<string>;
+  'normalModeStringProperty': LocalizedStringProperty;
   'amplitude': string;
-  'amplitudeStringProperty': LinkableProperty<string>;
+  'amplitudeStringProperty': LocalizedStringProperty;
   'normalModeSpectrum': string;
-  'normalModeSpectrumStringProperty': LinkableProperty<string>;
+  'normalModeSpectrumStringProperty': LocalizedStringProperty;
   'phase': string;
-  'phaseStringProperty': LinkableProperty<string>;
+  'phaseStringProperty': LocalizedStringProperty;
   'frequency': string;
-  'frequencyStringProperty': LinkableProperty<string>;
+  'frequencyStringProperty': LocalizedStringProperty;
   'frequencyRatioOmegaPattern': string;
-  'frequencyRatioOmegaPatternStringProperty': LinkableProperty<string>;
+  'frequencyRatioOmegaPatternStringProperty': LocalizedStringProperty;
   'normalModeAmplitudes': string;
-  'normalModeAmplitudesStringProperty': LinkableProperty<string>;
+  'normalModeAmplitudesStringProperty': LocalizedStringProperty;
 };
 
 const NormalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
