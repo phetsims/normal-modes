@@ -9,16 +9,16 @@ The simulation itself is an adaptation of the original Normal Modes simulation
 written in ActionScript (Flash), both math and design are inspired by it.
 
 Before reading this document, please read:
-* [model.md](https://github.com/phetsims/normal-modes/blob/master/doc/model.md), a high-level description of the simulation model
+* [model.md](https://github.com/phetsims/normal-modes/blob/main/doc/model.md), a high-level description of the simulation model
 
 In addition to this document, you are encouraged to read: 
-* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/master/doc/phet-development-overview.md)  
-* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/master/doc/phet-software-design-patterns.md)
+* [PhET Development Overview](https://github.com/phetsims/phet-info/blob/main/doc/phet-development-overview.md)  
+* [PhET Software Design Patterns](https://github.com/phetsims/phet-info/blob/main/doc/phet-software-design-patterns.md)
 
 ## Terminology
 * _mode_ normally refers to a normal mode of an oscillating system.
 * _visibleMasses_ are the masses visible in screen, excluding the invisible static masses that work as walls.
-* _AmplitudeDirection_ is either horizontal or vertical, see [AmplitudeDirection](https://github.com/phetsims/normal-modes/blob/master/js/common/model/AmplitudeDirection.js)
+* _AmplitudeDirection_ is either horizontal or vertical, see [AmplitudeDirection](https://github.com/phetsims/normal-modes/blob/main/js/common/model/AmplitudeDirection.js)
 
 ## General Considerations
 
@@ -40,14 +40,14 @@ There is one case of assert to keep an eye out for, though, during velocity and 
 
 ### Screen Differences
 
-Here's a more objective view on what each screen has/does. For a basic overview, [model.md](https://github.com/phetsims/normal-modes/blob/master/doc/model.md) is enough.
+Here's a more objective view on what each screen has/does. For a basic overview, [model.md](https://github.com/phetsims/normal-modes/blob/main/doc/model.md) is enough.
 
 The _One Dimension_ screen has, basically:
 * A _NormalModesControlPanel_ that allows:
     * Playing/pausing and stepping.
     * Changing the simulation speed.
     * Changing the number of masses.
-    * Going back to the masses' initial or zero positions (check the [model](https://github.com/phetsims/normal-modes/blob/master/doc/model.md) to see the difference).
+    * Going back to the masses' initial or zero positions (check the [model](https://github.com/phetsims/normal-modes/blob/main/doc/model.md) to see the difference).
     * Showing/hiding the springs.
     * Showing/hiding the phase sliders on _NormalModeSpectrumAccordionBox_.
 * A _NormalModeSpectrumAccordionBox_ which has:
