@@ -1,4 +1,3 @@
-
 # Normal Modes - model description
 
 This document is a high-level description of the model used in PhET's
@@ -37,7 +36,7 @@ To adjust each normal mode amplitude (_Normal Mode Amplitudes_ panel):
 * choose a rectangle by their row and column, which represent the normal mode number
 * click on a rectangle to turn given normal mode amplitude "on and off"
 
-Note that the amplitude values are represented by a progress bar inside each rectangle, from the 
+Note that the amplitude values are represented by a progress bar inside each rectangle, from the
 bottom to the top.
 
 ## Additional Controls
