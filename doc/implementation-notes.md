@@ -1,12 +1,11 @@
 # Normal Modes - implementation notes
 
-This document contains notes related to the implementation of Normal Modes.
-This is not an exhaustive description of the implementation. The intention is
-to provide a high-level overview, and to supplement the internal documentation
+This document contains notes related to the implementation of Normal Modes. This is not an exhaustive description of the
+implementation. The intention is to provide a high-level overview, and to supplement the internal documentation
 (source code comments) and external documentation (design documents).
 
-The simulation itself is an adaptation of the original Normal Modes simulation
-written in ActionScript (Flash), both math and design are inspired by it.
+The simulation itself is an adaptation of the original Normal Modes simulation written in ActionScript (Flash), both
+math and design are inspired by it.
 
 Before reading this document, please read:
 
@@ -28,9 +27,8 @@ In addition to this document, you are encouraged to read:
 ## General Considerations
 
 This section describes how this simulation addresses implementation considerations that are typically encountered in
-PhET simulations.
-Note that, in the subsections below, there are some names written in _italic_: those are the the actual names or terms
-used inside the code, so it's easy to find them there through a simple text search if you need to.
+PhET simulations. Note that, in the subsections below, there are some names written in _italic_: those are the the
+actual names or terms used inside the code, so it's easy to find them there through a simple text search if you need to.
 
 ### Coordinate Transforms
 
@@ -40,15 +38,14 @@ mapping of y-axis values; +y is down in view (scenery) coordinates, up in model 
 ### Memory Management
 
 All objects, except for one, are instantiated at startup and exist for the lifetime of the simulation and thus don't
-need to be disposed.
-The one object that does need to be disposed is a VStrut inside _NormalModeSpectrumAccordionBox_ which is properly
-disposed inside _phasesVisibilityProperty_ linked callback (
+need to be disposed. The one object that does need to be disposed is a VStrut inside _NormalModeSpectrumAccordionBox_
+which is properly disposed inside _phasesVisibilityProperty_ linked callback (
 see [#51](https://github.com/phetsims/normal-modes/issues/51)).
 
 ### Assertions
 
-The implementation doesn't have many cases of assert, aside from the ones in PhET libraries.
-There is one case of assert to keep an eye out for, though, during velocity and acceleration computations in
+The implementation doesn't have many cases of assert, aside from the ones in PhET libraries. There is one case of assert
+to keep an eye out for, though, during velocity and acceleration computations in
 _OneDimensionModel_. It checks whether the direction of those Properties coincide with the selected movement axis.
 However, this shouldn't be something to worry about unless you're making changes in the way those Properties are
 computed.
