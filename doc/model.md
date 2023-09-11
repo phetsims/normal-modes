@@ -14,21 +14,19 @@ To adjust the masses' movement pattern, you can both:
 
 The movement axis can be chosen through arrow buttons, which represent horizontal and vertical orientations.
 
-To adjust each normal mode individually, you can set their amplitude and phase values using sliders
-on _Normal Mode Spectrum_ panel.
+To adjust each normal mode individually, you can set their amplitude and phase values using sliders on _Normal Mode
+Spectrum_ panel.
 
-Phase controls can also be shown/hidden using the _Show Phases_ checkbox in the side menu to get
-some more screen space.
+Phase controls can also be shown/hidden using the _Show Phases_ checkbox in the side menu to get some more screen space.
 
-Note that you can see live animated curve representations through the _Normal Modes_ panel, which
-represent, in fact, each mode's motion pattern.
+Note that you can see live animated curve representations through the _Normal Modes_ panel, which represent, in fact,
+each mode's motion pattern.
 
 ## Two Dimensions screen
 
 The _Two Dimensions_ screen is similar to _One Dimension_ screen, with only a few differences.
 
-In this screen, only normal modes' amplitudes are individually adjustable, and the controls are
-also a bit different.
+In this screen, only normal modes' amplitudes are individually adjustable, and the controls are also a bit different.
 
 To adjust each normal mode amplitude (_Normal Mode Amplitudes_ panel):
 
@@ -36,8 +34,7 @@ To adjust each normal mode amplitude (_Normal Mode Amplitudes_ panel):
 * choose a rectangle by their row and column, which represent the normal mode number
 * click on a rectangle to turn given normal mode amplitude "on and off"
 
-Note that the amplitude values are represented by a progress bar inside each rectangle, from the
-bottom to the top.
+Note that the amplitude values are represented by a progress bar inside each rectangle, from the bottom to the top.
 
 ## Additional Controls
 
