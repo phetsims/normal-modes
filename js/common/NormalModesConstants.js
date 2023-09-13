@@ -27,7 +27,7 @@ const NormalModesConstants = {
   SLOW_SPEED: 0.2,
 
   // Masses
-  NUMBER_OF_MASSES_RANGE: NUMBER_OF_MASSES_RANGE, //TODO actually number of masses PER ROW
+  NUMBER_OF_MASSES_RANGE: NUMBER_OF_MASSES_RANGE, //TODO actually number of masses PER ROW https://github.com/phetsims/tasks/issues/1129
   MAX_MASSES_PER_ROW: NUMBER_OF_MASSES_RANGE.max,
   MASSES_MASS_VALUE: 0.1,
 
@@ -44,7 +44,7 @@ const NormalModesConstants = {
   MAX_PHASE: Math.PI,
   INITIAL_PHASE: 0,
 
-  //TODO ???
+  //TODO ??? https://github.com/phetsims/tasks/issues/1129
   LEFT_WALL_X_POS: -1,
   TOP_WALL_Y_POS: 1,
   DISTANCE_BETWEEN_X_WALLS: 2,
