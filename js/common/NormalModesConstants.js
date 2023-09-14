@@ -44,7 +44,8 @@ const NormalModesConstants = {
   MAX_PHASE: Math.PI,
   INITIAL_PHASE: 0,
 
-  //TODO ??? https://github.com/phetsims/tasks/issues/1129
+  // For the 1D case, x=0 is midway between the 2 walls.
+  // For the 2D case, (x,y)=(0,0) is at the center of the box.
   LEFT_WALL_X_POS: -1,
   TOP_WALL_Y_POS: 1,
   DISTANCE_BETWEEN_X_WALLS: 2,
