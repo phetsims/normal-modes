@@ -13,7 +13,9 @@ import Range from '../../../../dot/js/Range.js';
 import Vector2 from '../../../../dot/js/Vector2.js';
 import merge from '../../../../phet-core/js/merge.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
+import NullableIO from '../../../../tandem/js/types/NullableIO.js';
 import NumberIO from '../../../../tandem/js/types/NumberIO.js';
+import ObjectLiteralIO from '../../../../tandem/js/types/ObjectLiteralIO.js';
 import Mass from '../../common/model/Mass.js';
 import NormalModesModel from '../../common/model/NormalModesModel.js';
 import Spring from '../../common/model/Spring.js';
@@ -115,9 +117,10 @@ class TwoDimensionsModel extends NormalModesModel {
     }
     this.createDefaultSprings();
 
-    // @public {Property.<number[]|null>} the indexes of the mass being dragged (an object with and 'i' and a 'j')
+    // @public {Property.<Object[]|null>} the indexes of the mass being dragged (an object with and 'i' and a 'j')
     this.draggingMassIndexesProperty = new Property( null, {
-      tandem: options.tandem.createTandem( 'draggingMassIndexesProperty' )
+      tandem: options.tandem.createTandem( 'draggingMassIndexesProperty' ),
+      phetioValueType: NullableIO( ObjectLiteralIO ) // This should be an actual index object if needed for state
     } );
 
     // unlink is unnecessary, exists for the lifetime of the sim
