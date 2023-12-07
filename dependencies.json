@@ -1,5 +1,5 @@
 {
-  "comment": "# normal-modes 1.0.9 Mon Sep 25 2023 21:40:32 GMT-0600 (Mountain Daylight Time)",
+  "comment": "# normal-modes 1.0.10-rc.1 Thu Dec 07 2023 15:04:50 GMT-0700 (Mountain Standard Time)",
   "assert": {
     "sha": "767b2f345518ceca5144a152ecf40cd4f9206136",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "2c2ed23d076b182a2f276acedebe4f9d4e47eaf0",
+    "sha": "881d6385eef0b202ed204eac461ea3138bcd8ed2",
     "branch": "1.0"
   },
   "perennial-alias": {
