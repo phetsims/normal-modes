@@ -46,7 +46,7 @@ class SpringNode extends Node {
     let currentXScaling = 1;
 
     // Determines the visibility of the SpringNode. This is done with a Multilink instead of a DerivedProperty
-    // so that we don't shadow visibleProperty that is inherited from NodeIO (the IO Type associated with
+    // so that we don't shadow visibleProperty that is inherited from NodeIO (the IOType associated with
     // superclass Node).  See https://github.com/phetsims/normal-modes/issues/46.
     // Dispose is unnecessary because the SpringNode and the dependencies exist for the lifetime of the sim.
     Multilink.multilink( [ spring.visibleProperty, springsVisibleProperty ],
