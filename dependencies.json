@@ -1,5 +1,5 @@
 {
-  "comment": "# normal-modes 1.0.11-rc.2 Thu Feb 29 2024 15:13:11 GMT-0700 (Mountain Standard Time)",
+  "comment": "# normal-modes 1.0.11 Mon Mar 11 2024 12:22:30 GMT-0600 (Mountain Daylight Time)",
   "assert": {
     "sha": "767b2f345518ceca5144a152ecf40cd4f9206136",
     "branch": "HEAD"
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "29a918820ccf8a9e3408cce2e9b912a1c5ca04bf",
+    "sha": "e78a14778ca27c6514107910122d14dc3a75f2e1",
     "branch": "1.0"
   },
   "perennial-alias": {
