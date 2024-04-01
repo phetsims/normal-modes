@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "5bd4efba7c7a64aaffbeb61c659cd3f5eb4f5d02",
+    "sha": "2a4301b0341ec3015d7a90e138bcc8eb3b668d01",
     "branch": "1.0"
   },
   "perennial-alias": {
@@ -53,7 +53,7 @@
     "branch": "HEAD"
   },
   "phetcommon": {
-    "sha": "167e8f62473a17ea41762407db1dabcd0f138112",
+    "sha": "e1a4bf98a01159b5daa4d508db4da02dc9a6b591",
     "branch": "HEAD"
   },
   "phetmarks": {
