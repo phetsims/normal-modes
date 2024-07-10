@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "c457451d7a12a2a0844afed3aba109b9f9d99f0d",
+    "sha": "c2f45fb594b25a636082496b0c338a0591c53ca9",
     "branch": "1.0"
   },
   "perennial-alias": {
@@ -65,7 +65,7 @@
     "branch": "HEAD"
   },
   "scenery": {
-    "sha": "5abf76e8e36fa46299a6ceeb4e81133b066fb1c3",
+    "sha": "23504163dc92536e95f79162bc31aeba14125254",
     "branch": "HEAD"
   },
   "scenery-phet": {
