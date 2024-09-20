@@ -24,6 +24,18 @@
     ]
   },
   "eslintConfig": {
-    "extends": "../chipper/eslint/sim_eslintrc.js"
+    "extends": "../chipper/eslint/sim_eslintrc.js",
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts"
+        ],
+        "parserOptions": {
+          "project": [
+            "../normal-modes/tsconfig.json"
+          ]
+        }
+      }
+    ]
   }
 }
