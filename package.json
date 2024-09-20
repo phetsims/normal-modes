@@ -32,7 +32,7 @@
         ],
         "parserOptions": {
           "project": [
-            "../normal-modes/tsconfig.json"
+            "../chipper/tsconfig/eslint-all/tsconfig.json"
           ]
         }
       }
