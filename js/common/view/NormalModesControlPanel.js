@@ -89,7 +89,7 @@ class NormalModesControlPanel extends Panel {
     // Time control
     const timeControlNode = new TimeControlNode( model.playingProperty, {
       timeSpeedProperty: model.timeSpeedProperty,
-      buttonGroupXSpacing: 20,
+      flowBoxSpacing: 20,
       playPauseStepButtonOptions: {
         stepForwardButtonOptions: {
           listener: () => model.singleStep( NormalModesConstants.FIXED_DT )
