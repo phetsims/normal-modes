@@ -1,4 +1,4 @@
-// Copyright 2020-2022, University of Colorado Boulder
+// Copyright 2020-2025, University of Colorado Boulder
 
 /**
  * NormalModesControlPanel is the untitled control panel that appears in the upper-right corner of the screen.
