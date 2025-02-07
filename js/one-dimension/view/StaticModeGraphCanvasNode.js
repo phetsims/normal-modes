@@ -10,7 +10,7 @@
 import Bounds2 from '../../../../dot/js/Bounds2.js';
 import Dimension2 from '../../../../dot/js/Dimension2.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { CanvasNode } from '../../../../scenery/js/imports.js';
+import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import normalModes from '../../normalModes.js';

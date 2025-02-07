@@ -9,7 +9,10 @@
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
-import { Color, HBox, Rectangle, Text } from '../../../../scenery/js/imports.js';
+import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
+import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
+import Text from '../../../../scenery/js/nodes/Text.js';
+import Color from '../../../../scenery/js/util/Color.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';

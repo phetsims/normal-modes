@@ -8,7 +8,7 @@
  */
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
-import { Color } from '../../../scenery/js/imports.js';
+import Color from '../../../scenery/js/util/Color.js';
 import normalModes from '../normalModes.js';
 
 // Colors that are used as the base for other colors
