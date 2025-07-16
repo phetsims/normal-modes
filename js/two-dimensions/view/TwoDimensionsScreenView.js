@@ -69,7 +69,7 @@ class TwoDimensionsScreenView extends ScreenView {
       cornerRadius: 5,
       xMargin: 8,
       yMargin: 8,
-      numberOfMassesFormatter: value => Math.pow( value, 2 ) // See https://github.com/phetsims/normal-modes/issues/69
+      numberOfMassesFormatter: value => `${Math.pow( value, 2 )}` // See https://github.com/phetsims/normal-modes/issues/69
     }, NormalModesColors.PANEL_COLORS ) );
 
     // Springs
