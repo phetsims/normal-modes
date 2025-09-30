@@ -53,7 +53,6 @@ class TwoDimensionsScreenView extends ScreenView {
 
     const resetAllButton = new ResetAllButton( {
       listener: () => {
-        this.interruptSubtreeInput(); // cancel interactions that may be in progress
         model.reset();
         resetView();
       },
