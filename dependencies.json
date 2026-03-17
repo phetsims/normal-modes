@@ -21,7 +21,7 @@
     "branch": "HEAD"
   },
   "joist": {
-    "sha": "630fe6194d720741945e3202f629db80414584db",
+    "sha": "f8a8fdfae9ba99e60f16154d91b1ff3c95ce2428",
     "branch": "HEAD"
   },
   "kite": {
@@ -29,7 +29,7 @@
     "branch": "HEAD"
   },
   "normal-modes": {
-    "sha": "f67829d2595dd4c8d9df38c8c0d87d79131743b4",
+    "sha": "ed8499975586def9d41cdb4606ef3f0948e12f49",
     "branch": "1.0"
   },
   "perennial-alias": {
