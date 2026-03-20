@@ -50,4 +50,6 @@ type StringsType = {
 
 const NormalModesStrings = getStringModule( 'NORMAL_MODES' ) as StringsType;
 
+normalModes.register( 'NormalModesStrings', NormalModesStrings );
+
 export default NormalModesStrings;
