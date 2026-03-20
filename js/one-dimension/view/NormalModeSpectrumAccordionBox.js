@@ -26,7 +26,6 @@ import VSlider from '../../../../sun/js/VSlider.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
 import StaticModeGraphCanvasNode from './StaticModeGraphCanvasNode.js';
 
@@ -260,5 +259,4 @@ class NormalModeSpectrumAccordionBox extends AccordionBox {
   }
 }
 
-normalModes.register( 'NormalModeSpectrumAccordionBox', NormalModeSpectrumAccordionBox );
 export default NormalModeSpectrumAccordionBox;

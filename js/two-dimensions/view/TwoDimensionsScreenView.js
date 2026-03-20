@@ -20,7 +20,6 @@ import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
-import normalModes from '../../normalModes.js';
 import MassNode2D from './MassNode2D.js';
 import NormalModeAmplitudesAccordionBox from './NormalModeAmplitudesAccordionBox.js';
 
@@ -149,5 +148,4 @@ class TwoDimensionsScreenView extends ScreenView {
   }
 }
 
-normalModes.register( 'TwoDimensionsScreenView', TwoDimensionsScreenView );
 export default TwoDimensionsScreenView;

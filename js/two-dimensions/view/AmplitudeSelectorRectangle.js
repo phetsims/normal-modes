@@ -18,7 +18,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModes from '../../normalModes.js';
 
 class AmplitudeSelectorRectangle extends Rectangle {
 
@@ -133,5 +132,4 @@ class AmplitudeSelectorRectangle extends Rectangle {
   }
 }
 
-normalModes.register( 'AmplitudeSelectorRectangle', AmplitudeSelectorRectangle );
 export default AmplitudeSelectorRectangle;

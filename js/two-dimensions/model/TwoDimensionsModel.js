@@ -20,7 +20,6 @@ import Mass from '../../common/model/Mass.js';
 import NormalModesModel from '../../common/model/NormalModesModel.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModes from '../../normalModes.js';
 
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
 const MAX_SPRINGS = MAX_MASSES - 1;
@@ -591,5 +590,4 @@ class TwoDimensionsModel extends NormalModesModel {
   }
 }
 
-normalModes.register( 'TwoDimensionsModel', TwoDimensionsModel );
 export default TwoDimensionsModel;

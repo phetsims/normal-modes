@@ -16,7 +16,6 @@ import Circle from '../../../../scenery/js/nodes/Circle.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
-import normalModes from '../../normalModes.js';
 import NormalModesColors from '../NormalModesColors.js';
 
 // constants
@@ -99,5 +98,4 @@ const NormalModesIconFactory = {
   }
 };
 
-normalModes.register( 'NormalModesIconFactory', NormalModesIconFactory );
 export default NormalModesIconFactory;

@@ -12,7 +12,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import NumberControl from '../../../../scenery-phet/js/NumberControl.js';
 import HBox from '../../../../scenery/js/layout/nodes/HBox.js';
 import VBox from '../../../../scenery/js/layout/nodes/VBox.js';
-import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
 import NormalModesConstants from '../NormalModesConstants.js';
 
@@ -97,5 +96,4 @@ function createLayoutFunction( options ) {
   };
 }
 
-normalModes.register( 'NumberOfMassesControl', NumberOfMassesControl );
 export default NumberOfMassesControl;

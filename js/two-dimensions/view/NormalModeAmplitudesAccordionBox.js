@@ -17,7 +17,6 @@ import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
 import AmplitudeDirectionRadioButtonGroup from '../../common/view/AmplitudeDirectionRadioButtonGroup.js';
-import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
 import AmplitudeSelectorRectangle from './AmplitudeSelectorRectangle.js';
 
@@ -104,5 +103,4 @@ class NormalModeAmplitudesAccordionBox extends AccordionBox {
   }
 }
 
-normalModes.register( 'NormalModeAmplitudesAccordionBox', NormalModeAmplitudesAccordionBox );
 export default NormalModeAmplitudesAccordionBox;

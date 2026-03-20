@@ -19,7 +19,6 @@ import Mass from '../../common/model/Mass.js';
 import NormalModesModel from '../../common/model/NormalModesModel.js';
 import Spring from '../../common/model/Spring.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModes from '../../normalModes.js';
 
 // including the 2 virtual stationary masses at wall positions
 const MAX_MASSES = NormalModesConstants.MAX_MASSES_PER_ROW + 2;
@@ -407,5 +406,4 @@ class OneDimensionModel extends NormalModesModel {
   }
 }
 
-normalModes.register( 'OneDimensionModel', OneDimensionModel );
 export default OneDimensionModel;

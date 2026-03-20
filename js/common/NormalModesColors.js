@@ -9,7 +9,6 @@
 
 import PhetColorScheme from '../../../scenery-phet/js/PhetColorScheme.js';
 import Color from '../../../scenery/js/util/Color.js';
-import normalModes from '../normalModes.js';
 
 // Colors that are used as the base for other colors
 const ARROW_FILL = 'rgb( 255, 255, 0 )';
@@ -75,5 +74,4 @@ const NormalModesColors = {
   SEPARATOR_STROKE: 'gray'
 };
 
-normalModes.register( 'NormalModesColors', NormalModesColors );
 export default NormalModesColors;

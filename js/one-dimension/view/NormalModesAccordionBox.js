@@ -15,7 +15,6 @@ import HStrut from '../../../../scenery/js/nodes/HStrut.js';
 import Text from '../../../../scenery/js/nodes/Text.js';
 import AccordionBox from '../../../../sun/js/AccordionBox.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
 import ModeGraphCanvasNode from './ModeGraphCanvasNode.js';
 
@@ -99,5 +98,4 @@ class NormalModesAccordionBox extends AccordionBox {
   }
 }
 
-normalModes.register( 'NormalModesAccordionBox', NormalModesAccordionBox );
 export default NormalModesAccordionBox;

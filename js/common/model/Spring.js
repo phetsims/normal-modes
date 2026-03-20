@@ -7,7 +7,6 @@
  */
 
 import DerivedProperty from '../../../../axon/js/DerivedProperty.js';
-import normalModes from '../../normalModes.js';
 
 class Spring {
 
@@ -31,5 +30,4 @@ class Spring {
   }
 }
 
-normalModes.register( 'Spring', Spring );
 export default Spring;

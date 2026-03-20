@@ -14,7 +14,6 @@ import DragListener from '../../../../scenery/js/listeners/DragListener.js';
 import Circle from '../../../../scenery/js/nodes/Circle.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import MassNode from '../../common/view/MassNode.js';
-import normalModes from '../../normalModes.js';
 
 class MassNode2D extends MassNode {
 
@@ -105,5 +104,4 @@ class MassNode2D extends MassNode {
   }
 }
 
-normalModes.register( 'MassNode2D', MassNode2D );
 export default MassNode2D;

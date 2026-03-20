@@ -12,7 +12,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
-import normalModes from '../../normalModes.js';
 
 class WallNode extends Node {
 
@@ -43,5 +42,4 @@ class WallNode extends Node {
   }
 }
 
-normalModes.register( 'WallNode', WallNode );
 export default WallNode;

@@ -9,7 +9,6 @@
 
 import Range from '../../../dot/js/Range.js';
 import PhetFont from '../../../scenery-phet/js/PhetFont.js';
-import normalModes from '../normalModes.js';
 
 const NUMBER_OF_MASSES_RANGE = new Range( 1, 10 );
 
@@ -59,5 +58,4 @@ const NormalModesConstants = {
   SMALLER_FONT: new PhetFont( 12 )
 };
 
-normalModes.register( 'NormalModesConstants', NormalModesConstants );
 export default NormalModesConstants;

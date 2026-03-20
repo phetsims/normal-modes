@@ -17,7 +17,6 @@ import ButtonNode from '../../../../sun/js/buttons/ButtonNode.js';
 import TextPushButton from '../../../../sun/js/buttons/TextPushButton.js';
 import Checkbox from '../../../../sun/js/Checkbox.js';
 import Panel from '../../../../sun/js/Panel.js';
-import normalModes from '../../normalModes.js';
 import NormalModesStrings from '../../NormalModesStrings.js';
 import NormalModesColors from '../NormalModesColors.js';
 import NormalModesConstants from '../NormalModesConstants.js';
@@ -117,5 +116,4 @@ class NormalModesControlPanel extends Panel {
   }
 }
 
-normalModes.register( 'NormalModesControlPanel', NormalModesControlPanel );
 export default NormalModesControlPanel;

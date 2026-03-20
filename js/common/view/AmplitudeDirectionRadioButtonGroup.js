@@ -10,7 +10,6 @@
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import RectangularRadioButtonGroup from '../../../../sun/js/buttons/RectangularRadioButtonGroup.js';
-import normalModes from '../../normalModes.js';
 import AmplitudeDirection from '../model/AmplitudeDirection.js';
 import NormalModesColors from '../NormalModesColors.js';
 
@@ -63,5 +62,4 @@ class AmplitudeDirectionRadioButtonGroup extends RectangularRadioButtonGroup {
 
 }
 
-normalModes.register( 'AmplitudeDirectionRadioButtonGroup', AmplitudeDirectionRadioButtonGroup );
 export default AmplitudeDirectionRadioButtonGroup;

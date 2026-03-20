@@ -11,7 +11,6 @@ import Property from '../../../axon/js/Property.js';
 import Screen from '../../../joist/js/Screen.js';
 import NormalModesColors from '../common/NormalModesColors.js';
 import NormalModesIconFactory from '../common/view/NormalModesIconFactory.js';
-import normalModes from '../normalModes.js';
 import NormalModesStrings from '../NormalModesStrings.js';
 import TwoDimensionsModel from './model/TwoDimensionsModel.js';
 import TwoDimensionsScreenView from './view/TwoDimensionsScreenView.js';
@@ -38,5 +37,4 @@ class TwoDimensionsScreen extends Screen {
   }
 }
 
-normalModes.register( 'TwoDimensionsScreen', TwoDimensionsScreen );
 export default TwoDimensionsScreen;

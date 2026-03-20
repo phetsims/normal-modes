@@ -10,7 +10,6 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import Shape from '../../../../kite/js/Shape.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
 import Path from '../../../../scenery/js/nodes/Path.js';
-import normalModes from '../../normalModes.js';
 import NormalModesColors from '../NormalModesColors.js';
 
 class SpringNode extends Node {
@@ -82,5 +81,4 @@ class SpringNode extends Node {
   }
 }
 
-normalModes.register( 'SpringNode', SpringNode );
 export default SpringNode;

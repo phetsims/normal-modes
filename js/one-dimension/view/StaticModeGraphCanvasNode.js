@@ -13,7 +13,6 @@ import merge from '../../../../phet-core/js/merge.js';
 import CanvasNode from '../../../../scenery/js/nodes/CanvasNode.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import NormalModesConstants from '../../common/NormalModesConstants.js';
-import normalModes from '../../normalModes.js';
 
 class StaticModeGraphCanvasNode extends CanvasNode {
 
@@ -117,5 +116,4 @@ class StaticModeGraphCanvasNode extends CanvasNode {
   }
 }
 
-normalModes.register( 'StaticModeGraphCanvasNode', StaticModeGraphCanvasNode );
 export default StaticModeGraphCanvasNode;

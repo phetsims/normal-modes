@@ -15,7 +15,6 @@ import Rectangle from '../../../../scenery/js/nodes/Rectangle.js';
 import AmplitudeDirection from '../../common/model/AmplitudeDirection.js';
 import NormalModesColors from '../../common/NormalModesColors.js';
 import MassNode from '../../common/view/MassNode.js';
-import normalModes from '../../normalModes.js';
 
 class MassNode1D extends MassNode {
 
@@ -114,5 +113,4 @@ class MassNode1D extends MassNode {
   }
 }
 
-normalModes.register( 'MassNode1D', MassNode1D );
 export default MassNode1D;

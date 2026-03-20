@@ -14,7 +14,6 @@ import NumberProperty from '../../../../axon/js/NumberProperty.js';
 import merge from '../../../../phet-core/js/merge.js';
 import TimeSpeed from '../../../../scenery-phet/js/TimeSpeed.js';
 import Tandem from '../../../../tandem/js/Tandem.js';
-import normalModes from '../../normalModes.js';
 import NormalModesConstants from '../NormalModesConstants.js';
 import AmplitudeDirection from './AmplitudeDirection.js';
 
@@ -92,5 +91,4 @@ class NormalModesModel {
   }
 }
 
-normalModes.register( 'NormalModesModel', NormalModesModel );
 export default NormalModesModel;

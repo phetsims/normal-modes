@@ -9,7 +9,6 @@
 
 import logGlobal from '../../../phet-core/js/logGlobal.js';
 import { QueryStringMachine } from '../../../query-string-machine/js/QueryStringMachineModule.js';
-import normalModes from '../normalModes.js';
 
 const NormalModesQueryParameters = QueryStringMachine.getAll( {
 
@@ -34,8 +33,6 @@ const NormalModesQueryParameters = QueryStringMachine.getAll( {
     type: 'flag'
   }
 } );
-
-normalModes.register( 'NormalModesQueryParameters', NormalModesQueryParameters );
 
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );

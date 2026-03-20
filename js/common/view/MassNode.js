@@ -11,7 +11,6 @@ import Multilink from '../../../../axon/js/Multilink.js';
 import merge from '../../../../phet-core/js/merge.js';
 import ArrowNode from '../../../../scenery-phet/js/ArrowNode.js';
 import Node from '../../../../scenery/js/nodes/Node.js';
-import normalModes from '../../normalModes.js';
 import NormalModesColors from '../NormalModesColors.js';
 
 class MassNode extends Node {
@@ -64,5 +63,4 @@ class MassNode extends Node {
   }
 }
 
-normalModes.register( 'MassNode', MassNode );
 export default MassNode;

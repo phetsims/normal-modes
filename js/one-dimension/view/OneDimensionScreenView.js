@@ -21,7 +21,6 @@ import NormalModesConstants from '../../common/NormalModesConstants.js';
 import NormalModesQueryParameters from '../../common/NormalModesQueryParameters.js';
 import NormalModesControlPanel from '../../common/view/NormalModesControlPanel.js';
 import SpringNode from '../../common/view/SpringNode.js';
-import normalModes from '../../normalModes.js';
 import MassNode1D from './MassNode1D.js';
 import NormalModesAccordionBox from './NormalModesAccordionBox.js';
 import NormalModeSpectrumAccordionBox from './NormalModeSpectrumAccordionBox.js';
@@ -154,5 +153,4 @@ class OneDimensionScreenView extends ScreenView {
   }
 }
 
-normalModes.register( 'OneDimensionScreenView', OneDimensionScreenView );
 export default OneDimensionScreenView;
