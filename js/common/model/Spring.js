@@ -1,4 +1,4 @@
-// Copyright 2020, University of Colorado Boulder
+// Copyright 2020-2026, University of Colorado Boulder
 
 /**
  * This Spring class models a spring that connects two masses and is visible when the left one is visible.
