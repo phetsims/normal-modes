@@ -37,6 +37,6 @@ const NormalModesQueryParameters = QueryStringMachine.getAll( {
 // Log query parameters
 logGlobal( 'phet.chipper.queryParameters' );
 logGlobal( 'phet.preloads.phetio.queryParameters' );
-logGlobal( 'phet.normalModes.NormalModesQueryParameters' );
+phet.log && phet.log( `NormalModesQueryParameters: ${JSON.stringify( NormalModesQueryParameters, null, 2 )}` );
 
 export default NormalModesQueryParameters;
